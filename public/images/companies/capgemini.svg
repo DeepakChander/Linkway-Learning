@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60">
+  <path d="M120 2 C108 2 98 8 93 16 L100 20 C104 14 111 10 120 10 C133 10 143 20 143 33 C143 46 133 56 120 56 C111 56 104 52 100 46 L93 50 C98 58 108 64 120 64 C137 64 151 50 151 33 C151 16 137 2 120 2Z" fill="#0070AD"/>
+  <path d="M120 2 L117 6 L120 10 C133 10 143 20 143 33 C143 46 133 56 120 56 L117 60 L120 64 C137 64 151 50 151 33 C151 16 137 2 120 2Z" fill="#0070AD" opacity="0"/>
+  <text x="50" y="78" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0070AD" letter-spacing="3" transform="translate(0,-22)">CAPGEMINI</text>
+</svg>
