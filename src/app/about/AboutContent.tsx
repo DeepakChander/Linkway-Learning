@@ -20,18 +20,22 @@ const values = [
   {
     title: "Careers First, Always",
     desc: "We don't count certificates - we count people who actually got hired and stayed hired.",
+    image: "/images/sections/value-careers.png",
   },
   {
     title: "Learn by Shipping",
     desc: "You won't just watch lectures. You'll build real things, break them, fix them, and ship them.",
+    image: "/images/sections/value-shipping.png",
   },
   {
     title: "Mentors, Not Teachers",
     desc: "Everyone who teaches here works in the industry. They know what hiring managers actually care about.",
+    image: "/images/sections/value-mentors.png",
   },
   {
     title: "No Hidden Agendas",
     desc: "Our pricing is upfront, our placement numbers are real, and our student stories are verifiable.",
+    image: "/images/sections/value-agendas.png",
   },
 ];
 
@@ -307,33 +311,50 @@ export default function AboutPage() {
           <div className="absolute bottom-16 left-[4%] w-24 h-24 border-2 border-orange-200/20 rounded-xl -rotate-[15deg] pointer-events-none" />
           <div className="absolute top-[45%] right-[2%] w-16 h-16 border border-orange-300/10 rounded-lg rotate-45 pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto relative">
+          <div className="max-w-6xl mx-auto relative">
           <SpringReveal skewY={-5} distance={150} damping={12}>
             <SectionHeading label="What We Stand For" title="Our Values" />
           </SpringReveal>
-          <div className="mt-12 space-y-10">
+          <div className="mt-12 space-y-16">
             {values.map((v, i) => (
-              <LineMaskReveal key={i} delay={0.1 * i}>
-                <div className={`max-w-lg ${i % 2 === 0 ? "mr-auto" : "ml-auto"}`}>
-                  <LatencyPulseCard>
-                    <div className="relative">
-                      <span className="absolute -top-6 -left-4 text-8xl font-bold text-orange-500/[0.06] select-none pointer-events-none">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <CrossFlicker
-                        position={i % 2 === 0 ? "top-left" : "top-right"}
-                        color="orange"
-                        size="sm"
-                        delay={i * 0.15}
+              <div key={i} className={`flex flex-col md:flex-row items-center gap-8 ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
+                {/* Image */}
+                <div className="w-full md:w-1/2">
+                  <LineMaskReveal delay={0.1 * i}>
+                    <div className="relative w-full h-[280px] md:h-[320px] rounded-2xl overflow-hidden shadow-lg">
+                      <Image
+                        src={v.image}
+                        alt={v.title}
+                        fill
+                        className="object-cover"
                       />
-                      <Card className="h-full hover-blur-lift relative z-10">
-                        <h3 className="text-xl font-bold text-navy-900 mb-3">{v.title}</h3>
-                        <p className="text-gray-600 text-lg leading-relaxed">{v.desc}</p>
-                      </Card>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                     </div>
-                  </LatencyPulseCard>
+                  </LineMaskReveal>
                 </div>
-              </LineMaskReveal>
+                {/* Card */}
+                <div className="w-full md:w-1/2">
+                  <LineMaskReveal delay={0.15 + 0.1 * i}>
+                    <LatencyPulseCard>
+                      <div className="relative">
+                        <span className="absolute -top-6 -left-4 text-8xl font-bold text-orange-500/[0.06] select-none pointer-events-none">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <CrossFlicker
+                          position={i % 2 === 0 ? "top-left" : "top-right"}
+                          color="orange"
+                          size="sm"
+                          delay={i * 0.15}
+                        />
+                        <Card className="h-full hover-blur-lift relative z-10">
+                          <h3 className="text-xl font-bold text-navy-900 mb-3">{v.title}</h3>
+                          <p className="text-gray-600 text-lg leading-relaxed">{v.desc}</p>
+                        </Card>
+                      </div>
+                    </LatencyPulseCard>
+                  </LineMaskReveal>
+                </div>
+              </div>
             ))}
           </div>
           </div>
