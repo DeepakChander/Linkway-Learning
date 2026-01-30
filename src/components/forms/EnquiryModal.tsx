@@ -327,8 +327,10 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                           className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-navy-900 text-sm focus:outline-none focus:border-orange-500 transition-colors appearance-none cursor-pointer"
                         >
                           <option value="Data Analytics" className="bg-white">Data Analytics</option>
-                          <option value="Data Science & AI" className="bg-white">Data Science & AI</option>
-                          <option value="Business Intelligence" className="bg-white">Business Intelligence</option>
+                          <option value="Business Analytics" className="bg-white">Business Analytics</option>
+                          <option value="Data Science and AI" className="bg-white">Data Science and AI</option>
+                          <option value="Agentic AI & Prompt Engineering" className="bg-white">Agentic AI & Prompt Engineering</option>
+                          <option value="Investment Banking" className="bg-white">Investment Banking</option>
                           <option value="Not Sure" className="bg-white">Not Sure Yet</option>
                         </select>
                       </div>

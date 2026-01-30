@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/lib/theme";
 const faqs = [
   {
     q: "What exactly is Linkway Learning?",
-    a: "We're a training company that gets people hired in data roles. We run three programs - Data Analytics, Data Science & AI, and Business Intelligence - with live classes, real projects, and placement support baked in from day one.",
+    a: "We're a training company that gets people hired in data, AI, and finance roles. We run five programs - Data Analytics, Business Analytics, Data Science and AI, Agentic AI & Prompt Engineering, and Investment Banking - with live classes, real projects, and placement support baked in from day one.",
   },
   {
     q: "How is this different from Coursera or Udemy?",

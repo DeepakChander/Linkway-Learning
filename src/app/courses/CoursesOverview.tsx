@@ -13,7 +13,7 @@ import { ThemeProvider } from "@/lib/theme";
 
 const courses = [
   {
-    name: "Data Analytics Accelerator",
+    name: "Data Analytics",
     duration: "6 Months",
     level: "Beginner to Advanced",
     tagline: "Go from spreadsheets to strategic thinking — fast.",
@@ -25,7 +25,19 @@ const courses = [
     highlights: ["18+ Tools", "4 Portfolio Projects", "Placement Assistance"],
   },
   {
-    name: "Data Science & AI Mastery",
+    name: "Business Analytics",
+    duration: "6 Months",
+    level: "Beginner to Advanced",
+    tagline: "Bridge business strategy and data insights.",
+    description:
+      "Learn to translate business questions into data-driven answers. Master analytics frameworks, dashboards, and storytelling that executives actually act on.",
+    bg: "#10B981",
+    icon: LineChart,
+    href: "/courses/business-analytics",
+    highlights: ["15+ Tools", "5 Projects", "Business Focus"],
+  },
+  {
+    name: "Data Science and AI",
     duration: "12 Months",
     level: "Zero to Expert",
     tagline: "From your first Python script to production ML models.",
@@ -37,27 +49,39 @@ const courses = [
     highlights: ["36+ Tools", "7 Case Studies", "MLOps Ready"],
   },
   {
-    name: "Business Intelligence & Strategy",
-    duration: "12 Months",
-    level: "Professional Upskilling",
-    tagline: "For the people who need data to make better calls.",
+    name: "Agentic AI & Prompt Engineering",
+    duration: "6 Months",
+    level: "Intermediate to Advanced",
+    tagline: "Build autonomous AI agents that think and execute.",
     description:
-      "Built for working professionals, MBAs, and business leaders. You'll learn BI tools, predictive analytics, and AI-powered decision-making that you can apply immediately.",
-    bg: "#F5892A",
+      "Learn to design, build, and deploy AI agents. From prompt engineering to agentic workflows — this is the future of AI, and you'll be building it.",
+    bg: "#8B5CF6",
+    icon: Brain,
+    href: "/courses/agentic-ai",
+    highlights: ["20+ Tools", "AI Agent Projects", "LangChain & OpenAI"],
+  },
+  {
+    name: "Investment Banking",
+    duration: "9 Months",
+    level: "Beginner to Advanced",
+    tagline: "Break into the world of high-stakes finance.",
+    description:
+      "Master financial modeling, valuation, M&A, and deal structuring. Built for those who want to land roles at top investment banks and financial institutions.",
+    bg: "#F59E0B",
     icon: LineChart,
-    href: "/courses/business-intelligence",
-    highlights: ["15+ Tools", "6 Projects", "Executive Focus"],
+    href: "/courses/investment-banking",
+    highlights: ["15+ Tools", "Finance Projects", "Placement Assistance"],
   },
 ];
 
 const comparison = [
-  { label: "Duration", values: ["6 Months", "12 Months", "12 Months"] },
-  { label: "Best For", values: ["Career switchers & fresh graduates", "Aspiring data scientists & AI engineers", "Working professionals & MBA graduates"] },
-  { label: "Key Focus", values: ["Analytics & Visualization", "ML, Deep Learning & AI", "BI, Strategy & Decision-Making"] },
-  { label: "Tools Covered", values: ["18+", "36+", "15+"] },
-  { label: "Projects", values: ["4 Portfolio Projects", "7 Case Studies + Projects", "6 Business Projects"] },
-  { label: "Top Career Role", values: ["Data Analyst", "Data Scientist / ML Engineer", "BI Analyst / Analytics Manager"] },
-  { label: "Salary Range", values: ["₹6–12 LPA", "₹8–18 LPA", "₹7–15 LPA"] },
+  { label: "Duration", values: ["6 Months", "6 Months", "12 Months", "6 Months", "9 Months"] },
+  { label: "Best For", values: ["Career switchers & fresh graduates", "Business professionals", "Aspiring data scientists & AI engineers", "AI builders & developers", "Finance aspirants"] },
+  { label: "Key Focus", values: ["Analytics & Visualization", "Business Strategy & Dashboards", "ML, Deep Learning & AI", "AI Agents & Prompt Design", "Financial Modeling & Valuation"] },
+  { label: "Tools Covered", values: ["18+", "15+", "36+", "20+", "15+"] },
+  { label: "Projects", values: ["4 Portfolio Projects", "5 Business Projects", "7 Case Studies + Projects", "AI Agent Projects", "Finance Projects"] },
+  { label: "Top Career Role", values: ["Data Analyst", "Business Analyst", "Data Scientist / ML Engineer", "AI Engineer", "Investment Banking Analyst"] },
+  { label: "Salary Range", values: ["₹6–12 LPA", "₹6–14 LPA", "₹8–18 LPA", "₹10–20 LPA", "₹8–16 LPA"] },
   { label: "Certification", values: ["Azure AI Fundamentals", "AWS ML Specialty Prep", "Power BI Data Analyst Prep"] },
 ];
 

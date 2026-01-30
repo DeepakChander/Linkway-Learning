@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import CanvasWave from "@/components/animation/CanvasWave";
 
 import { cn } from "@/lib/utils";
-import { Linkedin, Twitter, Instagram, Youtube, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Linkedin, Instagram, MapPin, Phone, Mail } from "lucide-react";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -15,9 +15,11 @@ const quickLinks = [
 ];
 
 const courseLinks = [
-  { label: "Data Analytics Accelerator", href: "/courses/data-analytics" },
-  { label: "Data Science & AI Mastery", href: "/courses/data-science-ai" },
-  { label: "Business Intelligence", href: "/courses/business-intelligence" },
+  { label: "Data Analytics", href: "/courses/data-analytics" },
+  { label: "Business Analytics", href: "/courses/business-analytics" },
+  { label: "Data Science and AI", href: "/courses/data-science-ai" },
+  { label: "Agentic AI & Prompt Engineering", href: "/courses/agentic-ai" },
+  { label: "Investment Banking", href: "/courses/investment-banking" },
 ];
 
 const legalLinks = [
@@ -42,7 +44,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-black relative overflow-hidden pt-20 border-t border-white/5">
+    <footer className="bg-black relative overflow-hidden pt-10 border-t border-white/5">
       {/* Canvas Wave Background */}
       <CanvasWave />
 
@@ -64,7 +66,7 @@ export default function Footer() {
         </div>
 
         {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-8">
 
           {/* Brand Column */}
           <div className="lg:col-span-4">
@@ -131,15 +133,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-white/5 text-sm text-gray-400">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-white/5 text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Linkway Learning Private Limited.</p>
-          {/* Social links - uncomment and add real URLs when ready
           <div className="flex gap-3">
             {[
-              { icon: Linkedin, name: "LinkedIn", href: "https://linkedin.com/company/linkwaylearning" },
-              { icon: Twitter, name: "Twitter", href: "https://twitter.com/linkwaylearning" },
-              { icon: Instagram, name: "Instagram", href: "https://instagram.com/linkwaylearning" },
-              { icon: Youtube, name: "YouTube", href: "https://youtube.com/@linkwaylearning" },
+              { icon: Facebook, name: "Facebook", href: "https://www.facebook.com/share/1AxrBp9iYo/" },
+              { icon: Linkedin, name: "LinkedIn", href: "https://www.linkedin.com/company/linkway-learning/" },
+              { icon: Instagram, name: "Instagram", href: "https://www.instagram.com/linkway_learning" },
             ].map((social) => (
               <a
                 key={social.name}
@@ -153,7 +153,6 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          */}
         </div>
       </div>
     </footer>

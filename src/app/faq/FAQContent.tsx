@@ -11,7 +11,7 @@ const faqCategories = [
     items: [
       {
         q: "What exactly is Linkway Learning?",
-        a: "We're a training company that gets people hired in data roles. We run three programs - Data Analytics, Data Science & AI, and Business Intelligence - with live classes, real projects, and placement support baked in from day one.",
+        a: "We're a training company that gets people hired in data, AI, and finance roles. We run five programs - Data Analytics, Business Analytics, Data Science and AI, Agentic AI & Prompt Engineering, and Investment Banking - with live classes, real projects, and placement support baked in from day one.",
       },
       {
         q: "How is this different from Coursera or Udemy?",
@@ -32,7 +32,7 @@ const faqCategories = [
     items: [
       {
         q: "I don't know which course to pick. Help?",
-        a: "If you're starting fresh or switching careers, Data Analytics is the move. If you want to go deep into ML and AI, pick Data Science. If you're already working and want to level up, Business Intelligence is built for you. Still unsure? Talk to a counselor - they'll sort it out in 15 minutes.",
+        a: "If you're starting fresh or switching careers, Data Analytics is the move. Want to understand business strategy through data? Go with Business Analytics. If you want to go deep into ML and AI, pick Data Science and AI. Want to build AI agents? Agentic AI & Prompt Engineering is for you. Interested in finance? Investment Banking is the path. Still unsure? Talk to a counselor - they'll sort it out in 15 minutes.",
       },
       {
         q: "Do I need to know coding?",

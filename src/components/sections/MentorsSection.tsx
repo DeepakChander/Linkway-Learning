@@ -176,10 +176,6 @@ export default function MentorsSection() {
 
                 {/* Infinite scroll row */}
                 <div className="w-full relative marquee-row">
-                    {/* Fade edges */}
-                    <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: "linear-gradient(to right, #f2f1ee, transparent)" }} />
-                    <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: "linear-gradient(to left, #f2f1ee, transparent)" }} />
-
                     <InfiniteRow direction="left" speed={45} />
                 </div>
             </section>

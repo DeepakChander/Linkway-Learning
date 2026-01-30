@@ -224,7 +224,7 @@ export default function HiringPartners() {
 
           <h2
             ref={headlineRef}
-            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 text-white"
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-5 text-white whitespace-nowrap"
             style={{ perspective: "800px" }}
           >
             {headlineWords.map((word, i) => (

@@ -14,12 +14,11 @@ const navLinks = [
     label: "Courses",
     href: "/courses",
     children: [
-      { label: "Data Analytics Accelerator", href: "/courses/data-analytics" },
-      { label: "Data Science & AI Mastery", href: "/courses/data-science-ai" },
-      {
-        label: "Business Intelligence & Strategy",
-        href: "/courses/business-intelligence",
-      },
+      { label: "Data Analytics", href: "/courses/data-analytics" },
+      { label: "Business Analytics", href: "/courses/business-analytics" },
+      { label: "Data Science and AI", href: "/courses/data-science-ai" },
+      { label: "Agentic AI & Prompt Engineering", href: "/courses/agentic-ai" },
+      { label: "Investment Banking", href: "/courses/investment-banking" },
     ],
   },
   { label: "About", href: "/about" },
@@ -101,10 +100,10 @@ export default function Navbar() {
             "w-full max-w-7xl rounded-2xl transition-all duration-500",
             "border py-3 px-8 sm:px-12",
             scrolled
-              ? "border-gray-200/60 bg-white/80 backdrop-blur-[20px] backdrop-saturate-[1.8] shadow-[0_8px_32px_rgba(0,0,0,0.06),inset_0_0.5px_0_rgba(255,255,255,0.8)]"
+              ? "border-white/20 bg-white/70 backdrop-blur-[40px] backdrop-saturate-[1.8] shadow-[0_2px_20px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.9),inset_0_-0.5px_0_rgba(0,0,0,0.05)]"
               : isHome
-                ? "border-white/[0.06] bg-white/[0.05] backdrop-blur-[12px] backdrop-saturate-150 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
-                : "border-gray-200/60 bg-white/75 backdrop-blur-[12px] backdrop-saturate-150 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+                ? "border-white/[0.12] bg-white/[0.08] backdrop-blur-[40px] backdrop-saturate-[1.8] shadow-[0_2px_20px_rgba(0,0,0,0.15),inset_0_0.5px_0_rgba(255,255,255,0.15)]"
+                : "border-white/20 bg-white/60 backdrop-blur-[40px] backdrop-saturate-[1.8] shadow-[0_2px_20px_rgba(0,0,0,0.06),inset_0_0.5px_0_rgba(255,255,255,0.9),inset_0_-0.5px_0_rgba(0,0,0,0.03)]"
           )}
         >
           {/* Desktop layout */}
@@ -165,10 +164,10 @@ export default function Navbar() {
                           exit={{ opacity: 0, y: 8 }}
                           transition={{ duration: 0.2 }}
                           className={cn(
-                            "absolute top-full left-0 mt-3 w-72 rounded-2xl backdrop-blur-xl shadow-2xl overflow-hidden",
+                            "absolute top-full left-0 mt-3 w-72 rounded-2xl backdrop-blur-[40px] backdrop-saturate-[1.8] shadow-2xl overflow-hidden",
                             isHome
-                              ? "bg-navy-800/95 border border-white/[0.08] shadow-black/50"
-                              : "bg-white/95 border border-gray-200/80 shadow-black/10"
+                              ? "bg-[#1d1d1f]/80 border border-white/[0.12] shadow-black/40"
+                              : "bg-white/70 border border-white/20 shadow-black/8"
                           )}
                         >
                           {link.children.map((child) => (

@@ -128,12 +128,11 @@ export const NAV_LINKS: NavLink[] = [
     label: "Courses",
     href: "/courses",
     children: [
-      { label: "Data Analytics Accelerator", href: "/courses/data-analytics" },
-      { label: "Data Science & AI Mastery", href: "/courses/data-science-ai" },
-      {
-        label: "Business Intelligence & Strategy",
-        href: "/courses/business-intelligence",
-      },
+      { label: "Data Analytics", href: "/courses/data-analytics" },
+      { label: "Business Analytics", href: "/courses/business-analytics" },
+      { label: "Data Science and AI", href: "/courses/data-science-ai" },
+      { label: "Agentic AI & Prompt Engineering", href: "/courses/agentic-ai" },
+      { label: "Investment Banking", href: "/courses/investment-banking" },
     ],
   },
   { label: "About", href: "/about" },
@@ -1108,12 +1107,11 @@ export const FOOTER_LINKS: FooterLinkGroup[] = [
   {
     category: "Programs",
     links: [
-      { label: "Data Analytics Accelerator", href: "/courses/data-analytics" },
-      { label: "Data Science & AI Mastery", href: "/courses/data-science-ai" },
-      {
-        label: "Business Intelligence & Strategy",
-        href: "/courses/business-intelligence",
-      },
+      { label: "Data Analytics", href: "/courses/data-analytics" },
+      { label: "Business Analytics", href: "/courses/business-analytics" },
+      { label: "Data Science and AI", href: "/courses/data-science-ai" },
+      { label: "Agentic AI & Prompt Engineering", href: "/courses/agentic-ai" },
+      { label: "Investment Banking", href: "/courses/investment-banking" },
       { label: "Compare Courses", href: "/courses/compare" },
     ],
   },

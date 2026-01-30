@@ -62,11 +62,11 @@ export default function WhyLinkway() {
         <div className="max-w-7xl mx-auto w-full relative">
           {/* Headline */}
           <div className="mb-16 text-center max-w-5xl mx-auto relative z-10">
-            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-100 text-orange-600 font-semibold text-sm mb-6">
+            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-100 text-orange-600 font-bold text-sm mb-6">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
-              Why Linkway
+              Why Linkway?
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 tracking-tight leading-tight">
               {revealLines.map((line, li) => (
@@ -198,7 +198,7 @@ export default function WhyLinkway() {
 
           {/* Partner names - auto-scrolling marquee */}
           <div className="mt-16 relative z-10">
-            <p className="text-sm text-orange-500 uppercase tracking-widest mb-5 font-semibold text-center">Trusted by teams at</p>
+            <p className="text-base text-orange-500 uppercase tracking-widest mb-5 font-bold text-center">Trusted by teams at</p>
             <div className="border-y border-gray-200 py-5">
               <Marquee speed={30} gap={12} pauseOnHover>
                 {partnerNames.map((name) => (
@@ -207,7 +207,7 @@ export default function WhyLinkway() {
                     className="inline-flex items-center gap-2 text-lg md:text-xl font-bold text-navy-900 whitespace-nowrap"
                   >
                     {partnerLogos[name] && (
-                      <img src={partnerLogos[name]} alt={name} width={22} height={22} className="w-[22px] h-[22px] object-contain grayscale opacity-70" />
+                      <img src={partnerLogos[name]} alt={name} width={22} height={22} className="w-[22px] h-[22px] object-contain" />
                     )}
                     {name}
                     <span className="text-orange-400 mx-4">·</span>

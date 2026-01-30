@@ -32,8 +32,8 @@ const sections: {
           Linkway Learning Private Limited (&quot;Linkway Learning,&quot;
           &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) offers advanced
           professional training programs and skill-building courses
-          (&quot;Programs&quot;) in Data Analytics, Data Science &amp; AI,
-          Business Intelligence, and related disciplines. When you successfully
+          (&quot;Programs&quot;) in Data Analytics, Business Analytics, Data Science and AI,
+          Agentic AI &amp; Prompt Engineering, Investment Banking, and related disciplines. When you successfully
           complete a Program (as determined by Linkway Learning), you will
           receive a certificate of completion (&quot;Certificate&quot;). If you
           do not complete a Program, you may receive a certificate of
@@ -316,18 +316,24 @@ const sections: {
             </thead>
             <tbody className="text-gray-400">
               <tr className="border-b border-white/5">
-                <td className="px-4 py-2">Data Analytics Accelerator</td>
+                <td className="px-4 py-2">Data Analytics</td>
                 <td className="px-4 py-2">180</td>
               </tr>
               <tr className="border-b border-white/5">
-                <td className="px-4 py-2">Data Science &amp; AI Mastery</td>
+                <td className="px-4 py-2">Business Analytics</td>
+                <td className="px-4 py-2">180</td>
+              </tr>
+              <tr className="border-b border-white/5">
+                <td className="px-4 py-2">Data Science and AI</td>
                 <td className="px-4 py-2">365</td>
               </tr>
               <tr className="border-b border-white/5">
-                <td className="px-4 py-2">
-                  Business Intelligence &amp; Strategy
-                </td>
-                <td className="px-4 py-2">365</td>
+                <td className="px-4 py-2">Agentic AI &amp; Prompt Engineering</td>
+                <td className="px-4 py-2">180</td>
+              </tr>
+              <tr className="border-b border-white/5">
+                <td className="px-4 py-2">Investment Banking</td>
+                <td className="px-4 py-2">270</td>
               </tr>
             </tbody>
           </table>

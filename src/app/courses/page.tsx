@@ -3,7 +3,7 @@ import CoursesOverview from "./CoursesOverview";
 
 export const metadata: Metadata = {
   title: "Courses",
-  description: "Explore Linkway Learning's courses in Data Analytics, Data Science & AI, and Business Intelligence.",
+  description: "Explore Linkway Learning's courses in Data Analytics, Business Analytics, Data Science and AI, Agentic AI & Prompt Engineering, and Investment Banking.",
 };
 
 export default function CoursesPage() {

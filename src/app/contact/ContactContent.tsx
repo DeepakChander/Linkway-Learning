@@ -177,14 +177,17 @@ export default function ContactPage() {
                       <option value="data-analytics" className="bg-navy-900 text-white">
                         Data Analytics
                       </option>
-                      <option value="data-science-ai" className="bg-navy-900 text-white">
-                        Data Science & AI
+                      <option value="business-analytics" className="bg-navy-900 text-white">
+                        Business Analytics
                       </option>
-                      <option
-                        value="business-intelligence"
-                        className="bg-navy-900 text-white"
-                      >
-                        Business Intelligence
+                      <option value="data-science-ai" className="bg-navy-900 text-white">
+                        Data Science and AI
+                      </option>
+                      <option value="agentic-ai" className="bg-navy-900 text-white">
+                        Agentic AI & Prompt Engineering
+                      </option>
+                      <option value="investment-banking" className="bg-navy-900 text-white">
+                        Investment Banking
                       </option>
                       <option value="not-sure" className="bg-navy-900 text-white">
                         Not Sure Yet

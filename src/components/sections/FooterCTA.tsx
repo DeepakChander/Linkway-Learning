@@ -42,13 +42,15 @@ export default function FooterCTA() {
       className="py-14 md:py-20 px-6 relative overflow-hidden bg-[#ffc8b1]"
     >
       <div ref={ctaRef} className="relative z-10 max-w-3xl mx-auto text-center">
+        <p className="text-navy-900/70 text-sm font-semibold uppercase tracking-widest mb-4">Only a few seats left</p>
+
         <h2 className="text-2xl md:text-4xl lg:text-[2.75rem] font-bold text-navy-900 leading-tight tracking-tight">
-          Your data career starts{" "}
-          <span className="text-orange-600">the moment you decide.</span>
+          While you&apos;re thinking about it,{" "}
+          <span className="text-navy-700">someone else just enrolled.</span>
         </h2>
 
-        <p className="text-navy-800/70 text-base md:text-lg mt-4 mb-8 max-w-xl mx-auto">
-          The next batch is filling up. Spots are limited and we don&apos;t do waitlists.
+        <p className="text-navy-900/60 text-base md:text-lg mt-4 mb-8 max-w-xl mx-auto">
+          Every week you wait is a week someone else is building the career you want. The current batch is almost full — no waitlist, no second chances.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -65,9 +67,18 @@ export default function FooterCTA() {
               </span>
             </Button>
           </motion.div>
-          <Button variant="outline" size="lg" onClick={openEnquiry} className="!border-navy-900 !text-navy-900 hover:!bg-navy-900/10">
-            Talk to a Counselor
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          >
+            <Button variant="outline" size="lg" onClick={openEnquiry} className="!border-navy-900 !text-navy-900 hover:!bg-navy-900/10">
+              <span className="flex items-center gap-2">
+                Talk to a Counselor
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Button>
+          </motion.div>
         </div>
       </div>
     </section>
