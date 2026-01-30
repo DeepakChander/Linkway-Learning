@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import TermsPage from "./TermsContent";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions",
+  title: "Terms of Use",
   description:
-    "Terms and conditions for using Linkway Learning's website and educational programs.",
+    "Terms of Use for Linkway Learning's website, platform, and educational programs. Read our complete terms governing enrolment, payments, refunds, intellectual property, and more.",
 };
 
 export default function Terms() {
