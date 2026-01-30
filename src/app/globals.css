@@ -1155,6 +1155,58 @@
   }
 }
 
+/* ── Light Flow Ambient Background ── */
+@keyframes light-flow {
+  0%   { transform: translateY(100%) scaleX(0.8); opacity: 0; }
+  50%  { opacity: 0.07; }
+  100% { transform: translateY(-100%) scaleX(1.2); opacity: 0; }
+}
+
+.light-flow-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.light-flow-bg::before,
+.light-flow-bg::after {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 120%;
+  background: linear-gradient(180deg, transparent, rgba(245,137,42,0.08), transparent);
+  animation: light-flow 8s ease-in-out infinite;
+  filter: blur(60px);
+}
+
+.light-flow-bg::before {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.light-flow-bg::after {
+  left: 65%;
+  animation-delay: -4s;
+  width: 150px;
+  background: linear-gradient(180deg, transparent, rgba(27,45,79,0.06), transparent);
+}
+
+/* ── Progressive Blur Glassmorphism (light theme) ── */
+.glass-progressive-light {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* ── Stats Number Glow ── */
+.stat-glow {
+  text-shadow: 0 0 40px rgba(245, 137, 42, 0.15);
+}
+
 /* ── Reduced Motion Support ── */
 @media (prefers-reduced-motion: reduce) {
   *,

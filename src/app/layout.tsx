@@ -32,6 +32,10 @@ export const metadata: Metadata = {
     "placement assistance",
     "Linkway Learning",
   ],
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "Linkway Learning - Your Link to Mastery",
     description: "Transform your career with industry-driven programs. Dedicated Placement Assistance.",
