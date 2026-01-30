@@ -413,18 +413,29 @@ export default function AboutPage() {
         </section>
 
         {/* ─── STATS ─── */}
-        <section className="py-20 px-6 relative z-10">
-          <div className="max-w-5xl mx-auto glass-progressive-light rounded-3xl p-12 relative">
-            <CrossFlicker position="top-left" color="orange" size="sm" />
-            <CrossFlicker position="top-right" color="orange" size="sm" delay={0.3} />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <section className="py-24 px-6 relative z-10 overflow-hidden">
+          {/* Animated background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 pointer-events-none" />
+          <div className="absolute inset-0 values-grid-overlay opacity-30 pointer-events-none" style={{ filter: "invert(1)" }} />
+          <div className="absolute -top-20 left-[20%] w-[400px] h-[400px] rounded-full bg-orange-500/15 blur-[100px] pointer-events-none values-blob" />
+          <div className="absolute -bottom-20 right-[15%] w-[350px] h-[350px] rounded-full bg-orange-400/10 blur-[80px] pointer-events-none values-blob-delayed" />
+
+          <div className="max-w-5xl mx-auto relative">
+            <SpringReveal skewY={-5} distance={150} damping={12}>
+              <p className="text-orange-400 text-sm font-semibold tracking-widest uppercase text-center mb-3">Our Impact</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">Numbers That Speak</h2>
+            </SpringReveal>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
               {stats.map((stat, i) => (
-                <SpringReveal key={i} delay={i * 0.1} distance={60} stiffness={100} damping={12}>
-                  <div className="text-center">
-                    <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 stat-glow">
+                <SpringReveal key={i} delay={i * 0.12} distance={60} stiffness={100} damping={12}>
+                  <div className={`text-center py-8 px-4 relative ${i < stats.length - 1 ? "md:border-r md:border-white/10" : ""}`}>
+                    {/* Top accent line */}
+                    <div className="w-10 h-1 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full mx-auto mb-6" />
+                    <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-white stat-glow">
                       <ScrollOdometer value={stat.target} suffix={stat.suffix} animateSuffix duration={2} delay={0.2 + i * 0.15} />
                     </div>
-                    <p className="text-gray-500 text-sm md:text-base mt-2">{stat.label}</p>
+                    <p className="text-gray-400 text-sm md:text-base mt-3 tracking-wide">{stat.label}</p>
                   </div>
                 </SpringReveal>
               ))}
