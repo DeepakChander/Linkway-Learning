@@ -29,60 +29,6 @@ const headlines = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FLOATING BENTO CARDS DATA
-   ═══════════════════════════════════════════════════════════════════════════ */
-const bentoCards = [
-  {
-    id: "salary",
-    label: "Avg. Salary Hike",
-    value: "85",
-    suffix: "%",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
-    ),
-    gradient: "from-emerald-500/20 to-emerald-500/5",
-    borderColor: "border-emerald-500/20",
-    textColor: "text-emerald-400",
-    glowRgba: "rgba(16,185,129,0.15)",
-    position: "top-[5%] right-[4%] md:right-[8%]",
-    delay: 0.3,
-    floatDuration: 7,
-  },
-  {
-    id: "placements",
-    label: "Placement Rate",
-    value: "96.8",
-    suffix: "%",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
-    ),
-    gradient: "from-orange-500/20 to-orange-500/5",
-    borderColor: "border-orange-500/20",
-    textColor: "text-orange-400",
-    glowRgba: "rgba(245,137,42,0.15)",
-    position: "top-[35%] right-[-2%] md:right-[2%]",
-    delay: 0.6,
-    floatDuration: 8,
-  },
-  {
-    id: "partners",
-    label: "Hiring Partners",
-    value: "400",
-    suffix: "+",
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-    ),
-    gradient: "from-blue-500/20 to-blue-500/5",
-    borderColor: "border-blue-500/20",
-    textColor: "text-blue-400",
-    glowRgba: "rgba(59,130,246,0.15)",
-    position: "bottom-[22%] right-[0%] md:right-[6%]",
-    delay: 0.9,
-    floatDuration: 6,
-  },
-];
-
-/* ═══════════════════════════════════════════════════════════════════════════
    PARTNER MARQUEE
    ═══════════════════════════════════════════════════════════════════════════ */
 const partnerLogos = [
@@ -92,10 +38,45 @@ const partnerLogos = [
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PARTICLE FIELD - Ambient floating data particles with connections
+   AURORA BACKGROUND - Flowing gradient mesh with depth
    ═══════════════════════════════════════════════════════════════════════════ */
-function ParticleField() {
+function AuroraBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Primary aurora layers */}
+      <div className="hero-aurora-1" />
+      <div className="hero-aurora-2" />
+      <div className="hero-aurora-3" />
+      <div className="hero-aurora-4" />
+
+      {/* Radial vignette for depth */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, rgba(13,27,42,0.7) 100%)",
+        }}
+      />
+
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 hero-grid-overlay opacity-[0.015]" />
+
+      {/* Horizon glow line */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[1px]"
+        style={{
+          background: "linear-gradient(90deg, transparent, rgba(245,137,42,0.15), rgba(59,130,246,0.1), transparent)",
+        }}
+      />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INTERACTIVE PARTICLE CONSTELLATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+function ParticleConstellation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -999, y: -999 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -106,7 +87,7 @@ function ParticleField() {
     let animId: number;
     let particles: {
       x: number; y: number; vx: number; vy: number;
-      size: number; opacity: number; hue: number;
+      size: number; opacity: number; hue: number; pulse: number; pulseSpeed: number;
     }[] = [];
 
     const resize = () => {
@@ -120,25 +101,49 @@ function ParticleField() {
       resize();
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
-      const count = Math.min(70, Math.floor((w * h) / 14000));
+      const count = Math.min(80, Math.floor((w * h) / 12000));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
-        size: Math.random() * 1.8 + 0.4,
-        opacity: Math.random() * 0.4 + 0.08,
-        hue: Math.random() > 0.65 ? 28 : 210,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        size: Math.random() * 2 + 0.3,
+        opacity: Math.random() * 0.35 + 0.05,
+        hue: Math.random() > 0.6 ? 28 : Math.random() > 0.5 ? 210 : 160,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.01 + Math.random() * 0.02,
       }));
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
 
     const draw = () => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, w, h);
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
+
+        /* Mouse repulsion */
+        const dmx = p.x - mx;
+        const dmy = p.y - my;
+        const distMouse = Math.sqrt(dmx * dmx + dmy * dmy);
+        if (distMouse < 150 && distMouse > 0) {
+          const force = (150 - distMouse) / 150 * 0.4;
+          p.vx += (dmx / distMouse) * force;
+          p.vy += (dmy / distMouse) * force;
+        }
+
+        /* Friction */
+        p.vx *= 0.98;
+        p.vy *= 0.98;
+
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < 0) p.x = w;
@@ -146,21 +151,35 @@ function ParticleField() {
         if (p.y < 0) p.y = h;
         if (p.y > h) p.y = 0;
 
+        /* Pulsing opacity */
+        p.pulse += p.pulseSpeed;
+        const currentOpacity = p.opacity * (0.6 + 0.4 * Math.sin(p.pulse));
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, 80%, 60%, ${p.opacity})`;
+        ctx.fillStyle = `hsla(${p.hue}, 75%, 60%, ${currentOpacity})`;
         ctx.fill();
 
+        /* Glow effect for larger particles */
+        if (p.size > 1.2) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${p.hue}, 80%, 50%, ${currentOpacity * 0.1})`;
+          ctx.fill();
+        }
+
+        /* Connections */
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 110) {
+          if (dist < 120) {
+            const lineOpacity = 0.06 * (1 - dist / 120);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `hsla(${p.hue}, 60%, 50%, ${0.05 * (1 - dist / 110)})`;
+            ctx.strokeStyle = `hsla(${p.hue}, 50%, 55%, ${lineOpacity})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -172,94 +191,25 @@ function ParticleField() {
     init();
     draw();
     window.addEventListener("resize", init);
+    canvas.addEventListener("mousemove", handleMouseMove);
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", init);
+      canvas.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ opacity: 0.55 }}
+      className="absolute inset-0 w-full h-full pointer-events-auto"
+      style={{ opacity: 0.6 }}
     />
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   GRADIENT MESH BACKGROUND - Animated gradient orbs
-   ═══════════════════════════════════════════════════════════════════════════ */
-function GradientMesh() {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="hero-orb hero-orb-1" />
-      <div className="hero-orb hero-orb-2" />
-      <div className="hero-orb hero-orb-3" />
-      <div className="absolute inset-0 hero-grid-overlay opacity-[0.025]" />
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   FLOATING BENTO CARD - Glass card with stats, parallax on mouse
-   ═══════════════════════════════════════════════════════════════════════════ */
-function BentoCard({
-  card,
-  mouseX,
-  mouseY,
-}: {
-  card: (typeof bentoCards)[0];
-  mouseX: MotionValue<number>;
-  mouseY: MotionValue<number>;
-}) {
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useTransform(mouseX, [0, 1], [-8, 8]);
-  const y = useTransform(mouseY, [0, 1], [-6, 6]);
-  const springX = useSpring(x, { stiffness: 50, damping: 20 });
-  const springY = useSpring(y, { stiffness: 50, damping: 20 });
-
-  return (
-    <motion.div
-      className={`absolute ${card.position} z-10 hidden md:block`}
-      initial={{ opacity: 0, y: 40, scale: 0.9 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{
-        duration: 0.8,
-        delay: card.delay + 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      style={{ x: springX, y: springY }}
-    >
-      <motion.div
-        className={`relative backdrop-blur-xl bg-gradient-to-br ${card.gradient} border ${card.borderColor} rounded-2xl px-5 py-4 cursor-default select-none`}
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: card.floatDuration, repeat: Infinity, ease: "easeInOut" }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        whileHover={{ scale: 1.05 }}
-      >
-        {/* Hover glow */}
-        <div
-          className={`absolute inset-0 rounded-2xl transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}
-          style={{ background: `radial-gradient(circle at 50% 50%, ${card.glowRgba}, transparent 70%)` }}
-        />
-        <div className="relative flex items-center gap-3">
-          <div className={`${card.textColor} p-2 rounded-lg bg-white/5`}>{card.icon}</div>
-          <div>
-            <p className="text-[11px] uppercase tracking-wider text-gray-400 font-medium">{card.label}</p>
-            <div className={`text-2xl font-bold ${card.textColor} font-mono tabular-nums`}>
-              {card.value}<span className="text-lg">{card.suffix}</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   SCRAMBLE TEXT - Cipher-decode inline effect
+   SCRAMBLE TEXT
    ═══════════════════════════════════════════════════════════════════════════ */
 function ScrambleText({ text, delay = 0 }: { text: string; delay?: number }) {
   const [display, setDisplay] = useState(text);
@@ -300,7 +250,7 @@ function ScrambleText({ text, delay = 0 }: { text: string; delay?: number }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   STATUS PILL - Animated batch notification badge
+   STATUS PILL
    ═══════════════════════════════════════════════════════════════════════════ */
 function StatusPill() {
   return (
@@ -308,7 +258,7 @@ function StatusPill() {
       initial={{ opacity: 0, y: 15, filter: "blur(10px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.7, delay: 0.1 }}
-      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-8"
+      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-8 group hover:border-orange-500/20 transition-colors duration-500"
     >
       <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -323,76 +273,116 @@ function StatusPill() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   HERO VISUAL - Abstract orbital data constellation with course labels
+   DATA ORBIT VISUAL - Abstract visualization with floating elements
    ═══════════════════════════════════════════════════════════════════════════ */
-function HeroVisual() {
+function DataOrbitVisual({ mouseX, mouseY }: { mouseX: MotionValue<number>; mouseY: MotionValue<number> }) {
+  const parallaxX = useTransform(mouseX, [0, 1], [-15, 15]);
+  const parallaxY = useTransform(mouseY, [0, 1], [-10, 10]);
+  const springPX = useSpring(parallaxX, { stiffness: 40, damping: 20 });
+  const springPY = useSpring(parallaxY, { stiffness: 40, damping: 20 });
+
   return (
-    <div className="relative w-[480px] h-[480px]">
-      {/* Outer ring */}
+    <motion.div
+      className="relative w-[520px] h-[520px]"
+      style={{ x: springPX, y: springPY }}
+    >
+      {/* Outermost ring - dashed */}
       <motion.div
-        className="absolute inset-0 rounded-full border border-white/[0.04]"
+        className="absolute inset-0 rounded-full"
+        style={{
+          border: "1px dashed rgba(255,255,255,0.04)",
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Outer ring with data points */}
+      <motion.div
+        className="absolute inset-[20px] rounded-full border border-white/[0.04]"
         animate={{ rotate: 360 }}
         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
       >
-        {[0, 90, 180, 270].map((deg) => (
+        {[0, 72, 144, 216, 288].map((deg) => (
           <div
             key={deg}
-            className="absolute w-1.5 h-1.5 rounded-full bg-orange-500/40"
+            className="absolute"
             style={{
               top: "50%", left: "50%",
-              transform: `rotate(${deg}deg) translateX(210px) translateY(-50%)`,
+              transform: `rotate(${deg}deg) translateX(220px) translateY(-50%)`,
             }}
-          />
+          >
+            <div className="w-1.5 h-1.5 rounded-full bg-orange-500/50 shadow-[0_0_8px_rgba(245,137,42,0.3)]" />
+          </div>
         ))}
       </motion.div>
 
       {/* Middle ring */}
       <motion.div
-        className="absolute inset-[50px] rounded-full border border-white/[0.06]"
+        className="absolute inset-[70px] rounded-full border border-white/[0.06]"
         animate={{ rotate: -360 }}
         transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
       >
-        {[45, 135, 225, 315].map((deg) => (
+        {[30, 120, 210, 300].map((deg) => (
           <div
             key={deg}
-            className="absolute w-2 h-2 rounded-full bg-blue-500/30"
+            className="absolute"
             style={{
               top: "50%", left: "50%",
-              transform: `rotate(${deg}deg) translateX(160px) translateY(-50%)`,
+              transform: `rotate(${deg}deg) translateX(170px) translateY(-50%)`,
             }}
-          />
+          >
+            <div className="w-2 h-2 rounded-full bg-blue-500/35 shadow-[0_0_10px_rgba(59,130,246,0.2)]" />
+          </div>
         ))}
       </motion.div>
 
       {/* Inner ring */}
       <motion.div
-        className="absolute inset-[110px] rounded-full border border-orange-500/[0.08]"
+        className="absolute inset-[130px] rounded-full border border-orange-500/[0.08]"
         animate={{ rotate: 360 }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
       >
         {[0, 120, 240].map((deg) => (
           <div
             key={deg}
-            className="absolute w-2.5 h-2.5 rounded-full"
+            className="absolute"
             style={{
               top: "50%", left: "50%",
-              transform: `rotate(${deg}deg) translateX(100px) translateY(-50%)`,
-              background: "radial-gradient(circle, rgba(245,137,42,0.6), rgba(245,137,42,0.1))",
+              transform: `rotate(${deg}deg) translateX(110px) translateY(-50%)`,
             }}
-          />
+          >
+            <div
+              className="w-2.5 h-2.5 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(245,137,42,0.7), rgba(245,137,42,0.15))",
+                boxShadow: "0 0 12px rgba(245,137,42,0.3)",
+              }}
+            />
+          </div>
         ))}
       </motion.div>
 
-      {/* Center background circle */}
-      <div className="absolute inset-[100px] rounded-full bg-gradient-to-br from-orange-500/10 via-slate-800/50 to-blue-500/10 border border-orange-500/15" />
+      {/* Center glass circle with gradient */}
+      <div className="absolute inset-[120px] rounded-full overflow-hidden">
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: "linear-gradient(135deg, rgba(245,137,42,0.08) 0%, rgba(13,27,42,0.6) 40%, rgba(59,130,246,0.06) 100%)",
+            border: "1px solid rgba(245,137,42,0.12)",
+          }}
+        />
+      </div>
 
       {/* Center core - Student Image */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <motion.div
-          className="w-[280px] h-[280px] rounded-full border-2 border-orange-500/30 flex items-center justify-center overflow-hidden"
-          style={{ background: "radial-gradient(circle, rgba(245,137,42,0.08) 0%, rgba(15,23,42,0.6) 70%)" }}
-          animate={{ scale: [1, 1.03, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[240px] h-[240px] rounded-full border border-orange-500/20 flex items-center justify-center overflow-hidden"
+          style={{
+            background: "radial-gradient(circle, rgba(245,137,42,0.06) 0%, rgba(13,27,42,0.8) 70%)",
+            boxShadow: "0 0 60px rgba(245,137,42,0.08), inset 0 0 40px rgba(13,27,42,0.5)",
+          }}
+          animate={{ scale: [1, 1.02, 1] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
           <img
             src="/hero-students.png"
@@ -402,34 +392,124 @@ function HeroVisual() {
         </motion.div>
       </div>
 
-      {/* Floating course labels */}
-      <motion.div
-        className="absolute top-[15%] left-[-10%] px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] text-gray-400 font-mono"
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg className="inline w-3 h-3 mr-1.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /></svg>
-        Data Science
-      </motion.div>
+      {/* Floating course labels with glass effect */}
+      {[
+        { label: "Data Science", icon: "chart", pos: "top-[12%] left-[-8%]", color: "text-emerald-400", dur: 5 },
+        { label: "Business Intel", icon: "grid", pos: "bottom-[18%] left-[-3%]", color: "text-blue-400", dur: 6, delay: 1 },
+        { label: "AI / ML", icon: "layers", pos: "top-[45%] right-[-10%]", color: "text-orange-400", dur: 4.5, delay: 2 },
+      ].map((item) => (
+        <motion.div
+          key={item.label}
+          className={`absolute ${item.pos} px-3.5 py-2 rounded-xl backdrop-blur-md bg-white/[0.03] border border-white/[0.06] text-[11px] text-gray-400 font-mono shadow-lg shadow-black/10`}
+          animate={{ y: [0, item.label === "Business Intel" ? 8 : -6, 0] }}
+          transition={{ duration: item.dur, repeat: Infinity, ease: "easeInOut", delay: item.delay || 0 }}
+        >
+          <span className={`inline-block w-2 h-2 rounded-full mr-2 ${item.color} opacity-60`}
+            style={{ boxShadow: `0 0 6px currentColor` }}
+          />
+          {item.label}
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
 
-      <motion.div
-        className="absolute bottom-[20%] left-[-5%] px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] text-gray-400 font-mono"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      >
-        <svg className="inline w-3 h-3 mr-1.5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 9h6v6H9z" /></svg>
-        Business Intel
-      </motion.div>
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLOATING METRIC CARDS (right side)
+   ═══════════════════════════════════════════════════════════════════════════ */
+const metricCards = [
+  {
+    id: "salary",
+    label: "Avg. Salary Hike",
+    value: "85",
+    suffix: "%",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
+    ),
+    color: "emerald",
+    position: "top-[3%] right-[2%] md:right-[6%]",
+    delay: 0.8,
+    floatDuration: 7,
+  },
+  {
+    id: "placements",
+    label: "Placement Rate",
+    value: "96.8",
+    suffix: "%",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+    ),
+    color: "orange",
+    position: "top-[33%] right-[-3%] md:right-[1%]",
+    delay: 1.1,
+    floatDuration: 8,
+  },
+  {
+    id: "partners",
+    label: "Hiring Partners",
+    value: "400",
+    suffix: "+",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+    ),
+    color: "blue",
+    position: "bottom-[20%] right-[-1%] md:right-[4%]",
+    delay: 1.4,
+    floatDuration: 6,
+  },
+];
 
+function FloatingMetricCard({
+  card,
+  mouseX,
+  mouseY,
+}: {
+  card: (typeof metricCards)[0];
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+}) {
+  const x = useTransform(mouseX, [0, 1], [-10, 10]);
+  const y = useTransform(mouseY, [0, 1], [-8, 8]);
+  const springX = useSpring(x, { stiffness: 40, damping: 20 });
+  const springY = useSpring(y, { stiffness: 40, damping: 20 });
+
+  const colorMap: Record<string, { text: string; bg: string; border: string; glow: string }> = {
+    orange: { text: "text-orange-400", bg: "from-orange-500/15 to-orange-500/5", border: "border-orange-500/15", glow: "rgba(245,137,42,0.1)" },
+    emerald: { text: "text-emerald-400", bg: "from-emerald-500/15 to-emerald-500/5", border: "border-emerald-500/15", glow: "rgba(16,185,129,0.1)" },
+    blue: { text: "text-blue-400", bg: "from-blue-500/15 to-blue-500/5", border: "border-blue-500/15", glow: "rgba(59,130,246,0.1)" },
+  };
+  const c = colorMap[card.color] || colorMap.orange;
+
+  return (
+    <motion.div
+      className={`absolute ${card.position} z-10 hidden md:block`}
+      initial={{ opacity: 0, y: 40, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.8, delay: card.delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      style={{ x: springX, y: springY }}
+    >
       <motion.div
-        className="absolute top-[50%] right-[-12%] px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] text-gray-400 font-mono"
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className={`relative backdrop-blur-xl bg-gradient-to-br ${c.bg} border ${c.border} rounded-2xl px-5 py-4 cursor-default select-none group`}
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: card.floatDuration, repeat: Infinity, ease: "easeInOut" }}
+        whileHover={{ scale: 1.05 }}
       >
-        <svg className="inline w-3 h-3 mr-1.5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
-        AI / ML
+        {/* Hover glow */}
+        <div
+          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{ background: `radial-gradient(circle at 50% 50%, ${c.glow}, transparent 70%)` }}
+        />
+        <div className="relative flex items-center gap-3">
+          <div className={`${c.text} p-2 rounded-lg bg-white/5`}>{card.icon}</div>
+          <div>
+            <p className="text-[11px] uppercase tracking-wider text-gray-400 font-medium">{card.label}</p>
+            <div className={`text-2xl font-bold ${c.text} font-mono tabular-nums`}>
+              {card.value}<span className="text-lg">{card.suffix}</span>
+            </div>
+          </div>
+        </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -505,8 +585,8 @@ export default function HeroSection() {
       onMouseMove={handleMouseMove}
     >
       {/* ── Background Layers ── */}
-      <GradientMesh />
-      <ParticleField />
+      <AuroraBackground />
+      <ParticleConstellation />
       <div className="absolute inset-0 noise-overlay z-[1]" />
 
       {/* ── Content ── */}
@@ -519,7 +599,7 @@ export default function HeroSection() {
           <div className="lg:col-span-7 xl:col-span-6">
             <StatusPill />
 
-            {/* Headline */}
+            {/* Headline with character-level animation */}
             <div className="min-h-[140px] md:min-h-[180px] lg:min-h-[200px] mb-6">
               <AnimatePresence mode="wait">
                 <motion.h1
@@ -590,8 +670,8 @@ export default function HeroSection() {
                 { val: 400, suffix: "+", label: "Hiring Partners" },
                 { val: 96, suffix: "%", label: "Placement Rate", decimal: ".8" },
               ].map((stat, i) => (
-                <div key={i} className="text-left">
-                  <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-mono tabular-nums">
+                <div key={i} className="text-left group">
+                  <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-mono tabular-nums transition-all duration-300 group-hover:text-orange-300">
                     <ScrollOdometer value={stat.val} duration={2} suffix="" className="text-orange-400" />
                     {stat.decimal && <span className="text-orange-400">{stat.decimal}</span>}
                     <span className="text-orange-400 text-lg ml-0.5">{stat.suffix}</span>
@@ -610,28 +690,31 @@ export default function HeroSection() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <HeroVisual />
+              <DataOrbitVisual mouseX={mouseX} mouseY={mouseY} />
             </motion.div>
 
-            {bentoCards.map((card) => (
-              <BentoCard key={card.id} card={card} mouseX={mouseX} mouseY={mouseY} />
+            {metricCards.map((card) => (
+              <FloatingMetricCard key={card.id} card={card} mouseX={mouseX} mouseY={mouseY} />
             ))}
           </div>
         </div>
 
         {/* ── Bottom: Partner Marquee ── */}
         <motion.div
-          className="mt-8 md:mt-12 border-t border-white/[0.06] pt-6"
+          className="mt-8 md:mt-12 pt-6 relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
         >
+          {/* Top separator with gradient */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+
           <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-4 text-center">
             Our alumni work at
           </p>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-navy-900 to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-navy-900 to-transparent z-10" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-navy-900 to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-navy-900 to-transparent z-10" />
             <div className="flex animate-marquee whitespace-nowrap">
               {[...partnerLogos, ...partnerLogos].map((name, i) => (
                 <span

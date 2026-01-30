@@ -1271,7 +1271,114 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   HERO SECTION - Gradient Mesh, Orbs, Grid, Center Glow, Logo Draw
+   NAVBAR - Animated gradient border on scroll
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.nav-gradient-border {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 137, 42, 0.3) 0%,
+    rgba(59, 130, 246, 0.15) 30%,
+    rgba(245, 137, 42, 0.2) 60%,
+    rgba(16, 185, 129, 0.15) 100%
+  );
+  background-size: 300% 300%;
+  animation: nav-border-shift 6s ease-in-out infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  padding: 1px;
+}
+
+@keyframes nav-border-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO SECTION - Aurora Background, Gradient Mesh, Orbs, Grid
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Aurora layers - flowing gradient blobs */
+.hero-aurora-1 {
+  position: absolute;
+  width: 800px;
+  height: 600px;
+  top: -20%;
+  left: -15%;
+  background: radial-gradient(ellipse, rgba(245, 137, 42, 0.12) 0%, transparent 60%);
+  filter: blur(80px);
+  animation: aurora-drift-1 16s ease-in-out infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.hero-aurora-2 {
+  position: absolute;
+  width: 700px;
+  height: 500px;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+  filter: blur(90px);
+  animation: aurora-drift-2 20s ease-in-out infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.hero-aurora-3 {
+  position: absolute;
+  width: 500px;
+  height: 400px;
+  top: 30%;
+  right: 20%;
+  background: radial-gradient(ellipse, rgba(245, 137, 42, 0.06) 0%, transparent 55%);
+  filter: blur(70px);
+  animation: aurora-drift-3 14s ease-in-out infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.hero-aurora-4 {
+  position: absolute;
+  width: 400px;
+  height: 350px;
+  top: 10%;
+  left: 40%;
+  background: radial-gradient(ellipse, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+  filter: blur(80px);
+  animation: aurora-drift-4 18s ease-in-out infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  25% { transform: translate(60px, -40px) scale(1.08) rotate(2deg); }
+  50% { transform: translate(20px, 30px) scale(0.95) rotate(-1deg); }
+  75% { transform: translate(-40px, -10px) scale(1.03) rotate(1deg); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(-50px, 35px) scale(1.1) rotate(-2deg); }
+  66% { transform: translate(40px, -25px) scale(0.92) rotate(1.5deg); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.12); }
+}
+
+@keyframes aurora-drift-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-25px, 20px) scale(1.05); }
+  80% { transform: translate(15px, -15px) scale(0.95); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO SECTION (legacy) - Orbs, Grid, Center Glow, Logo Draw
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .hero-gradient-text {
