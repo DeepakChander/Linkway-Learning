@@ -1,7 +1,6 @@
 "use client";
 
 import { LineMaskReveal } from "@/components/animation";
-import { AccordionItem } from "@/components/ui/Accordion";
 
 /* ────────────────────────────────────────────────────────────────
    Plain-language note component
@@ -1109,7 +1108,7 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-navy-900 text-white">
       {/* ── Header ─────────────────────────────────────────────── */}
-      <section className="relative pt-32 pb-8 px-6 text-center max-w-4xl mx-auto overflow-hidden">
+      <section className="relative pt-32 pb-8 px-6 text-center max-w-6xl mx-auto overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-20 left-1/3 w-80 h-80 bg-orange-500/[0.05] rounded-full blur-[120px]" />
           <div className="absolute top-28 right-1/3 w-64 h-64 bg-blue-500/[0.04] rounded-full blur-[100px]" />
@@ -1124,9 +1123,9 @@ export default function TermsPage() {
         </p>
       </section>
 
-      {/* ── Intro ──────────────────────────────────────────────── */}
-      <section className="py-12 px-6 max-w-3xl mx-auto">
-        <div className="text-gray-400 leading-relaxed mb-10 space-y-4">
+      {/* ── Content ────────────────────────────────────────────── */}
+      <section className="py-12 px-6 max-w-6xl mx-auto">
+        <div className="text-gray-400 leading-relaxed mb-14 space-y-4">
           <p>
             Welcome to Linkway Learning! These Terms of Use
             (&quot;Terms&quot;) explain the rules for using our website,
@@ -1156,12 +1155,15 @@ export default function TermsPage() {
           </p>
         </div>
 
-        {/* ── Accordion sections ───────────────────────────────── */}
-        <div>
+        {/* ── All sections displayed directly ──────────────────── */}
+        <div className="space-y-16">
           {sections.map((s, i) => (
-            <AccordionItem key={i} title={s.title} defaultOpen={i === 0}>
-              {s.content}
-            </AccordionItem>
+            <div key={i}>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                {s.title}
+              </h2>
+              <div className="text-gray-300 leading-relaxed">{s.content}</div>
+            </div>
           ))}
         </div>
       </section>
