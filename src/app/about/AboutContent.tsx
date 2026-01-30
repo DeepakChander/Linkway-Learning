@@ -255,10 +255,10 @@ export default function AboutPage() {
           </SpringReveal>
           <div className="mt-12 grid md:grid-cols-2 gap-8">
             <SpringReveal delay={0.1} distance={120} skewY={-3} stiffness={80} damping={12}>
-              <LatencyPulseCard>
-                <div className="relative">
+              <LatencyPulseCard className="h-full">
+                <div className="relative h-full">
                   <CrossFlicker position="top-left" color="orange" size="sm" />
-                  <Card variant="accent" className="h-full hover-blur-lift relative z-10">
+                  <Card variant="accent" className="h-full hover-blur-lift relative z-10 flex flex-col">
                     <h3 className="text-orange-500 text-sm font-semibold tracking-widest uppercase mb-4">
                       Our Mission
                     </h3>
@@ -270,10 +270,10 @@ export default function AboutPage() {
               </LatencyPulseCard>
             </SpringReveal>
             <SpringReveal delay={0.2} distance={120} skewY={-3} stiffness={80} damping={12}>
-              <LatencyPulseCard>
-                <div className="relative">
+              <LatencyPulseCard className="h-full">
+                <div className="relative h-full">
                   <CrossFlicker position="top-right" color="orange" size="sm" delay={0.3} />
-                  <Card variant="accent" className="h-full hover-blur-lift relative z-10">
+                  <Card variant="accent" className="h-full hover-blur-lift relative z-10 flex flex-col">
                     <h3 className="text-orange-500 text-sm font-semibold tracking-widest uppercase mb-4">
                       Our Vision
                     </h3>
@@ -288,7 +288,26 @@ export default function AboutPage() {
         </section>
 
         {/* ─── OUR VALUES ─── */}
-        <section className="py-20 px-6 max-w-4xl mx-auto relative z-10">
+        <section className="py-20 px-6 relative z-10 overflow-hidden values-animated-bg">
+          {/* Animated grid overlay */}
+          <div className="absolute inset-0 values-grid-overlay pointer-events-none" />
+
+          {/* Floating gradient blobs */}
+          <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-orange-400/15 blur-[80px] pointer-events-none values-blob" />
+          <div className="absolute -bottom-32 -right-32 w-[450px] h-[450px] rounded-full bg-blue-300/10 blur-[80px] pointer-events-none values-blob-delayed" />
+          <div className="absolute top-1/3 right-[10%] w-[300px] h-[300px] rounded-full bg-orange-300/10 blur-[60px] pointer-events-none values-blob" style={{ animationDelay: "-3s" }} />
+
+          {/* Pulsing rings */}
+          <div className="absolute top-[20%] left-[15%] w-40 h-40 values-pulse-ring pointer-events-none" />
+          <div className="absolute bottom-[15%] right-[10%] w-56 h-56 values-pulse-ring pointer-events-none" style={{ animationDelay: "-3s" }} />
+          <div className="absolute top-[55%] left-[5%] w-28 h-28 values-pulse-ring pointer-events-none" style={{ animationDelay: "-1.5s" }} />
+
+          {/* Corner accent shapes */}
+          <div className="absolute top-12 right-[6%] w-32 h-32 border-2 border-orange-300/15 rounded-2xl rotate-12 pointer-events-none" />
+          <div className="absolute bottom-16 left-[4%] w-24 h-24 border-2 border-orange-200/20 rounded-xl -rotate-[15deg] pointer-events-none" />
+          <div className="absolute top-[45%] right-[2%] w-16 h-16 border border-orange-300/10 rounded-lg rotate-45 pointer-events-none" />
+
+          <div className="max-w-4xl mx-auto relative">
           <SpringReveal skewY={-5} distance={150} damping={12}>
             <SectionHeading label="What We Stand For" title="Our Values" />
           </SpringReveal>
@@ -316,6 +335,7 @@ export default function AboutPage() {
                 </div>
               </LineMaskReveal>
             ))}
+          </div>
           </div>
         </section>
 
