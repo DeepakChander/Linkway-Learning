@@ -145,7 +145,7 @@ export default function Testimonials() {
 
   return (
     <section
-      className="py-10 md:py-14 text-white overflow-hidden relative"
+      className="py-24 md:py-32 text-white overflow-hidden relative"
       style={{ backgroundColor: "#060E1A" }}
     >
       <div className="max-w-7xl mx-auto px-6 mb-10 relative z-10">

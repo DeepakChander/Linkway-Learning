@@ -216,7 +216,7 @@ export default function HiringPartners() {
 
   return (
     <section ref={sectionRef} className="relative border-t border-white/5 overflow-hidden" style={{ backgroundColor: "#060E1A" }}>
-      <div className="flex flex-col items-center justify-center px-6 py-16 md:py-20 relative">
+      <div className="flex flex-col items-center justify-center px-6 py-24 md:py-32 relative">
         <div className="max-w-4xl mx-auto w-full mb-14 text-center">
           <span className="hp-badge inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-sm mb-6 tracking-wide">
             Where You Could Work Next

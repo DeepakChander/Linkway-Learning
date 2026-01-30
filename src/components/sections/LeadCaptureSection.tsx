@@ -9,7 +9,7 @@ export default function LeadCaptureSection() {
     const { openEnquiry } = useEnquiryModal();
 
     return (
-        <section className="py-16 md:py-20 px-6 relative overflow-hidden bg-white border-t border-gray-100">
+        <section className="py-24 md:py-32 px-6 relative overflow-hidden bg-white border-t border-gray-100">
 
             <div className="max-w-7xl mx-auto relative z-10">
 

@@ -39,7 +39,7 @@ export default function FooterCTA() {
   return (
     <section
       ref={sectionRef}
-      className="py-14 md:py-20 px-6 relative overflow-hidden bg-[#ffc8b1]"
+      className="py-24 md:py-32 px-6 relative overflow-hidden bg-[#ffc8b1]"
     >
       <div ref={ctaRef} className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="text-navy-900/70 text-sm font-semibold uppercase tracking-widest mb-4">Only a few seats left</p>

@@ -157,7 +157,7 @@ export default function MentorsSection() {
 
     return (
         <ThemeProvider theme="light">
-            <section ref={sectionRef} className="pt-24 pb-28 md:pt-32 md:pb-36 overflow-x-clip relative" style={{ backgroundColor: "#f2f1ee" }}>
+            <section ref={sectionRef} className="py-24 md:py-32 overflow-x-clip relative" style={{ backgroundColor: "#f2f1ee" }}>
                 {/* Subtle background pattern */}
                 <div className="absolute inset-0 opacity-[0.03]" style={{
                     backgroundImage: `radial-gradient(circle at 1px 1px, rgb(0,0,0) 1px, transparent 0)`,
