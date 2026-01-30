@@ -1,4 +1,4 @@
-﻿// =============================================================================
+// =============================================================================
 // Linkway Learning - Master Constants File
 // =============================================================================
 
@@ -409,10 +409,10 @@ export const COURSES: Course[] = [
       },
       {
         phase: "Module 7",
-        title: "Specialisations & Career Launchpad",
+        title: "Specializations & Career Launchpad",
         duration: "6 Weeks",
         topics: [
-          "Domain Specialisation - Finance, Healthcare, E-commerce, HR analytics",
+          "Domain Specialization - Finance, Healthcare, E-commerce, HR analytics",
           "Capstone Projects - end-to-end industry projects with mentorship",
           "Resume Building - ATS-optimised profiles, portfolio creation",
           "Interview Preparation - technical rounds, case studies, HR strategies",
@@ -675,7 +675,7 @@ export const COURSES: Course[] = [
       },
       {
         phase: "Module 7",
-        title: "Specialisation & Career Growth",
+        title: "Specialization & Career Growth",
         duration: "6 Weeks",
         topics: [
           "Domain BI - Finance, Healthcare, Retail, and HR business intelligence",

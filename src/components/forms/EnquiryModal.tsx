@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { createContext, useContext, useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -74,12 +74,27 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     }
   }, [isOpen, formState]);
 
-  // Close on Escape
+  // Close on Escape + focus trap
   useEffect(() => {
+    if (!isOpen) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
     };
-    if (isOpen) window.addEventListener("keydown", handleKey);
+    window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [isOpen, onClose]);
 
@@ -96,13 +111,26 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setFormState("loading");
-    setTimeout(() => {
-      setFormState("success");
-    }, 2000);
+    try {
+      const res = await fetch("https://formspree.io/f/xpwdzgkl", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setFormState("success");
+      } else {
+        setFormState("idle");
+        setErrors({ email: "Submission failed. Please try again." });
+      }
+    } catch {
+      setFormState("idle");
+      setErrors({ email: "Network error. Please try again." });
+    }
   };
 
   const handleChange = (field: keyof typeof formData, value: string) => {
@@ -122,7 +150,7 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 py-6">
+        <div role="dialog" aria-modal="true" aria-label="Quick Enquiry" className="fixed inset-0 z-[9999] flex items-center justify-center px-4 py-6">
           {/* Backdrop */}
           <motion.div
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -299,7 +327,7 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
                           className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-navy-900 text-sm focus:outline-none focus:border-orange-500 transition-colors appearance-none cursor-pointer"
                         >
                           <option value="Data Analytics" className="bg-white">Data Analytics</option>
-                          <option value="Data Science & AI" className="bg-white">Data Science &amp; AI</option>
+                          <option value="Data Science & AI" className="bg-white">Data Science & AI</option>
                           <option value="Business Intelligence" className="bg-white">Business Intelligence</option>
                           <option value="Not Sure" className="bg-white">Not Sure Yet</option>
                         </select>

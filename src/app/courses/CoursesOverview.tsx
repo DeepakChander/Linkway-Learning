@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -66,7 +66,7 @@ export default function CoursesOverview() {
 
   return (
     <ThemeProvider theme="light">
-    <main className="min-h-screen bg-white orano-scroll text-navy-900">
+    <div className="min-h-screen bg-white orano-scroll text-navy-900">
       {/* Courses Header */}
       <section className="pt-32 pb-16 px-6 text-center">
         <div className="max-w-4xl mx-auto">
@@ -109,28 +109,28 @@ export default function CoursesOverview() {
             return (
               <motion.div
                 key={i}
-                className="relative rounded-2xl overflow-hidden cursor-pointer h-[340px] lg:h-full"
+                className="relative rounded-2xl overflow-hidden cursor-pointer min-h-[80px] lg:h-full"
                 style={{ backgroundColor: course.bg }}
+                onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
                 animate={{ flex: isActive ? 5 : 1 }}
                 transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
               >
-                {/* Collapsed state — vertical label */}
+                {/* Collapsed state — horizontal on mobile, vertical on desktop */}
                 <motion.div
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-2 py-6 px-3"
+                  className="absolute inset-0 flex flex-row lg:flex-col items-center justify-center gap-2 py-4 lg:py-6 px-4 lg:px-3"
                   animate={{ opacity: isActive ? 0 : 1 }}
                   transition={{ duration: 0.3 }}
                   style={{ pointerEvents: isActive ? "none" : "auto" }}
                 >
                   <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center"
+                    className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
                     style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
                   >
                     <Icon className="w-4 h-4 text-white/80" />
                   </div>
                   <h3
-                    className="text-white/90 font-bold text-[11px] tracking-wide"
-                    style={{ writingMode: "vertical-lr", textOrientation: "mixed" }}
+                    className="text-white/90 font-bold text-sm lg:text-[11px] tracking-wide lg:[writing-mode:vertical-lr] lg:[text-orientation:mixed]"
                   >
                     {course.name}
                   </h3>
@@ -278,7 +278,7 @@ export default function CoursesOverview() {
           </motion.div>
         </div>
       </section>
-    </main>
+    </div>
     </ThemeProvider>
   );
 }

@@ -1,4 +1,4 @@
-﻿import HeroSection from "@/components/sections/HeroSection";
+import HeroSection from "@/components/sections/HeroSection";
 import WhyLinkway from "@/components/sections/WhyLinkway";
 import CoursePreview from "@/components/sections/CoursePreview";
 import MentorsSection from "@/components/sections/MentorsSection";

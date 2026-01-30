@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useInView } from "framer-motion";
@@ -32,7 +32,7 @@ export default function TextScramble({
   highlightColor,
 }: TextScrambleProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
+  const isInView = useInView(ref, { once, margin: "-10% 0px -10% 0px" });
   const [display, setDisplay] = useState(children);
   const [resolvedCount, setResolvedCount] = useState(children.length);
   const [isScrambling, setIsScrambling] = useState(false);

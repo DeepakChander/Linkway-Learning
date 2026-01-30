@@ -423,6 +423,8 @@ export default function EarthGlobe({
   scrollProgress?: number;
 }) {
   const groupRef = useRef<THREE.Group>(null);
+  const scrollRef = useRef(scrollProgress);
+  scrollRef.current = scrollProgress;
 
   const locationPositions = useMemo(() => {
     return locations.map((loc) => ({
@@ -451,13 +453,14 @@ export default function EarthGlobe({
     groupRef.current.rotation.y = time * 0.06;
     groupRef.current.rotation.x = 0.15 + Math.sin(time * 0.2) * 0.02;
 
+    const sp = scrollRef.current;
     const baseScale = 2.0;
     const maxScale = 5.0;
-    const scale = baseScale + (maxScale - baseScale) * Math.pow(scrollProgress, 0.8);
+    const scale = baseScale + (maxScale - baseScale) * Math.pow(sp, 0.8);
     groupRef.current.scale.setScalar(scale);
 
-    groupRef.current.position.y = -scrollProgress * 1.5;
-    groupRef.current.position.z = scrollProgress * 1;
+    groupRef.current.position.y = -sp * 1.5;
+    groupRef.current.position.z = sp * 1;
   });
 
   return (

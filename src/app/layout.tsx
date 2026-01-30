@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
@@ -18,6 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://linkwaylearning.com"),
   title: {
     default: "Linkway Learning - Your Link to Mastery",
     template: "%s | Linkway Learning",
@@ -42,6 +43,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "Linkway Learning",
+    url: "https://linkwaylearning.com",
+    images: [
+      {
+        url: "/images/og/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Linkway Learning - Your Link to Mastery",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Linkway Learning - Your Link to Mastery",
+    description: "Transform your career with industry-driven programs. Dedicated Placement Assistance.",
+    images: ["/images/og/og-default.png"],
   },
 };
 

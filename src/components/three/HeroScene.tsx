@@ -108,7 +108,7 @@ function BlueParticles() {
 
 export default function HeroScene({ scrollProgress = 0 }: { scrollProgress?: number }) {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0" role="img" aria-label="Interactive 3D globe visualization with floating particles">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
         dpr={[1, 1.5]}

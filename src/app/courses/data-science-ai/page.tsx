@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import CoursePageTemplate from "@/components/sections/CoursePageTemplate";
 
 export const metadata: Metadata = {
@@ -93,10 +93,10 @@ export default function DataScienceAIPage() {
         },
         {
           phase: "Module 7",
-          title: "Specialisations & Career Launchpad",
+          title: "Specializations & Career Launchpad",
           duration: "6 Weeks",
           topics: [
-            "Domain specialisations - Finance (credit scoring, fraud), Healthcare (diagnostics, drug discovery), E-commerce (personalization), HR (attrition prediction)",
+            "Domain specializations - Finance (credit scoring, fraud), Healthcare (diagnostics, drug discovery), E-commerce (personalization), HR (attrition prediction)",
             "Capstone project - end-to-end ML system from problem definition to deployed product",
             "Career launchpad - resume building, portfolio review, mock interviews, hiring partner introductions",
           ],

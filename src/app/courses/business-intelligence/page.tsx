@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import CoursePageTemplate from "@/components/sections/CoursePageTemplate";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function BusinessIntelligencePage() {
       level="Professional Upskilling"
       tagline="For the people who need data to make better calls."
       heroDescription="You don't need a CS degree to lead with data. This program teaches you BI tools, predictive analytics, and AI-powered decision-making - all designed for professionals and business leaders who want to stop guessing and start knowing."
-      color="#10B981"
+      color="#F5892A"
       whoIsThisFor={[
         { title: "Working Professionals", description: "You've seen decisions made on gut feelings and it frustrates you. This program makes you the person your team turns to when they need answers backed by data." },
         { title: "MBA Graduates", description: "Your business sense is sharp, but your data skills aren't. Add Power BI, SQL, and predictive analytics to your MBA and watch how fast doors open." },
@@ -93,7 +93,7 @@ export default function BusinessIntelligencePage() {
         },
         {
           phase: "Module 7",
-          title: "Specialisation & Career Growth",
+          title: "Specialization & Career Growth",
           duration: "6 Weeks",
           topics: [
             "Finance BI - P&L dashboards, cash flow forecasting, investor reporting",

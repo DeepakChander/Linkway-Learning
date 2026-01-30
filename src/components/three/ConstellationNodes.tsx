@@ -84,6 +84,16 @@ export default function ConstellationNodes() {
     []
   );
 
+  // Pre-allocate buffer for connection lines (max possible connections = N*(N-1)/2 * 6 floats)
+  const maxConnections = (NODE_COUNT * (NODE_COUNT - 1)) / 2;
+  const linePositions = useMemo(() => new Float32Array(maxConnections * 6), [maxConnections]);
+  const lineGeometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+    geo.setDrawRange(0, 0);
+    return geo;
+  }, [linePositions]);
+
   useFrame((_, delta) => {
     time.current += delta;
 
@@ -108,25 +118,25 @@ export default function ConstellationNodes() {
       }
     });
 
-    // Update connection lines
-    if (linesRef.current) {
-      const positions: number[] = [];
-      for (let i = 0; i < nodesData.length; i++) {
-        for (let j = i + 1; j < nodesData.length; j++) {
-          const dist = nodesData[i].position.distanceTo(nodesData[j].position);
-          if (dist < CONNECTION_DISTANCE) {
-            positions.push(
-              nodesData[i].position.x, nodesData[i].position.y, nodesData[i].position.z,
-              nodesData[j].position.x, nodesData[j].position.y, nodesData[j].position.z
-            );
-          }
+    // Update connection lines (reuse pre-allocated buffer)
+    let vertexCount = 0;
+    for (let i = 0; i < nodesData.length; i++) {
+      for (let j = i + 1; j < nodesData.length; j++) {
+        const dist = nodesData[i].position.distanceTo(nodesData[j].position);
+        if (dist < CONNECTION_DISTANCE) {
+          const idx = vertexCount * 3;
+          linePositions[idx] = nodesData[i].position.x;
+          linePositions[idx + 1] = nodesData[i].position.y;
+          linePositions[idx + 2] = nodesData[i].position.z;
+          linePositions[idx + 3] = nodesData[j].position.x;
+          linePositions[idx + 4] = nodesData[j].position.y;
+          linePositions[idx + 5] = nodesData[j].position.z;
+          vertexCount += 2;
         }
       }
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-      linesRef.current.geometry.dispose();
-      linesRef.current.geometry = geometry;
     }
+    lineGeometry.setDrawRange(0, vertexCount);
+    lineGeometry.attributes.position.needsUpdate = true;
   });
 
   return (
@@ -144,9 +154,7 @@ export default function ConstellationNodes() {
       ))}
 
       {/* Connection lines */}
-      <lineSegments ref={linesRef} material={lineMaterial}>
-        <bufferGeometry />
-      </lineSegments>
+      <lineSegments ref={linesRef} geometry={lineGeometry} material={lineMaterial} />
     </group>
   );
 }

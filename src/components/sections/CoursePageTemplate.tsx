@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRef, useCallback, useState } from "react";
 import { motion, useInView } from "framer-motion";
@@ -15,6 +15,7 @@ import ToolLogo from "@/components/ui/ToolLogo";
 import { AccordionItem } from "@/components/ui/Accordion";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme";
+import { useEnquiryModal } from "@/components/forms/EnquiryModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,6 +108,7 @@ export default function CoursePageTemplate({
   whoIsThisFor, curriculum, tools, projects, caseStudies,
   careerOutcomes, faqs, animationVariant,
 }: CoursePageProps) {
+  const { openEnquiry } = useEnquiryModal();
   const heroRef = useRef<HTMLElement>(null);
   const v = animationVariant;
 
@@ -145,7 +147,7 @@ export default function CoursePageTemplate({
 
   return (
     <ThemeProvider theme="light">
-    <main ref={mainRef} className={cn(
+    <div ref={mainRef} className={cn(
       "min-h-screen bg-white text-navy-900",
       v === "orano" && "orano-scroll",
       v === "redbull" && "rb-scanlines",
@@ -255,7 +257,7 @@ export default function CoursePageTemplate({
                 Enroll Now
               </Button>
             </MagneticWrap>
-            <Button variant="outline" size="lg" className={cn(
+            <Button variant="outline" size="lg" onClick={openEnquiry} className={cn(
               v === "orano" && "orano-brightness",
               v === "activetheory" && "at-spring-enter",
               v === "redbull" && "btn-border-glow",
@@ -660,7 +662,7 @@ export default function CoursePageTemplate({
           >
             <MagneticWrap>
               <div className="pulse-corners text-orange-500">
-                <Button variant="primary" size="lg" className={cn(
+                <Button variant="primary" size="lg" onClick={openEnquiry} className={cn(
                   v === "orano" && "btn-border-glow orano-focus",
                   v === "activetheory" && "at-spring-enter",
                 )}>
@@ -669,7 +671,7 @@ export default function CoursePageTemplate({
               </div>
             </MagneticWrap>
             <MagneticWrap>
-              <Button variant="outline" size="lg" className={cn(
+              <Button variant="outline" size="lg" href="/contact" className={cn(
                 v === "orano" && "orano-brightness",
                 v === "activetheory" && "at-spring-enter",
                 v === "redbull" && "btn-border-glow",
@@ -680,7 +682,7 @@ export default function CoursePageTemplate({
           </motion.div>
         </div>
       </section>
-    </main>
+    </div>
     </ThemeProvider>
   );
 }

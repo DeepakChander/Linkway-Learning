@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import CoursePageTemplate from "@/components/sections/CoursePageTemplate";
 
 export const metadata: Metadata = {
@@ -69,7 +69,7 @@ export default function DataAnalyticsPage() {
       faqs={[
         { question: "Do I need to know coding?", answer: "Nope. We literally start from the basics - Excel, then SQL, then Python. Everything is taught step by step with exercises, so you're never lost." },
         { question: "What's the schedule like?", answer: "Both weekday and weekend batches are available. Everything is live with a real instructor, and every session gets recorded in case you miss one." },
-        { question: "How does placement assistance work?", answer: "Yes. Finish the assignments and projects, and we guarantee up to 10 interviews with companies from our hiring network. We don't stop until you're placed." },
+        { question: "How does placement assistance work?", answer: "Finish the assignments and projects, and we guarantee up to 10 interviews with companies from our hiring network. We don't stop until you're placed." },
         { question: "Can I pay in EMIs?", answer: "Yes - 0% interest EMI starting at ₹5,500/month. We want cost to be the last thing holding you back." },
         { question: "What certifications do I get?", answer: "A Linkway Learning completion certificate plus prep for the Microsoft Azure AI Fundamentals certification exam." },
       ]}

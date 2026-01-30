@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,11 +16,17 @@ export function AccordionItem({ title, children, defaultOpen = false }: Accordio
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const theme = usePageTheme();
   const light = theme === "light";
+  const id = useId();
+  const buttonId = `${id}-button`;
+  const panelId = `${id}-panel`;
 
   return (
     <div className={cn("border-b", light ? "border-gray-200" : "border-white/10")}>
       <button
+        id={buttonId}
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
         className="flex items-center justify-between w-full py-5 text-left group cursor-pointer"
       >
         <span className={cn("text-lg font-medium group-hover:text-orange-500 transition-colors", light ? "text-navy-900" : "text-white")}>
@@ -29,6 +35,7 @@ export function AccordionItem({ title, children, defaultOpen = false }: Accordio
         <motion.span
           animate={{ rotate: isOpen ? 135 : 0 }}
           transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          aria-hidden="true"
         >
           <Plus className={cn("w-5 h-5", light ? "text-gray-400" : "text-gray-400")} />
         </motion.span>
@@ -36,6 +43,9 @@ export function AccordionItem({ title, children, defaultOpen = false }: Accordio
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            id={panelId}
+            role="region"
+            aria-labelledby={buttonId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
