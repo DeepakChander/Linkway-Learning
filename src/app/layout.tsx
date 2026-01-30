@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import StickyCtaBar from "@/components/layout/StickyCtaBar";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import SmoothScroll from "@/components/animation/SmoothScroll";
 import PageTransition from "@/components/animation/PageTransition";
@@ -76,7 +75,6 @@ export default function RootLayout({
               <main>{children}</main>
             </PageTransition>
             <Footer />
-            <StickyCtaBar />
             <WhatsAppButton />
             <AgentationProvider />
           </SmoothScroll>
