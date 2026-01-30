@@ -95,7 +95,7 @@ const faqCategories = [
       },
       {
         q: "Do employers actually care about these certs?",
-        a: "The Microsoft cert is globally recognized - Fortune 500 companies know it. And the Linkway cert is backed by our 40+ hiring partners who actively recruit our grads. So yes, they carry weight.",
+        a: "The Microsoft cert is globally recognized - Fortune 500 companies know it. And the Linkway cert is backed by our 400+ hiring partners who actively recruit our grads. So yes, they carry weight.",
       },
     ],
   },

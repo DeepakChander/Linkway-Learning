@@ -147,7 +147,7 @@ export const NAV_LINKS: NavLink[] = [
 
 export const STATS: Stat[] = [
   { number: 500, suffix: "+", label: "Careers Transformed" },
-  { number: 40, suffix: "+", label: "Hiring Partners" },
+  { number: 400, suffix: "+", label: "Hiring Partners" },
   { number: 85, suffix: "%", label: "Average Salary Hike" },
   { number: 100, suffix: "%", label: "Placement Rate" },
 ] as const satisfies Stat[];
@@ -566,7 +566,7 @@ export const COURSES: Course[] = [
       {
         question: "What placement support is provided?",
         answer:
-          "You receive dedicated placement assistance including resume reviews, portfolio building, mock interviews (technical and HR), company-specific preparation, and direct introductions to our 40+ hiring partners. We support you until you land your desired role.",
+          "You receive dedicated placement assistance including resume reviews, portfolio building, mock interviews (technical and HR), company-specific preparation, and direct introductions to our 400+ hiring partners. We support you until you land your desired role.",
       },
     ],
   },
@@ -946,11 +946,11 @@ export const FAQS: FAQCategory[] = [
     questions: [
       {
         q: "Does Linkway guarantee placement?",
-        a: "We provide a 100% placement assistance guarantee. This includes resume building, portfolio reviews, mock interviews, company-specific preparation, and direct referrals to our 40+ hiring partners. Our track record shows 100% placement rate for students who complete the full program.",
+        a: "We provide a 100% placement assistance guarantee. This includes resume building, portfolio reviews, mock interviews, company-specific preparation, and direct referrals to our 400+ hiring partners. Our track record shows 100% placement rate for students who complete the full program.",
       },
       {
         q: "What companies hire from Linkway?",
-        a: "Our 40+ hiring partners include TCS, Deloitte, Google, Amazon, IBM, Flipkart, Infosys, Wipro, Paytm, Siemens, Citi, and many more. Students are placed across startups, mid-sized companies, and Fortune 500 organisations.",
+        a: "Our 400+ hiring partners include TCS, Deloitte, Google, Amazon, IBM, Flipkart, Infosys, Wipro, Paytm, Siemens, Citi, and many more. Students are placed across startups, mid-sized companies, and Fortune 500 organisations.",
       },
       {
         q: "What is the average salary hike after the program?",

@@ -28,7 +28,7 @@ const testimonials = [
 
 const stats = [
   { target: 500, suffix: "+", label: "Careers Launched" },
-  { target: 40, suffix: "+", label: "Hiring Partners" },
+  { target: 400, suffix: "+", label: "Hiring Partners" },
   { target: 85, suffix: "%", label: "Avg Salary Jump" },
   { target: 100, suffix: "%", label: "Placement Rate" },
 ];
@@ -172,7 +172,7 @@ export default function SuccessStoriesPage() {
             <SectionHeading
               label="Hiring Partners"
               title="Companies That Hire From Us"
-              description="40+ companies actively recruit Linkway graduates. Here's a snapshot."
+              description="400+ companies actively recruit Linkway graduates. Here's a snapshot."
             />
           </SpringReveal>
           <div className="mt-12 space-y-4">

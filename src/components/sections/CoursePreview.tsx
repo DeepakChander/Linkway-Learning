@@ -37,7 +37,7 @@ const courses = [
     textAccent: "text-cyan-400",
     usps: [
       { icon: Rocket, label: "25+ Industry Projects" },
-      { icon: Briefcase, label: "40+ Hiring Partners" },
+      { icon: Briefcase, label: "400+ Hiring Partners" },
       { icon: Users, label: "1:1 Mentorship" },
       { icon: MessageCircle, label: "Daily Doubt Clearing" },
       { icon: Target, label: "100+ Hours of Learning" },
@@ -59,7 +59,7 @@ const courses = [
     textAccent: "text-emerald-400",
     usps: [
       { icon: Rocket, label: "20+ Business Projects" },
-      { icon: Briefcase, label: "40+ Hiring Partners" },
+      { icon: Briefcase, label: "400+ Hiring Partners" },
       { icon: Users, label: "1:1 Mentorship" },
       { icon: MessageCircle, label: "Daily Doubt Clearing" },
       { icon: Target, label: "100+ Hours of Learning" },
@@ -81,7 +81,7 @@ const courses = [
     textAccent: "text-orange-400",
     usps: [
       { icon: Rocket, label: "30+ Real-World Projects" },
-      { icon: Briefcase, label: "40+ Hiring Partners" },
+      { icon: Briefcase, label: "400+ Hiring Partners" },
       { icon: Users, label: "1:1 Expert Sessions" },
       { icon: MessageCircle, label: "Daily Doubt Clearing" },
       { icon: Target, label: "200+ Hours of Learning" },
@@ -103,7 +103,7 @@ const courses = [
     textAccent: "text-purple-400",
     usps: [
       { icon: Rocket, label: "20+ AI Agent Projects" },
-      { icon: Briefcase, label: "40+ Hiring Partners" },
+      { icon: Briefcase, label: "400+ Hiring Partners" },
       { icon: Users, label: "1:1 Expert Sessions" },
       { icon: MessageCircle, label: "Daily Doubt Clearing" },
       { icon: Target, label: "120+ Hours of Learning" },

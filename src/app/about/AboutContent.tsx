@@ -72,7 +72,7 @@ const instructors = [
 
 const stats = [
   { target: 8200, suffix: "+", label: "Careers Launched" },
-  { target: 40, suffix: "+", label: "Hiring Partners" },
+  { target: 400, suffix: "+", label: "Hiring Partners" },
   { target: 85, suffix: "%", label: "Avg Salary Jump" },
   { target: 100, suffix: "%", label: "Placement Rate" },
 ];
@@ -422,16 +422,16 @@ export default function AboutPage() {
 
           <div className="max-w-5xl mx-auto relative">
             <SpringReveal skewY={-5} distance={150} damping={12}>
-              <p className="text-orange-500 text-sm font-semibold tracking-widest uppercase text-center mb-2">Our Impact</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-navy-900 text-center mb-12">Numbers That Speak</h2>
+              <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase text-center mb-1">Our Impact</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-navy-900 text-center mb-8">Numbers That Speak</h2>
             </SpringReveal>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-0 bg-white/60 backdrop-blur-sm rounded-2xl border border-orange-200/40 shadow-lg">
               {stats.map((stat, i) => (
                 <SpringReveal key={i} delay={i * 0.12} distance={60} stiffness={100} damping={12}>
-                  <div className={`text-center py-8 px-4 relative ${i < stats.length - 1 ? "md:border-r md:border-orange-200/30" : ""}`}>
-                    <div className="w-8 h-1 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full mx-auto mb-5" />
-                    <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 stat-glow">
+                  <div className={`text-center py-6 px-4 relative ${i < stats.length - 1 ? "md:border-r md:border-orange-200/30" : ""}`}>
+                    <div className="w-7 h-[3px] bg-gradient-to-r from-orange-500 to-orange-400 rounded-full mx-auto mb-4" />
+                    <div className="text-3xl md:text-4xl font-bold text-navy-900 stat-glow">
                       <ScrollOdometer value={stat.target} suffix={stat.suffix} animateSuffix duration={2} delay={0.2 + i * 0.15} />
                     </div>
                     <p className="text-gray-500 text-sm md:text-base mt-2 tracking-wide">{stat.label}</p>

@@ -130,7 +130,7 @@ export default function DataScienceAIPage() {
         { question: "How is this different from Data Analytics?", answer: "Data Analytics focuses on visualization and reporting. This goes way deeper - deep learning, NLP, generative AI, MLOps, cloud deployment. It's for people who want to build AI, not just look at dashboards." },
         { question: "What's the capstone project like?", answer: "You build a full ML system end-to-end: define the problem, collect data, train models, deploy a production API, and set up monitoring. Past students have built fraud detectors, medical image classifiers, and chatbots." },
         { question: "Do you cover generative AI?", answer: "Yes - GANs, LLMs, prompt engineering, fine-tuning with HuggingFace. You'll build actual generative AI applications, not just talk about them." },
-        { question: "What about placement support?", answer: "Resume reviews, LinkedIn optimization, mock technical interviews, and direct introductions to 40+ hiring partners. We guarantee at least 10 interview opportunities after you complete the program." },
+        { question: "What about placement support?", answer: "Resume reviews, LinkedIn optimization, mock technical interviews, and direct introductions to 400+ hiring partners. We guarantee at least 10 interview opportunities after you complete the program." },
       ]}
     />
   );

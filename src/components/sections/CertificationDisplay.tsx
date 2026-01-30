@@ -35,7 +35,7 @@ export default function CertificationDisplay() {
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Linkway Learning Certificate</h3>
               <p className="text-gray-400 leading-relaxed">
-                This says you finished the whole thing - curriculum, projects, assessments, all of it. Our 40+ hiring partners know exactly what it means.
+                This says you finished the whole thing - curriculum, projects, assessments, all of it. Our 400+ hiring partners know exactly what it means.
               </p>
               <div className="mt-6 inline-flex items-center gap-2 text-orange-400 text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-orange-500" />
