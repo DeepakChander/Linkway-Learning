@@ -2,338 +2,54 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+  useMotionValue,
+  useSpring,
+  type MotionValue,
+} from "framer-motion";
 
-/* ─── Animated Counter ─── */
-function AnimatedCounter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED COUNTER
+   ═══════════════════════════════════════════════════════════════ */
+function AnimatedCounter({
+  target,
+  suffix = "",
+}: {
+  target: number;
+  suffix?: string;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
-    let start = 0;
-    const duration = 2000;
+    const duration = 2200;
     const startTime = performance.now();
-
-    function animate(now: number) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      start = Math.floor(eased * target);
-      setCount(start);
-      if (progress < 1) requestAnimationFrame(animate);
+    function tick(now: number) {
+      const p = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 4);
+      setCount(Math.floor(eased * target));
+      if (p < 1) requestAnimationFrame(tick);
     }
-    requestAnimationFrame(animate);
+    requestAnimationFrame(tick);
   }, [isInView, target]);
 
   return (
-    <span ref={ref} className="tabular-nums">
-      {prefix}{count.toLocaleString()}{suffix}
+    <span ref={ref} className="tabular-nums font-mono">
+      {count.toLocaleString()}
+      {suffix}
     </span>
   );
 }
 
-/* ─── 3D Tilt Card with Mouse-Following Glow ─── */
-function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0.5);
-  const mouseY = useMotionValue(0.5);
-  const rotateX = useSpring(useTransform(mouseY, [0, 1], [8, -8]), { stiffness: 200, damping: 30 });
-  const rotateY = useSpring(useTransform(mouseX, [0, 1], [-8, 8]), { stiffness: 200, damping: 30 });
-
-  const handleMouse = useCallback((e: React.MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    mouseX.set((e.clientX - rect.left) / rect.width);
-    mouseY.set((e.clientY - rect.top) / rect.height);
-  }, [mouseX, mouseY]);
-
-  const handleLeave = useCallback(() => {
-    mouseX.set(0.5);
-    mouseY.set(0.5);
-  }, [mouseX, mouseY]);
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-        perspective: "1200px",
-      }}
-      className={className}
-    >
-      {/* Mouse-following glow */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-        style={{
-          background: useTransform(
-            [mouseX, mouseY],
-            ([x, y]) => `radial-gradient(600px circle at ${(x as number) * 100}% ${(y as number) * 100}%, rgba(245, 130, 32, 0.12), transparent 50%)`
-          ),
-        }}
-      />
-      {children}
-    </motion.div>
-  );
-}
-
-/* ─── Floating Particles ─── */
-function FloatingParticles() {
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    duration: Math.random() * 8 + 6,
-    delay: Math.random() * 4,
-    opacity: Math.random() * 0.3 + 0.1,
-  }));
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            background: p.id % 3 === 0
-              ? "rgba(245, 130, 32, 0.4)"
-              : p.id % 3 === 1
-                ? "rgba(148, 179, 215, 0.3)"
-                : "rgba(255, 255, 255, 0.2)",
-          }}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, p.id % 2 === 0 ? 15 : -15, 0],
-            opacity: [p.opacity, p.opacity * 1.5, p.opacity],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* ─── SVG Icons ─── */
-const CertificateIcon = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4h16v12H4z" />
-    <path d="M12 12a3 3 0 1 0 0-4 3 3 0 0 0 0 4z" />
-    <path d="M8 16l-2 6 4-2 4 2-2-6" />
-    <path d="M16 16l-2 6 4-2" />
-  </svg>
-);
-
-const ShieldIcon = () => (
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2l7 4v5c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z" />
-    <path d="M9 12l2 2 4-4" />
-  </svg>
-);
-
-const StarIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-  </svg>
-);
-
-const GlobeIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-  </svg>
-);
-
-const BriefcaseIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-  </svg>
-);
-
-const TrendingUpIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-    <polyline points="17 6 23 6 23 12" />
-  </svg>
-);
-
-const VerifiedIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-    <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" strokeWidth="1.5"/>
-  </svg>
-);
-
-/* ─── Certificate Card ─── */
-function CertificateCard({
-  imageSrc,
-  imageAlt,
-  title,
-  subtitle,
-  description,
-  features,
-  accentColor,
-  delay,
-}: {
-  imageSrc: string;
-  imageAlt: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  features: string[];
-  accentColor: "orange" | "blue";
-  delay: number;
-}) {
-  const isOrange = accentColor === "orange";
-  const glowColor = isOrange ? "rgba(245, 130, 32, 0.15)" : "rgba(59, 130, 246, 0.15)";
-  const borderColor = isOrange ? "rgba(245, 130, 32, 0.25)" : "rgba(59, 130, 246, 0.25)";
-  const badgeBg = isOrange
-    ? "linear-gradient(135deg, #F58220, #E07420)"
-    : "linear-gradient(135deg, #3b82f6, #2563eb)";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay, ease: [0.23, 1, 0.32, 1] }}
-      className="group"
-    >
-      <TiltCard className="relative">
-        <div
-          className="relative rounded-2xl overflow-hidden transition-all duration-500"
-          style={{
-            background: "rgba(13, 27, 42, 0.7)",
-            backdropFilter: "blur(20px)",
-            border: `1px solid ${borderColor}`,
-            boxShadow: `0 0 40px ${glowColor}, 0 20px 60px rgba(0,0,0,0.3)`,
-          }}
-        >
-          {/* Animated top border line */}
-          <motion.div
-            className="absolute top-0 left-0 h-[2px] z-10"
-            style={{
-              background: isOrange
-                ? "linear-gradient(90deg, transparent, #F58220, #FCBA6A, #F58220, transparent)"
-                : "linear-gradient(90deg, transparent, #3b82f6, #93c5fd, #3b82f6, transparent)",
-            }}
-            initial={{ width: "0%" }}
-            whileInView={{ width: "100%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, delay: delay + 0.3, ease: "easeOut" }}
-          />
-
-          {/* Certificate Image Area */}
-          <div className="relative p-8 pb-4">
-            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden" style={{
-              background: "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.08) 100%)",
-            }}>
-              {/* Subtle grid pattern behind certificate */}
-              <div
-                className="absolute inset-0 opacity-[0.04]"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)
-                  `,
-                  backgroundSize: "20px 20px",
-                }}
-              />
-
-              <Image
-                src={imageSrc}
-                alt={imageAlt}
-                fill
-                className="object-contain p-4 relative z-10 transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 560px"
-              />
-
-              {/* Corner accents */}
-              <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 rounded-tl-sm opacity-30 transition-opacity duration-300 group-hover:opacity-60"
-                style={{ borderColor: isOrange ? "#F58220" : "#3b82f6" }} />
-              <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 rounded-tr-sm opacity-30 transition-opacity duration-300 group-hover:opacity-60"
-                style={{ borderColor: isOrange ? "#F58220" : "#3b82f6" }} />
-              <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 rounded-bl-sm opacity-30 transition-opacity duration-300 group-hover:opacity-60"
-                style={{ borderColor: isOrange ? "#F58220" : "#3b82f6" }} />
-              <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 rounded-br-sm opacity-30 transition-opacity duration-300 group-hover:opacity-60"
-                style={{ borderColor: isOrange ? "#F58220" : "#3b82f6" }} />
-            </div>
-          </div>
-
-          {/* Content Area */}
-          <div className="px-8 pb-8 pt-2">
-            {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white text-sm font-semibold mb-4"
-              style={{ background: badgeBg, boxShadow: `0 4px 20px ${glowColor}` }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: delay + 0.5, duration: 0.5, type: "spring" }}
-            >
-              {isOrange ? <CertificateIcon /> : <ShieldIcon />}
-              <span>{subtitle}</span>
-            </motion.div>
-
-            {/* Title */}
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-tight">
-              {title}
-            </h3>
-
-            {/* Description */}
-            <p className="text-white/50 text-sm leading-relaxed mb-5">
-              {description}
-            </p>
-
-            {/* Features */}
-            <div className="space-y-2.5">
-              {features.map((feature, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-center gap-3 text-sm"
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: delay + 0.6 + i * 0.1, duration: 0.4 }}
-                >
-                  <span
-                    className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
-                    style={{
-                      background: isOrange ? "rgba(245,130,32,0.15)" : "rgba(59,130,246,0.15)",
-                      color: isOrange ? "#F99B3D" : "#60a5fa",
-                    }}
-                  >
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </span>
-                  <span className="text-white/70">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </TiltCard>
-    </motion.div>
-  );
-}
-
-/* ─── Main Component ─── */
+/* ═══════════════════════════════════════════════════════════════
+   MAIN COMPONENT
+   ═══════════════════════════════════════════════════════════════ */
 export default function CertificationDisplay() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -341,280 +57,818 @@ export default function CertificationDisplay() {
     offset: ["start end", "end start"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+  /* Parallax offsets for floating certificates */
+  const cert1Y = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const cert2Y = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const cert1Rotate = useTransform(scrollYProgress, [0, 1], [-6, -2]);
+  const cert2Rotate = useTransform(scrollYProgress, [0, 1], [4, 8]);
+
+  /* ── Mouse tilt for the certificate showcase ── */
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const rotX = useSpring(useTransform(my, [0, 1], [5, -5]), {
+    stiffness: 150,
+    damping: 25,
+  });
+  const rotY = useSpring(useTransform(mx, [0, 1], [-5, 5]), {
+    stiffness: 150,
+    damping: 25,
+  });
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      const r = showcaseRef.current?.getBoundingClientRect();
+      if (!r) return;
+      mx.set((e.clientX - r.left) / r.width);
+      my.set((e.clientY - r.top) / r.height);
+    },
+    [mx, my]
+  );
+  const handleMouseLeave = useCallback(() => {
+    mx.set(0.5);
+    my.set(0.5);
+  }, [mx, my]);
 
   const stats = [
-    { value: 5000, suffix: "+", label: "Certificates Issued", icon: <CertificateIcon /> },
-    { value: 92, suffix: "%", label: "Career Advancement", icon: <TrendingUpIcon /> },
-    { value: 150, suffix: "+", label: "Hiring Partners", icon: <BriefcaseIcon /> },
-    { value: 25, suffix: "+", label: "Countries", icon: <GlobeIcon /> },
+    { value: 5000, suffix: "+", label: "Certificates Issued" },
+    { value: 92, suffix: "%", label: "Career Growth" },
+    { value: 400, suffix: "+", label: "Hiring Partners" },
+    { value: 25, suffix: "+", label: "Countries" },
   ];
 
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ backgroundColor: "#0D1B2A" }}
+      style={{
+        background:
+          "linear-gradient(180deg, #FDF8F3 0%, #FFFFFF 35%, #FDF8F3 70%, #F8F4EF 100%)",
+      }}
     >
-      {/* ─── Animated Background ─── */}
-      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        {/* Gradient orbs */}
+      {/* ── Decorative background elements ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Soft gradient orbs */}
         <div
-          className="absolute top-[-20%] left-[-10%] w-[700px] h-[700px] rounded-full opacity-40"
+          className="absolute w-[800px] h-[800px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(245, 130, 32, 0.08) 0%, transparent 70%)",
+            top: "-15%",
+            right: "-10%",
+            background:
+              "radial-gradient(circle, rgba(245,130,32,0.06) 0%, transparent 70%)",
             filter: "blur(80px)",
-            animation: "hero-orb-float-1 14s ease-in-out infinite",
           }}
         />
         <div
-          className="absolute bottom-[-15%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-40"
+          className="absolute w-[600px] h-[600px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)",
-            filter: "blur(80px)",
-            animation: "hero-orb-float-2 18s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="absolute top-[30%] left-[60%] w-[400px] h-[400px] rounded-full opacity-30"
-          style={{
-            background: "radial-gradient(circle, rgba(245, 130, 32, 0.05) 0%, transparent 70%)",
+            bottom: "-10%",
+            left: "-5%",
+            background:
+              "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)",
             filter: "blur(60px)",
-            animation: "hero-orb-float-3 12s ease-in-out infinite",
           }}
         />
 
-        {/* Dot grid */}
+        {/* Subtle dot grid */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
+            backgroundImage:
+              "radial-gradient(circle, rgba(13,27,42,0.04) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
           }}
         />
-      </motion.div>
 
-      {/* Floating particles */}
-      <FloatingParticles />
+        {/* Decorative lines */}
+        <svg
+          className="absolute top-0 left-0 w-full h-full opacity-[0.03]"
+          preserveAspectRatio="none"
+        >
+          <line
+            x1="20%"
+            y1="0"
+            x2="20%"
+            y2="100%"
+            stroke="#0D1B2A"
+            strokeWidth="1"
+          />
+          <line
+            x1="80%"
+            y1="0"
+            x2="80%"
+            y2="100%"
+            stroke="#0D1B2A"
+            strokeWidth="1"
+          />
+          <line
+            x1="0"
+            y1="50%"
+            x2="100%"
+            y2="50%"
+            stroke="#0D1B2A"
+            strokeWidth="1"
+          />
+        </svg>
+      </div>
 
-      {/* Noise overlay */}
-      <div className="noise-overlay absolute inset-0 pointer-events-none z-[1]" />
-
-      {/* ─── Content ─── */}
-      <div className="relative z-10 py-28 md:py-36 lg:py-44 px-6">
+      <div className="relative z-10 py-24 md:py-32 lg:py-40 px-6">
         <div className="max-w-7xl mx-auto">
+          {/* ════════════════════════════════════════════════
+              TOP: Split layout — Text left, Certificates right
+              ════════════════════════════════════════════════ */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-28 md:mb-36">
+            {/* ── LEFT: Copy ── */}
+            <div>
+              {/* Eyebrow */}
+              <motion.div
+                className="inline-flex items-center gap-2.5 mb-7"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <span
+                  className="w-8 h-[2px] rounded-full"
+                  style={{ background: "#F58220" }}
+                />
+                <span
+                  className="text-xs font-bold uppercase tracking-[0.18em]"
+                  style={{ color: "#C45D10" }}
+                >
+                  Industry-Recognized Credentials
+                </span>
+              </motion.div>
 
-          {/* ─── Section Header ─── */}
-          <div className="text-center mb-20 md:mb-28">
-            {/* Eyebrow */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8"
-              style={{
-                background: "rgba(245, 130, 32, 0.08)",
-                border: "1px solid rgba(245, 130, 32, 0.15)",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="text-orange-400 flex items-center gap-1.5">
-                <VerifiedIcon />
-              </span>
-              <span className="text-orange-300/80 text-xs font-semibold uppercase tracking-[0.15em]">
-                Industry-Recognized Credentials
-              </span>
-            </motion.div>
-
-            {/* Main heading */}
-            <motion.h2
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-bold leading-[1.1] mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-            >
-              <span className="text-white">Earn Certificates That</span>
-              <br />
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: "linear-gradient(135deg, #F99B3D 0%, #F58220 40%, #FCBA6A 70%, #F58220 100%)",
-                  backgroundSize: "200% 200%",
-                  animation: "hero-gradient-shift 6s ease-in-out infinite",
+              {/* Heading */}
+              <motion.h2
+                className="text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.08] mb-6"
+                style={{ color: "#0D1B2A" }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.1,
+                  ease: [0.23, 1, 0.32, 1],
                 }}
               >
-                Open Real Doors
-              </span>
-            </motion.h2>
-
-            {/* Subtitle */}
-            <motion.p
-              className="text-white/40 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-            >
-              Not just a piece of paper. Our certifications are recognized by top employers
-              and validate the skills that actually matter in the industry.
-            </motion.p>
-          </div>
-
-          {/* ─── Certificate Cards ─── */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-24 md:mb-32">
-            <CertificateCard
-              imageSrc="/images/certificates/linkway-certificate.png"
-              imageAlt="Linkway Learning Certificate of Completion"
-              title="Linkway Learning Certificate of Completion"
-              subtitle="Completion Certificate"
-              description="Employer-trusted proof that you completed the full curriculum, hands-on projects, and rigorous assessments."
-              features={[
-                "Verified digital credential with unique ID",
-                "Shareable on LinkedIn and job portals",
-                "Includes project portfolio verification",
-                "QR code for instant employer verification",
-              ]}
-              accentColor="orange"
-              delay={0.1}
-            />
-
-            <CertificateCard
-              imageSrc="/images/certificates/azure-certificate.png"
-              imageAlt="Microsoft Azure AI Fundamentals Certificate"
-              title="Microsoft Certified: Azure AI Fundamentals"
-              subtitle="Microsoft Certification"
-              description="Globally recognized Microsoft certification that carries weight from startups to Fortune 500 companies."
-              features={[
-                "Official Microsoft certification (AI-900)",
-                "Recognized in 140+ countries worldwide",
-                "Lifetime validity with digital badge",
-                "Backed by Microsoft's global ecosystem",
-              ]}
-              accentColor="blue"
-              delay={0.25}
-            />
-          </div>
-
-          {/* ─── Stats Section ─── */}
-          <motion.div
-            className="relative rounded-2xl overflow-hidden"
-            style={{
-              background: "rgba(255, 255, 255, 0.02)",
-              border: "1px solid rgba(255, 255, 255, 0.06)",
-              backdropFilter: "blur(12px)",
-            }}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            {/* Top gradient line */}
-            <div className="absolute top-0 left-[10%] right-[10%] h-px"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(245,130,32,0.3), transparent)" }} />
-
-            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  className="relative px-6 py-10 md:py-14 text-center group/stat"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
+                Earn Certificates
+                <br />
+                That{" "}
+                <span
+                  className="relative inline-block"
+                  style={{ color: "#E07420" }}
                 >
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500"
-                    style={{ background: "radial-gradient(circle at center, rgba(245,130,32,0.04) 0%, transparent 70%)" }} />
+                  Actually Matter
+                  {/* Underline decoration */}
+                  <motion.svg
+                    className="absolute -bottom-2 left-0 w-full"
+                    viewBox="0 0 200 12"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.6 }}
+                  >
+                    <motion.path
+                      d="M2 8 C50 2, 150 2, 198 8"
+                      stroke="#F58220"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      fill="none"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.6 }}
+                    />
+                  </motion.svg>
+                </span>
+              </motion.h2>
 
-                  <div className="relative z-10">
-                    <div className="text-orange-400/60 mb-3 flex justify-center">
-                      {stat.icon}
+              {/* Description */}
+              <motion.p
+                className="text-lg md:text-xl leading-relaxed mb-10 max-w-lg"
+                style={{ color: "#4A5568" }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.25 }}
+              >
+                Not just paper credentials. Our certifications are recognized by{" "}
+                <strong style={{ color: "#0D1B2A" }}>400+ hiring partners</strong>{" "}
+                and validate the skills that top employers are actively searching for.
+              </motion.p>
+
+              {/* Feature pills */}
+              <motion.div
+                className="flex flex-wrap gap-3 mb-10"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.35 }}
+              >
+                {[
+                  { icon: "M9 12l2 2 4-4", text: "Verified Digital Credential" },
+                  { icon: "M9 12l2 2 4-4", text: "LinkedIn Ready" },
+                  { icon: "M9 12l2 2 4-4", text: "QR Verification" },
+                  { icon: "M9 12l2 2 4-4", text: "Globally Accepted" },
+                ].map((pill, i) => (
+                  <motion.span
+                    key={i}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+                    style={{
+                      background: "rgba(245, 130, 32, 0.07)",
+                      color: "#92400e",
+                      border: "1px solid rgba(245, 130, 32, 0.12)",
+                    }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 + i * 0.08, duration: 0.4 }}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#C45D10"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d={pill.icon} />
+                    </svg>
+                    {pill.text}
+                  </motion.span>
+                ))}
+              </motion.div>
+
+              {/* Stats row */}
+              <motion.div
+                className="grid grid-cols-4 gap-0 rounded-2xl overflow-hidden"
+                style={{
+                  background: "#0D1B2A",
+                  boxShadow: "0 20px 60px rgba(13, 27, 42, 0.15)",
+                }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+              >
+                {stats.map((stat, i) => (
+                  <div
+                    key={i}
+                    className="relative px-3 py-5 md:px-5 md:py-7 text-center"
+                    style={{
+                      borderRight:
+                        i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                    }}
+                  >
+                    <div className="text-xl md:text-2xl lg:text-3xl font-bold text-orange-400 mb-1">
+                      <AnimatedCounter
+                        target={stat.value}
+                        suffix={stat.suffix}
+                      />
                     </div>
-                    <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 stat-glow">
-                      <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                    </div>
-                    <div className="text-white/35 text-xs md:text-sm font-medium uppercase tracking-wider">
+                    <div className="text-[10px] md:text-xs text-white/40 uppercase tracking-wider font-medium">
                       {stat.label}
                     </div>
                   </div>
-                </motion.div>
-              ))}
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
 
-          {/* ─── Trust Indicators ─── */}
+            {/* ── RIGHT: Certificate Showcase ── */}
+            <motion.div
+              ref={showcaseRef}
+              className="relative flex items-center justify-center min-h-[500px] md:min-h-[600px] lg:min-h-[650px]"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                perspective: "1200px",
+              }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              {/* Ambient glow behind certificates */}
+              <div
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                <div
+                  className="w-[400px] h-[400px] rounded-full"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(245,130,32,0.1) 0%, rgba(245,130,32,0.03) 40%, transparent 70%)",
+                    filter: "blur(40px)",
+                  }}
+                />
+              </div>
+
+              {/* Decorative ring */}
+              <motion.div
+                className="absolute w-[380px] h-[380px] md:w-[440px] md:h-[440px] rounded-full pointer-events-none"
+                style={{
+                  border: "1px dashed rgba(245, 130, 32, 0.12)",
+                  left: "50%",
+                  top: "50%",
+                  x: "-50%",
+                  y: "-50%",
+                }}
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
+
+              {/* ── Linkway Certificate (back, tilted left) ── */}
+              <motion.div
+                className="absolute w-[280px] md:w-[340px] lg:w-[380px]"
+                style={{
+                  y: cert1Y,
+                  rotate: cert1Rotate,
+                  rotateX: rotX,
+                  rotateY: rotY,
+                  transformStyle: "preserve-3d",
+                  left: "5%",
+                  top: "15%",
+                  zIndex: 1,
+                }}
+              >
+                <motion.div
+                  className="relative rounded-xl overflow-hidden"
+                  style={{
+                    boxShadow:
+                      "0 25px 60px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.08)",
+                  }}
+                  initial={{ opacity: 0, x: -80, rotate: -12 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.4,
+                    ease: [0.23, 1, 0.32, 1],
+                  }}
+                  whileHover={{ scale: 1.04, zIndex: 10 }}
+                >
+                  <div className="relative aspect-[4/3] bg-white">
+                    <Image
+                      src="/images/certificates/linkway-certificate.png"
+                      alt="Linkway Learning Certificate of Completion"
+                      fill
+                      className="object-contain p-2"
+                      sizes="400px"
+                    />
+                  </div>
+                  {/* Label strip */}
+                  <div
+                    className="px-4 py-3 flex items-center gap-2.5"
+                    style={{ background: "#F58220" }}
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M9 14l-2 8 5-3 5 3-2-8" />
+                    </svg>
+                    <span className="text-white text-sm font-bold">
+                      Linkway Learning
+                    </span>
+                    <span className="text-white/60 text-xs ml-auto">
+                      Completion Certificate
+                    </span>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* ── Microsoft Certificate (front, tilted right) ── */}
+              <motion.div
+                className="absolute w-[280px] md:w-[340px] lg:w-[380px]"
+                style={{
+                  y: cert2Y,
+                  rotate: cert2Rotate,
+                  rotateX: rotX,
+                  rotateY: rotY,
+                  transformStyle: "preserve-3d",
+                  right: "5%",
+                  bottom: "10%",
+                  zIndex: 2,
+                }}
+              >
+                <motion.div
+                  className="relative rounded-xl overflow-hidden"
+                  style={{
+                    boxShadow:
+                      "0 30px 80px rgba(0,0,0,0.15), 0 10px 25px rgba(0,0,0,0.1)",
+                  }}
+                  initial={{ opacity: 0, x: 80, rotate: 12 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.6,
+                    ease: [0.23, 1, 0.32, 1],
+                  }}
+                  whileHover={{ scale: 1.04, zIndex: 10 }}
+                >
+                  <div className="relative aspect-[4/3] bg-white">
+                    <Image
+                      src="/images/certificates/azure-certificate.png"
+                      alt="Microsoft Azure AI Fundamentals Certificate"
+                      fill
+                      className="object-contain p-2"
+                      sizes="400px"
+                    />
+                  </div>
+                  {/* Label strip */}
+                  <div
+                    className="px-4 py-3 flex items-center gap-2.5"
+                    style={{ background: "#2563eb" }}
+                  >
+                    {/* Microsoft logo squares */}
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                      <rect x="0" y="0" width="7" height="7" />
+                      <rect x="9" y="0" width="7" height="7" />
+                      <rect x="0" y="9" width="7" height="7" />
+                      <rect x="9" y="9" width="7" height="7" />
+                    </svg>
+                    <span className="text-white text-sm font-bold">
+                      Microsoft Certified
+                    </span>
+                    <span className="text-white/60 text-xs ml-auto">
+                      Azure AI (AI-900)
+                    </span>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* ── Floating badge: "Verified" ── */}
+              <motion.div
+                className="absolute z-10"
+                style={{ right: "0%", top: "12%" }}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+              <motion.div
+                className="flex items-center gap-2 px-4 py-2.5 rounded-full"
+                style={{
+                  background: "white",
+                  boxShadow:
+                    "0 8px 30px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
+                }}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 1,
+                  type: "spring",
+                  stiffness: 200,
+                }}
+              >
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{ background: "#10B981" }}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: "#0D1B2A" }}
+                >
+                  Verified
+                </span>
+              </motion.div>
+              </motion.div>
+
+              {/* ── Floating badge: "LinkedIn Ready" ── */}
+              <motion.div
+                className="absolute z-10"
+                style={{ left: "0%", bottom: "8%" }}
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+              <motion.div
+                className="flex items-center gap-2 px-4 py-2.5 rounded-full"
+                style={{
+                  background: "white",
+                  boxShadow:
+                    "0 8px 30px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
+                }}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: 1.2,
+                  type: "spring",
+                  stiffness: 200,
+                }}
+              >
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{ background: "#0077B5" }}
+                >
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                  >
+                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
+                  </svg>
+                </div>
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: "#0D1B2A" }}
+                >
+                  LinkedIn Ready
+                </span>
+              </motion.div>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          {/* ════════════════════════════════════════════════
+              BOTTOM: Two detailed info cards
+              ════════════════════════════════════════════════ */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {/* Linkway Card */}
+            <motion.div
+              className="relative rounded-2xl overflow-hidden group"
+              style={{
+                background: "white",
+                border: "1px solid rgba(245, 130, 32, 0.1)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.04)",
+              }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+              whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(245,130,32,0.1)" }}
+            >
+              {/* Top accent */}
+              <div
+                className="h-1 w-full"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #F58220, #FCBA6A, #F58220)",
+                }}
+              />
+
+              <div className="p-7 md:p-9">
+                {/* Icon + Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(245,130,32,0.1), rgba(245,130,32,0.05))",
+                    }}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#E07420"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M9 14l-2 8 5-3 5 3-2-8" />
+                    </svg>
+                  </div>
+                  <span
+                    className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"
+                    style={{
+                      background: "rgba(245, 130, 32, 0.08)",
+                      color: "#C45D10",
+                    }}
+                  >
+                    Completion
+                  </span>
+                </div>
+
+                <h3
+                  className="text-xl md:text-2xl font-bold mb-3"
+                  style={{ color: "#0D1B2A" }}
+                >
+                  Linkway Learning Certificate
+                </h3>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+                  Employer-trusted proof that you completed the full curriculum,
+                  hands-on projects, and rigorous assessments.
+                </p>
+
+                {/* Feature list */}
+                <div className="space-y-3">
+                  {[
+                    "Verified digital credential with unique ID",
+                    "Shareable on LinkedIn & job portals",
+                    "Includes project portfolio verification",
+                    "QR code for instant employer verification",
+                  ].map((f, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div
+                        className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5"
+                        style={{ background: "rgba(245,130,32,0.1)" }}
+                      >
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M2 6l3 3 5-5"
+                            stroke="#E07420"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <span
+                        className="text-sm"
+                        style={{ color: "#4A5568" }}
+                      >
+                        {f}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Microsoft Azure Card */}
+            <motion.div
+              className="relative rounded-2xl overflow-hidden group"
+              style={{
+                background: "white",
+                border: "1px solid rgba(59, 130, 246, 0.1)",
+                boxShadow: "0 4px 24px rgba(0,0,0,0.04)",
+              }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+              whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(59,130,246,0.1)" }}
+            >
+              {/* Top accent */}
+              <div
+                className="h-1 w-full"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #3b82f6, #93c5fd, #3b82f6)",
+                }}
+              />
+
+              <div className="p-7 md:p-9">
+                {/* Icon + Badge */}
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(59,130,246,0.1), rgba(59,130,246,0.05))",
+                    }}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#2563eb"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 2l7 4v5c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <span
+                    className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"
+                    style={{
+                      background: "rgba(59, 130, 246, 0.08)",
+                      color: "#1d4ed8",
+                    }}
+                  >
+                    Microsoft
+                  </span>
+                </div>
+
+                <h3
+                  className="text-xl md:text-2xl font-bold mb-3"
+                  style={{ color: "#0D1B2A" }}
+                >
+                  Microsoft Azure AI Fundamentals
+                </h3>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
+                  Globally recognized Microsoft certification that carries weight from
+                  startups to Fortune 500 companies.
+                </p>
+
+                {/* Feature list */}
+                <div className="space-y-3">
+                  {[
+                    "Official Microsoft certification (AI-900)",
+                    "Recognized in 140+ countries worldwide",
+                    "Lifetime validity with digital badge",
+                    "Backed by Microsoft's global ecosystem",
+                  ].map((f, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div
+                        className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5"
+                        style={{ background: "rgba(59,130,246,0.1)" }}
+                      >
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M2 6l3 3 5-5"
+                            stroke="#2563eb"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <span
+                        className="text-sm"
+                        style={{ color: "#4A5568" }}
+                      >
+                        {f}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ── Trust bar ── */}
           <motion.div
-            className="mt-20 md:mt-24 text-center"
+            className="mt-16 md:mt-20 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-white/25 text-xs uppercase tracking-[0.2em] mb-8 font-medium">
-              Trusted & verified by leading platforms
+            <p
+              className="text-xs uppercase tracking-[0.2em] mb-7 font-medium"
+              style={{ color: "#9CA3AF" }}
+            >
+              Credentials recognized on
             </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-              {/* LinkedIn SVG */}
-              <motion.div
-                className="opacity-25 hover:opacity-60 transition-opacity duration-300 text-white"
-                whileHover={{ scale: 1.05 }}
-              >
-                <svg width="100" height="28" viewBox="0 0 100 28" fill="currentColor">
-                  <path d="M4.5 9.5H0V28h4.5V9.5zM2.25 0C.95 0 0 1 0 2.3s.95 2.3 2.25 2.3S4.5 3.6 4.5 2.3 3.55 0 2.25 0zM17.5 9.5c-2.5 0-4 1.3-4.5 2.5V9.5H8.5V28H13V18c0-2.5 1.5-3.5 3-3.5s2.5 1.5 2.5 3.5V28H23V17c0-4.5-2.5-7.5-5.5-7.5z" />
-                  <text x="28" y="20" fontSize="13" fontWeight="600" fontFamily="Inter, sans-serif">LinkedIn</text>
-                </svg>
-              </motion.div>
-
-              {/* Microsoft SVG */}
-              <motion.div
-                className="opacity-25 hover:opacity-60 transition-opacity duration-300 text-white"
-                whileHover={{ scale: 1.05 }}
-              >
-                <svg width="110" height="24" viewBox="0 0 110 24" fill="currentColor">
-                  <rect x="0" y="0" width="10" height="10" opacity="0.8" />
-                  <rect x="12" y="0" width="10" height="10" opacity="0.8" />
-                  <rect x="0" y="12" width="10" height="10" opacity="0.8" />
-                  <rect x="12" y="12" width="10" height="10" opacity="0.8" />
-                  <text x="28" y="17" fontSize="13" fontWeight="500" fontFamily="Inter, sans-serif">Microsoft</text>
-                </svg>
-              </motion.div>
-
-              {/* Credly SVG */}
-              <motion.div
-                className="opacity-25 hover:opacity-60 transition-opacity duration-300 text-white"
-                whileHover={{ scale: 1.05 }}
-              >
-                <svg width="85" height="24" viewBox="0 0 85 24" fill="currentColor">
-                  <circle cx="10" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <path d="M7 12l2 2 4-4" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                  <text x="24" y="17" fontSize="13" fontWeight="500" fontFamily="Inter, sans-serif">Credly</text>
-                </svg>
-              </motion.div>
-
-              {/* Naukri SVG */}
-              <motion.div
-                className="opacity-25 hover:opacity-60 transition-opacity duration-300 text-white"
-                whileHover={{ scale: 1.05 }}
-              >
-                <svg width="80" height="24" viewBox="0 0 80 24" fill="currentColor">
-                  <text x="0" y="18" fontSize="14" fontWeight="600" fontFamily="Inter, sans-serif">naukri</text>
-                </svg>
-              </motion.div>
-
-              {/* Indeed SVG */}
-              <motion.div
-                className="opacity-25 hover:opacity-60 transition-opacity duration-300 text-white"
-                whileHover={{ scale: 1.05 }}
-              >
-                <svg width="80" height="24" viewBox="0 0 80 24" fill="currentColor">
-                  <text x="0" y="18" fontSize="14" fontWeight="600" fontFamily="Inter, sans-serif">indeed</text>
-                </svg>
-              </motion.div>
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
+              {[
+                "LinkedIn",
+                "Microsoft",
+                "Credly",
+                "Naukri",
+                "Indeed",
+              ].map((name, i) => (
+                <motion.span
+                  key={i}
+                  className="text-sm font-semibold tracking-wide"
+                  style={{ color: "#CBD5E1" }}
+                  whileHover={{ color: "#64748B", scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {name}
+                </motion.span>
+              ))}
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
