@@ -233,7 +233,7 @@ export default function CoursePreview() {
                   transition={{ delay: 0.1, duration: 0.3 }}
                 >
                   <CheckCircle2 className="w-3.5 h-3.5 text-orange-500" />
-                  <span className="text-[11px] font-semibold text-orange-600">Updated in 2025</span>
+                  <span className="text-[11px] font-semibold text-orange-600">Updated in 2026</span>
                 </motion.div>
 
                 {/* Content */}
@@ -347,7 +347,7 @@ export default function CoursePreview() {
                     </div>
                     <div className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-orange-200/60 bg-white/70">
                       <CheckCircle2 className="w-3 h-3 text-orange-500" />
-                      <span className="text-[10px] font-semibold text-orange-600">Updated in 2025</span>
+                      <span className="text-[10px] font-semibold text-orange-600">Updated in 2026</span>
                     </div>
                   </div>
 

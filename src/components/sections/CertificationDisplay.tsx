@@ -2,75 +2,154 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import SectionHeading from "@/components/ui/SectionHeading";
-import ScrollReveal from "@/components/animation/ScrollReveal";
+import { Award, ShieldCheck } from "lucide-react";
 
 export default function CertificationDisplay() {
   return (
-    <section className="py-24 md:py-32 px-6">
-      <div className="max-w-7xl mx-auto">
-        <ScrollReveal>
-          <SectionHeading
-            label="Certification"
-            title="Walk Out With Proof That Opens Doors"
-            description="You'll earn two certifications - one from Linkway, one from Microsoft. Both are recognized by employers and ready to go on your LinkedIn."
-          />
-        </ScrollReveal>
+    <section className="relative overflow-hidden" style={{
+      backgroundColor: "#f4f2ed",
+      backgroundImage: `
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(251,146,60,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(59,130,246,0.06) 0%, transparent 60%),
+        repeating-linear-gradient(
+          135deg,
+          transparent 0px,
+          transparent 40px,
+          rgba(0,0,0,0.015) 40px,
+          rgba(0,0,0,0.015) 41px
+        ),
+        repeating-linear-gradient(
+          45deg,
+          transparent 0px,
+          transparent 40px,
+          rgba(0,0,0,0.015) 40px,
+          rgba(0,0,0,0.015) 41px
+        )
+      `,
+    }}>
+      {/* Top separator */}
+      <div className="w-full h-px bg-gray-300/50" />
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Linkway Certificate */}
-          <ScrollReveal delay={0.1}>
-            <motion.div
-              className="relative rounded-2xl p-8 backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] text-center group hover:border-orange-500/30 transition-all duration-500"
-              whileHover={{ rotateY: -5, rotateX: 3 }}
-              style={{ transformPerspective: 1200 }}
+      <div className="py-24 md:py-32 px-6 relative z-10">
+        <div className="max-w-6xl mx-auto">
+
+          {/* Heading */}
+          <div className="text-center mb-16 md:mb-20">
+            <motion.h2
+              className="text-3xl md:text-4xl lg:text-[2.8rem] font-bold text-gray-900 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
             >
-              <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-6 border border-white/[0.06]">
+              Will I get a certificate?
+              <br />
+              Of course! It&apos;ll look great on your
+              <br />
+              resume and LinkedIn :-)
+            </motion.h2>
+          </div>
+
+          {/* Two certificates */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
+
+            {/* Linkway Certificate */}
+            <motion.div
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <motion.div
+                className="relative w-full max-w-xl aspect-[4/3]"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   src="/images/certificates/linkway-certificate.png"
-                  alt="Linkway Learning Certificate"
+                  alt="Linkway Learning Certificate of Completion"
                   fill
-                  className="object-cover scale-110"
+                  className="object-contain mix-blend-multiply"
+                  sizes="(max-width: 768px) 100vw, 560px"
                 />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">Linkway Learning Certificate</h3>
-              <p className="text-gray-400 leading-relaxed">
-                This says you finished the whole thing - curriculum, projects, assessments, all of it. Our 400+ hiring partners know exactly what it means.
-              </p>
-              <div className="mt-6 inline-flex items-center gap-2 text-orange-400 text-sm font-medium">
-                <span className="w-2 h-2 rounded-full bg-orange-500" />
-                Employer-Trusted
+              </motion.div>
+
+              <div className="text-center mt-8">
+                <motion.div
+                  className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-orange-500 text-white mb-3 shadow-lg shadow-orange-500/20"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                >
+                  <Award className="w-4 h-4" />
+                  <span className="text-sm font-bold">Linkway Learning Certificate</span>
+                </motion.div>
+                <motion.p
+                  className="text-gray-500 text-sm leading-relaxed max-w-xs mx-auto"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  Employer-trusted proof that you completed the full curriculum, projects, and assessments.
+                </motion.p>
               </div>
             </motion.div>
-          </ScrollReveal>
 
-          {/* Microsoft Certificate */}
-          <ScrollReveal delay={0.2}>
+            {/* Microsoft Azure Certificate */}
             <motion.div
-              className="relative rounded-2xl p-8 backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] text-center group hover:border-blue-500/30 transition-all duration-500"
-              whileHover={{ rotateY: 5, rotateX: 3 }}
-              style={{ transformPerspective: 1200 }}
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
             >
-              <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-6 border border-white/[0.06]">
+              <motion.div
+                className="relative w-full max-w-xl aspect-[4/3]"
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   src="/images/certificates/azure-certificate.png"
                   alt="Microsoft Azure AI Fundamentals Certificate"
                   fill
-                  className="object-cover scale-110"
+                  className="object-contain mix-blend-multiply"
+                  sizes="(max-width: 768px) 100vw, 560px"
                 />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">Microsoft Azure AI Fundamentals</h3>
-              <p className="text-gray-400 leading-relaxed">
-                A Microsoft certification that carries weight everywhere - from startups to Fortune 500s. It proves you understand AI and ML at a foundational level.
-              </p>
-              <div className="mt-6 inline-flex items-center gap-2 text-blue-400 text-sm font-medium">
-                <span className="w-2 h-2 rounded-full bg-blue-500" />
-                Globally Recognized
+              </motion.div>
+
+              <div className="text-center mt-8">
+                <motion.div
+                  className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-blue-600 text-white mb-3 shadow-lg shadow-blue-600/20"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  <span className="text-sm font-bold">Microsoft Azure AI Fundamentals</span>
+                </motion.div>
+                <motion.p
+                  className="text-gray-500 text-sm leading-relaxed max-w-xs mx-auto"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.4 }}
+                >
+                  Globally recognized Microsoft certification that carries weight from startups to Fortune 500s.
+                </motion.p>
               </div>
             </motion.div>
-          </ScrollReveal>
+
+          </div>
+
         </div>
       </div>
+
+      {/* Bottom separator */}
+      <div className="w-full h-px bg-gray-300/50" />
     </section>
   );
 }
