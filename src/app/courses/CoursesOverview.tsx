@@ -161,6 +161,33 @@ const courses = [
   },
 ];
 
+/* ─────────── Company Logo SVGs ─────────── */
+const companyLogos: Record<string, React.ReactNode> = {
+  Amazon: (<svg viewBox="0 0 24 24" className="w-5 h-5"><path d="M13.23 10.56c0 .43.01.79-.2 1.18-.17.31-.44.51-.74.51-.41 0-.65-.31-.65-.78 0-.92.82-1.08 1.59-1.08v.17zm1.07 2.62c-.07.06-.17.07-.25.02-.35-.29-.41-.43-.6-.71-.58.59-1 .77-1.74.77-.89 0-1.58-.55-1.58-1.65 0-.86.47-1.44 1.13-1.73.58-.25 1.38-.3 2-.37v-.14c0-.25.02-.55-.13-.77-.13-.19-.38-.27-.6-.27-.41 0-.77.21-.86.64-.02.1-.08.19-.17.19l-.95-.1c-.08-.02-.16-.08-.14-.19.21-1.07 1.3-1.45 2.48-1.45.6 0 1.39.16 1.86.62.6.55.55 1.29.55 2.09v1.89c0 .57.24.82.46 1.12.08.11.1.24-.01.32-.26.22-.73.63-.99.86z" fill="#FF9900"/><path d="M14.68 17.16c-2.68 1.98-6.57 3.04-9.91 3.04-4.69 0-8.91-1.74-12.11-4.63-.25-.23-.03-.54.28-.36 3.45 2 7.71 3.21 12.12 3.21 2.97 0 6.24-.62 9.25-1.89.45-.2.83.3.37.63z" fill="#FF9900"/></svg>),
+  Google: (<svg viewBox="0 0 24 24" className="w-5 h-5"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>),
+  Razorpay: (<svg viewBox="0 0 24 24" className="w-5 h-5"><path d="M8.63 1L2 18.75h4.43l1.72-4.78h5.9L8.63 1z" fill="#3395FF"/><path d="M14.05 13.97l-2.55 6.78h4.44L22 3.25h-4.44l-3.51 10.72z" fill="#072654"/></svg>),
+  Accenture: (<svg viewBox="0 0 24 24" className="w-5 h-5"><path d="M1 17l11-14 12 14h-7l-5-6.5L7 17H1z" fill="#A100FF"/></svg>),
+  Deloitte: (<svg viewBox="0 0 24 24" className="w-5 h-5"><circle cx="12" cy="12" r="10" fill="#86BC25"/></svg>),
+  Wipro: (<svg viewBox="0 0 24 24" className="w-5 h-5"><path d="M2 16l4-12h2l-3 8h4l3-8h2l-4 12h-2l3-8H7l-3 8H2z" fill="#431D7E"/></svg>),
+  Paytm: (<svg viewBox="0 0 24 24" className="w-5 h-5"><rect width="24" height="24" rx="4" fill="#00BAF2"/><text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="700" fontFamily="Arial">Paytm</text></svg>),
+  Siemens: (<svg viewBox="0 0 24 24" className="w-5 h-5"><rect width="24" height="24" rx="4" fill="#009999"/><text x="12" y="16" textAnchor="middle" fill="white" fontSize="8" fontWeight="700" fontFamily="Arial">S</text></svg>),
+  Citi: (<svg viewBox="0 0 24 24" className="w-5 h-5"><rect width="24" height="24" rx="4" fill="#003DA5"/><path d="M6 8c0 0 3-4 6-4s6 4 6 4" fill="none" stroke="#E31837" strokeWidth="2.5"/><text x="12" y="18" textAnchor="middle" fill="white" fontSize="9" fontWeight="700" fontFamily="Arial">citi</text></svg>),
+};
+
+function CompanyLogo({ name }: { name: string }) {
+  if (companyLogos[name]) return <>{companyLogos[name]}</>;
+  const colors = ["#4F46E5","#059669","#DC2626","#7C3AED","#D97706","#0891B2","#DB2777","#2563EB","#1E3A5F","#E31837","#FF6600","#003B71","#6C5CE7","#0052CC","#FF3366","#00008F"];
+  const c = colors[name.split("").reduce((a, ch) => a + ch.charCodeAt(0), 0) % colors.length];
+  return (
+    <svg viewBox="0 0 24 24" className="w-5 h-5">
+      <rect width="24" height="24" rx="4" fill={c} />
+      <text x="12" y="16" textAnchor="middle" fill="white" fontSize={name.length <= 3 ? "9" : "7"} fontWeight="700" fontFamily="Arial">
+        {name.length <= 4 ? name : name.split(" ").map(w => w[0]).join("").slice(0, 3)}
+      </text>
+    </svg>
+  );
+}
+
 const comparison = [
   { label: "Duration", key: "duration" as const },
   { label: "Best For", key: "bestFor" as const },
@@ -181,15 +208,19 @@ function RotatingText() {
   }, []);
 
   return (
-    <span className="relative inline-block h-[1.15em] overflow-hidden align-bottom min-w-[280px] md:min-w-[420px]">
+    <span className="relative inline-grid overflow-hidden" style={{ height: "1.2em" }}>
+      {/* Invisible sizer — takes the width of the longest word */}
+      {rotatingWords.map((w) => (
+        <span key={w} className="invisible col-start-1 row-start-1 whitespace-nowrap">{w}</span>
+      ))}
       <AnimatePresence mode="wait">
         <motion.span
           key={rotatingWords[index]}
-          className="absolute left-0 bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 bg-clip-text text-transparent whitespace-nowrap"
-          initial={{ y: "100%", opacity: 0, rotateX: -90 }}
-          animate={{ y: "0%", opacity: 1, rotateX: 0 }}
-          exit={{ y: "-100%", opacity: 0, rotateX: 90 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="col-start-1 row-start-1 bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 bg-clip-text text-transparent whitespace-nowrap text-center"
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           {rotatingWords[index]}
         </motion.span>
@@ -751,9 +782,7 @@ export default function CoursesOverview() {
                 key={p}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-50 border border-gray-100 text-sm font-medium text-gray-600 whitespace-nowrap hover:border-orange-200 hover:bg-orange-50/50 transition-colors"
               >
-                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-[9px] font-bold text-white">
-                  {p.charAt(0)}
-                </div>
+                <CompanyLogo name={p} />
                 {p}
               </div>
             ))}
@@ -765,9 +794,7 @@ export default function CoursesOverview() {
                 key={p}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-50 border border-gray-100 text-sm font-medium text-gray-600 whitespace-nowrap hover:border-orange-200 hover:bg-orange-50/50 transition-colors"
               >
-                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-[9px] font-bold text-white">
-                  {p.charAt(0)}
-                </div>
+                <CompanyLogo name={p} />
                 {p}
               </div>
             ))}
