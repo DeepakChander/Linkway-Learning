@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CoursePageTemplate from "@/components/sections/CoursePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Data Science & AI Mastery",
+  title: "Data Science and AI",
   description: "From Python fundamentals to deploying production ML models. Build neural networks, NLP systems, and generative AI applications across 7 comprehensive modules.",
 };
 
@@ -10,7 +10,7 @@ export default function DataScienceAIPage() {
   return (
     <CoursePageTemplate
       animationVariant="activetheory"
-      name="Data Science & AI Mastery"
+      name="Data Science and AI"
       duration="12 Months"
       level="Zero to Expert"
       tagline="From your first Python script to deploying ML in production."

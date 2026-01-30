@@ -1,9 +1,11 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 import BorderGlow from "@/components/animation/BorderGlow";
 import CrossFlicker from "@/components/animation/CrossFlicker";
-import Marquee from "@/components/animation/Marquee";
 import { Award, Briefcase, GraduationCap, Code2, Disc } from "lucide-react";
 
 const values = [
@@ -51,6 +53,48 @@ const partnerLogos: Record<string, string> = {
   Deloitte: "/images/companies/deloitte.svg",
   Capgemini: "/images/companies/capgemini.svg",
 };
+
+function PartnerMarquee() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+
+  useGSAP(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    requestAnimationFrame(() => {
+      const oneSetWidth = track.scrollWidth / 2;
+      tweenRef.current = gsap.fromTo(
+        track,
+        { x: 0 },
+        { x: -oneSetWidth, duration: 30, ease: "none", repeat: -1 }
+      );
+    });
+
+    return () => { tweenRef.current?.kill(); };
+  }, { scope: trackRef });
+
+  const items = [...partnerNames, ...partnerNames];
+
+  return (
+    <div className="overflow-hidden">
+      <div ref={trackRef} className="flex gap-12 w-max">
+        {items.map((name, i) => (
+          <span
+            key={`${name}-${i}`}
+            className="inline-flex items-center gap-2 text-lg md:text-xl font-bold text-navy-900 whitespace-nowrap"
+          >
+            {partnerLogos[name] && (
+              <img src={partnerLogos[name]} alt={name} width={22} height={22} className="w-[22px] h-[22px] object-contain" />
+            )}
+            {name}
+            <span className="text-orange-400 mx-4">·</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function WhyLinkway() {
   return (
@@ -200,20 +244,7 @@ export default function WhyLinkway() {
           <div className="mt-16 relative z-10">
             <p className="text-base text-orange-500 uppercase tracking-widest mb-5 font-bold text-center">Trusted by teams at</p>
             <div className="border-y border-gray-200 py-5">
-              <Marquee speed={30} gap={12} pauseOnHover>
-                {partnerNames.map((name) => (
-                  <span
-                    key={name}
-                    className="inline-flex items-center gap-2 text-lg md:text-xl font-bold text-navy-900 whitespace-nowrap"
-                  >
-                    {partnerLogos[name] && (
-                      <img src={partnerLogos[name]} alt={name} width={22} height={22} className="w-[22px] h-[22px] object-contain" />
-                    )}
-                    {name}
-                    <span className="text-orange-400 mx-4">·</span>
-                  </span>
-                ))}
-              </Marquee>
+              <PartnerMarquee />
             </div>
           </div>
         </div>

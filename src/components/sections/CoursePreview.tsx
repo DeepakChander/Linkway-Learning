@@ -151,7 +151,7 @@ export default function CoursePreview() {
   }, []);
 
   return (
-    <section className="py-24 md:py-32 px-6 bg-black overflow-hidden">
+    <section className="py-24 md:py-32 px-6 bg-black overflow-x-clip">
       <div className="max-w-7xl mx-auto">
         {/* Header with masked reveal */}
         <div className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -335,8 +335,8 @@ export default function CoursePreview() {
           </div>
 
           {/* Right: Sticky Preview Card */}
-          <div className="lg:col-span-5 hidden lg:block relative">
-            <div className="sticky top-32">
+          <div className="lg:col-span-5 hidden lg:block self-start sticky top-28">
+            <div>
               <AnimatePresence mode="wait">
                 {courses.map((course, i) => (
                   activeIndex === i && (

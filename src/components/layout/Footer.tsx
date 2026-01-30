@@ -31,13 +31,8 @@ const legalLinks = [
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link href={href} className="group relative inline-block overflow-hidden">
-      <span className="relative z-10 block transition-transform duration-300 group-hover:-translate-y-full text-gray-300 group-hover:text-orange-400">
-        {label}
-      </span>
-      <span className="absolute inset-0 block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-orange-400 font-medium" aria-hidden="true">
-        {label}
-      </span>
+    <Link href={href} className="text-gray-300 hover:text-orange-400 transition-colors duration-300">
+      {label}
     </Link>
   );
 }

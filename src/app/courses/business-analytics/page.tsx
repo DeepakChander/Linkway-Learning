@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import CoursePageTemplate from "@/components/sections/CoursePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Business Intelligence & Strategy",
+  title: "Business Analytics",
   description: "Master BI tools, predictive analytics, and AI-powered decision-making. Designed for professionals, MBAs, and business leaders who want to lead with data.",
 };
 
-export default function BusinessIntelligencePage() {
+export default function BusinessAnalyticsPage() {
   return (
     <CoursePageTemplate
       animationVariant="redbull"
-      name="Business Intelligence & Strategy"
-      duration="12 Months"
-      level="Professional Upskilling"
+      name="Business Analytics"
+      duration="6 Months"
+      level="Beginner to Advanced"
       tagline="For the people who need data to make better calls."
       heroDescription="You don't need a CS degree to lead with data. This program teaches you BI tools, predictive analytics, and AI-powered decision-making - all designed for professionals and business leaders who want to stop guessing and start knowing."
       color="#F5892A"

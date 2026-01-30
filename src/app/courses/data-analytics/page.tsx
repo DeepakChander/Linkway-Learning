@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CoursePageTemplate from "@/components/sections/CoursePageTemplate";
 
 export const metadata: Metadata = {
-  title: "Data Analytics Accelerator",
+  title: "Data Analytics",
   description: "Master Excel, SQL, Python, Tableau, Power BI, and ML fundamentals in 6 intensive months. Dedicated Placement Assistance.",
 };
 
@@ -10,7 +10,7 @@ export default function DataAnalyticsPage() {
   return (
     <CoursePageTemplate
       animationVariant="orano"
-      name="Data Analytics Accelerator"
+      name="Data Analytics"
       duration="6 Months"
       level="Beginner to Advanced"
       tagline="Go from spreadsheets to strategic thinking - in 6 months."
