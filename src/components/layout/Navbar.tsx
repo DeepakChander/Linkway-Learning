@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronDown } from "lucide-react";
@@ -98,7 +97,7 @@ export default function Navbar() {
         <nav
           className={cn(
             "w-full max-w-7xl rounded-2xl transition-all duration-500",
-            "border py-3 px-8 sm:px-12",
+            "border py-2 px-5 sm:px-8",
             scrolled
               ? "border-white/20 bg-white/70 backdrop-blur-[40px] backdrop-saturate-[1.8] shadow-[0_2px_20px_rgba(0,0,0,0.08),inset_0_0.5px_0_rgba(255,255,255,0.9),inset_0_-0.5px_0_rgba(0,0,0,0.05)]"
               : isHome
@@ -110,14 +109,12 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center justify-between gap-4">
             {/* Logo */}
             <Link href="/" className="shrink-0">
-              <Image
-                src="/images/logo/linkway-learning.jpeg"
-                alt="Linkway Learning"
-                width={90}
-                height={90}
-                className="rounded-lg transition-all duration-300"
-                priority
-              />
+              <span className={cn(
+                "text-2xl font-bold transition-colors duration-300",
+                scrolled ? "text-navy-900" : isHome ? "text-white" : "text-navy-900"
+              )}>
+                Linkway
+              </span>
             </Link>
 
             {/* Nav links - centered */}
@@ -133,7 +130,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       className={cn(
-                        "group flex items-center h-12 px-5 transition-colors duration-300",
+                        "group flex items-center h-10 px-3 transition-colors duration-300",
                         isActive(link.href)
                           ? "text-orange-500"
                           : scrolled ? "text-gray-900" : isHome ? "text-gray-300" : "text-gray-900"
@@ -193,7 +190,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       className={cn(
-                        "group flex items-center h-12 px-5 transition-colors duration-300",
+                        "group flex items-center h-10 px-3 transition-colors duration-300",
                         isActive(link.href)
                           ? "text-orange-500"
                           : scrolled ? "text-gray-900" : isHome ? "text-gray-300" : "text-gray-900"
@@ -215,7 +212,7 @@ export default function Navbar() {
             <Link
               href="/enroll"
               className={cn(
-                "shrink-0 flex items-center justify-center font-bold gap-2 px-7 py-3 rounded-xl transition-all duration-300 min-w-[140px] text-base ml-4",
+                "shrink-0 flex items-center justify-center font-bold gap-2 px-5 py-2 rounded-xl transition-all duration-300 min-w-[120px] text-base ml-4",
                 isHome
                   ? "bg-orange-500 text-white hover:bg-orange-600 shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40"
                   : "bg-navy-900 text-white hover:bg-navy-800 shadow-lg shadow-navy-900/25"
@@ -229,14 +226,12 @@ export default function Navbar() {
           <div className="flex lg:hidden items-center justify-between gap-2">
             {/* Logo */}
             <Link href="/" className="shrink-0">
-              <Image
-                src="/images/logo/linkway-learning.jpeg"
-                alt="Linkway Learning"
-                width={48}
-                height={48}
-                className="rounded-full"
-                priority
-              />
+              <span className={cn(
+                "text-xl font-bold transition-colors duration-300",
+                scrolled ? "text-navy-900" : isHome ? "text-white" : "text-navy-900"
+              )}>
+                Linkway
+              </span>
             </Link>
 
             {/* CTA + Hamburger */}
@@ -295,13 +290,9 @@ export default function Navbar() {
             >
               {/* Close button */}
               <div className="flex items-center justify-between h-20 px-6">
-                <Image
-                  src="/images/logo/linkway-learning.jpeg"
-                  alt="Linkway Learning"
-                  width={52}
-                  height={52}
-                  className="rounded-full"
-                />
+                <span className="text-xl font-bold text-white">
+                  Linkway
+                </span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="p-2 text-gray-400 hover:text-white transition-colors"

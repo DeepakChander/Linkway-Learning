@@ -62,47 +62,42 @@ function RatingStars({ rating }: { rating: number }) {
   return (
     <div className="flex items-center gap-0.5">
       {[...Array(fullStars)].map((_, j) => (
-        <Star key={`f-${j}`} className="w-3.5 h-3.5 fill-orange-400 text-orange-400" />
+        <Star key={`f-${j}`} className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />
       ))}
-      {hasHalf && <StarHalf className="w-3.5 h-3.5 fill-orange-400 text-orange-400" />}
+      {hasHalf && <StarHalf className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />}
       {[...Array(emptyStars)].map((_, j) => (
-        <Star key={`e-${j}`} className="w-3.5 h-3.5 text-white/15" />
+        <Star key={`e-${j}`} className="w-3.5 h-3.5 text-gray-300" />
       ))}
-      <span className="text-[11px] text-gray-500 ml-1.5 font-medium">{rating}</span>
+      <span className="text-[11px] text-gray-400 ml-1.5 font-medium">{rating}</span>
     </div>
   );
 }
 
 function TestimonialCard({ t }: { t: (typeof testimonials)[number] }) {
   return (
-    <div className="shrink-0 w-[320px] md:w-[360px]">
-      <div className="h-full rounded-xl p-6 bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] hover:border-white/[0.15] transition-all duration-300">
-        <div className="mb-3">
+    <div className="shrink-0 w-[320px] md:w-[350px]">
+      <div className="h-full rounded-2xl p-6 bg-[#F2F1EE] border border-[#e5e4e0] hover:border-[#d5d4d0] transition-all duration-300">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] text-gray-500 font-medium">{t.from}</span>
+            <ArrowRight className="w-3 h-3 text-gray-400" />
+            <span className="text-[11px] text-orange-600 font-semibold">{t.to}</span>
+          </div>
           <RatingStars rating={t.rating} />
         </div>
 
-        <div className="flex items-center gap-2 mb-4">
-          <span className="px-2.5 py-1 rounded-md bg-white/[0.06] text-gray-400 text-xs font-medium">
-            {t.from}
-          </span>
-          <ArrowRight className="w-3.5 h-3.5 text-orange-500" />
-          <span className="px-2.5 py-1 rounded-md bg-orange-500/15 text-orange-400 text-xs font-semibold">
-            {t.to}
-          </span>
-        </div>
-
-        <p className="text-gray-300 leading-relaxed text-sm mb-5">
+        <p className="text-gray-600 leading-relaxed text-[13px] mb-6">
           &ldquo;{t.desc}&rdquo;
         </p>
 
-        <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
-          <div className="w-10 h-10 rounded-full bg-white/10 overflow-hidden shrink-0">
-            <Image src={t.avatar} alt={t.name} width={40} height={40} className="w-full h-full object-cover" />
+        <div className="flex items-center gap-3 pt-4 border-t border-black/[0.06]">
+          <div className="w-9 h-9 rounded-full bg-black/[0.08] overflow-hidden shrink-0">
+            <Image src={t.avatar} alt={t.name} width={36} height={36} className="w-full h-full object-cover" />
           </div>
           <div className="min-w-0">
-            <h4 className="font-semibold text-white text-sm leading-tight truncate">{t.name}</h4>
+            <h4 className="font-medium text-gray-900 text-sm leading-tight truncate">{t.name}</h4>
+            <span className="text-[11px] text-gray-500">{t.company}</span>
           </div>
-          <span className="ml-auto text-xs font-bold text-orange-400 shrink-0">{t.company}</span>
         </div>
       </div>
     </div>
@@ -144,21 +139,17 @@ export default function Testimonials() {
   const handleMouseLeave = () => tweenRef.current?.resume();
 
   return (
-    <section
-      className="py-24 md:py-32 text-white overflow-hidden relative"
-      style={{ backgroundColor: "#060E1A" }}
-    >
-      <div className="max-w-7xl mx-auto px-6 mb-10 relative z-10">
+    <section className="pt-6 md:pt-8 pb-8 md:pb-10 text-white overflow-hidden relative bg-black">
+      <div className="max-w-7xl mx-auto px-6 mb-12 relative z-10">
         <ScrollReveal>
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <span className="w-8 h-[2px] bg-orange-500" />
-              <span className="text-orange-400 text-xs font-semibold tracking-widest uppercase">
-                Success Stories
-              </span>
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
-              They Were Where You Are Right Now.
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-xs mb-6 tracking-widest uppercase">
+              Success Stories
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+              <span className="text-white">They Were Where </span>
+              <span className="text-orange-400">You Are</span>
+              <span className="text-white"> Right Now.</span>
             </h2>
           </div>
         </ScrollReveal>
@@ -169,13 +160,13 @@ export default function Testimonials() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#060E1A] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#060E1A] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
         <div className="overflow-hidden">
           <div
             ref={trackRef}
-            className="flex gap-4 w-max"
+            className="flex gap-5 w-max"
             style={{ willChange: "transform" }}
           >
             {[...testimonials, ...testimonials].map((t, i) => (

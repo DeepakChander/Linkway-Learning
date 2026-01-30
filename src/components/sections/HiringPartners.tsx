@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollOdometer from "@/components/animation/ScrollOdometer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,22 +92,21 @@ const row3 = [
 function CompanyCard({ name }: { name: string }) {
   const role = companyRoles[name];
   return (
-    <div className="group relative flex items-center gap-4 px-5 py-4 w-64 md:w-72 rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-sm shrink-0 overflow-hidden">
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-orange-500/10 via-transparent to-orange-500/5 pointer-events-none" />
-      <div className="w-11 h-11 rounded-xl bg-white/[0.05] flex items-center justify-center shrink-0">
+    <div className="group relative flex items-center gap-4 px-5 py-4 w-60 md:w-64 rounded-xl border border-white/[0.08] bg-white/[0.03] shrink-0 overflow-hidden hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300">
+      <div className="w-11 h-11 rounded-xl bg-white/[0.06] flex items-center justify-center shrink-0 aspect-square">
         <img
           src={companyLogos[name]}
           alt={name}
           width={28}
           height={28}
-          className={`w-7 h-7 object-contain transition-transform duration-300 group-hover:scale-110 ${monoLogos.has(name) ? "brightness-0 invert" : ""}`}
+          className={`w-7 h-7 object-contain ${monoLogos.has(name) ? "brightness-0 invert" : ""}`}
         />
       </div>
       <div className="flex flex-col min-w-0">
-        <span className="text-sm font-semibold text-white/90 group-hover:text-white transition-colors duration-300 truncate">
+        <span className="text-sm font-medium text-white/80 truncate">
           {name}
         </span>
-        <span className="text-xs text-gray-500 group-hover:text-orange-400/80 transition-colors duration-300 truncate">
+        <span className="text-xs text-gray-600 truncate">
           {role}
         </span>
       </div>
@@ -215,10 +215,10 @@ export default function HiringPartners() {
   const headlineWords = ["These", "Teams", "Are", "Already", "Hiring"];
 
   return (
-    <section ref={sectionRef} className="relative border-t border-white/5 overflow-hidden" style={{ backgroundColor: "#060E1A" }}>
-      <div className="flex flex-col items-center justify-center px-6 py-24 md:py-32 relative">
-        <div className="max-w-4xl mx-auto w-full mb-14 text-center">
-          <span className="hp-badge inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-sm mb-6 tracking-wide">
+    <section ref={sectionRef} className="relative overflow-hidden bg-black">
+      <div className="flex flex-col items-center justify-center px-6 py-10 md:py-16 relative">
+        <div className="max-w-4xl mx-auto w-full mb-16 text-center">
+          <span className="hp-badge inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-xs mb-6 tracking-widest uppercase">
             Where You Could Work Next
           </span>
 
@@ -230,7 +230,7 @@ export default function HiringPartners() {
             {headlineWords.map((word, i) => (
               <span
                 key={i}
-                className="hw inline-block will-change-[opacity,filter,transform] mr-[0.3em] last:mr-0"
+                className={`hw inline-block will-change-[opacity,filter,transform] mr-[0.3em] last:mr-0 ${word === "Already" || word === "Hiring" ? "text-orange-400" : ""}`}
                 style={{ transformStyle: "preserve-3d" }}
               >
                 {word}
@@ -238,25 +238,25 @@ export default function HiringPartners() {
             ))}
           </h2>
 
-          <p className="hp-subtitle text-lg md:text-xl text-gray-400">
-            Real roles. Real companies. These are the teams our graduates walk into - not internships, not promises.
+          <p className="hp-subtitle text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+            Real roles. Real companies. These are the teams our graduates walk into.
           </p>
         </div>
 
-        {/* Three auto-scrolling rows - GSAP driven */}
-        <div className="w-full space-y-4 md:space-y-5 relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#060E1A] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#060E1A] to-transparent z-10 pointer-events-none" />
+        {/* Three auto-scrolling rows */}
+        <div className="w-full space-y-3 md:space-y-4 relative">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
           <InfiniteRow items={row1} direction="left" speed={70} className="marquee-row" />
           <InfiniteRow items={row2} direction="right" speed={60} className="marquee-row" />
           <InfiniteRow items={row3} direction="left" speed={65} className="marquee-row" />
         </div>
 
-        <div className="mt-12 text-center">
-          <p className="text-gray-500 text-sm">
-            <span className="text-white font-semibold">400+</span> companies. Open roles across AI, data, cloud, and engineering - updated every quarter.
-          </p>
+        <div className="mt-8 text-center">
+          <div className="text-gray-300 text-sm">
+            <ScrollOdometer value={400} duration={2} suffix="+" animateSuffix className="text-orange-400 font-bold" /> hiring partners. New roles added every quarter across <span className="text-white font-medium">AI, data, cloud, and engineering.</span>
+          </div>
         </div>
       </div>
     </section>
