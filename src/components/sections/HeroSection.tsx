@@ -44,7 +44,7 @@ const bentoCards = [
     borderColor: "border-emerald-500/20",
     textColor: "text-emerald-400",
     glowRgba: "rgba(16,185,129,0.15)",
-    position: "top-[12%] right-[4%] md:right-[8%]",
+    position: "top-[5%] right-[4%] md:right-[8%]",
     delay: 0.3,
     floatDuration: 7,
   },
@@ -60,7 +60,7 @@ const bentoCards = [
     borderColor: "border-orange-500/20",
     textColor: "text-orange-400",
     glowRgba: "rgba(245,137,42,0.15)",
-    position: "top-[38%] right-[2%] md:right-[4%]",
+    position: "top-[35%] right-[-2%] md:right-[2%]",
     delay: 0.6,
     floatDuration: 8,
   },
@@ -76,7 +76,7 @@ const bentoCards = [
     borderColor: "border-blue-500/20",
     textColor: "text-blue-400",
     glowRgba: "rgba(59,130,246,0.15)",
-    position: "bottom-[28%] right-[6%] md:right-[12%]",
+    position: "bottom-[22%] right-[0%] md:right-[6%]",
     delay: 0.9,
     floatDuration: 6,
   },
@@ -327,7 +327,7 @@ function StatusPill() {
    ═══════════════════════════════════════════════════════════════════════════ */
 function HeroVisual() {
   return (
-    <div className="relative w-[420px] h-[420px]">
+    <div className="relative w-[480px] h-[480px]">
       {/* Outer ring */}
       <motion.div
         className="absolute inset-0 rounded-full border border-white/[0.04]"
@@ -383,29 +383,22 @@ function HeroVisual() {
         ))}
       </motion.div>
 
-      {/* Center core */}
-      <div className="absolute inset-[160px] rounded-full hero-center-glow flex items-center justify-center">
+      {/* Center background circle */}
+      <div className="absolute inset-[100px] rounded-full bg-gradient-to-br from-orange-500/10 via-slate-800/50 to-blue-500/10 border border-orange-500/15" />
+
+      {/* Center core - Student Image */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
         <motion.div
-          className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-500/20 to-orange-600/5 border border-orange-500/20 flex items-center justify-center backdrop-blur-sm"
-          animate={{ scale: [1, 1.08, 1] }}
+          className="w-[280px] h-[280px] rounded-full border-2 border-orange-500/30 flex items-center justify-center overflow-hidden"
+          style={{ background: "radial-gradient(circle, rgba(245,137,42,0.08) 0%, rgba(15,23,42,0.6) 70%)" }}
+          animate={{ scale: [1, 1.03, 1] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path
-              d="M8 6v20h16"
-              stroke="url(#heroLogoGrad)"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="hero-logo-draw"
-            />
-            <defs>
-              <linearGradient id="heroLogoGrad" x1="8" y1="6" x2="24" y2="26">
-                <stop stopColor="#F58220" />
-                <stop offset="1" stopColor="#F99B3D" />
-              </linearGradient>
-            </defs>
-          </svg>
+          <img
+            src="/hero-students.png"
+            alt="Linkway Learning Students"
+            className="w-full h-full object-cover object-top scale-110"
+          />
         </motion.div>
       </div>
 
