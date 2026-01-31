@@ -4,38 +4,57 @@ import { useRef, useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { SpringReveal, LineMaskReveal } from "@/components/animation";
+import { useGSAP } from "@gsap/react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
+import {
+  SpringReveal,
+  LineMaskReveal,
+  CrossFlicker,
+  ScrollTextReveal,
+  HorizontalScroll,
+} from "@/components/animation";
+import TextScramble from "@/components/animation/TextScramble";
 import ScrollOdometer from "@/components/animation/ScrollOdometer";
 import Marquee from "@/components/animation/Marquee";
+import Badge from "@/components/ui/Badge";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── DATA ─── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DATA
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 const values = [
   {
     title: "Careers First, Always",
-    desc: "We don't count certificates — we count people who actually got hired and stayed hired.",
+    desc: "We don't count certificates \u2014 we count people who actually got hired and stayed hired.",
     image: "/images/sections/value-careers.png",
-    icon: "🎯",
+    color: "orange",
   },
   {
     title: "Learn by Shipping",
     desc: "You won't just watch lectures. You'll build real things, break them, fix them, and ship them.",
     image: "/images/sections/value-shipping.png",
-    icon: "🚀",
+    color: "blue",
   },
   {
     title: "Mentors, Not Teachers",
     desc: "Everyone who teaches here works in the industry. They know what hiring managers actually care about.",
     image: "/images/sections/value-mentors.png",
-    icon: "🧭",
+    color: "emerald",
   },
   {
     title: "No Hidden Agendas",
     desc: "Our pricing is upfront, our placement numbers are real, and our student stories are verifiable.",
     image: "/images/sections/value-agendas.png",
-    icon: "🔍",
+    color: "purple",
   },
 ];
 
@@ -44,7 +63,7 @@ const instructors = [
     name: "Akshat Khandelwal",
     experience: "5+ years",
     title: "Senior Finance BI Developer at Autodesk",
-    bio: "Akshat has spent 5+ years turning messy financial data into dashboards that executives actually use. He's worked at Allen Digital and now leads BI at Autodesk.",
+    bio: "Akshat has spent 5+ years turning messy financial data into dashboards that executives actually use. He's worked at Allen Digital and now leads BI at Autodesk \u2014 and he teaches the way he works: practical, no fluff, straight to the point.",
     tags: ["Power BI", "Python", "SQL", "Finance BI"],
     image: "/images/instructors/akshat-khandelwal.jpeg",
   },
@@ -52,7 +71,7 @@ const instructors = [
     name: "Prabhat Sinha",
     experience: "9+ years",
     title: "Data Scientist at Cognizant",
-    bio: "Nine years at Cognizant taught Prabhat how to take chaotic datasets and turn them into something a business can actually act on.",
+    bio: "Nine years at Cognizant taught Prabhat how to take chaotic datasets and turn them into something a business can actually act on. He specializes in Python and EDA, and he's particularly good at making complex analytics feel approachable.",
     tags: ["Python", "EDA", "Advanced Analytics"],
     image: "/images/instructors/prabhat-sinha.jpeg",
   },
@@ -60,7 +79,7 @@ const instructors = [
     name: "Heena Arora",
     experience: "3+ years",
     title: "Associate Data Scientist at PwC (ex-Amazon)",
-    bio: "Heena went from handling international ops at Amazon to building image analytics pipelines at PwC. She knows what it takes to switch lanes.",
+    bio: "Heena went from handling international ops at Amazon to building image analytics pipelines at PwC. She knows what it takes to switch lanes in your career \u2014 because she did it herself.",
     tags: ["Data Science", "Image Analytics", "Python"],
     image: "/images/instructors/heena-arora.jpeg",
   },
@@ -68,7 +87,7 @@ const instructors = [
     name: "Anand Tripathi",
     experience: "1+ year",
     title: "Data Analyst at Google",
-    bio: "Anand works at Google, where he analyzes data that shapes real product decisions. He brings that same structured thinking to Linkway.",
+    bio: "Anand works at Google, where he analyzes data that shapes real product decisions. He brings that same structured thinking to Linkway \u2014 helping students learn how to ask the right questions before jumping into the data.",
     tags: ["Data Analytics", "Big Data", "Google"],
     image: "/images/instructors/anand-tripathi.jpeg",
   },
@@ -83,116 +102,59 @@ const stats = [
 
 const milestones = [
   { year: "2019", title: "The Spark", desc: "Started with 12 students in a small room, one laptop, and a whiteboard." },
-  { year: "2020", title: "Going Online", desc: "Pandemic hit — we went fully online and reached students across India." },
+  { year: "2020", title: "Going Online", desc: "Pandemic hit \u2014 we went fully online and reached students across India." },
   { year: "2021", title: "500+ Placed", desc: "Crossed 500 successful placements with top companies hiring our grads." },
   { year: "2022", title: "Industry Mentors", desc: "Brought on mentors from Google, PwC, Cognizant, and Autodesk." },
-  { year: "2023", title: "8,200+ Careers", desc: "Became one of India's most trusted data career platforms." },
+  { year: "2023", title: "8,200+ Careers", desc: "Became one of India\u2019s most trusted data career platforms." },
   { year: "2024", title: "AI & Beyond", desc: "Launched AI/ML tracks and expanded to full-stack data engineering." },
 ];
 
-/* ─── MAGNETIC 3D TILT CARD ─── */
-function MagneticCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MICRO COMPONENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* 3D tilt card */
+function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 200, damping: 20 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 200, damping: 20 });
+  const rx = useSpring(useTransform(y, [-0.5, 0.5], [5, -5]), { stiffness: 300, damping: 30 });
+  const ry = useSpring(useTransform(x, [-0.5, 0.5], [-5, 5]), { stiffness: 300, damping: 30 });
 
-  const handleMouse = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const onMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current;
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
+    const r = el.getBoundingClientRect();
+    x.set((e.clientX - r.left) / r.width - 0.5);
+    y.set((e.clientY - r.top) / r.height - 0.5);
   }, [x, y]);
 
-  const handleLeave = useCallback(() => {
-    x.set(0);
-    y.set(0);
-  }, [x, y]);
+  const onLeave = useCallback(() => { x.set(0); y.set(0); }, [x, y]);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformPerspective: 800 }}
-      className={className}
-    >
+    <motion.div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}
+      style={{ rotateX: rx, rotateY: ry, transformPerspective: 900 }} className={className}>
       {children}
     </motion.div>
   );
 }
 
-/* ─── MOUSE-FOLLOWING GLOW CARD ─── */
-function GlowCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    el.style.setProperty("--glow-x", `${e.clientX - rect.left}px`);
-    el.style.setProperty("--glow-y", `${e.clientY - rect.top}px`);
-  }, []);
-
-  return (
-    <div ref={ref} onMouseMove={handleMouseMove} className={`about-glow-card ${className}`}>
-      {children}
-    </div>
-  );
-}
-
-/* ─── FLOATING PARTICLES ─── */
-function FloatingParticles() {
-  const [particles] = useState(() =>
-    Array.from({ length: 25 }, (_, i) => ({
-      id: i,
-      left: `${(i * 37 + 13) % 100}%`,
-      top: `${(i * 53 + 7) % 100}%`,
-      delay: `${(i * 0.4) % 8}s`,
-      duration: `${6 + (i % 5) * 2}s`,
-      size: i % 3 === 0 ? "w-1.5 h-1.5" : "w-1 h-1",
-    }))
-  );
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className={`absolute ${p.size} rounded-full bg-orange-500/20 about-particle-float`}
-          style={{
-            left: p.left,
-            top: p.top,
-            animationDelay: p.delay,
-            animationDuration: p.duration,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* ─── SCROLL TO TOP ─── */
+/* Scroll to top */
 function ScrollToTop() {
-  const [visible, setVisible] = useState(false);
+  const [v, setV] = useState(false);
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 500);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setV(window.scrollY > 500);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   return (
     <AnimatePresence>
-      {visible && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
+      {v && (
+        <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-orange-500 text-white shadow-[0_0_30px_rgba(245,130,32,0.4)] hover:shadow-[0_0_50px_rgba(245,130,32,0.6)] hover:scale-110 transition-all duration-300 flex items-center justify-center"
-          aria-label="Scroll to top"
-        >
+          className="fixed bottom-24 right-6 z-40 w-12 h-12 rounded-full bg-orange-500 text-white shadow-lg hover:bg-orange-600 transition-colors duration-300 flex items-center justify-center lg:bottom-8 lg:right-8"
+          aria-label="Scroll to top">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M10 16V4M4 10l6-6 6 6" />
           </svg>
@@ -202,484 +164,497 @@ function ScrollToTop() {
   );
 }
 
-/* ═══════════════════════════════════════════════════
-   MAIN ABOUT PAGE COMPONENT
-   ═══════════════════════════════════════════════════ */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MAIN ABOUT PAGE
+   Background pattern: Navy Hero -> Warm Beige -> White -> Orange Accent -> Beige -> Navy -> White -> Orange CTA
+   Matches the existing site's warm, premium aesthetic
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 export default function AboutPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+
+  /* GSAP scroll progress */
+  const progressRef = useRef<HTMLDivElement>(null);
+  useGSAP(() => {
+    if (!progressRef.current) return;
+    gsap.to(progressRef.current, {
+      scaleX: 1, ease: "none",
+      scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: 0.3 },
+    });
+  });
 
   return (
-    <div className="min-h-screen bg-navy-900 text-white overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#f2f1ee]">
+      {/* Scroll progress */}
+      <div ref={progressRef} className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 z-[60] origin-left" style={{ transform: "scaleX(0)" }} />
 
-      {/* ═══════════════════════════════════════════════
-          HERO — Immersive full-screen cinematic
-          ═══════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background layers */}
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 1 — HERO (Dark Navy, matches site hero pattern)
+          ══════════════════════════════════════════════════════════ */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-navy-900">
+        {/* Animated background elements */}
         <div className="absolute inset-0">
           <div className="hero-aurora-1" />
           <div className="hero-aurora-2" />
           <div className="hero-aurora-3" />
-          <div className="absolute inset-0 about-dark-grid opacity-[0.04]" />
+          <div className="hero-aurora-4" />
+        </div>
+        <div className="absolute inset-0 hero-grid-overlay opacity-[0.02]" />
+
+        {/* Floating animated geometric shapes */}
+        <motion.div animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[12%] right-[8%] w-20 h-20 border border-orange-500/15 rounded-xl pointer-events-none" />
+        <motion.div animate={{ rotate: -360 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[18%] left-[5%] w-14 h-14 border border-blue-400/10 rounded-lg pointer-events-none" />
+        <motion.div animate={{ y: [-20, 20, -20], x: [-10, 10, -10] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] right-[15%] w-3 h-3 rounded-full bg-orange-500/20 pointer-events-none" />
+        <motion.div animate={{ y: [15, -15, 15], x: [8, -8, 8] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[35%] left-[12%] w-2 h-2 rounded-full bg-blue-400/15 pointer-events-none" />
+        <motion.div animate={{ y: [-12, 18, -12] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[55%] right-[35%] w-1.5 h-1.5 rounded-full bg-orange-400/25 pointer-events-none" />
+
+        {/* Animated grid lines */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div initial={{ x: "-100%" }} animate={{ x: "200%" }} transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
+            className="absolute top-[25%] w-[300px] h-[1px] bg-gradient-to-r from-transparent via-orange-500/20 to-transparent" />
+          <motion.div initial={{ x: "200%" }} animate={{ x: "-100%" }} transition={{ duration: 10, repeat: Infinity, ease: "linear", repeatDelay: 3 }}
+            className="absolute top-[70%] w-[400px] h-[1px] bg-gradient-to-r from-transparent via-blue-400/10 to-transparent" />
+          <motion.div initial={{ y: "-100%" }} animate={{ y: "200%" }} transition={{ duration: 12, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
+            className="absolute left-[20%] w-[1px] h-[300px] bg-gradient-to-b from-transparent via-orange-500/10 to-transparent" />
+          <motion.div initial={{ y: "200%" }} animate={{ y: "-100%" }} transition={{ duration: 9, repeat: Infinity, ease: "linear", repeatDelay: 6 }}
+            className="absolute right-[30%] w-[1px] h-[250px] bg-gradient-to-b from-transparent via-blue-400/8 to-transparent" />
         </div>
 
-        <FloatingParticles />
+        {/* Corner decorative plus signs */}
+        <motion.div animate={{ opacity: [0.1, 0.3, 0.1] }} transition={{ duration: 3, repeat: Infinity }}
+          className="absolute top-12 left-12 text-orange-500/30 text-2xl font-light pointer-events-none select-none">+</motion.div>
+        <motion.div animate={{ opacity: [0.15, 0.35, 0.15] }} transition={{ duration: 4, repeat: Infinity }}
+          className="absolute bottom-12 right-12 text-orange-500/30 text-2xl font-light pointer-events-none select-none">+</motion.div>
+        <motion.div animate={{ opacity: [0.08, 0.25, 0.08] }} transition={{ duration: 3.5, repeat: Infinity }}
+          className="absolute top-[40%] left-6 text-blue-400/20 text-lg font-light pointer-events-none select-none">+</motion.div>
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-          {/* Overline badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/20 bg-orange-500/5 text-orange-400 text-sm font-medium tracking-wider uppercase mb-8">
-              <span className="w-2 h-2 rounded-full bg-orange-500 about-pulse-dot" />
-              About Linkway Learning
-            </span>
-          </motion.div>
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-32">
+          {/* Left: Text */}
+          <div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/20 bg-orange-500/[0.06] text-orange-400 text-xs font-semibold tracking-wider uppercase mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                About Linkway Learning
+              </span>
+            </motion.div>
 
-          {/* Main heading with gradient */}
-          <motion.h1
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight"
-          >
-            <span className="text-white">We Build </span>
-            <br className="hidden md:block" />
-            <span className="hero-gradient-text">Data Careers.</span>
-            <br />
-            <span className="text-white/30 text-4xl md:text-5xl lg:text-6xl font-light mt-2 inline-block">Not Just Courses.</span>
-          </motion.h1>
+            <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight text-white">
+              We Build{" "}
+              <TextScramble delay={0.7} speed={25} iterations={4} highlightColor="orange">Data Careers</TextScramble>
+              <span className="text-orange-500">.</span>
+              <br />
+              <span className="text-white/30 text-3xl md:text-4xl lg:text-[2.8rem] font-light">Not Just Courses.</span>
+            </motion.h1>
 
-          {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-8 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            Bridging the gap between ambition and industry — with skills, projects, mentorship, and placement support that actually work.
-          </motion.p>
+            <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
+              className="mt-6 text-base md:text-lg text-gray-400 max-w-lg leading-relaxed">
+              Bridging the gap between ambition and industry &mdash; with skills, projects, mentorship, and placement support that actually work.
+            </motion.p>
 
-          {/* Stats pills */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-            className="mt-10 flex flex-wrap justify-center gap-3"
-          >
-            {[
-              { label: "8,200+ Careers Launched", icon: "⚡" },
-              { label: "100% Placement Rate*", icon: "✦" },
-              { label: "400+ Hiring Partners", icon: "🤝" },
-            ].map((pill, i) => (
-              <div key={i} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm text-sm text-gray-300 hover:bg-white/[0.08] hover:border-orange-500/30 transition-all duration-300 cursor-default">
-                <span>{pill.icon}</span>
-                <span>{pill.label}</span>
-              </div>
-            ))}
-          </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.95 }}
+              className="mt-8 flex flex-wrap gap-3">
+              <Badge variant="orange">8,200+ Careers Launched</Badge>
+              <Badge variant="orange">100% Placement Rate*</Badge>
+            </motion.div>
+          </div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="absolute -bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          >
-            <span className="text-xs text-gray-600 tracking-widest uppercase">Scroll to explore</span>
-            <div className="w-5 h-8 rounded-full border border-gray-700 flex items-start justify-center p-1">
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-1.5 h-1.5 rounded-full bg-orange-500"
-              />
-            </div>
-          </motion.div>
+          {/* Right: Overlapping image collage */}
+          <div className="relative h-[420px] md:h-[500px] lg:h-[540px]">
+            <motion.div initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.4 }}>
+              <TiltCard className="absolute top-0 right-0 w-[72%] h-[62%] rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border border-white/[0.06] z-10">
+                <Image src="/images/about/about-hero-1.png" alt="Students collaborating with data dashboards" fill className="object-cover object-top" />
+              </TiltCard>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: -40, y: 30 }} animate={{ opacity: 1, x: 0, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}>
+              <TiltCard className="absolute top-[18%] left-0 w-[45%] h-[48%] rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border-2 border-white/10 z-20">
+                <Image src="/images/about/about-hero-3.png" alt="One-on-one mentoring session" fill className="object-cover object-top" />
+              </TiltCard>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.8 }}>
+              <TiltCard className="absolute bottom-0 right-[5%] w-[54%] h-[42%] rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border-2 border-white/10 z-30">
+                <Image src="/images/about/about-hero-4.png" alt="Birds-eye view of data workspace" fill className="object-cover object-center" />
+              </TiltCard>
+            </motion.div>
+            {/* Glow */}
+            <div className="absolute inset-0 bg-orange-500/[0.04] rounded-3xl blur-3xl -z-10 pointer-events-none" />
+          </div>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+          <span className="text-[10px] text-gray-600 tracking-[0.25em] uppercase">Scroll</span>
+          <div className="w-5 h-8 rounded-full border border-gray-700 flex items-start justify-center p-1">
+            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+          </div>
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          PHOTO STRIP — Cinematic image marquee
-          ═══════════════════════════════════════════════ */}
-      <section className="py-4 relative z-10">
-        <Marquee speed={50} pauseOnHover direction="left" gap={3}>
+      {/* ══════════════════════════════════════════════════════════
+          IMAGE MARQUEE STRIP
+          ══════════════════════════════════════════════════════════ */}
+      <section className="bg-navy-900 py-4">
+        <Marquee speed={45} pauseOnHover direction="left" gap={3} fadeEdges>
           {[
             { src: "/images/about/about-hero-1.png", label: "Data Collaboration" },
             { src: "/images/sections/classroom-workshop.png", label: "Live Workshops" },
             { src: "/images/about/about-hero-3.png", label: "1:1 Mentoring" },
             { src: "/images/sections/campus-office.png", label: "Our Campus" },
             { src: "/images/about/about-hero-4.png", label: "Data Workspace" },
-            { src: "/images/sections/team-working.png", label: "Team Work" },
-            { src: "/images/about/about-hero-2.png", label: "Student Presentations" },
+            { src: "/images/sections/team-working.png", label: "Team Collaboration" },
+            { src: "/images/about/about-hero-2.png", label: "Presentations" },
           ].map((img, i) => (
-            <div key={i} className="relative w-[320px] h-[190px] rounded-xl overflow-hidden shrink-0 group">
+            <div key={i} className="relative w-[280px] h-[170px] rounded-xl overflow-hidden shrink-0 group">
               <Image src={img.src} alt={img.label} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/20 to-transparent" />
-              <div className="absolute bottom-3 left-3">
-                <span className="text-xs font-medium text-white/70 tracking-wider uppercase">{img.label}</span>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <span className="absolute bottom-3 left-3 text-[10px] font-semibold text-white/70 tracking-wider uppercase">{img.label}</span>
             </div>
           ))}
         </Marquee>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          OUR STORY — Split layout with large typography
-          ═══════════════════════════════════════════════ */}
-      <section className="py-32 px-6 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/[0.02] to-transparent pointer-events-none" />
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 2 — OUR STORY (Warm Beige #f2f1ee, matches WhyLinkway)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-28 md:py-36 px-6 overflow-hidden" style={{ background: "#f2f1ee" }}>
+        {/* Decorative blobs */}
+        <div className="absolute -top-32 right-[10%] w-[400px] h-[400px] rounded-full bg-orange-200/20 blur-[100px] pointer-events-none" />
+        <div className="absolute -bottom-32 left-[5%] w-[350px] h-[350px] rounded-full bg-orange-100/30 blur-[80px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left — Text */}
-          <div className="relative">
-            <SpringReveal distance={60} damping={14}>
-              <span className="text-orange-500 text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">Our Story</span>
+        <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          {/* Left: Image */}
+          <SpringReveal delay={0.1} distance={80} damping={12}>
+            <TiltCard>
+              <div className="relative rounded-3xl overflow-hidden shadow-xl shadow-gray-300/50 border border-gray-200/60 aspect-[4/3]">
+                <Image src="/images/sections/team-working.png" alt="Linkway Learning team" fill className="object-cover object-top" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-transparent" />
+              </div>
+            </TiltCard>
+          </SpringReveal>
+
+          {/* Right: Text */}
+          <div>
+            <SpringReveal distance={40} damping={14}>
+              <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">Our Story</span>
             </SpringReveal>
-            <SpringReveal distance={80} damping={12} delay={0.1}>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-8">
-                How This <span className="hero-gradient-text">Started</span>
+            <SpringReveal distance={50} damping={12} delay={0.1}>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-navy-900 mb-6">
+                How This{" "}
+                <span className="relative inline-block">
+                  Started
+                  <svg className="absolute -bottom-1.5 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none"><path d="M1 4C30 1.5 60 0.5 100 2.5C140 4.5 170 3.5 199 1.5" stroke="#F58220" strokeWidth="2.5" strokeLinecap="round" /></svg>
+                </span>
               </h2>
             </SpringReveal>
-            <LineMaskReveal delay={0.2} staggerDelay={0.15}>
-              <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
-                We kept seeing the same thing: smart people finishing college, picking up a degree, and then sitting at home wondering why nobody would hire them for a data role. It wasn&apos;t a knowledge problem — it was a <span className="text-orange-400 font-medium">gap between what colleges teach</span> and what companies need.
-              </p>
-              <p className="text-gray-400 text-lg md:text-xl leading-relaxed mt-6">
-                So we built Linkway to close that gap. Live classes from industry professionals, projects that mirror real business problems, and a placement team that doesn&apos;t stop until you&apos;re hired. <span className="text-orange-400 font-medium">Over 8,200 people</span> have made the switch through us so far.
-              </p>
-            </LineMaskReveal>
-          </div>
 
-          {/* Right — Stacked images with 3D tilt */}
-          <div className="relative h-[500px] lg:h-[600px]">
-            <SpringReveal delay={0.2} distance={80} damping={12}>
-              <MagneticCard className="absolute top-0 right-0 w-[70%] h-[55%] rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/[0.06] z-10">
-                <Image src="/images/about/about-hero-1.png" alt="Students collaborating" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 to-transparent" />
-              </MagneticCard>
-            </SpringReveal>
-            <SpringReveal delay={0.4} distance={100} damping={10}>
-              <MagneticCard className="absolute top-[20%] left-0 w-[50%] h-[45%] rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/[0.06] z-20">
-                <Image src="/images/about/about-hero-3.png" alt="Mentoring session" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 to-transparent" />
-              </MagneticCard>
-            </SpringReveal>
-            <SpringReveal delay={0.5} distance={100} damping={10}>
-              <MagneticCard className="absolute bottom-0 right-[5%] w-[55%] h-[40%] rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/[0.06] z-30">
-                <Image src="/images/about/about-hero-4.png" alt="Data workspace" fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900/40 to-transparent" />
-              </MagneticCard>
-            </SpringReveal>
-            {/* Decorative glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-orange-500/[0.06] blur-[80px] pointer-events-none" />
+            <div className="space-y-4">
+              <ScrollTextReveal tag="p" className="text-navy-800/60 text-base md:text-lg leading-relaxed">
+                We kept seeing the same thing: smart people finishing college, picking up a degree, and then sitting at home wondering why nobody would hire them for a data role. It was not a knowledge problem it was a gap between what colleges teach and what companies need.
+              </ScrollTextReveal>
+              <ScrollTextReveal tag="p" className="text-navy-800/60 text-base md:text-lg leading-relaxed">
+                So we built Linkway to close that gap. Live classes from industry professionals, projects that mirror real business problems, and a placement team that does not stop until you are hired. Over 8200 people have made the switch through us so far.
+              </ScrollTextReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          MISSION & VISION — Large cinematic cards
-          ═══════════════════════════════════════════════ */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-24 bg-gradient-to-b from-transparent via-orange-500/40 to-transparent" />
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 3 — MISSION & VISION (White with orange accents)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-28 md:py-36 px-6 overflow-hidden bg-white">
+        <CrossFlicker position="top-left" color="orange" size="sm" />
+        <CrossFlicker position="top-right" color="orange" size="sm" delay={0.4} />
 
-        <div className="max-w-6xl mx-auto">
-          <SpringReveal distance={60} damping={14}>
-            <div className="text-center mb-16">
-              <span className="text-orange-500 text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">Purpose</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-                Mission & <span className="hero-gradient-text">Vision</span>
-              </h2>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <SpringReveal distance={40} damping={14}>
+            <div className="text-center mb-14">
+              <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">Purpose</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900">Mission &amp; Vision</h2>
             </div>
           </SpringReveal>
 
           <div className="grid md:grid-cols-2 gap-6">
             {/* Mission */}
-            <SpringReveal delay={0.1} distance={80} damping={12}>
-              <GlowCard className="h-full">
-                <div className="relative h-full rounded-2xl p-8 md:p-10 bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm overflow-hidden group hover:border-orange-500/20 transition-all duration-500">
+            <SpringReveal delay={0.1} distance={60} damping={12}>
+              <TiltCard className="h-full">
+                <div className="relative h-full rounded-2xl p-7 md:p-9 bg-gradient-to-br from-orange-50 to-white border border-orange-100 shadow-xl shadow-orange-100/50 overflow-hidden group hover:shadow-2xl hover:shadow-orange-200/50 hover:-translate-y-1 transition-all duration-500">
                   {/* Corner accents */}
-                  <div className="absolute top-0 left-0 w-20 h-20">
-                    <div className="absolute top-4 left-4 w-8 h-[1px] bg-orange-500/40" />
-                    <div className="absolute top-4 left-4 w-[1px] h-8 bg-orange-500/40" />
-                  </div>
+                  <div className="absolute top-4 left-4 w-6 h-6"><div className="absolute top-0 left-0 w-full h-[2px] bg-orange-400" /><div className="absolute top-0 left-0 h-full w-[2px] bg-orange-400" /></div>
+                  <div className="absolute bottom-4 right-4 w-6 h-6"><div className="absolute bottom-0 right-0 w-full h-[2px] bg-orange-200" /><div className="absolute bottom-0 right-0 h-full w-[2px] bg-orange-200" /></div>
+
+                  <span className="absolute top-3 right-5 text-[7rem] font-black text-orange-500/[0.04] leading-none select-none pointer-events-none">01</span>
 
                   <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors duration-300">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-orange-500">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M2 17l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                    <div className="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center mb-5 shadow-lg shadow-orange-500/25 group-hover:scale-110 transition-transform duration-300">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinecap="round" strokeLinejoin="round" /><path d="M2 17l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" /><path d="M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     </div>
-                    <h3 className="text-orange-400 text-sm font-semibold tracking-[0.15em] uppercase mb-4">Our Mission</h3>
-                    <p className="text-gray-300 text-xl md:text-2xl leading-relaxed font-light">
-                      Give people <span className="text-white font-medium">real skills</span> that actually get them hired — regardless of where they went to college or what they studied before.
+                    <h3 className="text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-3">Our Mission</h3>
+                    <p className="text-navy-800 text-lg md:text-xl leading-relaxed">
+                      Give people <span className="font-bold text-navy-900">real skills</span> that actually get them hired &mdash; regardless of where they went to college or what they studied before.
                     </p>
                   </div>
-
-                  <span className="absolute bottom-4 right-6 text-[8rem] font-bold text-white/[0.02] leading-none select-none pointer-events-none">01</span>
                 </div>
-              </GlowCard>
+              </TiltCard>
             </SpringReveal>
 
             {/* Vision */}
-            <SpringReveal delay={0.2} distance={80} damping={12}>
-              <GlowCard className="h-full">
-                <div className="relative h-full rounded-2xl p-8 md:p-10 bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm overflow-hidden group hover:border-orange-500/20 transition-all duration-500">
-                  <div className="absolute top-0 right-0 w-20 h-20">
-                    <div className="absolute top-4 right-4 w-8 h-[1px] bg-orange-500/40" />
-                    <div className="absolute top-4 right-4 w-[1px] h-8 bg-orange-500/40" />
-                  </div>
+            <SpringReveal delay={0.2} distance={60} damping={12}>
+              <TiltCard className="h-full">
+                <div className="relative h-full rounded-2xl p-7 md:p-9 bg-gradient-to-br from-navy-100/60 to-white border border-navy-200/40 shadow-xl shadow-navy-100/50 overflow-hidden group hover:shadow-2xl hover:shadow-navy-200/50 hover:-translate-y-1 transition-all duration-500">
+                  <div className="absolute top-4 right-4 w-6 h-6"><div className="absolute top-0 right-0 w-full h-[2px] bg-navy-400" /><div className="absolute top-0 right-0 h-full w-[2px] bg-navy-400" /></div>
+                  <div className="absolute bottom-4 left-4 w-6 h-6"><div className="absolute bottom-0 left-0 w-full h-[2px] bg-navy-200" /><div className="absolute bottom-0 left-0 h-full w-[2px] bg-navy-200" /></div>
+
+                  <span className="absolute top-3 right-5 text-[7rem] font-black text-navy-600/[0.04] leading-none select-none pointer-events-none">02</span>
 
                   <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center mb-6 group-hover:bg-orange-500/20 transition-colors duration-300">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-orange-500">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z" />
-                        <path d="M2 12h20" />
-                      </svg>
+                    <div className="w-12 h-12 rounded-xl bg-navy-800 flex items-center justify-center mb-5 shadow-lg shadow-navy-800/25 group-hover:scale-110 transition-transform duration-300">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z" /><path d="M2 12h20" /></svg>
                     </div>
-                    <h3 className="text-orange-400 text-sm font-semibold tracking-[0.15em] uppercase mb-4">Our Vision</h3>
-                    <p className="text-gray-300 text-xl md:text-2xl leading-relaxed font-light">
-                      If you&apos;re curious enough and willing to put in the work, your background <span className="text-white font-medium">shouldn&apos;t decide your future</span>. We want to make that true for data and AI careers.
+                    <h3 className="text-navy-600 text-xs font-bold tracking-[0.2em] uppercase mb-3">Our Vision</h3>
+                    <p className="text-navy-800 text-lg md:text-xl leading-relaxed">
+                      If you are curious enough and willing to put in the work, your background <span className="font-bold text-navy-900">should not decide your future</span>. We want to make that true for data and AI careers.
                     </p>
                   </div>
-
-                  <span className="absolute bottom-4 right-6 text-[8rem] font-bold text-white/[0.02] leading-none select-none pointer-events-none">02</span>
                 </div>
-              </GlowCard>
+              </TiltCard>
             </SpringReveal>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          STATS — Glassmorphism floating bar
-          ═══════════════════════════════════════════════ */}
-      <section className="py-16 px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <SpringReveal distance={60} damping={14}>
-            <div className="relative rounded-3xl p-[1px] about-stats-border-glow">
-              <div className="rounded-3xl bg-navy-900/80 backdrop-blur-xl border border-white/[0.05] overflow-hidden">
-                <div className="grid grid-cols-2 md:grid-cols-4">
-                  {stats.map((stat, i) => (
-                    <div
-                      key={i}
-                      className={`relative text-center py-10 px-6 group ${i < stats.length - 1 ? "border-r border-white/[0.05]" : ""}`}
-                    >
-                      <div className="absolute inset-0 bg-orange-500/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="relative z-10">
-                        <div className="w-8 h-[2px] bg-gradient-to-r from-orange-500 to-orange-400 rounded-full mx-auto mb-5" />
-                        <div className="text-4xl md:text-5xl font-bold text-white mb-2">
-                          <ScrollOdometer value={stat.target} suffix={stat.suffix} animateSuffix duration={2} delay={0.2 + i * 0.15} />
-                        </div>
-                        <p className="text-gray-500 text-sm tracking-wider uppercase">{stat.label}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 4 — STATS (Split: left label, right numbers)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-12 md:py-16 px-6 overflow-hidden bg-navy-900">
+        <div className="absolute inset-0 hero-grid-overlay opacity-[0.015]" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid md:grid-cols-[1fr_2fr] gap-8 md:gap-16 items-center">
+            {/* Left: label */}
+            <SpringReveal distance={30} damping={14}>
+              <div>
+                <span className="text-orange-400 text-xs font-bold tracking-[0.2em] uppercase">Our Impact</span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mt-2 leading-snug">
+                  Numbers that<br />
+                  <span className="text-orange-400">speak for us.</span>
+                </h3>
               </div>
+            </SpringReveal>
+
+            {/* Right: stat cards */}
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
+              {stats.map((stat, i) => (
+                <SpringReveal key={i} delay={0.08 * i} distance={30} damping={14}>
+                  <div className="group relative rounded-xl p-5 md:p-6 border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-orange-500/20 transition-all duration-500 overflow-hidden">
+                    {/* Hover glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="relative z-10">
+                      <div className="text-3xl md:text-4xl font-bold text-white leading-none group-hover:text-orange-400 transition-colors duration-400">
+                        <ScrollOdometer value={stat.target} suffix={stat.suffix} duration={2} delay={0.3 + i * 0.15} />
+                      </div>
+                      <p className="text-gray-500 text-[10px] md:text-xs tracking-[0.12em] uppercase font-medium mt-2">{stat.label}</p>
+                    </div>
+
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-500 to-orange-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  </div>
+                </SpringReveal>
+              ))}
             </div>
-          </SpringReveal>
+          </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          VALUES — Bento Grid Layout
-          ═══════════════════════════════════════════════ */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 about-dark-grid opacity-[0.03]" />
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-orange-500/[0.04] blur-[120px] pointer-events-none" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/[0.03] blur-[100px] pointer-events-none" />
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 5 — VALUES (Warm Beige #f4f2ed, matches CoursePreview)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-28 md:py-36 px-6 overflow-hidden" style={{ background: "#f4f2ed" }}>
+        <div className="absolute -top-20 right-[10%] w-[300px] h-[300px] rounded-full bg-orange-100/40 blur-[80px] pointer-events-none" />
+        <div className="absolute -bottom-20 left-[15%] w-[250px] h-[250px] rounded-full bg-orange-100/30 blur-[60px] pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto relative">
-          <SpringReveal distance={60} damping={14}>
-            <div className="text-center mb-16">
-              <span className="text-orange-500 text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">What We Stand For</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-                Our <span className="hero-gradient-text">Values</span>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <SpringReveal distance={40} damping={14}>
+            <div className="text-center mb-14">
+              <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">What We Stand For</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900">
+                Our{" "}
+                <span className="relative inline-block">
+                  Values
+                  <svg className="absolute -bottom-1.5 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none"><path d="M1 4C30 1.5 60 0.5 100 2.5C140 4.5 170 3.5 199 1.5" stroke="#F58220" strokeWidth="2.5" strokeLinecap="round" /></svg>
+                </span>
               </h2>
             </div>
           </SpringReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="space-y-14 md:space-y-20">
             {values.map((v, i) => (
-              <SpringReveal key={i} delay={0.1 * i} distance={60} damping={14}>
-                <GlowCard className="h-full">
-                  <div className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm group hover:border-orange-500/20 transition-all duration-500">
-                    {/* Image section */}
-                    <div className="relative h-48 overflow-hidden">
-                      <Image src={v.image} alt={v.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent" />
-                      <span className="absolute top-4 left-5 text-6xl font-bold text-white/[0.08] leading-none select-none pointer-events-none">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div className="absolute top-4 right-4 w-10 h-10 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center text-lg">
-                        {v.icon}
+              <SpringReveal key={i} delay={0.05 * i} distance={60} damping={14}>
+                <div className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
+                  {/* Image */}
+                  <div className="w-full md:w-1/2">
+                    <TiltCard>
+                      <div className="relative w-full h-[260px] md:h-[300px] rounded-2xl overflow-hidden shadow-xl shadow-gray-300/40 border border-gray-200/60 group">
+                        <Image src={v.image} alt={v.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                        <span className="absolute top-4 left-5 text-6xl font-black text-white/25 leading-none select-none drop-shadow-lg">{String(i + 1).padStart(2, "0")}</span>
+                      </div>
+                    </TiltCard>
+                  </div>
+
+                  {/* Card */}
+                  <div className="w-full md:w-1/2">
+                    <div className="relative">
+                      <CrossFlicker position={i % 2 === 0 ? "top-left" : "top-right"} color="orange" size="sm" delay={i * 0.15} />
+                      <div className="rounded-2xl p-6 md:p-8 bg-white border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-orange-100/50 hover:-translate-y-1 transition-all duration-500">
+                        <h3 className="text-xl font-bold text-navy-900 mb-2">{v.title}</h3>
+                        <p className="text-gray-500 text-base leading-relaxed">{v.desc}</p>
                       </div>
                     </div>
-
-                    {/* Content */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors duration-300">{v.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{v.desc}</p>
-                    </div>
                   </div>
-                </GlowCard>
+                </div>
               </SpringReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          TIMELINE — Journey milestones
-          ═══════════════════════════════════════════════ */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-orange-500/[0.015] to-transparent pointer-events-none" />
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 6 — TIMELINE (Dark Navy, horizontal GSAP scroll)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative bg-navy-900 overflow-hidden">
+        <div className="absolute inset-0 hero-grid-overlay opacity-[0.015]" />
 
-        <div className="max-w-5xl mx-auto">
-          <SpringReveal distance={60} damping={14}>
-            <div className="text-center mb-20">
-              <span className="text-orange-500 text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">Our Journey</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+        <HorizontalScroll speed={1.2} className="min-h-screen">
+          {/* Leading spacer with heading */}
+          <div className="w-screen shrink-0 flex flex-col items-center justify-center px-6">
+            <SpringReveal distance={40} damping={14}>
+              <span className="inline-flex items-center gap-2 text-orange-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">
+                <span className="w-5 h-[1.5px] bg-orange-500" /> Our Journey <span className="w-5 h-[1.5px] bg-orange-500" />
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
                 The <span className="hero-gradient-text">Timeline</span>
               </h2>
-            </div>
-          </SpringReveal>
-
-          <div className="relative">
-            {/* Central vertical line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-orange-500/30 to-transparent md:-translate-x-[0.5px]" />
-
-            {milestones.map((m, i) => (
-              <SpringReveal key={i} delay={0.1 * i} distance={60} direction={i % 2 === 0 ? "left" : "right"} damping={14}>
-                <div className={`relative flex items-center mb-12 last:mb-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
-                  <div className={`ml-16 md:ml-0 md:w-[45%] ${i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"}`}>
-                    <GlowCard>
-                      <div className="rounded-xl p-6 bg-white/[0.03] border border-white/[0.06] hover:border-orange-500/20 transition-all duration-500">
-                        <span className="text-orange-500 text-sm font-bold tracking-wider">{m.year}</span>
-                        <h3 className="text-xl font-bold text-white mt-1 mb-2">{m.title}</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed">{m.desc}</p>
-                      </div>
-                    </GlowCard>
-                  </div>
-
-                  {/* Timeline dot */}
-                  <div className="absolute left-6 md:left-1/2 w-3 h-3 -translate-x-1/2 rounded-full bg-orange-500 shadow-[0_0_12px_rgba(245,130,32,0.5)] z-10" />
-
-                  <div className="hidden md:block md:w-[45%]" />
-                </div>
-              </SpringReveal>
-            ))}
+              <p className="text-gray-500 text-xs tracking-wide mt-4 text-center">Scroll to explore &rarr;</p>
+            </SpringReveal>
           </div>
-        </div>
+
+          {milestones.map((m, i) => (
+            <div key={i} className="w-[80vw] md:w-[40vw] lg:w-[32vw] shrink-0 flex items-center px-3">
+              <div className="w-full rounded-2xl p-7 bg-white/[0.04] border border-white/[0.08] hover:border-orange-500/20 hover:bg-white/[0.06] transition-all duration-500 relative overflow-hidden">
+                <span className="inline-block text-orange-500 text-sm font-bold tracking-wider mb-3">{m.year}</span>
+                <h3 className="text-xl font-bold text-white mb-2">{m.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{m.desc}</p>
+                <span className="absolute -bottom-2 -right-1 text-[5rem] font-black text-white/[0.025] leading-none select-none pointer-events-none">{m.year}</span>
+              </div>
+            </div>
+          ))}
+          <div className="w-[12vw] shrink-0" />
+        </HorizontalScroll>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          INSTRUCTORS — Premium cards with 3D tilt
-          ═══════════════════════════════════════════════ */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 about-dark-grid opacity-[0.03]" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-orange-500/[0.04] blur-[100px] pointer-events-none" />
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 7 — INSTRUCTORS (White, matches site card pattern)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-28 md:py-36 px-6 overflow-hidden bg-white">
+        <div className="absolute -top-20 left-[15%] w-[300px] h-[300px] rounded-full bg-orange-100/30 blur-[80px] pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto relative">
-          <SpringReveal distance={60} damping={14}>
-            <div className="text-center mb-6">
-              <span className="text-orange-500 text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">Mentors</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-                The People Who <span className="hero-gradient-text">Teach Here</span>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <SpringReveal distance={40} damping={14}>
+            <div className="text-center mb-5">
+              <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">Mentors</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 mb-3">
+                The People Who{" "}
+                <span className="relative inline-block">
+                  Teach Here
+                  <svg className="absolute -bottom-1.5 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none"><path d="M1 4C30 1.5 60 0.5 100 2.5C140 4.5 170 3.5 199 1.5" stroke="#F58220" strokeWidth="2.5" strokeLinecap="round" /></svg>
+                </span>
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                They work at Google, PwC, Cognizant, and Autodesk during the day — and teach at Linkway because they genuinely care about helping people break in.
+              <p className="text-gray-500 text-base md:text-lg max-w-2xl mx-auto mt-3">
+                They work at Google, PwC, Cognizant, and Autodesk during the day &mdash; and teach at Linkway because they genuinely care.
               </p>
             </div>
           </SpringReveal>
 
-          <div className="mt-16 grid md:grid-cols-2 gap-6">
+          <div className="mt-12 grid md:grid-cols-2 gap-6">
             {instructors.map((inst, i) => (
-              <SpringReveal key={i} delay={0.1 + i * 0.1} distance={80} damping={12}>
-                <MagneticCard className="h-full">
-                  <GlowCard className="h-full">
-                    <div className="relative h-full rounded-2xl p-6 md:p-8 bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm group hover:border-orange-500/20 transition-all duration-500 overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <SpringReveal key={i} delay={0.08 + i * 0.08} distance={50} damping={14}>
+                <TiltCard className="h-full">
+                  <div className="relative h-full rounded-2xl p-6 bg-white border border-gray-100 shadow-xl shadow-gray-200/50 group hover:shadow-2xl hover:shadow-orange-100/50 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+                    {/* Hover gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-50/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                      <div className="relative z-10 flex items-start gap-5">
-                        <div className="shrink-0">
-                          <div className="relative w-20 h-20 rounded-2xl overflow-hidden border-2 border-white/[0.1] shadow-lg group-hover:border-orange-500/30 transition-all duration-300">
-                            <Image src={inst.image} alt={inst.name} width={80} height={80} className="w-full h-full object-cover" />
-                          </div>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-bold text-white group-hover:text-orange-400 transition-colors duration-300">{inst.name}</h3>
-                          <p className="text-orange-400/80 text-sm mt-0.5">{inst.title}</p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                            <span className="text-gray-500 text-xs">{inst.experience} experience</span>
-                          </div>
+                    <div className="relative z-10 flex items-start gap-4">
+                      <div className="shrink-0">
+                        <div className="relative w-[68px] h-[68px] rounded-xl overflow-hidden border-2 border-gray-100 shadow-md group-hover:border-orange-300 transition-all duration-300">
+                          <Image src={inst.image} alt={inst.name} width={68} height={68} className="w-full h-full object-cover" />
                         </div>
                       </div>
-
-                      <p className="relative z-10 text-gray-400 text-sm leading-relaxed mt-5 mb-5">{inst.bio}</p>
-
-                      <div className="relative z-10 flex flex-wrap gap-2">
-                        {inst.tags.map((tag) => (
-                          <span key={tag} className="px-3 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400 border border-orange-500/15">
-                            {tag}
-                          </span>
-                        ))}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-base font-bold text-navy-900 group-hover:text-orange-500 transition-colors duration-300">{inst.name}</h3>
+                        <p className="text-orange-500 text-xs mt-0.5 font-medium">{inst.title}</p>
+                        <div className="flex items-center gap-1.5 mt-1">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          <span className="text-gray-400 text-[11px]">{inst.experience} experience</span>
+                        </div>
                       </div>
                     </div>
-                  </GlowCard>
-                </MagneticCard>
+
+                    <p className="relative z-10 text-gray-500 text-sm leading-relaxed mt-4 mb-4">{inst.bio}</p>
+
+                    <div className="relative z-10 flex flex-wrap gap-1.5">
+                      {inst.tags.map((tag) => (
+                        <span key={tag} className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-orange-50 text-orange-600 border border-orange-100">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Bottom accent */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 to-orange-300 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  </div>
+                </TiltCard>
               </SpringReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          CTA — Full width closing section
-          ═══════════════════════════════════════════════ */}
-      <section className="py-32 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-orange-500/[0.06] via-transparent to-transparent pointer-events-none" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-orange-500/[0.08] blur-[120px] pointer-events-none" />
+      {/* ══════════════════════════════════════════════════════════
+          SECTION 8 — CTA (Orange gradient)
+          ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-28 md:py-36 px-6 overflow-hidden about-warm-gradient">
+        <div className="absolute inset-0 noise-overlay" />
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <SpringReveal distance={80} damping={12}>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight">
-              Ready to Build Your
-              <br />
-              <span className="hero-gradient-text">Data Career?</span>
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <SpringReveal distance={50} damping={12}>
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight">
+              Ready to Build Your Data Career?
             </h2>
           </SpringReveal>
-          <SpringReveal distance={40} damping={14} delay={0.2}>
-            <p className="mt-6 text-lg md:text-xl text-gray-400 max-w-xl mx-auto">
+          <SpringReveal distance={30} damping={14} delay={0.15}>
+            <p className="mt-5 text-base md:text-lg text-white/70 max-w-lg mx-auto">
               Join 8,200+ professionals who transformed their careers through Linkway Learning.
             </p>
           </SpringReveal>
-          <SpringReveal distance={30} damping={14} delay={0.4}>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="/courses"
-                className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-full bg-orange-500 text-white font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(245,130,32,0.4)]"
-              >
-                <span className="relative z-10">Explore Courses</span>
-                <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-                <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <SpringReveal distance={20} damping={14} delay={0.3}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <a href="/courses" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-navy-900 font-bold text-base hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-[1.02] transition-all duration-300">
+                <span>Explore Courses</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/[0.15] text-white font-semibold text-lg hover:bg-white/[0.05] hover:border-orange-500/30 transition-all duration-300"
-              >
+              <a href="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-white/30 text-white font-bold text-base hover:bg-white/10 hover:border-white/50 transition-all duration-300">
                 Talk to Us
               </a>
             </div>

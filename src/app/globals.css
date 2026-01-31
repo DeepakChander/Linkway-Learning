@@ -1473,16 +1473,22 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   ABOUT PAGE — Dark Cinematic Redesign Styles
+   ABOUT PAGE — Multi-Theme Cinematic Redesign
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Dark dot grid background */
+/* ── Dark dot grid (navy sections) ── */
 .about-dark-grid {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-/* Mouse-following glow card */
+/* ── Light dot pattern (white sections) ── */
+.about-light-dots {
+  background-image: radial-gradient(circle, rgba(13, 27, 42, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Mouse-following glow card ── */
 .about-glow-card {
   --glow-x: 50%;
   --glow-y: 50%;
@@ -1509,31 +1515,43 @@
   opacity: 1;
 }
 
-/* Floating particles animation */
-@keyframes about-particle-float {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-    opacity: 0.2;
-  }
-  25% {
-    transform: translateY(-30px) translateX(10px);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translateY(-15px) translateX(-8px);
-    opacity: 0.3;
-  }
-  75% {
-    transform: translateY(-40px) translateX(5px);
-    opacity: 0.1;
-  }
+/* ── Floating geometric shape rotations ── */
+@keyframes about-float-rotate {
+  0%   { transform: rotate(0deg) translateY(0); }
+  25%  { transform: rotate(5deg) translateY(-12px); }
+  50%  { transform: rotate(0deg) translateY(-6px); }
+  75%  { transform: rotate(-5deg) translateY(-16px); }
+  100% { transform: rotate(0deg) translateY(0); }
 }
 
-.about-particle-float {
-  animation: about-particle-float 8s ease-in-out infinite;
+@keyframes about-float-rotate-reverse {
+  0%   { transform: rotate(0deg) translateY(0); }
+  25%  { transform: rotate(-8deg) translateY(-10px); }
+  50%  { transform: rotate(-3deg) translateY(-18px); }
+  75%  { transform: rotate(4deg) translateY(-8px); }
+  100% { transform: rotate(0deg) translateY(0); }
 }
 
-/* Pulsing dot for hero badge */
+@keyframes about-float-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(20px, -15px) scale(1.05); }
+  50%      { transform: translate(-10px, 10px) scale(0.95); }
+  75%      { transform: translate(10px, 5px) scale(1.02); }
+}
+
+@keyframes about-float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
+  25%      { transform: translateY(-25px) translateX(8px); opacity: 0.5; }
+  50%      { transform: translateY(-12px) translateX(-6px); opacity: 0.25; }
+  75%      { transform: translateY(-35px) translateX(4px); opacity: 0.1; }
+}
+
+.about-float-rotate { animation: about-float-rotate 12s ease-in-out infinite; }
+.about-float-rotate-reverse { animation: about-float-rotate-reverse 14s ease-in-out infinite; }
+.about-float-blob { animation: about-float-blob 10s ease-in-out infinite; }
+.about-float-particle { animation: about-float-particle 8s ease-in-out infinite; }
+
+/* ── Pulsing dot (hero badge) ── */
 .about-pulse-dot {
   animation: about-pulse 2s ease-in-out infinite;
 }
@@ -1543,16 +1561,215 @@
   50% { opacity: 0.4; transform: scale(0.8); }
 }
 
-/* Stats border glow */
-.about-stats-border-glow {
+/* ── Warm gradient section (orange theme) ── */
+.about-warm-gradient {
   background: linear-gradient(
     135deg,
-    rgba(245, 130, 32, 0.3) 0%,
-    transparent 30%,
-    transparent 70%,
-    rgba(245, 130, 32, 0.3) 100%
+    #F58220 0%,
+    #E07420 25%,
+    #C45D10 50%,
+    #E07420 75%,
+    #F58220 100%
   );
-  border-radius: 1.5rem;
+  background-size: 200% 200%;
+  animation: about-warm-shift 8s ease-in-out infinite;
+}
+
+@keyframes about-warm-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ── CTA gradient section ── */
+.about-cta-gradient {
+  background: linear-gradient(
+    150deg,
+    #0D1B2A 0%,
+    #1B3A5C 30%,
+    #3D5A80 50%,
+    #E07420 85%,
+    #F58220 100%
+  );
+  background-size: 200% 200%;
+  animation: about-cta-shift 10s ease-in-out infinite;
+}
+
+@keyframes about-cta-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SUCCESS STORIES PAGE v3 — Award-Level Multi-Theme Redesign
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Story card — white editorial with layered shadows and hover lift */
+.ss-story-card {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss-story-card:hover {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.03),
+    0 16px 48px rgba(0, 0, 0, 0.07),
+    0 32px 64px rgba(0, 0, 0, 0.04);
+}
+
+/* Spotlight card — dark with depth */
+.ss-spotlight-card {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 32px 80px rgba(0, 0, 0, 0.12);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss-spotlight-card:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.2),
+    0 40px 100px rgba(0, 0, 0, 0.15);
+}
+
+/* Journey step backgrounds */
+.ss-journey-step-before {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.ss-journey-step-after {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Bento grid — asymmetric layout */
+.ss-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .ss-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ss-bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .ss-bento-grid > *:nth-child(1) {
+    grid-column: span 2;
+  }
+  .ss-bento-grid > *:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+/* Journey pills */
+.ss-pill-from {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6B7280;
+  background: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  white-space: nowrap;
+}
+
+.ss-pill-to {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+/* Stat item — dark section */
+.ss-stat-item {
+  position: relative;
+}
+
+/* Orbital ring around stat number */
+.ss-stat-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(245, 130, 32, 0.08);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.ss-stat-item:hover .ss-stat-ring {
+  width: 140px;
+  height: 140px;
+  border-color: rgba(245, 130, 32, 0.15);
+}
+
+/* Logo card — premium company card with real logo */
+.ss-logo-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  min-width: 180px;
+  border-radius: 14px;
+  background: white;
+  border: 1px solid rgba(13, 27, 42, 0.06);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.02),
+    0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.ss-logo-card:hover {
+  border-color: rgba(245, 130, 32, 0.15);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.03),
+    0 12px 32px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Logo icon container */
+.ss-logo-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #F9FAFB;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+}
+
+.ss-logo-card:hover .ss-logo-icon {
+  background: #FFF7ED;
+  border-color: rgba(245, 130, 32, 0.1);
+}
+
+/* CTA card — dark glassmorphism */
+.ss-cta-dark {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 /* ── Reduced Motion Support ── */
