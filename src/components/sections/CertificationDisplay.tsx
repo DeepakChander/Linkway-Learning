@@ -613,259 +613,277 @@ export default function CertificationDisplay() {
           </div>
 
           {/* ════════════════════════════════════════════════
-              BOTTOM: Two detailed info cards
+              BOTTOM: Transform Your Career Section
               ════════════════════════════════════════════════ */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {/* Linkway Card */}
-            <motion.div
-              className="relative rounded-2xl overflow-hidden group"
-              style={{
-                background: "white",
-                border: "1px solid rgba(245, 130, 32, 0.1)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.04)",
-              }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(245,130,32,0.1)" }}
-            >
-              {/* Top accent */}
-              <div
-                className="h-1 w-full"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #F58220, #FCBA6A, #F58220)",
-                }}
-              />
-
-              <div className="p-7 md:p-9">
-                {/* Icon + Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(245,130,32,0.1), rgba(245,130,32,0.05))",
-                    }}
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#E07420"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="12" cy="8" r="6" />
-                      <path d="M9 14l-2 8 5-3 5 3-2-8" />
-                    </svg>
-                  </div>
-                  <span
-                    className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"
-                    style={{
-                      background: "rgba(245, 130, 32, 0.08)",
-                      color: "#C45D10",
-                    }}
-                  >
-                    Completion
-                  </span>
-                </div>
-
-                <h3
-                  className="text-xl md:text-2xl font-bold mb-3"
-                  style={{ color: "#0D1B2A" }}
-                >
-                  Linkway Learning Certificate
-                </h3>
-                <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-                  Employer-trusted proof that you completed the full curriculum,
-                  hands-on projects, and rigorous assessments.
-                </p>
-
-                {/* Feature list */}
-                <div className="space-y-3">
-                  {[
-                    "Verified digital credential with unique ID",
-                    "Shareable on LinkedIn & job portals",
-                    "Includes project portfolio verification",
-                    "QR code for instant employer verification",
-                  ].map((f, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div
-                        className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5"
-                        style={{ background: "rgba(245,130,32,0.1)" }}
-                      >
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 6l3 3 5-5"
-                            stroke="#E07420"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <span
-                        className="text-sm"
-                        style={{ color: "#4A5568" }}
-                      >
-                        {f}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Microsoft Azure Card */}
-            <motion.div
-              className="relative rounded-2xl overflow-hidden group"
-              style={{
-                background: "white",
-                border: "1px solid rgba(59, 130, 246, 0.1)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.04)",
-              }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(59,130,246,0.1)" }}
-            >
-              {/* Top accent */}
-              <div
-                className="h-1 w-full"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #3b82f6, #93c5fd, #3b82f6)",
-                }}
-              />
-
-              <div className="p-7 md:p-9">
-                {/* Icon + Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(59,130,246,0.1), rgba(59,130,246,0.05))",
-                    }}
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#2563eb"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M12 2l7 4v5c0 5.25-3.5 9.74-7 11-3.5-1.26-7-5.75-7-11V6l7-4z" />
-                      <path d="M9 12l2 2 4-4" />
-                    </svg>
-                  </div>
-                  <span
-                    className="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-full"
-                    style={{
-                      background: "rgba(59, 130, 246, 0.08)",
-                      color: "#1d4ed8",
-                    }}
-                  >
-                    Microsoft
-                  </span>
-                </div>
-
-                <h3
-                  className="text-xl md:text-2xl font-bold mb-3"
-                  style={{ color: "#0D1B2A" }}
-                >
-                  Microsoft Azure AI Fundamentals
-                </h3>
-                <p className="text-sm leading-relaxed mb-6" style={{ color: "#6B7280" }}>
-                  Globally recognized Microsoft certification that carries weight from
-                  startups to Fortune 500 companies.
-                </p>
-
-                {/* Feature list */}
-                <div className="space-y-3">
-                  {[
-                    "Official Microsoft certification (AI-900)",
-                    "Recognized in 140+ countries worldwide",
-                    "Lifetime validity with digital badge",
-                    "Backed by Microsoft's global ecosystem",
-                  ].map((f, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div
-                        className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5"
-                        style={{ background: "rgba(59,130,246,0.1)" }}
-                      >
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 6l3 3 5-5"
-                            stroke="#2563eb"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <span
-                        className="text-sm"
-                        style={{ color: "#4A5568" }}
-                      >
-                        {f}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* ── Trust bar ── */}
           <motion.div
-            className="mt-16 md:mt-20 text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="relative rounded-[2rem] overflow-hidden"
+            style={{
+              background: "white",
+              border: "1px solid #e5e7eb",
+              boxShadow: "0 4px 30px rgba(0,0,0,0.04)",
+            }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
           >
-            <p
-              className="text-xs uppercase tracking-[0.2em] mb-7 font-medium"
-              style={{ color: "#9CA3AF" }}
-            >
-              Credentials recognized on
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
-              {[
-                "LinkedIn",
-                "Microsoft",
-                "Credly",
-                "Naukri",
-                "Indeed",
-              ].map((name, i) => (
-                <motion.span
-                  key={i}
-                  className="text-sm font-semibold tracking-wide"
-                  style={{ color: "#CBD5E1" }}
-                  whileHover={{ color: "#64748B", scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+            <div className="px-8 py-14 md:px-16 md:py-20 text-center">
+              {/* Eyebrow pill */}
+              <motion.span
+                className="inline-block text-xs font-semibold tracking-[0.08em] px-5 py-2 rounded-full mb-8"
+                style={{
+                  border: "1.5px solid #F58220",
+                  color: "#C45D10",
+                  background: "white",
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                Transform Your Career Today
+              </motion.span>
+
+              {/* Heading */}
+              <motion.h2
+                className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold leading-tight mb-5"
+                style={{ color: "#1a1a2e" }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Ready to Level Up Your Career?
+              </motion.h2>
+
+              {/* Subtitle */}
+              <motion.p
+                className="text-base md:text-lg max-w-2xl mx-auto mb-16"
+                style={{ color: "#6B7280" }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Join professionals who&apos;ve launched their careers with Linkway Learning.
+                Gain job-ready skills and step into high-demand roles today!
+              </motion.p>
+
+              {/* Four features with connecting dashed line */}
+              <motion.div
+                className="relative flex flex-wrap justify-center gap-y-10 gap-x-6 md:gap-x-0 mb-16 max-w-4xl mx-auto"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+              >
+                {/* Curved dashed connecting line (visible on md+) */}
+                <svg
+                  className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+                  width="70%"
+                  height="60"
+                  viewBox="0 0 700 60"
+                  preserveAspectRatio="none"
+                  style={{ overflow: "visible", top: "4px" }}
                 >
-                  {name}
-                </motion.span>
+                  <path
+                    d="M0,30 C80,30 100,5 175,5 C250,5 270,55 350,55 C430,55 450,5 525,5 C600,5 620,30 700,30"
+                    fill="none"
+                    stroke="#F58220"
+                    strokeWidth="2.5"
+                    strokeDasharray="10 8"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
+                {[
+                  {
+                    icon: (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="M21 21l-4.35-4.35" />
+                      </svg>
+                    ),
+                    title: "Flexible Learning",
+                    desc: "Learn while working",
+                  },
+                  {
+                    icon: (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                      </svg>
+                    ),
+                    title: "Expert Mentors",
+                    desc: "FAANG professionals",
+                  },
+                  {
+                    icon: (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                      </svg>
+                    ),
+                    title: "Certified Program",
+                    desc: "Microsoft accredited",
+                  },
+                  {
+                    icon: (
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                      </svg>
+                    ),
+                    title: "100% Placement",
+                    desc: "Guaranteed assistance",
+                  },
+                ].map((feature, i) => (
+                  <motion.div
+                    key={i}
+                    className="relative flex flex-col items-center w-36 md:w-1/4"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.35 + i * 0.1, duration: 0.5 }}
+                  >
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center mb-4 relative z-10"
+                      style={{
+                        background: "#F58220",
+                        boxShadow: "0 4px 14px rgba(245, 130, 32, 0.25)",
+                      }}
+                    >
+                      {feature.icon}
+                    </div>
+                    <h4
+                      className="text-sm md:text-base font-bold mb-1"
+                      style={{ color: "#1a1a2e" }}
+                    >
+                      {feature.title}
+                    </h4>
+                    <p className="text-xs" style={{ color: "#9CA3AF" }}>
+                      {feature.desc}
+                    </p>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              {/* Certificate Includes card */}
+              <motion.div
+                className="max-w-2xl mx-auto rounded-2xl p-8 md:p-10 mb-12"
+                style={{
+                  background: "#F8FAFC",
+                  border: "1px solid #e5e7eb",
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <h3
+                  className="text-lg md:text-xl font-bold mb-6 text-left"
+                  style={{ color: "#1a1a2e" }}
+                >
+                  Certificate Includes
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                  {[
+                    "Free career counseling session",
+                    "Lifetime access to learning materials",
+                    "20% scholarship for early birds",
+                    "Alumni network access",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div
+                        className="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center"
+                        style={{ background: "#F58220" }}
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <path
+                            d="M2 6l3 3 5-5"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <span
+                        className="text-sm font-medium text-left"
+                        style={{ color: "#374151" }}
+                      >
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* CTA Button */}
+              <motion.a
+                href="/contact"
+                className="inline-block px-10 py-4 rounded-full text-white font-bold text-base"
+                style={{
+                  background: "#1a1a2e",
+                  boxShadow: "0 8px 24px rgba(26, 26, 46, 0.2)",
+                }}
+                whileHover={{
+                  scale: 1.04,
+                  boxShadow: "0 12px 32px rgba(26, 26, 46, 0.3)",
+                }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                Get in Touch
+              </motion.a>
+            </div>
+
+            {/* Bottom stats bar */}
+            <div
+              className="grid grid-cols-2 md:grid-cols-4"
+              style={{
+                background: "#F8FAFC",
+                borderTop: "1px solid #e5e7eb",
+              }}
+            >
+              {[
+                { value: "4.8", suffix: "+", label: "Average Rating" },
+                { value: "18000", suffix: "+", label: "Happy Students" },
+                { value: "400", suffix: "+", label: "Hiring Partners" },
+                { value: "100", suffix: "%", label: "Salary Hike" },
+              ].map((stat, i) => (
+                <div
+                  key={i}
+                  className="relative px-4 py-7 md:py-9 text-center"
+                  style={{
+                    borderRight:
+                      i < 3 ? "1px solid #e5e7eb" : "none",
+                  }}
+                >
+                  <div
+                    className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-1"
+                    style={{ color: "#1a1a2e" }}
+                  >
+                    <AnimatedCounter
+                      target={Number(stat.value)}
+                      suffix={stat.suffix}
+                    />
+                  </div>
+                  <div className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider font-medium">
+                    {stat.label}
+                  </div>
+                </div>
               ))}
             </div>
           </motion.div>
