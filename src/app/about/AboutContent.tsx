@@ -18,7 +18,6 @@ import {
   LineMaskReveal,
   CrossFlicker,
   ScrollTextReveal,
-  HorizontalScroll,
 } from "@/components/animation";
 import TextScramble from "@/components/animation/TextScramble";
 import ScrollOdometer from "@/components/animation/ScrollOdometer";
@@ -531,37 +530,94 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 6 — TIMELINE (Dark Navy, horizontal GSAP scroll)
+          SECTION 6 — TIMELINE (Dark Navy, vertical cascade)
           ══════════════════════════════════════════════════════════ */}
-      <section className="relative bg-navy-900 overflow-hidden">
-        <div className="absolute inset-0 hero-grid-overlay opacity-[0.015]" />
+      <section className="relative bg-navy-900 overflow-hidden py-28 md:py-40">
+        {/* Animated background */}
+        <div className="absolute inset-0 hero-grid-overlay opacity-[0.02]" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-orange-500/[0.03] blur-[100px] about-float-blob" />
+          <div className="absolute bottom-[20%] right-[10%] w-[300px] h-[300px] rounded-full bg-blue-500/[0.025] blur-[80px] about-float-blob" style={{ animationDelay: "3s" }} />
+          <div className="absolute top-[15%] right-[8%] w-16 h-16 border border-orange-500/10 rounded-lg about-float-rotate opacity-40" />
+          <div className="absolute bottom-[25%] left-[6%] w-10 h-10 border border-white/[0.06] rounded about-float-rotate-reverse opacity-30" />
+          <div className="absolute top-[60%] right-[25%] w-3 h-3 bg-orange-500/15 rounded-full about-float-particle" />
+          <div className="absolute top-[30%] left-[40%] w-2 h-2 bg-white/[0.06] rounded-full about-float-particle" style={{ animationDelay: "2s" }} />
+        </div>
 
-        <HorizontalScroll speed={1.2} className="min-h-screen">
-          {/* Leading spacer with heading */}
-          <div className="w-screen shrink-0 flex flex-col items-center justify-center px-6">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          {/* Section heading */}
+          <div className="text-center mb-20">
             <SpringReveal distance={40} damping={14}>
-              <span className="inline-flex items-center gap-2 text-orange-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">
-                <span className="w-5 h-[1.5px] bg-orange-500" /> Our Journey <span className="w-5 h-[1.5px] bg-orange-500" />
+              <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
+                <span className="text-gray-300 text-xs font-semibold tracking-[0.2em] uppercase">Our Journey</span>
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+            </SpringReveal>
+            <SpringReveal distance={50} damping={12} delay={0.1}>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
                 The <span className="hero-gradient-text">Timeline</span>
               </h2>
-              <p className="text-gray-500 text-xs tracking-wide mt-4 text-center">Scroll to explore &rarr;</p>
+            </SpringReveal>
+            <SpringReveal distance={30} damping={14} delay={0.2}>
+              <p className="text-gray-500 text-sm md:text-base max-w-md mx-auto">
+                From a small room with 12 students to 500+ careers transformed.
+              </p>
             </SpringReveal>
           </div>
 
-          {milestones.map((m, i) => (
-            <div key={i} className="w-[80vw] md:w-[40vw] lg:w-[32vw] shrink-0 flex items-center px-3">
-              <div className="w-full rounded-2xl p-7 bg-white/[0.04] border border-white/[0.08] hover:border-orange-500/20 hover:bg-white/[0.06] transition-all duration-500 relative overflow-hidden">
-                <span className="inline-block text-orange-500 text-sm font-bold tracking-wider mb-3">{m.year}</span>
-                <h3 className="text-xl font-bold text-white mb-2">{m.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{m.desc}</p>
-                <span className="absolute -bottom-2 -right-1 text-[5rem] font-black text-white/[0.025] leading-none select-none pointer-events-none">{m.year}</span>
-              </div>
-            </div>
-          ))}
-          <div className="w-[12vw] shrink-0" />
-        </HorizontalScroll>
+          {/* Vertical timeline with center line */}
+          <div className="about-timeline-vertical relative">
+            {/* Center connecting line */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] md:-translate-x-[1px] bg-gradient-to-b from-orange-500/40 via-white/[0.08] to-orange-500/40" />
+
+            {milestones.map((m, i) => {
+              const isLeft = i % 2 === 0;
+              return (
+                <div key={i} className={`relative flex items-start gap-6 md:gap-0 mb-16 last:mb-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}>
+                  {/* Content card */}
+                  <div className={`flex-1 pl-14 md:pl-0 ${isLeft ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
+                    <SpringReveal distance={isLeft ? -60 : 60} direction={isLeft ? "right" : "left"} delay={i * 0.08}>
+                      <div className="group relative rounded-2xl p-6 md:p-7 bg-white/[0.03] border border-white/[0.07] hover:border-orange-500/20 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden backdrop-blur-sm hover:-translate-y-1">
+                        {/* Accent line top */}
+                        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-orange-500 to-transparent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
+
+                        {/* Year badge */}
+                        <span className="inline-flex items-center gap-1.5 text-orange-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">
+                          <span className="w-1 h-1 rounded-full bg-orange-500/60" />
+                          {m.year}
+                        </span>
+
+                        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-orange-100 transition-colors duration-300">
+                          {m.title}
+                        </h3>
+                        <p className="text-gray-400 text-sm leading-relaxed">{m.desc}</p>
+
+                        {/* Watermark year */}
+                        <span className="absolute -bottom-3 -right-2 text-[5rem] font-black text-white/[0.015] leading-none select-none pointer-events-none group-hover:text-white/[0.04] transition-colors duration-700">
+                          {m.year}
+                        </span>
+
+                        {/* Hover glow */}
+                        <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-orange-500/[0.03] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                      </div>
+                    </SpringReveal>
+                  </div>
+
+                  {/* Center dot — always visible */}
+                  <div className="absolute left-6 md:left-1/2 top-2 -translate-x-1/2 z-10">
+                    <div className="about-timeline-dot group/dot relative">
+                      <div className="w-4 h-4 rounded-full bg-navy-900 border-2 border-orange-500/50 group-hover/dot:border-orange-500 transition-colors duration-300" />
+                      <div className="absolute inset-0 rounded-full bg-orange-500/20 animate-ping" style={{ animationDuration: "3s", animationDelay: `${i * 0.5}s` }} />
+                    </div>
+                  </div>
+
+                  {/* Empty spacer for opposite side */}
+                  <div className="hidden md:block flex-1" />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════
