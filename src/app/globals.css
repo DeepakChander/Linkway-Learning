@@ -1472,6 +1472,89 @@
   to { stroke-dashoffset: 0; }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ABOUT PAGE — Dark Cinematic Redesign Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Dark dot grid background */
+.about-dark-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Mouse-following glow card */
+.about-glow-card {
+  --glow-x: 50%;
+  --glow-y: 50%;
+  position: relative;
+}
+
+.about-glow-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    500px circle at var(--glow-x) var(--glow-y),
+    rgba(245, 130, 32, 0.07),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.about-glow-card:hover::before {
+  opacity: 1;
+}
+
+/* Floating particles animation */
+@keyframes about-particle-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-30px) translateX(10px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-15px) translateX(-8px);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-40px) translateX(5px);
+    opacity: 0.1;
+  }
+}
+
+.about-particle-float {
+  animation: about-particle-float 8s ease-in-out infinite;
+}
+
+/* Pulsing dot for hero badge */
+.about-pulse-dot {
+  animation: about-pulse 2s ease-in-out infinite;
+}
+
+@keyframes about-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* Stats border glow */
+.about-stats-border-glow {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 130, 32, 0.3) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(245, 130, 32, 0.3) 100%
+  );
+  border-radius: 1.5rem;
+}
+
 /* ── Reduced Motion Support ── */
 @media (prefers-reduced-motion: reduce) {
   *,
