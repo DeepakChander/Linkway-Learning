@@ -542,36 +542,25 @@ export default function HeroSection() {
     [mouseX, mouseY]
   );
 
-  /* ── GSAP scroll-driven pin + fade ── */
+  /* ── GSAP scroll-driven fade (no pin) ── */
   useGSAP(
     () => {
       const section = sectionRef.current;
       const content = contentRef.current;
       if (!section || !content) return;
 
-      const pinTrigger = ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "+=80%",
-        pin: true,
-        pinSpacing: true,
-        id: "hero-pin",
-      });
-
       gsap.to(content, {
-        y: -80,
+        y: -40,
         opacity: 0,
-        scale: 0.97,
+        scale: 0.98,
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          start: "+=10% top",
-          end: "+=80%",
+          start: "top top",
+          end: "bottom top",
           scrub: 1,
         },
       });
-
-      return () => { pinTrigger.kill(); };
     },
     { scope: sectionRef }
   );
@@ -581,7 +570,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative h-screen max-h-screen flex items-center overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* ── Background Layers ── */}
@@ -699,51 +688,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ── Bottom: Partner Marquee ── */}
-        <motion.div
-          className="mt-8 md:mt-12 pt-6 relative"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
-          {/* Top separator with gradient */}
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
-
-          <p className="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-4 text-center">
-            Our alumni work at
-          </p>
-          <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-navy-900 to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-navy-900 to-transparent z-10" />
-            <div className="flex animate-marquee whitespace-nowrap">
-              {[...partnerLogos, ...partnerLogos].map((name, i) => (
-                <span
-                  key={i}
-                  className="mx-8 text-sm text-gray-500/60 font-medium tracking-wide hover:text-gray-300 transition-colors duration-300 cursor-default select-none"
-                >
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
 
-      {/* ── Scroll Indicator ── */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-      >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500">Scroll</span>
-        <motion.div
-          className="w-[1px] h-8 bg-gradient-to-b from-orange-500/60 to-transparent"
-          animate={{ scaleY: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ transformOrigin: "top" }}
-        />
-      </motion.div>
     </section>
   );
 }
