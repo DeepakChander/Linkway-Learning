@@ -5,7 +5,7 @@ import { CourseJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Investment Banking Course — Financial Modeling, Valuation, M&A",
   description:
-    "Master financial modeling, valuation, M&A, and deal structuring. Built for those who want to land roles at top investment banks. Placement support at Linkway Learning.",
+    "Master financial modeling, valuation, M&A, and deal structuring. Built for those who want to land roles at top investment banks. Only 100% placement. No guarantee or assistance. Linkway Learning.",
   alternates: { canonical: "https://linkwaylearning.com/courses/investment-banking" },
   openGraph: {
     title: "Investment Banking Course — Financial Modeling, M&A",

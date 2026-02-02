@@ -61,7 +61,7 @@ const portalFeatures = [
     icon: Briefcase,
     title: "Career Services",
     description:
-      "Resume building, mock interviews, alumni referrals, and 400+ hiring partners.",
+      "Only 100% placement. No guarantee or assistance.",
     color: "#F59E0B",
   },
 ];
@@ -88,7 +88,7 @@ const howItWorks = [
   {
     step: "04",
     title: "Get Certified & Placed",
-    description: "Earn your certificates and leverage our placement support to land your dream role.",
+    description: "Earn your certificates and leverage our only 100% placement. No guarantee or assistance to land your dream role.",
     icon: Award,
   },
 ];

@@ -319,7 +319,7 @@ export default function AgenticAIPage() {
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "Placement Guarantee", sub: "Up to 10 interviews", color: ACCENT_PURPLE },
+    { icon: ShieldIcon, label: "Only 100% Placement", sub: "No guarantee or assistance", color: ACCENT_PURPLE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹7,000/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "AI Certifications", sub: "LangChain + OpenAI", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: ACCENT_PURPLE },
@@ -546,7 +546,7 @@ export default function AgenticAIPage() {
             </div>
             <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
               <SlideIn direction="right"><div className="bg-gray-50 rounded-2xl border border-gray-100 p-6"><p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Expected Salary Range</p><p className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_PURPLE}, ${ACCENT_BLUE})` }}>₹10–20 LPA</p></div></SlideIn>
-              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_PURPLE }} /><div><p className="text-sm text-navy-900 font-semibold">Dedicated Placement Assistance</p><p className="text-xs text-gray-500">Up to 10 guaranteed interviews</p></div></div></SlideIn>
+              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_PURPLE }} /><div><p className="text-sm text-navy-900 font-semibold">Only 100% Placement</p><p className="text-xs text-gray-500">No guarantee or assistance</p></div></div></SlideIn>
               <SlideIn direction="right" delay={0.2}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><SparklesIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_BLUE }} /><div><p className="text-sm text-navy-900 font-semibold">LangChain & OpenAI Certifications</p><p className="text-xs text-gray-500">Industry-recognized AI credentials</p></div></div></SlideIn>
             </div>
           </div>

@@ -480,7 +480,7 @@ const metricCards = [
   },
   {
     id: "placements",
-    label: "Placement Rate",
+    label: "Only 100% Placement",
     value: "96.8",
     suffix: "%",
     icon: (
@@ -718,7 +718,7 @@ export default function HeroSection() {
               {[
                 { val: 8200, suffix: "+", label: "Careers Launched" },
                 { val: 400, suffix: "+", label: "Hiring Partners" },
-                { val: 96, suffix: "%", label: "Placement Rate", decimal: ".8" },
+                { val: 100, suffix: "%", label: "Only 100% Placement" },
               ].map((stat, i) => (
                 <div key={i} className="text-left group">
                   <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">

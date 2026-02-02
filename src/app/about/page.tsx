@@ -4,7 +4,7 @@ import AboutPage from "./AboutContent";
 export const metadata: Metadata = {
   title: "About Us — Our Mission, Mentors & Vision",
   description:
-    "Linkway Learning bridges the gap between ambition and industry. Learn about our mission, FAANG mentors from Google, Amazon & Deloitte, 96.8% placement rate, and how we've transformed 8,200+ careers in data analytics and AI.",
+    "Linkway Learning bridges the gap between ambition and industry. Learn about our mission, FAANG mentors from Google, Amazon & Deloitte, Only 100% placement. No guarantee or assistance, and how we've transformed 8,200+ careers in data analytics and AI.",
   alternates: {
     canonical: "https://linkwaylearning.com/about",
   },

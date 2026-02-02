@@ -15,7 +15,7 @@ const stats = [
   { target: 8200, suffix: "+", label: "Careers Transformed", icon: Users, progress: 100 },
   { target: 400, suffix: "+", label: "Hiring Partners", icon: Briefcase, progress: 85 },
   { target: 85, suffix: "%", label: "Avg Salary Hike", icon: TrendingUp, progress: 85 },
-  { target: 100, suffix: "%", label: "Placement Rate", icon: Award, progress: 100 },
+  { target: 100, suffix: "%", label: "Only 100% Placement", icon: Award, progress: 100 },
 ];
 
 export default function StatsStrip() {

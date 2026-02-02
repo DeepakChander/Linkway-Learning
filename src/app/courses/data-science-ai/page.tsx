@@ -5,11 +5,11 @@ import { CourseJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Data Science & AI Course — Python, ML, Deep Learning, NLP",
   description:
-    "From Python fundamentals to deploying production ML models. Build neural networks, NLP systems, and generative AI applications. 100% placement support at Linkway Learning.",
+    "From Python fundamentals to deploying production ML models. Build neural networks, NLP systems, and generative AI applications. Only 100% placement. No guarantee or assistance. Linkway Learning.",
   alternates: { canonical: "https://linkwaylearning.com/courses/data-science-ai" },
   openGraph: {
     title: "Data Science & AI Course — Python, ML, Deep Learning",
-    description: "Build neural networks, NLP systems, and generative AI apps. 100% placement support.",
+    description: "Build neural networks, NLP systems, and generative AI apps. Only 100% placement. No guarantee or assistance.",
     url: "https://linkwaylearning.com/courses/data-science-ai",
   },
 };

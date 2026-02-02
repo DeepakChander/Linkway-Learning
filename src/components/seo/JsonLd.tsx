@@ -6,7 +6,7 @@ export function OrganizationJsonLd() {
     url: "https://linkwaylearning.com",
     logo: "https://linkwaylearning.com/images/logo/linkway-learning.jpeg",
     description:
-      "India's leading data analytics and AI training institute. Industry-driven programs with 96.8% placement rate and 400+ hiring partners.",
+      "India's leading data analytics and AI training institute. Industry-driven programs. Only 100% placement. No guarantee or assistance.",
     sameAs: [
       "https://www.instagram.com/linkwaylearning",
       "https://www.linkedin.com/company/linkway-learning",

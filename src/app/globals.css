@@ -1601,176 +1601,257 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SUCCESS STORIES PAGE v3 — Award-Level Multi-Theme Redesign
+   SUCCESS STORIES PAGE v4 — Modern Aesthetic Redesign
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Story card — white editorial with layered shadows and hover lift */
-.ss-story-card {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* ── Hero Animated Mesh Gradient Background ── */
+.ss-hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(245, 130, 32, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(59, 130, 246, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 70% at 50% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 70% 60%, rgba(245, 130, 32, 0.04) 0%, transparent 50%);
+  animation: ss-mesh-drift 12s ease-in-out infinite alternate;
+}
+
+@keyframes ss-mesh-drift {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 70% 60%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 30% 20%, 70% 40%, 40% 70%, 60% 30%;
+    filter: hue-rotate(5deg);
+  }
+  100% {
+    background-position: 10% 40%, 90% 20%, 60% 90%, 50% 50%;
+    filter: hue-rotate(0deg);
+  }
+}
+
+/* ── Animated Gradient Orbs ── */
+.ss-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.ss-orb-1 {
+  width: 500px;
+  height: 500px;
+  top: -10%;
+  left: -5%;
+  background: radial-gradient(circle, rgba(245, 130, 32, 0.12) 0%, transparent 70%);
+  animation: ss-orb-float-1 15s ease-in-out infinite;
+}
+
+.ss-orb-2 {
+  width: 400px;
+  height: 400px;
+  top: 30%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  animation: ss-orb-float-2 18s ease-in-out infinite;
+}
+
+.ss-orb-3 {
+  width: 350px;
+  height: 350px;
+  bottom: -5%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+  animation: ss-orb-float-3 20s ease-in-out infinite;
+}
+
+@keyframes ss-orb-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, 40px) scale(1.1); }
+  66% { transform: translate(-30px, 60px) scale(0.95); }
+}
+
+@keyframes ss-orb-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-50px, -30px) scale(1.05); }
+  66% { transform: translate(40px, -50px) scale(0.9); }
+}
+
+@keyframes ss-orb-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -40px) scale(1.08); }
+  66% { transform: translate(-60px, 20px) scale(0.92); }
+}
+
+/* ── Noise Texture Overlay ── */
+.ss-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ── Featured Card ── */
+.ss-featured-card {
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.02),
-    0 4px 16px rgba(0, 0, 0, 0.03);
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 32px 80px rgba(0, 0, 0, 0.15);
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.ss-story-card:hover {
-  border-color: rgba(0, 0, 0, 0.08);
+.ss-featured-card:hover {
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.03),
-    0 16px 48px rgba(0, 0, 0, 0.07),
-    0 32px 64px rgba(0, 0, 0, 0.04);
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    0 40px 100px rgba(0, 0, 0, 0.2);
 }
 
-/* Spotlight card — dark with depth */
-.ss-spotlight-card {
+/* Mesh glow inside featured card */
+.ss-mesh-glow {
+  background:
+    radial-gradient(ellipse 40% 50% at 80% 20%, rgba(245, 130, 32, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
+  animation: ss-mesh-drift 10s ease-in-out infinite alternate;
+}
+
+/* Placed badge */
+.ss-placed-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Story Card v2 ── */
+.ss-story-card-v2 {
+  border: 1px solid rgba(0, 0, 0, 0.04);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 32px 80px rgba(0, 0, 0, 0.12);
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    0 1px 2px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.02);
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.ss-spotlight-card:hover {
+.ss-story-card-v2:hover {
+  border-color: rgba(0, 0, 0, 0.06);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.2),
-    0 40px 100px rgba(0, 0, 0, 0.15);
+    0 4px 12px rgba(0, 0, 0, 0.03),
+    0 20px 60px rgba(0, 0, 0, 0.06),
+    0 40px 80px rgba(0, 0, 0, 0.03);
+  transform: translateY(-4px);
 }
 
-/* Journey step backgrounds */
-.ss-journey-step-before {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.ss-journey-step-after {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-/* Bento grid — asymmetric layout */
-.ss-bento-grid {
+/* ── Stories Grid — Responsive masonry-like layout ── */
+.ss-stories-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
-@media (min-width: 768px) {
-  .ss-bento-grid {
+@media (min-width: 640px) {
+  .ss-stories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 24px;
   }
 }
 
 @media (min-width: 1024px) {
-  .ss-bento-grid {
+  .ss-stories-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
   }
-  .ss-bento-grid > *:nth-child(1) {
+  /* Make first and last cards span 2 columns for visual interest */
+  .ss-stories-grid > *:first-child {
     grid-column: span 2;
   }
-  .ss-bento-grid > *:nth-child(5) {
+  .ss-stories-grid > *:nth-child(6) {
     grid-column: span 2;
   }
 }
 
-/* Journey pills */
-.ss-pill-from {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #6B7280;
-  background: #F3F4F6;
-  border: 1px solid #E5E7EB;
-  white-space: nowrap;
-}
-
-.ss-pill-to {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid;
-  white-space: nowrap;
-}
-
-/* Stat item — dark section */
-.ss-stat-item {
-  position: relative;
-}
-
-/* Orbital ring around stat number */
-.ss-stat-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120px;
-  height: 120px;
-  border: 1px solid rgba(245, 130, 32, 0.08);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  transition: all 0.5s ease;
-}
-
-.ss-stat-item:hover .ss-stat-ring {
-  width: 140px;
-  height: 140px;
-  border-color: rgba(245, 130, 32, 0.15);
-}
-
-/* Logo card — premium company card with real logo */
+/* ── Logo Card ── */
 .ss-logo-card {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 20px;
   min-width: 180px;
-  border-radius: 14px;
+  border-radius: 16px;
   background: white;
-  border: 1px solid rgba(13, 27, 42, 0.06);
+  border: 1px solid rgba(13, 27, 42, 0.05);
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.02),
+    0 1px 3px rgba(0, 0, 0, 0.01),
     0 4px 12px rgba(0, 0, 0, 0.02);
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: default;
   flex-shrink: 0;
 }
 
 .ss-logo-card:hover {
-  border-color: rgba(245, 130, 32, 0.15);
+  border-color: rgba(245, 130, 32, 0.12);
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.03),
-    0 12px 32px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
+    0 4px 8px rgba(0, 0, 0, 0.02),
+    0 12px 32px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
 }
 
-/* Logo icon container */
 .ss-logo-icon {
   width: 44px;
   height: 44px;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #F9FAFB;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
 }
 
 .ss-logo-card:hover .ss-logo-icon {
   background: #FFF7ED;
-  border-color: rgba(245, 130, 32, 0.1);
+  border-color: rgba(245, 130, 32, 0.08);
 }
 
-/* CTA card — dark glassmorphism */
-.ss-cta-dark {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+/* ── CTA Card with animated gradient border ── */
+.ss-cta-card {
+  position: relative;
+}
+
+.ss-gradient-border {
+  background: conic-gradient(
+    from 0deg,
+    rgba(245, 130, 32, 0.3),
+    rgba(59, 130, 246, 0.15),
+    rgba(139, 92, 246, 0.2),
+    rgba(245, 130, 32, 0.1),
+    rgba(16, 185, 129, 0.15),
+    rgba(245, 130, 32, 0.3)
+  );
+  animation: ss-border-spin 6s linear infinite;
+}
+
+@keyframes ss-border-spin {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* CTA Button glow */
+.ss-cta-button {
+  box-shadow:
+    0 4px 24px rgba(245, 130, 32, 0.3),
+    0 0 0 0 rgba(245, 130, 32, 0);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss-cta-button:hover {
+  box-shadow:
+    0 8px 40px rgba(245, 130, 32, 0.4),
+    0 0 0 4px rgba(245, 130, 32, 0.08);
 }
 
 /* ── Reduced Motion Support ── */

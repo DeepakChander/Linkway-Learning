@@ -98,8 +98,8 @@ const featureSteps = [
         <polyline points="22 4 12 14.01 9 11.01" />
       </svg>
     ),
-    title: "100% Placement",
-    desc: "Guaranteed assistance",
+    title: "Only 100% Placement",
+    desc: "No guarantee or assistance",
   },
 ];
 

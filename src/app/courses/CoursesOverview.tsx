@@ -20,13 +20,13 @@ const courses = [
     level: "Beginner to Advanced",
     tagline: "Go from spreadsheets to strategic thinking — fast.",
     description:
-      "Master Excel, SQL, Python, Tableau, and Power BI by building real analytics projects. Not toy datasets — actual business problems with dedicated placement assistance.",
+      "Master Excel, SQL, Python, Tableau, and Power BI by building real analytics projects. Not toy datasets — actual business problems with only 100% placement. No guarantee or assistance.",
     color: "#4F46E5",
     gradient: "from-indigo-600 via-blue-600 to-cyan-500",
     lightGradient: "from-indigo-50 to-blue-50",
     accentBg: "bg-indigo-500",
     href: "/courses/data-analytics",
-    highlights: ["18+ Tools", "4 Portfolio Projects", "Placement Assistance"],
+    highlights: ["18+ Tools", "4 Portfolio Projects", "Only 100% Placement"],
     tools: ["Excel", "SQL", "Python", "Tableau", "Power BI", "Pandas"],
     salary: "₹6–12 LPA",
     topRole: "Data Analyst",
@@ -143,7 +143,7 @@ const courses = [
     lightGradient: "from-amber-50 to-yellow-50",
     accentBg: "bg-amber-500",
     href: "/courses/investment-banking",
-    highlights: ["15+ Tools", "Finance Projects", "Placement Assistance"],
+    highlights: ["15+ Tools", "Finance Projects", "Only 100% Placement"],
     tools: ["Excel", "Bloomberg", "Python", "VBA", "SQL", "Argus"],
     salary: "₹8–16 LPA",
     topRole: "IB Analyst",
@@ -229,29 +229,212 @@ function RotatingText() {
   );
 }
 
-/* ─────────── Floating Particles Background ─────────── */
-function FloatingParticles() {
+/* ─────────── Animated Background Elements ─────────── */
+function AnimatedBackgroundElements() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 20 }).map((_, i) => (
+      {/* Floating particles */}
+      {Array.from({ length: 25 }).map((_, i) => (
         <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-orange-400/20"
+          key={`p-${i}`}
+          className="absolute rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
+            width: `${Math.random() * 4 + 2}px`,
+            height: `${Math.random() * 4 + 2}px`,
+            background: i % 3 === 0 ? "rgba(245,158,11,0.25)" : i % 3 === 1 ? "rgba(99,102,241,0.2)" : "rgba(16,185,129,0.18)",
           }}
           animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.6, 0.2],
-            scale: [1, 1.5, 1],
+            y: [0, -40 - Math.random() * 30, 0],
+            x: [0, (Math.random() - 0.5) * 20, 0],
+            opacity: [0.15, 0.5, 0.15],
+            scale: [1, 1.4, 1],
           }}
           transition={{
-            duration: 4 + Math.random() * 4,
+            duration: 5 + Math.random() * 5,
             repeat: Infinity,
-            delay: Math.random() * 3,
+            delay: Math.random() * 4,
             ease: "easeInOut",
           }}
+        />
+      ))}
+
+      {/* Floating geometric rings */}
+      {[
+        { size: 120, x: "8%", y: "15%", color: "rgba(245,158,11,0.08)", dur: 18, border: "rgba(245,158,11,0.12)" },
+        { size: 80, x: "85%", y: "25%", color: "rgba(99,102,241,0.06)", dur: 22, border: "rgba(99,102,241,0.1)" },
+        { size: 60, x: "75%", y: "70%", color: "rgba(16,185,129,0.06)", dur: 15, border: "rgba(16,185,129,0.1)" },
+        { size: 100, x: "15%", y: "75%", color: "rgba(168,85,247,0.05)", dur: 20, border: "rgba(168,85,247,0.08)" },
+      ].map((ring, i) => (
+        <motion.div
+          key={`ring-${i}`}
+          className="absolute rounded-full"
+          style={{
+            width: ring.size,
+            height: ring.size,
+            left: ring.x,
+            top: ring.y,
+            border: `1.5px solid ${ring.border}`,
+            background: ring.color,
+          }}
+          animate={{
+            y: [0, -15, 0, 10, 0],
+            x: [0, 8, 0, -8, 0],
+            rotate: [0, 360],
+            scale: [1, 1.05, 1, 0.97, 1],
+          }}
+          transition={{
+            duration: ring.dur,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+
+      {/* Animated dashed orbit paths */}
+      <motion.svg
+        className="absolute"
+        style={{ left: "5%", top: "10%", width: 200, height: 200, opacity: 0.06 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+      >
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeDasharray="8 6" />
+        <circle cx="100" cy="100" r="60" fill="none" stroke="#6366F1" strokeWidth="1" strokeDasharray="5 8" />
+      </motion.svg>
+
+      <motion.svg
+        className="absolute"
+        style={{ right: "3%", bottom: "15%", width: 160, height: 160, opacity: 0.05 }}
+        animate={{ rotate: -360 }}
+        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+      >
+        <circle cx="80" cy="80" r="70" fill="none" stroke="#10B981" strokeWidth="1.5" strokeDasharray="6 8" />
+        <circle cx="80" cy="80" r="40" fill="none" stroke="#F59E0B" strokeWidth="1" strokeDasharray="4 6" />
+      </motion.svg>
+
+      {/* Floating hexagon shapes */}
+      {[
+        { x: "90%", y: "12%", size: 28, rot: 30, color: "rgba(245,158,11,0.12)", dur: 12 },
+        { x: "6%", y: "55%", size: 22, rot: 0, color: "rgba(99,102,241,0.1)", dur: 14 },
+        { x: "70%", y: "80%", size: 18, rot: 60, color: "rgba(16,185,129,0.1)", dur: 10 },
+        { x: "35%", y: "8%", size: 20, rot: 15, color: "rgba(168,85,247,0.08)", dur: 16 },
+      ].map((hex, i) => (
+        <motion.svg
+          key={`hex-${i}`}
+          className="absolute"
+          style={{ left: hex.x, top: hex.y, width: hex.size, height: hex.size }}
+          viewBox="0 0 24 24"
+          animate={{
+            y: [0, -12, 0, 8, 0],
+            rotate: [hex.rot, hex.rot + 90, hex.rot + 180, hex.rot + 270, hex.rot + 360],
+            opacity: [0.4, 0.7, 0.4],
+          }}
+          transition={{ duration: hex.dur, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <polygon
+            points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"
+            fill="none"
+            stroke={hex.color.replace(/[\d.]+\)$/, "1)")}
+            strokeWidth="1.5"
+          />
+        </motion.svg>
+      ))}
+
+      {/* Animated cross/plus marks */}
+      {[
+        { x: "20%", y: "20%", color: "rgba(245,158,11,0.15)", size: 12, dur: 8 },
+        { x: "80%", y: "45%", color: "rgba(99,102,241,0.12)", size: 10, dur: 10 },
+        { x: "55%", y: "85%", color: "rgba(16,185,129,0.12)", size: 14, dur: 7 },
+        { x: "40%", y: "60%", color: "rgba(245,158,11,0.1)", size: 10, dur: 12 },
+      ].map((mark, i) => (
+        <motion.svg
+          key={`cross-${i}`}
+          className="absolute"
+          style={{ left: mark.x, top: mark.y, width: mark.size, height: mark.size }}
+          viewBox="0 0 12 12"
+          animate={{
+            rotate: [0, 180, 360],
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{ duration: mark.dur, repeat: Infinity, ease: "easeInOut", delay: i * 0.8 }}
+        >
+          <line x1="6" y1="1" x2="6" y2="11" stroke={mark.color.replace(/[\d.]+\)$/, "1)")} strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="1" y1="6" x2="11" y2="6" stroke={mark.color.replace(/[\d.]+\)$/, "1)")} strokeWidth="1.5" strokeLinecap="round" />
+        </motion.svg>
+      ))}
+
+      {/* Animated diamond shapes */}
+      {[
+        { x: "62%", y: "10%", size: 16, color: "rgba(245,158,11,0.15)", dur: 9 },
+        { x: "12%", y: "40%", size: 12, color: "rgba(99,102,241,0.12)", dur: 11 },
+        { x: "92%", y: "60%", size: 14, color: "rgba(168,85,247,0.1)", dur: 13 },
+      ].map((d, i) => (
+        <motion.div
+          key={`diamond-${i}`}
+          className="absolute"
+          style={{
+            left: d.x,
+            top: d.y,
+            width: d.size,
+            height: d.size,
+            border: `1.5px solid ${d.color.replace(/[\d.]+\)$/, "1)")}`,
+            background: d.color,
+            transform: "rotate(45deg)",
+            borderRadius: 2,
+          }}
+          animate={{
+            y: [0, -18, 0, 12, 0],
+            scale: [1, 1.2, 1, 0.9, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{ duration: d.dur, repeat: Infinity, ease: "easeInOut", delay: i * 1.2 }}
+        />
+      ))}
+
+      {/* Soft flowing gradient waves */}
+      <motion.div
+        className="absolute left-0 right-0 top-[30%] h-[1px]"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.08) 20%, rgba(99,102,241,0.06) 50%, rgba(16,185,129,0.06) 80%, transparent 100%)",
+        }}
+        animate={{ opacity: [0.3, 0.7, 0.3], scaleX: [0.8, 1.1, 0.8] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute left-0 right-0 top-[65%] h-[1px]"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.06) 25%, rgba(245,158,11,0.08) 55%, rgba(168,85,247,0.05) 85%, transparent 100%)",
+        }}
+        animate={{ opacity: [0.2, 0.5, 0.2], scaleX: [1.1, 0.85, 1.1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+
+      {/* Glowing accent dots at intersections */}
+      {[
+        { x: "25%", y: "30%", color: "#F59E0B", dur: 4 },
+        { x: "75%", y: "30%", color: "#6366F1", dur: 5 },
+        { x: "50%", y: "65%", color: "#10B981", dur: 4.5 },
+        { x: "15%", y: "65%", color: "#A855F7", dur: 6 },
+        { x: "85%", y: "65%", color: "#F59E0B", dur: 3.5 },
+      ].map((dot, i) => (
+        <motion.div
+          key={`glow-${i}`}
+          className="absolute rounded-full"
+          style={{
+            left: dot.x,
+            top: dot.y,
+            width: 6,
+            height: 6,
+            background: dot.color,
+            boxShadow: `0 0 12px 3px ${dot.color}30`,
+          }}
+          animate={{
+            scale: [1, 1.8, 1],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{ duration: dot.dur, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
         />
       ))}
     </div>
@@ -319,7 +502,7 @@ export default function CoursesOverview() {
             }}
           />
 
-          <FloatingParticles />
+          <AnimatedBackgroundElements />
 
           <div className="relative max-w-6xl mx-auto">
             {/* Top badge */}
@@ -360,7 +543,7 @@ export default function CoursesOverview() {
               className="text-center text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mt-6 leading-relaxed"
             >
               Industry-grade programs designed by practitioners, not academics.
-              Pick the one that matches where you are — every program comes with real projects and dedicated placement assistance.
+              Pick the one that matches where you are — every program comes with real projects and only 100% placement. No guarantee or assistance.
             </motion.p>
 
             {/* CTA buttons */}
@@ -839,7 +1022,7 @@ export default function CoursesOverview() {
                 {
                   step: "04",
                   title: "Get Placed",
-                  desc: "Dedicated placement assistance — resume reviews, mock interviews, and introductions to 400+ hiring partners.",
+                  desc: "Only 100% placement. No guarantee or assistance.",
                   iconPath: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
                 },
               ].map((item, i) => (
@@ -935,7 +1118,7 @@ export default function CoursesOverview() {
                     <circle cx="8" cy="8" r="8" fill="currentColor" opacity="0.15" />
                     <path d="M11 6L7 10.5L5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  100% Placement Assistance
+                  Only 100% Placement. No guarantee or assistance
                 </div>
                 <div className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-emerald-400" viewBox="0 0 16 16" fill="none">

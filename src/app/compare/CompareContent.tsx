@@ -55,7 +55,7 @@ const rows = [
   { label: "Key Tools", values: ["Excel, SQL, Python, Tableau", "Power BI, Excel, SQL, Tableau", "TensorFlow, PyTorch, Docker, AWS", "LangChain, OpenAI, Python", "Excel, Power BI, SQL, Python"] },
   { label: "Projects", values: ["4+ hands-on", "5+ business cases", "7+ capstones + case studies", "AI agent projects", "Finance projects"] },
   { label: "Top Roles", values: ["Data Analyst, BI Analyst", "Business Analyst", "Data Scientist, ML Engineer", "AI Engineer, Prompt Engineer", "IB Analyst, Financial Analyst"] },
-  { label: "Placement", values: ["Placement Assistance", "Placement Assistance", "Placement Assistance", "Placement Assistance", "Placement Assistance"] },
+  { label: "Placement", values: ["Only 100% Placement", "Only 100% Placement", "Only 100% Placement", "Only 100% Placement", "Only 100% Placement"] },
 ];
 
 const choosePaths = [

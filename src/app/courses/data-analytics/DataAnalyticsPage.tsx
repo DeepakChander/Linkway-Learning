@@ -579,24 +579,54 @@ const heroImages = [
 
 function HeroImageCarousel({ className }: { className?: string }) {
   const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
+      setDirection(1);
       setCurrent((prev) => (prev + 1) % heroImages.length);
-    }, 3500);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
+  const variants = {
+    enter: (dir: number) => ({
+      clipPath: dir > 0
+        ? "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
+        : "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+      scale: 1.1,
+    }),
+    center: {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      scale: 1,
+    },
+    exit: (dir: number) => ({
+      clipPath: dir > 0
+        ? "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"
+        : "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+      scale: 1.05,
+    }),
+  };
+
   return (
-    <div className={cn("relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl aspect-[4/3]", className)}>
-      <AnimatePresence mode="wait">
+    <div className={cn("relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl aspect-[4/3] group", className)}>
+      {/* Ambient glow behind image */}
+      <motion.div
+        className="absolute -inset-4 rounded-3xl opacity-40 blur-2xl -z-10"
+        style={{ background: `radial-gradient(ellipse at center, ${BRAND_ORANGE}40, transparent 70%)` }}
+        animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <AnimatePresence initial={false} custom={direction} mode="sync">
         <motion.div
           key={current}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
           className="absolute inset-0"
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.97 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <Image
             src={heroImages[current]}
@@ -608,21 +638,20 @@ function HeroImageCarousel({ className }: { className?: string }) {
           />
         </motion.div>
       </AnimatePresence>
-      {/* Dot indicators */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {heroImages.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={cn(
-              "w-2 h-2 rounded-full transition-all duration-300",
-              i === current ? "bg-orange-500 w-5" : "bg-white/40 hover:bg-white/60"
-            )}
-          />
-        ))}
+      {/* Animated progress bar at bottom */}
+      <div className="absolute bottom-0 inset-x-0 h-[3px] bg-white/10 z-10">
+        <motion.div
+          key={current}
+          className="h-full"
+          style={{ background: `linear-gradient(90deg, ${BRAND_ORANGE}, ${ACCENT_CYAN})` }}
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 4, ease: "linear" }}
+        />
       </div>
-      {/* Bottom gradient overlay for dots visibility */}
-      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+      {/* Corner accent frame lines */}
+      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 rounded-tl-sm pointer-events-none" style={{ borderColor: `${BRAND_ORANGE}80` }} />
+      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 rounded-br-sm pointer-events-none" style={{ borderColor: `${BRAND_ORANGE}80` }} />
     </div>
   );
 }
@@ -690,6 +719,498 @@ function LayersIcon({ className, style }: { className?: string; style?: React.CS
 }
 function ClockIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MODULES — Interactive Accordion with Animated Connectors
+   ═══════════════════════════════════════════════════════ */
+
+const MODULE_DATA = [
+  {
+    id: 1,
+    title: "Excel for Data Analytics",
+    subtitle: "Master the world's most-used analytics tool",
+    icon: "spreadsheet",
+    color: "#22C55E",
+    accentGlow: "#22C55E",
+    topics: [
+      "Advanced formulas — VLOOKUP, INDEX-MATCH, array formulas",
+      "PivotTables & PivotCharts for dynamic reporting",
+      "Conditional formatting & data validation at scale",
+      "Forecasting models, What-If analysis & Goal Seek",
+      "Dashboard design — sparklines, slicers, KPI tiles",
+      "Power Query for automated data transformation",
+    ],
+  },
+  {
+    id: 2,
+    title: "Tableau",
+    subtitle: "Turn raw data into visual stories",
+    icon: "chart",
+    color: "#3B82F6",
+    accentGlow: "#3B82F6",
+    topics: [
+      "Connecting to live & extract data sources",
+      "Building interactive dashboards & storyboards",
+      "Calculated fields, LOD expressions & table calcs",
+      "Geospatial mapping & custom geocoding",
+      "Publishing to Tableau Server / Tableau Public",
+      "Best practices for visual design & storytelling",
+    ],
+  },
+  {
+    id: 3,
+    title: "Power BI",
+    subtitle: "Enterprise-grade business intelligence",
+    icon: "dashboard",
+    color: "#F59E0B",
+    accentGlow: "#F59E0B",
+    topics: [
+      "Power BI Desktop — data modeling & DAX formulas",
+      "Building multi-page interactive reports",
+      "Power Query M language for ETL pipelines",
+      "Row-level security & workspace governance",
+      "Dataflows, incremental refresh & performance tuning",
+      "Publishing & sharing via Power BI Service",
+    ],
+  },
+  {
+    id: 4,
+    title: "Python Programming & Data Science",
+    subtitle: "From zero to data analysis with Python",
+    icon: "code",
+    color: "#8B5CF6",
+    accentGlow: "#8B5CF6",
+    topics: [
+      "Python fundamentals — variables, loops, functions, OOP",
+      "NumPy arrays & vectorized operations",
+      "Pandas DataFrames — cleaning, merging, grouping",
+      "Matplotlib & Seaborn for publication-quality plots",
+      "Statistics — descriptive, probability, hypothesis testing",
+      "Data cleaning, preparation & feature engineering",
+    ],
+  },
+  {
+    id: 5,
+    title: "Machine Learning",
+    subtitle: "Predictive models that drive decisions",
+    icon: "brain",
+    color: "#EC4899",
+    accentGlow: "#EC4899",
+    topics: [
+      "Supervised Learning — linear & logistic regression",
+      "Decision Trees, Random Forests & Gradient Boosting",
+      "Unsupervised Learning — K-Means, DBSCAN, PCA",
+      "Model evaluation — cross-validation, ROC, confusion matrix",
+      "Time Series forecasting — ARIMA, SARIMA, Prophet",
+      "Recommender Systems — collaborative & content-based filtering",
+    ],
+  },
+  {
+    id: 6,
+    title: "Big Data & SQL",
+    subtitle: "Query, manage and scale data infrastructure",
+    icon: "database",
+    color: "#06B6D4",
+    accentGlow: "#06B6D4",
+    topics: [
+      "SQL fundamentals — SELECT, JOINs, subqueries, CTEs",
+      "MySQL database design & normalization",
+      "Window functions, stored procedures & optimization",
+      "Integrating SQL queries in Python (SQLAlchemy, Pandas)",
+      "Introduction to Apache Spark & PySpark",
+      "Big Data ecosystem — Hadoop, distributed computing basics",
+    ],
+  },
+];
+
+const MODULE_ICONS: Record<string, (props: { className?: string; style?: React.CSSProperties }) => React.ReactNode> = {
+  spreadsheet: ({ className, style }) => (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+    </svg>
+  ),
+  chart: ({ className, style }) => (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 3v18h18" /><path d="M7 16l4-8 4 5 5-9" />
+    </svg>
+  ),
+  dashboard: ({ className, style }) => (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="9" rx="1" /><rect x="14" y="3" width="7" height="5" rx="1" /><rect x="14" y="12" width="7" height="9" rx="1" /><rect x="3" y="16" width="7" height="5" rx="1" />
+    </svg>
+  ),
+  code: ({ className, style }) => (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /><line x1="14" y1="4" x2="10" y2="20" />
+    </svg>
+  ),
+  brain: ({ className, style }) => (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z" />
+      <path d="M9 21h6M10 17h4" />
+    </svg>
+  ),
+  database: ({ className, style }) => (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3" /><path d="M21 12c0 1.66-4.03 3-9 3s-9-1.34-9-3" /><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+    </svg>
+  ),
+};
+
+function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section className="relative py-28 px-6 overflow-hidden" style={{ background: `linear-gradient(180deg, #050810 0%, #0a0f1e 40%, #080c18 100%)` }}>
+      {/* ── Animated mesh background ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Horizontal scan line */}
+        <motion.div
+          className="absolute left-0 right-0 h-[1px]"
+          style={{ background: `linear-gradient(90deg, transparent, ${BRAND_ORANGE}20, transparent)` }}
+          animate={{ top: ["0%", "100%"] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
+        {/* Grid pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="moduleGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M80 0H0v80" fill="none" stroke="white" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#moduleGrid)" />
+        </svg>
+        {/* Ambient glow orbs */}
+        <motion.div
+          className="absolute w-[600px] h-[600px] rounded-full blur-[150px]"
+          style={{ top: "10%", left: "-15%", background: `radial-gradient(circle, ${BRAND_ORANGE}12, transparent 70%)` }}
+          animate={{ x: [0, 80, 0], y: [0, -40, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute w-[500px] h-[500px] rounded-full blur-[130px]"
+          style={{ bottom: "5%", right: "-10%", background: `radial-gradient(circle, ${ACCENT_CYAN}10, transparent 70%)` }}
+          animate={{ x: [0, -60, 0], y: [0, 50, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+        />
+      </div>
+
+      <div ref={containerRef} className="relative z-10 max-w-5xl mx-auto">
+        {/* ── Section Header ── */}
+        <ScrollReveal>
+          <div className="text-center mb-20">
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <motion.div
+                className="w-2 h-2 rounded-full"
+                style={{ backgroundColor: BRAND_ORANGE }}
+                animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <span className="text-xs font-mono text-gray-400 tracking-widest uppercase">6 Modules · 24 Weeks</span>
+            </motion.div>
+
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              What You&apos;ll{" "}
+              <span className="relative inline-block">
+                <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, #f59e0b, ${ACCENT_CYAN})` }}>
+                  Master
+                </span>
+                <motion.svg
+                  className="absolute -bottom-2 left-0 w-full"
+                  viewBox="0 0 200 12"
+                  fill="none"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                >
+                  <motion.path
+                    d="M2 8 C50 2, 80 12, 120 6 S170 2, 198 7"
+                    stroke={BRAND_ORANGE}
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                  />
+                </motion.svg>
+              </span>
+            </h2>
+            <p className="mt-4 text-gray-500 text-lg max-w-lg mx-auto">
+              Each module builds on the last — from spreadsheets to machine learning, you graduate job-ready.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* ── Module Cards with Vertical Timeline ── */}
+        <div className="relative">
+          {/* Vertical connector line */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] md:-translate-x-[1px]" style={{ background: `linear-gradient(180deg, transparent, ${BRAND_ORANGE}30 10%, ${ACCENT_BLUE}20 50%, ${ACCENT_CYAN}30 90%, transparent)` }}>
+            {/* Traveling light pulse */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 w-[6px] h-16 rounded-full"
+              style={{ background: `linear-gradient(180deg, transparent, ${BRAND_ORANGE}80, transparent)` }}
+              animate={{ top: ["-5%", "105%"] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
+
+          {MODULE_DATA.map((mod, idx) => {
+            const isExpanded = expandedId === mod.id;
+            const isEven = idx % 2 === 0;
+            const IconComponent = MODULE_ICONS[mod.icon];
+
+            return (
+              <motion.div
+                key={mod.id}
+                className={cn(
+                  "relative flex items-start mb-8 last:mb-0",
+                  "pl-16 md:pl-0",
+                  isEven ? "md:flex-row" : "md:flex-row-reverse"
+                )}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* ── Timeline Node ── */}
+                <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
+                  <motion.div
+                    className="relative w-12 h-12 rounded-xl flex items-center justify-center border-2 cursor-pointer"
+                    style={{
+                      borderColor: isExpanded ? mod.color : `${mod.color}40`,
+                      backgroundColor: isExpanded ? `${mod.color}20` : `${mod.color}08`,
+                    }}
+                    whileHover={{ scale: 1.15, borderColor: mod.color }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setExpandedId(isExpanded ? null : mod.id)}
+                    animate={isExpanded ? { boxShadow: `0 0 25px ${mod.color}30` } : { boxShadow: `0 0 0px transparent` }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Pulse ring on active */}
+                    {isExpanded && (
+                      <motion.div
+                        className="absolute inset-0 rounded-xl border"
+                        style={{ borderColor: mod.color }}
+                        animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      />
+                    )}
+                    <span className="text-sm font-bold font-mono" style={{ color: mod.color }}>
+                      {String(mod.id).padStart(2, "0")}
+                    </span>
+                  </motion.div>
+                </div>
+
+                {/* ── Card ── */}
+                <div className={cn("flex-1 max-w-full md:max-w-[calc(50%-40px)]", isEven ? "md:pr-10" : "md:pl-10")}>
+                  <motion.div
+                    className="group relative rounded-2xl overflow-hidden cursor-pointer"
+                    onClick={() => setExpandedId(isExpanded ? null : mod.id)}
+                    layout
+                    transition={{ layout: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
+                  >
+                    {/* Glow border on hover/active */}
+                    <motion.div
+                      className="absolute -inset-[1px] rounded-2xl blur-[1px] pointer-events-none"
+                      style={{ background: `linear-gradient(135deg, ${mod.color}40, transparent 60%, ${mod.color}20)` }}
+                      animate={{ opacity: isExpanded ? 1 : 0 }}
+                      whileHover={{ opacity: 0.7 }}
+                      transition={{ duration: 0.3 }}
+                    />
+
+                    <div
+                      className="relative border rounded-2xl p-6 transition-all duration-500"
+                      style={{
+                        backgroundColor: isExpanded ? `rgba(255,255,255,0.05)` : `rgba(255,255,255,0.02)`,
+                        borderColor: isExpanded ? `${mod.color}30` : `rgba(255,255,255,0.06)`,
+                      }}
+                    >
+                      {/* Top gradient accent line */}
+                      <motion.div
+                        className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
+                        style={{ background: `linear-gradient(90deg, ${mod.color}, ${mod.color}40)` }}
+                        initial={{ scaleX: 0, transformOrigin: "left" }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 + idx * 0.1 }}
+                      />
+
+                      {/* Card header */}
+                      <div className="flex items-start gap-4">
+                        <motion.div
+                          className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                          style={{ backgroundColor: `${mod.color}15` }}
+                          whileHover={{ rotate: [0, -8, 8, 0] }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <IconComponent className="w-5 h-5" style={{ color: mod.color }} />
+                        </motion.div>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md" style={{ color: mod.color, backgroundColor: `${mod.color}15` }}>
+                              MODULE {mod.id}
+                            </span>
+                          </div>
+                          <h3 className="mt-1.5 text-lg md:text-xl font-bold text-white group-hover:text-white/90 transition-colors leading-tight">
+                            {mod.title}
+                          </h3>
+                          <p className="mt-1 text-sm text-gray-500">{mod.subtitle}</p>
+                        </div>
+
+                        {/* Expand chevron */}
+                        <motion.div
+                          className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center mt-1"
+                          style={{ backgroundColor: `${mod.color}10` }}
+                          animate={{ rotate: isExpanded ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ChevronIcon className="w-4 h-4" style={{ color: mod.color } as React.CSSProperties} />
+                        </motion.div>
+                      </div>
+
+                      {/* Expandable topics */}
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="mt-5 pt-5 border-t" style={{ borderColor: `${mod.color}15` }}>
+                              <div className="grid gap-2.5">
+                                {mod.topics.map((topic, tIdx) => {
+                                  const parts = topic.split(" — ");
+                                  return (
+                                    <motion.div
+                                      key={tIdx}
+                                      className="group/t flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.05] hover:border-white/[0.08] transition-all duration-300"
+                                      initial={{ opacity: 0, x: isEven ? -20 : 20 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.3, delay: tIdx * 0.06 }}
+                                    >
+                                      {/* Animated check circle */}
+                                      <motion.div
+                                        className="shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center"
+                                        style={{ backgroundColor: `${mod.color}15`, border: `1.5px solid ${mod.color}40` }}
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        transition={{ delay: 0.2 + tIdx * 0.06, type: "spring", stiffness: 400 }}
+                                      >
+                                        <motion.svg
+                                          viewBox="0 0 12 12"
+                                          className="w-2.5 h-2.5"
+                                          initial={{ pathLength: 0 }}
+                                          animate={{ pathLength: 1 }}
+                                          transition={{ delay: 0.4 + tIdx * 0.06, duration: 0.3 }}
+                                        >
+                                          <motion.path
+                                            d="M2.5 6L5 8.5L9.5 3.5"
+                                            fill="none"
+                                            stroke={mod.color}
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            initial={{ pathLength: 0 }}
+                                            animate={{ pathLength: 1 }}
+                                            transition={{ delay: 0.4 + tIdx * 0.06, duration: 0.3 }}
+                                          />
+                                        </motion.svg>
+                                      </motion.div>
+                                      <div className="flex-1 min-w-0">
+                                        <p className="text-[13px] font-semibold text-white/85 group-hover/t:text-white transition-colors">
+                                          {parts[0]}
+                                        </p>
+                                        {parts[1] && (
+                                          <p className="text-[12px] text-gray-500 mt-0.5 leading-relaxed group-hover/t:text-gray-400 transition-colors">
+                                            {parts[1]}
+                                          </p>
+                                        )}
+                                      </div>
+                                    </motion.div>
+                                  );
+                                })}
+                              </div>
+
+                              {/* Topic count footer */}
+                              <div className="mt-4 flex items-center justify-between">
+                                <span className="text-[11px] font-mono text-gray-600">
+                                  {mod.topics.length} topics covered
+                                </span>
+                                <motion.button
+                                  onClick={(e) => { e.stopPropagation(); openEnquiry(); }}
+                                  className="text-[11px] font-semibold flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-300 cursor-pointer"
+                                  style={{ color: mod.color, borderColor: `${mod.color}30`, backgroundColor: `${mod.color}08` }}
+                                  whileHover={{ scale: 1.05, backgroundColor: `${mod.color}15` }}
+                                  whileTap={{ scale: 0.95 }}
+                                >
+                                  Get Syllabus
+                                  <ArrowRightIcon className="w-3 h-3" />
+                                </motion.button>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* ── Bottom CTA ── */}
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]">
+            <div className="flex -space-x-1">
+              {MODULE_DATA.map((m, i) => (
+                <motion.div
+                  key={i}
+                  className="w-3 h-3 rounded-full border-2"
+                  style={{ backgroundColor: m.color, borderColor: "#050810" }}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + i * 0.08, type: "spring" }}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-gray-400">6 modules</span>
+            <span className="text-gray-600">·</span>
+            <span className="text-xs font-mono text-gray-500">36+ topics</span>
+            <span className="text-gray-600">·</span>
+            <motion.span
+              className="text-xs font-bold"
+              style={{ color: BRAND_ORANGE }}
+              animate={{ opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Industry-ready
+            </motion.span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -784,13 +1305,13 @@ export default function DataAnalyticsPage() {
   const faqs = [
     { question: "Do I need to know coding?", answer: "Nope. We start from the basics — Excel, then SQL, then Python. Everything is taught step by step with exercises, so you're never lost." },
     { question: "What's the schedule like?", answer: "Both weekday and weekend batches are available. Everything is live with a real instructor, and every session gets recorded in case you miss one." },
-    { question: "How does placement assistance work?", answer: "Finish the assignments and projects, and we guarantee up to 10 interviews with companies from our hiring network. We don't stop until you're placed." },
+    { question: "How does placement assistance work?", answer: "Only 100% placement. No guarantee or assistance." },
     { question: "Can I pay in EMIs?", answer: "Yes — 0% interest EMI starting at ₹5,500/month. We want cost to be the last thing holding you back." },
     { question: "What certifications do I get?", answer: "A Linkway Learning completion certificate plus prep for the Microsoft Azure AI Fundamentals certification exam." },
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "Placement Guarantee", sub: "Up to 10 interviews", color: BRAND_ORANGE },
+    { icon: ShieldIcon, label: "Only 100% Placement", sub: "No guarantee or assistance", color: BRAND_ORANGE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹5,500/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "Azure AI Certification", sub: "Exam prep included", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: BRAND_ORANGE },
@@ -980,7 +1501,7 @@ export default function DataAnalyticsPage() {
               </motion.div>
 
               <motion.p className="mt-5 text-base md:text-lg text-gray-400 leading-relaxed max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
-                Go from spreadsheets to strategic thinking in 6 months. Real tools, real projects, real placement support.
+                Go from spreadsheets to strategic thinking in 6 months. Real tools, real projects, only 100% placement. No guarantee or assistance.
               </motion.p>
 
               <motion.div className="mt-8 flex flex-wrap items-center gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}>
@@ -1645,6 +2166,9 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
+      {/* ═══════ MODULES — Interactive Deep-Dive Grid ═══════ */}
+      <ModulesSection openEnquiry={openEnquiry} />
+
       {/* ═══════ TOOLS — Two-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
         <Divider />
@@ -1834,8 +2358,8 @@ export default function DataAnalyticsPage() {
                 <div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50">
                   <ShieldIcon className="w-5 h-5 shrink-0" style={{ color: BRAND_ORANGE }} />
                   <div>
-                    <p className="text-sm text-navy-900 font-semibold">Dedicated Placement Assistance</p>
-                    <p className="text-xs text-gray-500">Up to 10 guaranteed interviews</p>
+                    <p className="text-sm text-navy-900 font-semibold">Only 100% Placement</p>
+                    <p className="text-xs text-gray-500">No guarantee or assistance</p>
                   </div>
                 </div>
               </SlideIn>

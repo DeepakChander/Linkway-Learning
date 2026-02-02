@@ -311,11 +311,11 @@ export default function DataScienceAIPage() {
     { question: "How is this different from Data Analytics?", answer: "Data Analytics focuses on visualization and reporting. This goes way deeper — deep learning, NLP, generative AI, MLOps, cloud deployment. It's for people who want to build AI, not just look at dashboards." },
     { question: "What's the capstone project like?", answer: "You build a full ML system end-to-end: define the problem, collect data, train models, deploy a production API, and set up monitoring. Past students have built fraud detectors, medical image classifiers, and chatbots." },
     { question: "Do you cover generative AI?", answer: "Yes — GANs, LLMs, prompt engineering, fine-tuning with HuggingFace. You'll build actual generative AI applications, not just talk about them." },
-    { question: "What about placement support?", answer: "Resume reviews, LinkedIn optimization, mock technical interviews, and direct introductions to 400+ hiring partners. We guarantee at least 10 interview opportunities after you complete the program." },
+    { question: "What about placement support?", answer: "Only 100% placement. No guarantee or assistance." },
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "Placement Guarantee", sub: "Up to 10 interviews", color: BRAND_ORANGE },
+    { icon: ShieldIcon, label: "Only 100% Placement", sub: "No guarantee or assistance", color: BRAND_ORANGE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹8,000/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "AI Certifications", sub: "AWS + Azure ML prep", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: BRAND_ORANGE },
@@ -543,7 +543,7 @@ export default function DataScienceAIPage() {
             </div>
             <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
               <SlideIn direction="right"><div className="bg-gray-50 rounded-2xl border border-gray-100 p-6"><p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Expected Salary Range</p><p className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>₹8–18 LPA</p></div></SlideIn>
-              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: BRAND_ORANGE }} /><div><p className="text-sm text-navy-900 font-semibold">Dedicated Placement Assistance</p><p className="text-xs text-gray-500">Up to 10 guaranteed interviews</p></div></div></SlideIn>
+              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: BRAND_ORANGE }} /><div><p className="text-sm text-navy-900 font-semibold">Only 100% Placement</p><p className="text-xs text-gray-500">No guarantee or assistance</p></div></div></SlideIn>
               <SlideIn direction="right" delay={0.2}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><SparklesIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_BLUE }} /><div><p className="text-sm text-navy-900 font-semibold">AWS & Azure ML Certifications</p><p className="text-xs text-gray-500">Cloud AI certification prep included</p></div></div></SlideIn>
             </div>
           </div>
