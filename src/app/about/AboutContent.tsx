@@ -717,54 +717,194 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 8 — CTA (Orange gradient, centered, bold)
+          SECTION 8 — CTA (Split asymmetric layout with morphing blob)
           ══════════════════════════════════════════════════════════ */}
-      <section className="relative py-24 md:py-32 px-6 overflow-hidden bg-gradient-to-br from-orange-500 via-orange-500 to-orange-600">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12)_0%,transparent_50%)]" />
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_80%_80%,rgba(0,0,0,0.1)_0%,transparent_50%)]" />
-        </div>
-        {/* Floating shapes */}
-        <motion.div animate={{ rotate: 360 }} transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[15%] right-[10%] w-24 h-24 border-2 border-white/10 rounded-2xl pointer-events-none" />
-        <motion.div animate={{ rotate: -360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[20%] left-[8%] w-16 h-16 border-2 border-white/10 rounded-xl pointer-events-none" />
-        <motion.div animate={{ y: [-10, 10, -10] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[40%] left-[20%] w-3 h-3 rounded-full bg-white/20 pointer-events-none" />
-        <motion.div animate={{ y: [8, -8, 8] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[30%] right-[25%] w-2 h-2 rounded-full bg-white/15 pointer-events-none" />
+      <section className="relative py-14 md:py-18 px-6 overflow-hidden" style={{ background: "#0c0f1a" }}>
+        {/* Animated morphing gradient blob */}
+        <motion.div
+          animate={{
+            borderRadius: ["30% 70% 70% 30% / 30% 30% 70% 70%", "70% 30% 30% 70% / 70% 70% 30% 30%", "30% 70% 70% 30% / 30% 30% 70% 70%"],
+            scale: [1, 1.08, 1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-orange-500/20 via-orange-600/10 to-transparent blur-[80px] pointer-events-none"
+        />
+        {/* Secondary blob */}
+        <motion.div
+          animate={{
+            borderRadius: ["60% 40% 30% 70% / 50% 60% 40% 50%", "40% 60% 70% 30% / 50% 40% 60% 50%", "60% 40% 30% 70% / 50% 60% 40% 50%"],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] right-[10%] w-[250px] h-[250px] bg-gradient-to-tl from-blue-500/10 to-transparent blur-[60px] pointer-events-none"
+        />
 
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <SpringReveal distance={40} damping={12}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/20 backdrop-blur-sm mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              <span className="text-white/90 text-xs font-semibold tracking-[0.15em] uppercase">Start Your Journey</span>
-            </span>
-          </SpringReveal>
-          <SpringReveal distance={50} damping={12} delay={0.1}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Ready to Build Your
-              <br />
-              Data Career?
-            </h2>
-          </SpringReveal>
-          <SpringReveal distance={30} damping={14} delay={0.2}>
-            <p className="mt-4 text-base md:text-lg text-white/80 max-w-lg mx-auto leading-relaxed">
-              Join 8,200+ professionals who transformed their careers through Linkway Learning.
-            </p>
-          </SpringReveal>
-          <SpringReveal distance={20} damping={14} delay={0.3}>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a href="/courses" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-navy-900 font-bold text-base shadow-xl shadow-black/10 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-[1.03] transition-all duration-300">
-                <span>Explore Courses</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </a>
-              <a href="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-white/40 text-white font-bold text-base hover:bg-white/15 hover:border-white/60 transition-all duration-300">
-                Talk to Us
-              </a>
+        {/* Animated scan line */}
+        <motion.div
+          animate={{ top: ["-5%", "105%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange-500/20 to-transparent pointer-events-none"
+        />
+
+        {/* Grid dot pattern */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          backgroundImage: "radial-gradient(circle, rgba(245,130,32,0.06) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }} />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-center">
+            {/* Left: Content */}
+            <div>
+              <SpringReveal distance={40} damping={12}>
+                <div className="flex items-center gap-3 mb-4">
+                  {/* Animated line that draws in */}
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="h-[2px] w-12 bg-gradient-to-r from-orange-500 to-orange-300 origin-left"
+                  />
+                  <span className="text-orange-400 text-xs font-bold tracking-[0.2em] uppercase">Your Next Chapter</span>
+                </div>
+              </SpringReveal>
+
+              <SpringReveal distance={50} damping={12} delay={0.1}>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.1] mb-3">
+                  Stop Watching.
+                  <br />
+                  <span className="relative">
+                    <span className="relative z-10">Start Building.</span>
+                    {/* Animated highlight behind text */}
+                    <motion.span
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute bottom-1 left-0 right-0 h-3 bg-orange-500/20 -z-0 origin-left rounded-sm"
+                    />
+                  </span>
+                </h2>
+              </SpringReveal>
+
+              <SpringReveal distance={30} damping={14} delay={0.2}>
+                <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-md mb-5">
+                  8,200+ people didn&apos;t just learn data &mdash; they got hired. Your seat is waiting.
+                </p>
+              </SpringReveal>
+
+              <SpringReveal distance={20} damping={14} delay={0.3}>
+                <div className="flex flex-wrap gap-4">
+                  {/* Primary CTA with morphing arrow */}
+                  <a href="/courses" className="group relative inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-orange-500 text-white font-bold text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(245,130,32,0.35)] hover:scale-[1.02]">
+                    {/* Shimmer effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    <span className="relative z-10">Explore Courses</span>
+                    <motion.svg
+                      className="relative z-10 w-5 h-5"
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+                      whileHover={{ x: 4 }}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </motion.svg>
+                  </a>
+
+                  {/* Secondary CTA with border animation */}
+                  <a href="/contact" className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm overflow-hidden border border-white/10 hover:border-orange-500/40 transition-all duration-300 hover:bg-white/[0.03]">
+                    <span>Talk to Us</span>
+                    <svg className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 12h8m0 0l-4-4m4 4l-4 4" /></svg>
+                  </a>
+                </div>
+              </SpringReveal>
             </div>
-          </SpringReveal>
+
+            {/* Right: Floating stat cards stacked with stagger */}
+            <div className="relative h-[260px] md:h-[280px]">
+              {/* Card 1 */}
+              <SpringReveal distance={60} damping={12} delay={0.15}>
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-0 right-0 md:right-4 w-[210px] rounded-xl p-4 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md shadow-2xl shadow-black/20"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-orange-500/15 flex items-center justify-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-white">8,200+</p>
+                      <p className="text-[10px] text-gray-500 tracking-wider uppercase">Careers Launched</p>
+                    </div>
+                  </div>
+                  <div className="h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "92%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+                      className="h-full rounded-full bg-gradient-to-r from-orange-500 to-orange-400"
+                    />
+                  </div>
+                </motion.div>
+              </SpringReveal>
+
+              {/* Card 2 */}
+              <SpringReveal distance={60} damping={12} delay={0.3}>
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute top-[95px] left-0 md:left-4 w-[195px] rounded-xl p-4 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md shadow-2xl shadow-black/20"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-white">100%</p>
+                      <p className="text-[10px] text-gray-500 tracking-wider uppercase">Placement Rate</p>
+                    </div>
+                  </div>
+                  <div className="h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "100%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+                      className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400"
+                    />
+                  </div>
+                </motion.div>
+              </SpringReveal>
+
+              {/* Card 3 */}
+              <SpringReveal distance={60} damping={12} delay={0.45}>
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  className="absolute top-[190px] right-[10%] w-[180px] rounded-xl p-4 bg-white/[0.04] border border-white/[0.08] backdrop-blur-md shadow-2xl shadow-black/20"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-white">85%</p>
+                      <p className="text-[10px] text-gray-500 tracking-wider uppercase">Avg Salary Jump</p>
+                    </div>
+                  </div>
+                  <div className="h-1 w-full rounded-full bg-white/[0.06] overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "85%" }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.5, delay: 1.1, ease: "easeOut" }}
+                      className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400"
+                    />
+                  </div>
+                </motion.div>
+              </SpringReveal>
+            </div>
+          </div>
         </div>
       </section>
 
