@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,11 +11,12 @@ import {
   useMotionValue,
   useSpring,
   useInView,
+  useMotionTemplate,
+  AnimatePresence,
 } from "framer-motion";
 import Counter from "@/components/animation/Counter";
 import {
   SpringReveal,
-
   ScrollTextReveal,
   CharacterSplit,
   LineMaskReveal,
@@ -31,22 +32,36 @@ gsap.registerPlugin(ScrollTrigger);
    DATA
    ═══════════════════════════════════════════════════════════════════ */
 const testimonials = [
-  { name: "Aditya Srivastava", from: "Full-Stack Developer", to: "Junior Data Scientist", company: "Globussoft", desc: "I could build apps, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works. Now I'm doing data science full-time.", initials: "AS", color: "#F59E0B" },
-  { name: "Arpit Jain", from: "Hospitality Professional", to: "Business Analyst", company: "EaseMyTrip", desc: "Hospitality was all I knew. I picked up SQL and analytics from scratch, and now I'm analyzing booking trends at EaseMyTrip. Completely different life.", initials: "AJ", color: "#3B82F6" },
-  { name: "Junaid Khan", from: "Operations & Banking", to: "Business Analyst", company: "Razorpay", desc: "Banking ops had no growth path for me. Six months of focused learning later, I'm a business analyst at Razorpay doing work that actually excites me.", initials: "JK", color: "#10B981" },
-  { name: "Rajeev Chauhan", from: "Operations Executive", to: "Business Research Analyst", company: "EXL", desc: "I was stuck in operations. The program taught me how to think analytically and back decisions with data. Now I do exactly that at EXL.", initials: "RC", color: "#8B5CF6" },
-  { name: "Rehan Siddiqui", from: "Non-Tech Background", to: "Data Analyst", company: "Amazon", desc: "Zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems.", initials: "RS", color: "#F58220" },
-  { name: "Shivani Rawat", from: "Operations & Product", to: "Business Analyst", company: "Booking.com", desc: "Operations felt like a dead end. The program gave me the technical edge I needed, and now I'm doing requirement analysis at Booking.com.", initials: "SR", color: "#EC4899" },
-  { name: "Shalendra Gupta", from: "Sales Executive", to: "Business Analyst", company: "Vishal Mega Mart", desc: "Went from selling on the floor to analyzing what sells. Excel and Power BI changed how I see business — and my career.", initials: "SG", color: "#06B6D4" },
-  { name: "Syed Nehal", from: "HR & Accounting", to: "Data Analyst", company: "Safegraph", desc: "HR and accounting weren't going anywhere for me. Project-based learning made the switch possible. Now I'm a data analyst working globally.", initials: "SN", color: "#6366F1" },
-  { name: "Vansh Pathak", from: "Accounting Intern", to: "Reporting Analyst", company: "Accenture", desc: "From crunching numbers in spreadsheets to building real SQL reports at Accenture. The jump felt huge, but the mentors made it doable.", initials: "VP", color: "#14B8A6" },
+  { name: "Aditya Srivastava", from: "Full-Stack Developer", to: "Junior Data Scientist", company: "Globussoft", desc: "I could build apps, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works. Now I'm doing data science full-time.", initials: "AS", color: "#F59E0B", category: "tech" },
+  { name: "Arpit Jain", from: "Hospitality Professional", to: "Business Analyst", company: "EaseMyTrip", desc: "Hospitality was all I knew. I picked up SQL and analytics from scratch, and now I'm analyzing booking trends at EaseMyTrip. Completely different life.", initials: "AJ", color: "#3B82F6", category: "career-switch" },
+  { name: "Junaid Khan", from: "Operations & Banking", to: "Business Analyst", company: "Razorpay", desc: "Banking ops had no growth path for me. Six months of focused learning later, I'm a business analyst at Razorpay doing work that actually excites me.", initials: "JK", color: "#10B981", category: "career-switch" },
+  { name: "Rajeev Chauhan", from: "Operations Executive", to: "Business Research Analyst", company: "EXL", desc: "I was stuck in operations. The program taught me how to think analytically and back decisions with data. Now I do exactly that at EXL.", initials: "RC", color: "#8B5CF6", category: "upskill" },
+  { name: "Rehan Siddiqui", from: "Non-Tech Background", to: "Data Analyst", company: "Amazon", desc: "Zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems.", initials: "RS", color: "#F58220", category: "career-switch" },
+  { name: "Shivani Rawat", from: "Operations & Product", to: "Business Analyst", company: "Booking.com", desc: "Operations felt like a dead end. The program gave me the technical edge I needed, and now I'm doing requirement analysis at Booking.com.", initials: "SR", color: "#EC4899", category: "upskill" },
+  { name: "Shalendra Gupta", from: "Sales Executive", to: "Business Analyst", company: "Vishal Mega Mart", desc: "Went from selling on the floor to analyzing what sells. Excel and Power BI changed how I see business — and my career.", initials: "SG", color: "#06B6D4", category: "career-switch" },
+  { name: "Syed Nehal", from: "HR & Accounting", to: "Data Analyst", company: "Safegraph", desc: "HR and accounting weren't going anywhere for me. Project-based learning made the switch possible. Now I'm a data analyst working globally.", initials: "SN", color: "#6366F1", category: "career-switch" },
+  { name: "Vansh Pathak", from: "Accounting Intern", to: "Reporting Analyst", company: "Accenture", desc: "From crunching numbers in spreadsheets to building real SQL reports at Accenture. The jump felt huge, but the mentors made it doable.", initials: "VP", color: "#14B8A6", category: "upskill" },
 ];
 
 const stats = [
-  { target: 500, suffix: "+", label: "Careers Launched", icon: "rocket" },
-  { target: 400, suffix: "+", label: "Hiring Partners", icon: "handshake" },
-  { target: 85, suffix: "%", label: "Avg Salary Jump", icon: "trending" },
-  { target: 100, suffix: "%", label: "Only 100% Placement", icon: "check" },
+  { target: 500, suffix: "+", label: "Careers Launched", icon: "rocket", description: "Professionals placed in top companies" },
+  { target: 400, suffix: "+", label: "Hiring Partners", icon: "building", description: "Companies actively recruiting from us" },
+  { target: 85, suffix: "%", label: "Avg Salary Jump", icon: "trending", description: "Average increase in compensation" },
+  { target: 100, suffix: "%", label: "Placement Rate", icon: "target", description: "Of committed learners get placed" },
+];
+
+const categories = [
+  { id: "all", label: "All Stories" },
+  { id: "career-switch", label: "Career Switchers" },
+  { id: "upskill", label: "Upskilled" },
+  { id: "tech", label: "Tech Background" },
+];
+
+const journeySteps = [
+  { step: "01", title: "Apply & Get Assessed", desc: "Take a quick aptitude test. We identify your strengths and craft a personalized path.", icon: "clipboard" },
+  { step: "02", title: "Learn by Building", desc: "No passive lectures. You build 12+ real projects with industry datasets from day one.", icon: "code" },
+  { step: "03", title: "Get Mentored", desc: "Weekly 1-on-1 sessions with industry mentors from Amazon, Google, and Deloitte.", icon: "users" },
+  { step: "04", title: "Land Your Dream Role", desc: "Dedicated placement team preps you with mock interviews, resume reviews, and direct referrals.", icon: "briefcase" },
 ];
 
 /* Company logos mapping */
@@ -83,185 +98,199 @@ const companyLogos: Record<string, string> = {
   Capgemini: "/images/companies/capgemini.svg",
 };
 
-/* Logos that need inversion on white bg */
 const darkLogos = new Set(["Amazon", "Microsoft", "IBM", "Wipro"]);
 
-const partnerRow1 = [
-  "Google", "Amazon", "Accenture", "Deloitte", "TCS",
-  "Tech Mahindra", "Saint-Gobain", "BNY Mellon", "Infosys", "Microsoft",
-];
-const partnerRow2 = [
-  "Turing", "IDFC First Bank", "AXA", "Juniper Networks",
-  "iOPEX", "Fractal", "Sony Pictures", "AT&T", "SpringWorks", "Capgemini",
-];
-const partnerRow3 = [
-  "Uptime AI", "MUFG", "MiQ", "HUL",
-  "Genpact", "Sprinklr", "Bandhan Bank", "GlobalLogic", "Wipro", "IBM",
-];
+const partnerRow1 = ["Google", "Amazon", "Accenture", "Deloitte", "TCS", "Tech Mahindra", "Saint-Gobain", "BNY Mellon", "Infosys", "Microsoft"];
+const partnerRow2 = ["Turing", "IDFC First Bank", "AXA", "Juniper Networks", "iOPEX", "Fractal", "Sony Pictures", "AT&T", "SpringWorks", "Capgemini"];
+const partnerRow3 = ["Uptime AI", "MUFG", "MiQ", "HUL", "Genpact", "Sprinklr", "Bandhan Bank", "GlobalLogic", "Wipro", "IBM"];
 
 /* ═══════════════════════════════════════════════════════════════════
    MICRO-COMPONENTS
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Animated SVG progress ring for stats */
-function ProgressRing({ progress, color, size = 140, strokeWidth = 3 }: { progress: number; color: string; size?: number; strokeWidth?: number }) {
-  const ref = useRef<SVGCircleElement>(null);
-  const isInView = useInView(ref as any, { once: true, margin: "-100px" });
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
+/* ── Mouse-tracking Spotlight Card ── */
+function SpotlightCard({
+  children,
+  className = "",
+  spotlightColor = "rgba(245, 130, 32, 0.07)",
+  borderRadius = "24px",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  spotlightColor?: string;
+  borderRadius?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      const rect = ref.current?.getBoundingClientRect();
+      if (!rect) return;
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+    },
+    [mouseX, mouseY]
+  );
+
+  const spotlightBg = useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, ${spotlightColor}, transparent 80%)`;
 
   return (
-    <svg width={size} height={size} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90">
-      {/* Track */}
-      <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth={strokeWidth} />
-      {/* Progress */}
-      <circle
-        ref={ref}
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        fill="none"
-        stroke={color}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        strokeDasharray={circumference}
-        strokeDashoffset={isInView ? circumference * (1 - progress / 100) : circumference}
-        style={{ transition: "stroke-dashoffset 2s cubic-bezier(0.22, 1, 0.36, 1)" }}
+    <div ref={ref} onMouseMove={handleMouseMove} className={`relative group ${className}`}>
+      <motion.div
+        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[1]`}
+        style={{ background: spotlightBg, borderRadius }}
       />
-    </svg>
+      <motion.div
+        className={`absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+        style={{
+          background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, ${spotlightColor}, transparent 70%)`,
+          borderRadius,
+        }}
+      />
+      {children}
+    </div>
   );
 }
 
-/* Animated horizontal line divider */
-function AnimatedDivider({ className = "" }: { className?: string }) {
+/* ── Floating Testimonial Pill (for hero) ── */
+function FloatingPill({
+  person,
+  className,
+  delay = 0,
+}: {
+  person: (typeof testimonials)[0];
+  className: string;
+  delay?: number;
+}) {
+  const logo = companyLogos[person.company];
   return (
     <motion.div
-      className={`relative h-px overflow-hidden ${className}`}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
+      className={`absolute z-20 ${className}`}
+      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ delay, duration: 1, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent"
-        initial={{ x: "-100%" }}
-        whileInView={{ x: "100%" }}
-        viewport={{ once: true }}
-        transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+        className="ss2-floating-pill flex items-center gap-3 px-4 py-3 rounded-2xl"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4 + delay, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0"
+          style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}BB)` }}
+        >
+          {person.initials}
+        </div>
+        <div className="min-w-0">
+          <p className="text-white text-sm font-semibold truncate">{person.name}</p>
+          <div className="flex items-center gap-1.5">
+            {logo && (
+              <img src={logo} alt="" width={12} height={12} className="w-3 h-3 object-contain brightness-0 invert opacity-40" />
+            )}
+            <p className="text-white/40 text-[11px] truncate">{person.to} at {person.company}</p>
+          </div>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
 
-/* Story Card — Glassmorphism card with reveal animation */
-function StoryCard({ t, i }: { t: (typeof testimonials)[0]; i: number }) {
-  const logo = companyLogos[t.company];
+/* ── Transformation Card (Featured Section) ── */
+function TransformationCard({ person, isActive }: { person: (typeof testimonials)[0]; isActive: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [4, -4]), { stiffness: 250, damping: 20 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-4, 4]), { stiffness: 250, damping: 20 });
+
+  const onMove = useCallback((e: React.MouseEvent) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  }, [x, y, mouseX, mouseY]);
+
+  const onLeave = useCallback(() => { x.set(0); y.set(0); }, [x, y]);
+  const logo = companyLogos[person.company];
+  const spotlightBg = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, ${person.color}12, transparent 70%)`;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 80, rotateX: 8 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: 0.9,
-        delay: i * 0.08,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="h-full perspective-[1200px]"
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      style={{ rotateX, rotateY, transformPerspective: 1200 }}
+      className="h-full"
+      layout
     >
-      <div className="ss-story-card-v2 group relative h-full rounded-[24px] overflow-hidden">
-        {/* Animated gradient border on hover */}
-        <div
-          className="absolute inset-0 rounded-[24px] p-px opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-          style={{
-            background: `linear-gradient(135deg, ${t.color}40, transparent 40%, transparent 60%, ${t.color}20)`,
-          }}
-        >
-          <div className="w-full h-full rounded-[23px] bg-white" />
-        </div>
+      <div className="ss2-transformation-card relative rounded-[28px] overflow-hidden h-full group">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#080f1e] via-[#0d1b2a] to-[#080f1e]" />
+        <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[1]" style={{ background: spotlightBg }} />
+        <div className="absolute inset-0 ss-mesh-glow" />
+        <div className="absolute inset-0 ss-noise opacity-[0.02]" />
+        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl" style={{ background: `${person.color}08` }} />
 
-        {/* Inner content */}
-        <div className="relative h-full p-7 md:p-8 flex flex-col bg-white rounded-[24px]">
-          {/* Top: Company + accent dot */}
-          <div className="flex items-center justify-between mb-7">
-            <div className="flex items-center gap-3">
-              <div
-                className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0 transition-all duration-500"
-                style={{ background: `${t.color}08`, border: `1px solid ${t.color}15` }}
-              >
-                {logo ? (
-                  <img src={logo} alt={t.company} width={22} height={22} className={`w-[22px] h-[22px] object-contain ${darkLogos.has(t.company) ? "brightness-0 opacity-40" : "opacity-60"} group-hover:opacity-90 transition-opacity duration-500`} />
-                ) : (
-                  <span className="text-[9px] font-bold text-navy-900/30 uppercase tracking-wider">{t.company.slice(0, 3)}</span>
-                )}
+        <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            {logo && (
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.07] flex items-center justify-center backdrop-blur-sm">
+                  <img src={logo} alt={person.company} width={28} height={28} className="w-7 h-7 object-contain brightness-0 invert opacity-60" />
+                </div>
+                <div>
+                  <span className="text-white/60 font-semibold text-sm">{person.company}</span>
+                  <p className="text-white/20 text-[11px]">Hired through Linkway</p>
+                </div>
               </div>
-              <span className="text-[12px] text-gray-400 font-medium tracking-wide">{t.company}</span>
-            </div>
-            <div
-              className="w-2 h-2 rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-150 transition-all duration-500"
-              style={{ background: t.color }}
-            />
-          </div>
-
-          {/* Name */}
-          <h3 className="text-[18px] font-bold text-navy-900 leading-snug mb-2">{t.name}</h3>
-
-          {/* Journey: from → to with animated arrow */}
-          <div className="flex items-center gap-2.5 mb-6 flex-wrap">
-            <span className="text-[11px] font-medium text-gray-400 bg-gray-50/80 border border-gray-100 rounded-lg px-3 py-1.5 whitespace-nowrap">
-              {t.from}
-            </span>
-            <div className="relative w-8 h-px shrink-0">
-              <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, ${t.color}40, ${t.color})` }} />
-              <motion.div
-                className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
-                style={{ background: t.color }}
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </div>
-            <span
-              className="text-[11px] font-semibold rounded-lg px-3 py-1.5 whitespace-nowrap"
-              style={{ background: `${t.color}10`, color: t.color, border: `1px solid ${t.color}18` }}
-            >
-              {t.to}
+            )}
+            <span className="ss-placed-badge">
+              <span className="relative flex h-2 w-2 mr-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+              </span>
+              Placed
             </span>
           </div>
 
-          {/* Quote with decorative mark */}
-          <div className="relative flex-1">
-            <span
-              className="absolute -top-3 -left-1 text-[48px] font-serif leading-none select-none pointer-events-none opacity-[0.06]"
-              style={{ color: t.color }}
-            >
-              &ldquo;
-            </span>
-            <p className="text-gray-400 leading-[1.8] text-[13.5px] group-hover:text-gray-500 transition-colors duration-500 pl-1">
-              {t.desc}
-            </p>
+          {/* Identity transformation */}
+          <div className="flex-1 mb-8">
+            <div className="mb-6">
+              <span className="text-[10px] text-white/20 font-semibold tracking-[0.2em] uppercase block mb-2">Identity Shift</span>
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/40 text-sm font-medium">{person.from}</span>
+                <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="shrink-0">
+                  <path d="M0 6H22M22 6L17 1M22 6L17 11" stroke={person.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+                </svg>
+                <span className="px-3 py-1.5 rounded-lg text-sm font-bold" style={{ background: `${person.color}15`, color: person.color, border: `1px solid ${person.color}25` }}>
+                  {person.to}
+                </span>
+              </div>
+            </div>
+
+            <blockquote className="text-white/50 text-[15px] leading-[1.8] relative pl-4 border-l-2" style={{ borderColor: `${person.color}30` }}>
+              &ldquo;{person.desc}&rdquo;
+            </blockquote>
           </div>
 
-          {/* Bottom: avatar + arrow */}
-          <div className="mt-6 pt-5 border-t border-gray-100/80 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div
-                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-[10px] shrink-0 ring-2 ring-offset-2"
-                style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}CC)`, ["--tw-ring-color" as any]: `${t.color}20` }}
-              >
-                {t.initials}
+          {/* Bottom metrics */}
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { label: "Program", value: "Data Analytics" },
+              { label: "Duration", value: "6 Months" },
+              { label: "Salary Hike", value: "120%" },
+            ].map((m) => (
+              <div key={m.label} className="text-center p-3.5 rounded-2xl bg-white/[0.025] border border-white/[0.04] hover:bg-white/[0.05] transition-all duration-500">
+                <span className="text-white/60 font-bold text-sm block">{m.value}</span>
+                <span className="text-white/15 text-[10px] font-medium tracking-wider uppercase">{m.label}</span>
               </div>
-              <div className="flex flex-col">
-                <span className="text-[11px] text-gray-300 font-medium">Career Switch</span>
-                <span className="text-[10px] text-gray-200 font-normal">via Linkway</span>
-              </div>
-            </div>
-            <div className="w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center group-hover:border-orange-200 group-hover:bg-orange-50 transition-all duration-500">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-300 group-hover:text-orange-500 transition-colors duration-500 group-hover:translate-x-0.5 transition-transform">
-                <path d="M3 7H11M11 7L8 4M11 7L8 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
+            ))}
           </div>
         </div>
       </div>
@@ -269,97 +298,234 @@ function StoryCard({ t, i }: { t: (typeof testimonials)[0]; i: number }) {
   );
 }
 
-/* Stat Item — with SVG progress ring */
-function StatItem({ stat, i }: { stat: (typeof stats)[0]; i: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const ringProgress = stat.suffix === "%" ? stat.target : Math.min((stat.target / 500) * 100, 100);
+/* ── Bento Story Card ── */
+function BentoStoryCard({ person, size = "normal" }: { person: (typeof testimonials)[0]; size?: "large" | "normal" }) {
+  const logo = companyLogos[person.company];
+  const isLarge = size === "large";
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50, scale: 0.9 }}
-      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ duration: 0.8, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-      className="group text-center relative"
-    >
-      <div className="relative inline-block mb-4">
-        <ProgressRing progress={isInView ? ringProgress : 0} color="rgba(245, 130, 32, 0.3)" />
-        <div className="relative z-10 w-[140px] h-[140px] flex items-center justify-center">
-          <span className="text-5xl md:text-6xl font-black text-white tabular-nums">
-            <Counter target={stat.target} suffix={stat.suffix} />
+    <SpotlightCard spotlightColor={`${person.color}10`} borderRadius="20px">
+      <motion.div
+        className={`ss2-bento-card relative rounded-[20px] overflow-hidden bg-white border border-gray-100/80 h-full ${isLarge ? "p-8 md:p-10" : "p-6 md:p-8"}`}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        whileHover={{ y: -4, transition: { duration: 0.3 } }}
+      >
+        {/* Subtle gradient wash at top */}
+        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${person.color}50, ${person.color}, ${person.color}50)` }} />
+
+        {/* Avatar + Identity */}
+        <div className="flex items-start gap-4 mb-5">
+          <div
+            className={`${isLarge ? "w-14 h-14" : "w-12 h-12"} rounded-2xl flex items-center justify-center text-white font-bold ${isLarge ? "text-lg" : "text-sm"} shrink-0`}
+            style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)`, boxShadow: `0 8px 24px ${person.color}25` }}
+          >
+            {person.initials}
+          </div>
+          <div className="min-w-0">
+            <h3 className={`${isLarge ? "text-lg" : "text-base"} font-bold text-navy-900`}>{person.name}</h3>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              {logo && (
+                <img src={logo} alt="" width={14} height={14} className={`w-3.5 h-3.5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-50" : "opacity-60"}`} />
+              )}
+              <span className="text-xs text-gray-400 font-medium">{person.company}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Transformation journey - horizontal */}
+        <div className="flex items-center gap-2 mb-5 flex-wrap">
+          <span className="text-[11px] font-medium text-gray-400 bg-gray-50 border border-gray-100 rounded-lg px-2.5 py-1">{person.from}</span>
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none" className="shrink-0">
+            <path d="M0 5H18M18 5L14 1M18 5L14 9" stroke={person.color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
+          </svg>
+          <span className="text-[11px] font-semibold rounded-lg px-2.5 py-1" style={{ background: `${person.color}10`, color: person.color, border: `1px solid ${person.color}18` }}>
+            {person.to}
           </span>
         </div>
-      </div>
-      <p className="text-gray-400 text-sm md:text-base font-medium tracking-wide group-hover:text-gray-300 transition-colors duration-500">
-        {stat.label}
-      </p>
-      {/* Subtle glow on hover */}
-      <div className="absolute -inset-4 bg-orange-500/[0.03] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10 blur-xl" />
+
+        {/* Quote */}
+        <div className="relative">
+          <span className="absolute -top-3 -left-1 text-[48px] font-serif leading-none select-none pointer-events-none" style={{ color: `${person.color}08` }}>&ldquo;</span>
+          <p className={`text-gray-500 leading-[1.85] relative z-10 ${isLarge ? "text-[15px]" : "text-sm"}`}>
+            {person.desc}
+          </p>
+        </div>
+
+        {/* Bottom */}
+        <div className="mt-5 pt-4 border-t border-gray-50 flex items-center justify-between">
+          <span className="text-[10px] text-gray-300 font-medium tracking-wider uppercase">Career Transformation</span>
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <svg key={star} width="12" height="12" viewBox="0 0 12 12" fill={person.color} opacity="0.3">
+                <path d="M6 0.5L7.5 4.5H11.5L8.5 7L9.5 11L6 8.5L2.5 11L3.5 7L0.5 4.5H4.5L6 0.5Z" />
+              </svg>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </SpotlightCard>
+  );
+}
+
+/* ── Journey Step Card ── */
+function JourneyStepCard({ step, index }: { step: (typeof journeySteps)[0]; index: number }) {
+  const icons: Record<string, React.ReactNode> = {
+    clipboard: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2" />
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+      </svg>
+    ),
+    code: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+      </svg>
+    ),
+    users: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
+    briefcase: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+      </svg>
+    ),
+  };
+
+  return (
+    <motion.div
+      className="relative"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <SpotlightCard spotlightColor="rgba(245, 130, 32, 0.06)" borderRadius="24px">
+        <div className="ss2-journey-card relative rounded-[24px] p-8 h-full overflow-hidden group">
+          {/* Step number watermark */}
+          <span className="absolute top-4 right-6 text-[80px] font-black text-navy-900/[0.03] leading-none select-none pointer-events-none">{step.step}</span>
+
+          {/* Animated top line */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-orange-500/0 to-transparent group-hover:via-orange-500/40 transition-all duration-700" />
+
+          <div className="relative z-10">
+            {/* Icon */}
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-50 to-orange-100/50 border border-orange-200/30 flex items-center justify-center text-orange-500 mb-6 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-orange-500/10 transition-all duration-500">
+              {icons[step.icon]}
+            </div>
+
+            {/* Step label */}
+            <span className="text-[11px] font-bold text-orange-500/60 tracking-[0.2em] uppercase block mb-2">Step {step.step}</span>
+
+            <h3 className="text-xl font-bold text-navy-900 mb-3 group-hover:text-orange-600 transition-colors duration-500">{step.title}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+          </div>
+        </div>
+      </SpotlightCard>
     </motion.div>
   );
 }
 
-/* Company Logo Card */
+/* ── Stat Card (Cinematic) ── */
+function StatCard({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const icons: Record<string, React.ReactNode> = {
+    rocket: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+        <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+      </svg>
+    ),
+    building: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
+      </svg>
+    ),
+    trending: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
+      </svg>
+    ),
+    target: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+      </svg>
+    ),
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <SpotlightCard spotlightColor="rgba(245, 130, 32, 0.05)" borderRadius="24px">
+        <div className="ss2-stat-card relative rounded-[20px] p-6 md:p-7 overflow-hidden group h-full">
+          <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-orange-500/[0.03] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+          <div className="relative z-10">
+            <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-orange-400/60 mb-5 group-hover:border-orange-500/20 group-hover:text-orange-400 transition-all duration-500 [&>svg]:w-5 [&>svg]:h-5">
+              {icons[stat.icon]}
+            </div>
+
+            <div className="mb-2">
+              <span className="text-3xl md:text-4xl font-black text-white tabular-nums">
+                <Counter target={stat.target} suffix={stat.suffix} />
+              </span>
+            </div>
+
+            <h3 className="text-white/80 text-sm font-semibold mb-1">{stat.label}</h3>
+            <p className="text-white/25 text-xs leading-relaxed">{stat.description}</p>
+          </div>
+        </div>
+      </SpotlightCard>
+    </motion.div>
+  );
+}
+
+/* ── Company Logo Card ── */
 function CompanyLogoCard({ name }: { name: string }) {
   const logo = companyLogos[name];
   const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 
   return (
-    <div className="ss-logo-card group">
-      <div className="ss-logo-icon">
+    <div className="ss2-logo-card group">
+      <div className="ss2-logo-icon">
         {logo ? (
-          <img
-            src={logo}
-            alt={name}
-            width={28}
-            height={28}
-            className={`w-7 h-7 object-contain ${darkLogos.has(name) ? "brightness-0" : ""}`}
-          />
+          <img src={logo} alt={name} width={28} height={28} className={`w-7 h-7 object-contain ${darkLogos.has(name) ? "brightness-0 invert" : ""}`} />
         ) : (
-          <span className="text-xs font-bold text-navy-900/40">{initials}</span>
+          <span className="text-xs font-bold text-white/30">{initials}</span>
         )}
       </div>
-      <span className="text-sm font-medium text-navy-900/70 group-hover:text-navy-900 transition-colors duration-300 truncate">
-        {name}
-      </span>
+      <span className="text-sm font-medium text-white/40 group-hover:text-white/70 transition-colors duration-300 truncate">{name}</span>
     </div>
   );
 }
 
-/* GSAP Infinite Logo Row */
-function InfiniteLogoRow({
-  items,
-  direction = "left",
-  speed = 55,
-  className = "",
-}: {
-  items: string[];
-  direction?: "left" | "right";
-  speed?: number;
-  className?: string;
-}) {
+/* ── GSAP Infinite Logo Row ── */
+function InfiniteLogoRow({ items, direction = "left", speed = 55, className = "" }: { items: string[]; direction?: "left" | "right"; speed?: number; className?: string }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useGSAP(() => {
     const track = trackRef.current;
     if (!track) return;
-
     requestAnimationFrame(() => {
       const oneSetWidth = track.scrollWidth / 2;
       tweenRef.current = gsap.fromTo(
         track,
         { x: direction === "left" ? 0 : -oneSetWidth },
-        {
-          x: direction === "left" ? -oneSetWidth : 0,
-          duration: speed,
-          ease: "none",
-          repeat: -1,
-        }
+        { x: direction === "left" ? -oneSetWidth : 0, duration: speed, ease: "none", repeat: -1 }
       );
     });
-
     return () => { tweenRef.current?.kill(); };
   }, { scope: trackRef });
 
@@ -374,149 +540,31 @@ function InfiniteLogoRow({
   );
 }
 
-/* Floating particle for hero */
-function FloatingParticle({ delay, x, y, size, color }: { delay: number; x: string; y: string; size: number; color: string }) {
-  return (
-    <motion.div
-      className="absolute rounded-full pointer-events-none"
-      style={{ left: x, top: y, width: size, height: size, background: color }}
-      animate={{
-        y: [0, -30, 0],
-        opacity: [0.3, 0.7, 0.3],
-        scale: [1, 1.2, 1],
-      }}
-      transition={{
-        duration: 4 + Math.random() * 3,
-        delay,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-  );
-}
-
-/* Interactive story card for featured section - with tilt */
-function FeaturedCard({ person }: { person: (typeof testimonials)[0] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [4, -4]), { stiffness: 300, damping: 20 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-4, 4]), { stiffness: 300, damping: 20 });
-
-  const onMove = useCallback((e: React.MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-  }, [x, y]);
-
-  const onLeave = useCallback(() => { x.set(0); y.set(0); }, [x, y]);
-
-  const logo = companyLogos[person.company];
+/* ── Horizontal Scroll Stats Section ── */
+function HorizontalStats() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], ["5%", "-15%"]);
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1200 }}
-      className="h-full"
-    >
-      <div className="ss-featured-card relative rounded-[28px] overflow-hidden h-full">
-        {/* Card dark background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0d1b2a] to-[#0a1628]" />
-
-        {/* Animated mesh gradient overlay */}
-        <div className="absolute inset-0 ss-mesh-glow" />
-
-        {/* Subtle grid */}
-        <div className="absolute inset-0 about-dark-grid opacity-[0.04]" />
-
-        {/* Top-right glow blob */}
-        <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl" style={{ background: `${person.color}10` }} />
-
-        <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
-          {/* Top: Logo + Placed badge */}
-          <div className="flex items-center justify-between mb-8">
-            {logo && (
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center backdrop-blur-sm">
-                  <img src={logo} alt={person.company} width={28} height={28} className="w-7 h-7 object-contain brightness-0 invert opacity-70" />
-                </div>
-                <div>
-                  <span className="text-white/70 font-semibold text-sm">{person.company}</span>
-                  <p className="text-white/25 text-[11px]">Hired through Linkway</p>
-                </div>
-              </div>
-            )}
-            <span className="ss-placed-badge">
-              <span className="relative flex h-2 w-2 mr-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-              </span>
-              Placed
-            </span>
+    <div ref={containerRef} className="overflow-hidden">
+      <motion.div ref={scrollRef} className="flex gap-6 md:gap-8 px-6" style={{ x }}>
+        {stats.map((stat, i) => (
+          <div key={stat.label} className="min-w-[280px] md:min-w-[320px] flex-shrink-0">
+            <StatCard stat={stat} index={i} />
           </div>
-
-          {/* Journey timeline - vertical */}
-          <div className="relative mb-8 flex-1">
-            {/* Before */}
-            <motion.div
-              className="relative pl-8 pb-8"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-            >
-              {/* Timeline dot + line */}
-              <div className="absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-white/10 bg-white/[0.03]" />
-              <div className="absolute left-[7px] top-5 w-px h-[calc(100%-8px)] bg-gradient-to-b from-white/10 to-orange-500/30" />
-              <span className="text-[10px] text-white/25 font-semibold tracking-[0.2em] uppercase block mb-1.5">Before Linkway</span>
-              <span className="text-white/50 text-base font-medium">{person.from}</span>
-            </motion.div>
-
-            {/* After */}
-            <motion.div
-              className="relative pl-8"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.7 }}
-            >
-              <div className="absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-orange-500/40 bg-orange-500/20" />
-              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase block mb-1.5" style={{ color: `${person.color}80` }}>After Linkway</span>
-              <span className="text-base font-bold" style={{ color: person.color }}>{person.to}</span>
-            </motion.div>
-          </div>
-
-          {/* Key metrics row */}
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { label: "Program", value: "Data Analytics" },
-              { label: "Duration", value: "6 Months" },
-              { label: "Salary Hike", value: "120%" },
-            ].map((m, mi) => (
-              <motion.div
-                key={m.label}
-                className="text-center p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:bg-white/[0.06] transition-colors duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6 + mi * 0.1, duration: 0.6 }}
-              >
-                <span className="text-white/70 font-bold text-sm block">{m.value}</span>
-                <span className="text-white/20 text-[10px] font-medium tracking-wider uppercase">{m.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   MAIN PAGE COMPONENT
+   MAIN PAGE
    ═══════════════════════════════════════════════════════════════════ */
 export default function SuccessStoriesPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -525,223 +573,347 @@ export default function SuccessStoriesPage() {
     offset: ["start start", "end start"],
   });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const heroBlur = useTransform(scrollYProgress, [0, 0.6], [0, 10]);
 
-  // featured = Rehan Siddiqui (Amazon)
-  const featured = testimonials[4];
-  const remaining = testimonials.filter((_, i) => i !== 4);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeFeatured, setActiveFeatured] = useState(0);
 
+  const featured = [testimonials[4], testimonials[2], testimonials[5]]; // Rehan, Junaid, Shivani
+  const filteredTestimonials = activeCategory === "all"
+    ? testimonials
+    : testimonials.filter((t) => t.category === activeCategory);
+
+  // Auto-rotate featured
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveFeatured((prev) => (prev + 1) % featured.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [featured.length]);
 
   return (
     <ThemeProvider theme="light">
-      <div className="ss-page-v4">
+      <div className="ss2-page">
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 1 — HERO  (Animated mesh gradient, no image)      ║
+            ║  SECTION 1 — HERO (Cinematic with floating cards)          ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060d18]"
+          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a14]"
         >
-          {/* Animated mesh gradient background — pure CSS */}
-          <div className="absolute inset-0 ss-hero-mesh" />
+          {/* Animated mesh gradient */}
+          <div className="absolute inset-0 ss-stripe-gradient" />
 
-          {/* Animated gradient orbs */}
+          {/* Gradient orbs */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="ss-orb ss-orb-1" />
             <div className="ss-orb ss-orb-2" />
             <div className="ss-orb ss-orb-3" />
+            <div className="ss-orb ss-orb-4" />
           </div>
 
-          {/* Noise texture overlay */}
-          <div className="absolute inset-0 ss-noise opacity-[0.03]" />
+          {/* Grid + noise + vignette */}
+          <div className="absolute inset-0 ss-noise opacity-[0.025]" />
+          <div className="absolute inset-0 z-[2] ss-grid-pattern" />
+          <div className="absolute inset-0 z-[3] bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,transparent_30%,#050a14_100%)]" />
 
-          {/* Grid pattern */}
-          <div className="absolute inset-0 z-[2] about-dark-grid opacity-[0.025]" />
-
-          {/* Floating particles */}
-          <div className="absolute inset-0 z-[3] pointer-events-none">
-            <FloatingParticle delay={0} x="10%" y="20%" size={4} color="rgba(245,130,32,0.4)" />
-            <FloatingParticle delay={1} x="85%" y="30%" size={3} color="rgba(59,130,246,0.3)" />
-            <FloatingParticle delay={0.5} x="50%" y="15%" size={2} color="rgba(255,255,255,0.2)" />
-            <FloatingParticle delay={2} x="25%" y="70%" size={3} color="rgba(245,130,32,0.3)" />
-            <FloatingParticle delay={1.5} x="70%" y="65%" size={4} color="rgba(139,92,246,0.2)" />
-            <FloatingParticle delay={0.8} x="40%" y="80%" size={2} color="rgba(255,255,255,0.15)" />
-            <FloatingParticle delay={3} x="90%" y="75%" size={3} color="rgba(245,130,32,0.25)" />
-            <FloatingParticle delay={2.5} x="15%" y="50%" size={2} color="rgba(16,185,129,0.2)" />
+          {/* Scan lines */}
+          <div className="absolute inset-0 z-[2] pointer-events-none">
+            <div className="ss-scanline ss-scanline-1" />
+            <div className="ss-scanline ss-scanline-2" />
           </div>
 
-          {/* Horizontal line accents */}
-          <motion.div
-            className="absolute left-0 right-0 top-[30%] h-px bg-gradient-to-r from-transparent via-orange-500/10 to-transparent z-[2]"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 1.5, duration: 2, ease: [0.22, 1, 0.36, 1] }}
-          />
-          <motion.div
-            className="absolute left-0 right-0 bottom-[25%] h-px bg-gradient-to-r from-transparent via-white/[0.04] to-transparent z-[2]"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 2, duration: 2, ease: [0.22, 1, 0.36, 1] }}
-          />
+          {/* Floating testimonial pills - desktop only */}
+          <div className="hidden lg:block">
+            <FloatingPill person={testimonials[4]} className="top-[18%] left-[5%]" delay={2} />
+            <FloatingPill person={testimonials[2]} className="top-[25%] right-[4%]" delay={2.5} />
+            <FloatingPill person={testimonials[7]} className="bottom-[22%] left-[8%]" delay={3} />
+            <FloatingPill person={testimonials[0]} className="bottom-[18%] right-[6%]" delay={3.3} />
+          </div>
 
           {/* Content */}
           <motion.div
             className="relative z-10 text-center max-w-5xl mx-auto px-6"
-            style={{ opacity: heroOpacity, scale: heroScale }}
+            style={{ opacity: heroOpacity, scale: heroScale, filter: useMotionTemplate`blur(${heroBlur}px)` }}
           >
-            {/* Eyebrow badge with scramble text */}
+            {/* Eyebrow */}
             <SpringReveal distance={30} damping={18} delay={0.1}>
-              <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.04] border border-white/[0.06] backdrop-blur-xl mb-10">
+              <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-xl mb-10">
                 <span className="w-2 h-2 rounded-full bg-orange-500 about-pulse-dot" />
                 <TextScramble className="text-sm text-gray-300 font-medium" delay={0.5} speed={25}>
-                  500+ careers transformed
+                  500+ careers transformed and counting
                 </TextScramble>
               </span>
             </SpringReveal>
 
-            {/* Main heading — StaggerLines for dramatic waterfall entry */}
-            <StaggerLines
-              baseDelay={0.3}
-              staggerDelay={0.12}
-              skewY={-4}
-              distance={120}
-            >
-              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[0.95] tracking-tight">
-                They Did It.
+            {/* Main heading */}
+            <StaggerLines baseDelay={0.3} staggerDelay={0.14} skewY={-5} distance={140}>
+              <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black text-white leading-[0.92] tracking-tight">
+                They Were You.
               </h1>
-              <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-black hero-gradient-text leading-[0.95] tracking-tight">
-                So Can You.
+              <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black leading-[0.92] tracking-tight">
+                <span className="hero-gradient-text">Now They&apos;re Here.</span>
               </h1>
             </StaggerLines>
 
-            {/* Subtitle — staggered line mask */}
+            {/* Subtitle */}
             <LineMaskReveal delay={1} staggerDelay={0.2} className="mt-10 max-w-2xl mx-auto">
-              <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-                Every name here is a real person who was exactly where you are now.
+              <p className="text-lg md:text-xl text-gray-500 leading-relaxed">
+                Real people. Real career transformations.
               </p>
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed">
-                Here&apos;s where they ended up.
+              <p className="text-lg md:text-xl text-white/50 leading-relaxed">
+                From zero tech background to top companies.
               </p>
             </LineMaskReveal>
 
-            {/* CTA button in hero */}
+            {/* Hero stats row */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-14 flex items-center justify-center gap-8 md:gap-14 flex-wrap"
+            >
+              {[
+                { value: "500+", label: "Placed" },
+                { value: "85%", label: "Salary Jump" },
+                { value: "400+", label: "Partners" },
+              ].map((s, i) => (
+                <div key={s.label} className="text-center">
+                  <span className="text-2xl md:text-3xl font-black text-white">{s.value}</span>
+                  <p className="text-xs text-white/25 font-medium mt-1 tracking-wider uppercase">{s.label}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Dual CTA */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-12"
+              className="mt-10 flex items-center justify-center gap-4 flex-wrap"
             >
               <a
                 href="#stories"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white/[0.06] border border-white/[0.08] backdrop-blur-sm text-white/80 font-medium text-sm hover:bg-white/[0.1] hover:border-white/[0.12] transition-all duration-500 group"
+                className="ss-hero-cta group inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl text-white font-semibold text-base transition-all duration-500 hover:-translate-y-0.5"
               >
-                Explore Their Stories
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-500 group-hover:translate-y-0.5">
-                  <path d="M8 3V13M8 13L4 9M8 13L12 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                Explore Stories
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="transition-transform duration-500 group-hover:translate-y-0.5">
+                  <path d="M9 3V15M9 15L4 10M9 15L14 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
+              <a
+                href="/#contact"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl border border-white/[0.08] text-white/50 font-medium text-base hover:bg-white/[0.04] hover:text-white/70 transition-all duration-500"
+              >
+                Start Your Journey
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </motion.div>
+
+            {/* Scroll indicator */}
+            <motion.div
+              className="absolute bottom-10 left-1/2 -translate-x-1/2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.5 }}
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="w-6 h-10 rounded-full border border-white/10 flex items-start justify-center p-1.5"
+              >
+                <motion.div
+                  className="w-1 h-2 rounded-full bg-white/30"
+                  animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </motion.div>
             </motion.div>
           </motion.div>
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 2 — FEATURED SPOTLIGHT  (White, editorial)        ║
+            ║  SECTION 2 — FEATURED TRANSFORMATIONS (Interactive)        ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section className="relative py-28 md:py-40 bg-white overflow-hidden">
-          {/* Subtle pattern */}
-          <div className="absolute inset-0 about-light-dots opacity-20" />
+          <div className="absolute inset-0 about-light-dots opacity-15" />
 
           {/* Decorative elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
-              className="absolute top-[10%] right-[8%] w-[200px] h-[200px] rounded-full border border-orange-100/40"
+              className="absolute top-[8%] right-[6%] w-[240px] h-[240px] rounded-full border border-orange-100/30"
               animate={{ rotate: 360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
             />
-            <div className="absolute bottom-[20%] left-[5%] w-[140px] h-[140px] rounded-full bg-orange-50/50 blur-3xl" />
+            <motion.div
+              className="absolute top-[12%] right-[8%] w-[180px] h-[180px] rounded-full border border-orange-100/20"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="absolute bottom-[15%] left-[3%] w-[180px] h-[180px] rounded-full bg-orange-50/40 blur-3xl" />
           </div>
 
           <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-center">
-              {/* Left — Typography & quote */}
+            {/* Section header */}
+            <div className="text-center mb-16">
+              <ScrollReveal>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200/50 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
+                  <span className="text-orange-600 text-xs font-semibold tracking-[0.2em] uppercase">Featured Transformations</span>
+                </span>
+              </ScrollReveal>
+
+              <SpringReveal distance={40} damping={14} delay={0.1}>
+                <h2 className="text-3xl md:text-5xl font-black text-navy-900 leading-tight mb-4">
+                  From &ldquo;I can&apos;t&rdquo; to &ldquo;I did&rdquo;
+                </h2>
+              </SpringReveal>
+
+              <ScrollReveal delay={0.2}>
+                <p className="text-gray-400 text-lg max-w-lg mx-auto">
+                  Click on each story to see the full transformation journey.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-start">
+              {/* Left — Story selector + quote */}
               <div>
-                <ScrollReveal>
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200/50 mb-8">
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
-                    <span className="text-orange-600 text-xs font-semibold tracking-[0.2em] uppercase">Featured Story</span>
-                  </span>
-                </ScrollReveal>
-
-                {/* Oversized quote */}
-                <SpringReveal distance={50} damping={14} delay={0.2}>
-                  <div className="relative mb-8">
-                    <span className="absolute -top-12 -left-4 text-[180px] md:text-[220px] font-serif leading-none text-orange-500/[0.06] select-none pointer-events-none">&ldquo;</span>
-                    <blockquote className="relative z-10 text-xl md:text-2xl lg:text-[1.75rem] font-medium text-navy-900 leading-[1.65] pl-2">
-                      {featured.desc}
-                    </blockquote>
-                  </div>
-                </SpringReveal>
-
-                {/* Animated gradient line */}
-                <motion.div
-                  className="h-[2px] mb-8 rounded-full overflow-hidden"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: 80 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className="w-full h-full bg-gradient-to-r from-orange-500 to-orange-300" />
-                </motion.div>
-
-                {/* Person info */}
-                <SpringReveal distance={20} damping={18} delay={0.5}>
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-lg shrink-0 shadow-lg"
-                      style={{ background: `linear-gradient(135deg, ${featured.color}, ${featured.color}CC)`, boxShadow: `0 8px 24px ${featured.color}25` }}
+                {/* Person tabs */}
+                <div className="space-y-3 mb-10">
+                  {featured.map((person, i) => (
+                    <motion.button
+                      key={person.name}
+                      onClick={() => setActiveFeatured(i)}
+                      className={`w-full text-left p-5 rounded-2xl border transition-all duration-500 relative overflow-hidden ${
+                        activeFeatured === i
+                          ? "bg-white border-gray-200 shadow-lg shadow-gray-100/50"
+                          : "bg-transparent border-gray-100 hover:bg-gray-50/50"
+                      }`}
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      {featured.initials}
+                      {/* Progress bar for active */}
+                      {activeFeatured === i && (
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-[2px]"
+                          style={{ background: person.color }}
+                          initial={{ width: "0%" }}
+                          animate={{ width: "100%" }}
+                          transition={{ duration: 6, ease: "linear" }}
+                          key={`progress-${i}-${activeFeatured}`}
+                        />
+                      )}
+
+                      <div className="flex items-center gap-4">
+                        <div
+                          className={`w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0 transition-all duration-500 ${
+                            activeFeatured === i ? "scale-110" : "scale-100 opacity-60"
+                          }`}
+                          style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)` }}
+                        >
+                          {person.initials}
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className={`font-bold transition-colors duration-300 ${activeFeatured === i ? "text-navy-900" : "text-gray-400"}`}>
+                            {person.name}
+                          </h4>
+                          <p className="text-sm text-gray-400 truncate">
+                            {person.from} → {person.to}
+                          </p>
+                        </div>
+                        <div className="ml-auto flex items-center gap-2">
+                          {companyLogos[person.company] && (
+                            <img
+                              src={companyLogos[person.company]}
+                              alt=""
+                              width={20}
+                              height={20}
+                              className={`w-5 h-5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-40" : "opacity-50"}`}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Active person quote */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeFeatured}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="relative mb-6">
+                      <span className="absolute -top-10 -left-3 text-[140px] font-serif leading-none text-orange-500/[0.05] select-none pointer-events-none">&ldquo;</span>
+                      <blockquote className="relative z-10 text-xl md:text-2xl font-medium text-navy-900 leading-[1.65] pl-1">
+                        {featured[activeFeatured].desc}
+                      </blockquote>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-navy-900">{featured.name}</h3>
-                      <p className="text-sm text-gray-400">{featured.to} at {featured.company}</p>
+
+                    <motion.div
+                      className="h-[2px] mb-6 rounded-full overflow-hidden"
+                      initial={{ width: 0 }}
+                      animate={{ width: 80 }}
+                      transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <div className="w-full h-full" style={{ background: `linear-gradient(90deg, ${featured[activeFeatured].color}, ${featured[activeFeatured].color}80)` }} />
+                    </motion.div>
+
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <h3 className="text-lg font-bold text-navy-900">{featured[activeFeatured].name}</h3>
+                        <p className="text-sm text-gray-400">{featured[activeFeatured].to} at {featured[activeFeatured].company}</p>
+                      </div>
                     </div>
-                  </div>
-                </SpringReveal>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
-              {/* Right — Immersive card */}
-              <SpringReveal distance={60} damping={14} delay={0.3}>
-                <FeaturedCard person={featured} />
-              </SpringReveal>
+              {/* Right — Immersive transformation card */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeFeatured}
+                  initial={{ opacity: 0, scale: 0.95, x: 30 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, x: -30 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="lg:sticky lg:top-32"
+                >
+                  <TransformationCard person={featured[activeFeatured]} isActive={true} />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 3 — ALL STORIES  (Light bg, modern grid)          ║
+            ║  SECTION 3 — ALL STORIES (Bento Grid + Filters)            ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section id="stories" className="relative py-28 md:py-40 bg-[#FAFBFC] overflow-hidden">
-          {/* Subtle gradient accent */}
+        <section id="stories" className="relative bg-[#FAFBFC] overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
 
           {/* Decorative */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[10%] right-[10%] w-[300px] h-[300px] bg-orange-50/30 rounded-full blur-3xl" />
-            <div className="absolute bottom-[10%] left-[5%] w-[250px] h-[250px] bg-blue-50/20 rounded-full blur-3xl" />
+            <div className="absolute top-[5%] right-[8%] w-[400px] h-[400px] bg-orange-50/20 rounded-full blur-3xl" />
+            <div className="absolute bottom-[10%] left-[3%] w-[300px] h-[300px] bg-blue-50/15 rounded-full blur-3xl" />
           </div>
 
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            {/* Section header */}
+          {/* Header + Filters */}
+          <div className="pt-28 md:pt-40 pb-12 max-w-7xl mx-auto px-6 relative z-10">
             <ScrollReveal>
               <div className="text-center mb-5">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900/[0.03] border border-navy-900/[0.06]">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                  <span className="text-navy-900/50 text-xs font-semibold tracking-[0.2em] uppercase">
-                    All Transformations
-                  </span>
+                  <span className="text-navy-900/50 text-xs font-semibold tracking-[0.2em] uppercase">All Transformations</span>
                 </span>
               </div>
             </ScrollReveal>
@@ -753,115 +925,200 @@ export default function SuccessStoriesPage() {
                 mode="word"
                 scrub={1.5}
               >
-                Real stories that started with a single decision
+                Every story started with a single decision
               </ScrollTextReveal>
             </div>
 
             <ScrollReveal delay={0.2}>
-              <p className="text-center text-gray-400 text-lg max-w-lg mx-auto mb-16">
+              <p className="text-center text-gray-400 text-lg max-w-lg mx-auto mb-12">
                 Different backgrounds. Different goals. Same transformation.
               </p>
             </ScrollReveal>
 
-            {/* Modern grid with staggered heights */}
-            <div className="ss-stories-grid">
-              {remaining.map((t, i) => (
-                <StoryCard key={t.name} t={t} i={i} />
+            {/* Filter pills */}
+            <div className="flex items-center justify-center gap-2 flex-wrap mb-16">
+              {categories.map((cat) => (
+                <motion.button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-400 border ${
+                    activeCategory === cat.id
+                      ? "bg-navy-900 text-white border-navy-900 shadow-lg shadow-navy-900/20"
+                      : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
+                  }`}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {cat.label}
+                  {activeCategory === cat.id && (
+                    <motion.span
+                      className="ml-2 inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-xs"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                    >
+                      {filteredTestimonials.length}
+                    </motion.span>
+                  )}
+                </motion.button>
               ))}
             </div>
+          </div>
+
+          {/* Bento Grid */}
+          <div className="max-w-7xl mx-auto px-6 relative z-10 pb-28 md:pb-40">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
+              layout
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredTestimonials.map((person, i) => (
+                  <motion.div
+                    key={person.name}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                    className={i === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-1" : ""}
+                  >
+                    <BentoStoryCard person={person} size={i === 0 ? "large" : "normal"} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           </div>
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 4 — STATS  (Dark, cinematic with progress rings)  ║
+            ║  SECTION 4 — IMPACT NUMBERS (Cinematic stat cards)         ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-28 md:py-40 bg-[#060d18] overflow-hidden">
-          {/* Animated mesh background */}
-          <div className="absolute inset-0 ss-hero-mesh opacity-40" />
-
-          {/* Grid */}
-          <div className="absolute inset-0 about-dark-grid opacity-[0.025]" />
-
-          {/* Horizontal accent lines */}
-          <div className="absolute top-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-500/[0.08] to-transparent" />
-          <div className="absolute bottom-[20%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent" />
+        <section className="relative py-16 md:py-24 bg-[#050a14] overflow-hidden">
+          <div className="absolute inset-0 ss-stripe-gradient opacity-30" />
+          <div className="absolute inset-0 ss-grid-pattern" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,transparent_20%,#050a14_80%)]" />
 
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <ScrollReveal>
-              <div className="text-center mb-4">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06]">
+              <div className="text-center mb-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.05]">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                  <span className="text-white/40 text-xs font-semibold tracking-[0.2em] uppercase">
-                    The Numbers
-                  </span>
+                  <span className="text-white/30 text-[11px] font-semibold tracking-[0.2em] uppercase">The Numbers</span>
                 </span>
               </div>
             </ScrollReveal>
 
-            <div className="text-center mb-20">
+            <div className="text-center mb-12">
               <CharacterSplit
-                className="text-3xl md:text-5xl font-black text-white leading-tight"
+                className="text-2xl md:text-4xl font-black text-white leading-tight"
                 highlightColor="white"
                 effect="blur"
                 delay={0}
                 staggerDelay={0.025}
               >
-                Impact That Speaks for Itself
+                Impact that speaks for itself
               </CharacterSplit>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+            {/* Stat cards grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
               {stats.map((stat, i) => (
-                <StatItem key={stat.label} stat={stat} i={i} />
+                <StatCard key={stat.label} stat={stat} index={i} />
               ))}
             </div>
-
-            {/* Bottom animated divider */}
-            <AnimatedDivider className="mt-20 max-w-md mx-auto" />
           </div>
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 5 — HIRING PARTNERS  (White, 3-row logo scroll)   ║
+            ║  SECTION 5 — YOUR JOURNEY (Step-by-step visualization)     ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-28 md:py-36 bg-white overflow-hidden">
-          <div className="absolute inset-0 about-light-dots opacity-20" />
+        <section className="relative py-28 md:py-40 bg-white overflow-hidden">
+          <div className="absolute inset-0 about-light-dots opacity-15" />
+
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            {/* Header */}
+            <div className="text-center mb-20">
+              <ScrollReveal>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200/50 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
+                  <span className="text-orange-600 text-xs font-semibold tracking-[0.2em] uppercase">How It Works</span>
+                </span>
+              </ScrollReveal>
+
+              <SpringReveal distance={40} damping={14} delay={0.1}>
+                <h2 className="text-3xl md:text-5xl font-black text-navy-900 leading-tight mb-4">
+                  Your transformation in four steps
+                </h2>
+              </SpringReveal>
+
+              <ScrollReveal delay={0.2}>
+                <p className="text-gray-400 text-lg max-w-lg mx-auto">
+                  A clear, proven path from where you are to where you want to be.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            {/* Journey steps grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+              {journeySteps.map((step, i) => (
+                <JourneyStepCard key={step.step} step={step} index={i} />
+              ))}
+            </div>
+
+            {/* Connecting line - desktop */}
+            <div className="hidden lg:block relative -mt-[calc(50%+1rem)] mb-[calc(50%+1rem)] mx-12 pointer-events-none">
+              <motion.div
+                className="h-[2px] bg-gradient-to-r from-orange-200/40 via-orange-400/40 to-orange-200/40"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                style={{ transformOrigin: "left" }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ╔══════════════════════════════════════════════════════════════╗
+            ║  SECTION 6 — HIRING PARTNERS (Dark theme with glow)        ║
+            ╚══════════════════════════════════════════════════════════════╝ */}
+        <section className="relative py-28 md:py-36 bg-[#050a14] overflow-hidden">
+          <div className="absolute inset-0 ss-stripe-gradient opacity-15" />
+          <div className="absolute inset-0 ss-grid-pattern" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,transparent_20%,#050a14_80%)]" />
 
           <div className="relative z-10">
             <div className="max-w-6xl mx-auto px-6">
               <ScrollReveal>
                 <div className="text-center mb-5">
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900/[0.03] border border-navy-900/[0.06]">
+                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05]">
                     <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                    <span className="text-navy-900/50 text-xs font-semibold tracking-[0.2em] uppercase">
-                      Hiring Partners
-                    </span>
+                    <span className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase">Hiring Partners</span>
                   </span>
                 </div>
               </ScrollReveal>
 
               <div className="text-center mb-4">
-                <ScrollTextReveal
-                  className="text-3xl md:text-5xl font-black text-navy-900 leading-tight"
-                  tag="h2"
-                  mode="word"
-                  scrub={1.5}
+                <CharacterSplit
+                  className="text-3xl md:text-5xl font-black text-white leading-tight"
+                  highlightColor="white"
+                  effect="blur"
+                  delay={0}
+                  staggerDelay={0.025}
                 >
-                  Where our graduates build their careers
-                </ScrollTextReveal>
+                  Where our graduates build careers
+                </CharacterSplit>
               </div>
 
               <ScrollReveal delay={0.2}>
-                <p className="text-center text-gray-400 text-lg max-w-lg mx-auto mb-16">
+                <p className="text-center text-white/25 text-lg max-w-lg mx-auto mb-16">
                   400+ companies actively recruit from Linkway. Here&apos;s a snapshot.
                 </p>
               </ScrollReveal>
             </div>
 
-            {/* 3-row infinite logo scroll */}
             <div className="w-full relative">
-              <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#050a14] to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#050a14] to-transparent z-10 pointer-events-none" />
 
               <div className="space-y-4">
                 <InfiniteLogoRow items={partnerRow1} direction="left" speed={60} />
@@ -873,72 +1130,79 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 6 — CTA  (Dark, animated gradient border)         ║
+            ║  SECTION 7 — CTA (Enhanced with social proof)              ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-28 md:py-40 bg-[#060d18] overflow-hidden">
-          {/* Background mesh */}
-          <div className="absolute inset-0 ss-hero-mesh opacity-30" />
-          <div className="absolute inset-0 about-dark-grid opacity-[0.02]" />
+        <section className="relative py-16 md:py-24 bg-[#050a14] overflow-hidden">
+          <div className="absolute inset-0 ss-stripe-gradient opacity-20" />
+          <div className="absolute inset-0 ss-grid-pattern" />
 
-          <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
+          {/* Section separator */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
+
+          <div className="max-w-2xl mx-auto px-6 relative z-10 text-center">
             <SpringReveal distance={60} damping={14}>
-              <div className="ss-cta-card relative rounded-[32px] p-12 md:p-16 overflow-hidden">
-                {/* Animated gradient border */}
-                <div className="absolute inset-0 rounded-[32px] ss-gradient-border" />
+              <div className="ss-cta-card relative rounded-[28px] p-1 overflow-hidden">
+                <div className="absolute inset-0 rounded-[28px] ss-spinning-border" />
 
-                {/* Inner bg */}
-                <div className="absolute inset-px rounded-[31px] bg-[#0a1628]" />
+                <div className="relative rounded-[27px] bg-[#0a1628]/95 backdrop-blur-xl p-8 md:p-10 overflow-hidden">
+                  {/* Ambient glow */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-36 bg-orange-500/[0.04] blur-3xl rounded-full pointer-events-none" />
 
-                {/* Top glow */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 bg-orange-500/[0.05] blur-3xl rounded-full pointer-events-none" />
+                  {/* Corner accents */}
+                  <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-orange-500/15 rounded-tl-lg" />
+                  <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-orange-500/15 rounded-tr-lg" />
+                  <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-orange-500/15 rounded-bl-lg" />
+                  <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-orange-500/15 rounded-br-lg" />
 
-                {/* Corner accents */}
-                <div className="absolute top-6 left-6 w-8 h-8 border-t border-l border-orange-500/20 rounded-tl-lg" />
-                <div className="absolute top-6 right-6 w-8 h-8 border-t border-r border-orange-500/20 rounded-tr-lg" />
-                <div className="absolute bottom-6 left-6 w-8 h-8 border-b border-l border-orange-500/20 rounded-bl-lg" />
-                <div className="absolute bottom-6 right-6 w-8 h-8 border-b border-r border-orange-500/20 rounded-br-lg" />
+                  <div className="relative z-10">
+                    {/* Avatar stack */}
+                    <div className="flex items-center justify-center mb-5">
+                      <div className="flex -space-x-2.5">
+                        {testimonials.slice(0, 5).map((t) => (
+                          <div
+                            key={t.initials}
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-bold border-2 border-[#0a1628]"
+                            style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}CC)` }}
+                          >
+                            {t.initials}
+                          </div>
+                        ))}
+                      </div>
+                      <span className="ml-2.5 text-white/30 text-xs font-medium">+495 more</span>
+                    </div>
 
-                <div className="relative z-10">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="w-16 h-16 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-500/5 border border-orange-500/10 flex items-center justify-center"
-                  >
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-orange-400">
-                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </motion.div>
-
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
-                    Ready to Write
-                    <br />
-                    <span className="hero-gradient-text">Your Story?</span>
-                  </h3>
-                  <p className="mt-6 text-gray-400 text-lg max-w-md mx-auto leading-relaxed">
-                    Join 500+ professionals who transformed their careers with
-                    Linkway Learning.
-                  </p>
-                  <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a
-                      href="/#contact"
-                      className="ss-cta-button group/btn inline-flex items-center gap-2.5 px-9 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-lg transition-all duration-500 hover:-translate-y-1"
-                    >
-                      Start Your Journey
-                      <svg
-                        width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        className="transition-transform duration-300 group-hover/btn:translate-x-1"
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight">
+                      Ready to Write <span className="hero-gradient-text">Your Story?</span>
+                    </h3>
+                    <p className="mt-3 text-gray-400 text-base max-w-sm mx-auto leading-relaxed">
+                      Join 500+ professionals who transformed their careers with Linkway Learning.
+                    </p>
+                    <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+                      <a
+                        href="/#contact"
+                        className="ss-cta-button group/btn inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-base transition-all duration-500 hover:-translate-y-1"
                       >
-                        <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </a>
-                    <a
-                      href="/programs"
-                      className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl border border-white/[0.08] text-white/60 font-medium text-base hover:bg-white/[0.04] hover:text-white/80 transition-all duration-500"
-                    >
-                      View Programs
-                    </a>
+                        Start Your Journey
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="transition-transform duration-300 group-hover/btn:translate-x-1">
+                          <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
+                      <a
+                        href="/programs"
+                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl border border-white/[0.06] text-white/50 font-medium text-sm hover:bg-white/[0.04] hover:text-white/70 hover:border-white/[0.1] transition-all duration-500"
+                      >
+                        View Programs
+                      </a>
+                    </div>
+
+                    {/* Trust badges */}
+                    <div className="mt-6 pt-5 border-t border-white/[0.04] flex items-center justify-center gap-4 flex-wrap">
+                      <span className="text-white/15 text-[11px] font-medium">100% Placement Rate</span>
+                      <span className="w-1 h-1 rounded-full bg-white/10" />
+                      <span className="text-white/15 text-[11px] font-medium">6-Month Programs</span>
+                      <span className="w-1 h-1 rounded-full bg-white/10" />
+                      <span className="text-white/15 text-[11px] font-medium">EMI Available</span>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1601,125 +1601,204 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SUCCESS STORIES PAGE v4 — Modern Aesthetic Redesign
+   SUCCESS STORIES PAGE v5 — Premium Award-Level Redesign
+   Inspired by: Linear.app, Stripe, Vercel, Apple — 40+ site research
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Hero Animated Mesh Gradient Background ── */
-.ss-hero-mesh {
+/* ── Stripe-Style Animated Gradient ── */
+.ss-stripe-gradient {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(245, 130, 32, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(59, 130, 246, 0.06) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 70% at 50% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 70% 60%, rgba(245, 130, 32, 0.04) 0%, transparent 50%);
-  animation: ss-mesh-drift 12s ease-in-out infinite alternate;
+    radial-gradient(ellipse 90% 70% at 25% 35%, rgba(245, 130, 32, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 75% 25%, rgba(59, 130, 246, 0.09) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 80% at 50% 85%, rgba(139, 92, 246, 0.07) 0%, transparent 45%),
+    radial-gradient(ellipse 60% 50% at 80% 65%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 15% 75%, rgba(236, 72, 153, 0.04) 0%, transparent 50%);
+  background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%;
+  animation: ss-stripe-shift 20s ease-in-out infinite;
 }
 
-@keyframes ss-mesh-drift {
+@keyframes ss-stripe-shift {
   0% {
-    background-position: 0% 0%, 100% 0%, 50% 100%, 70% 60%;
-    filter: hue-rotate(0deg);
+    background-position: 0% 0%, 100% 0%, 50% 100%, 80% 60%, 20% 80%;
+  }
+  25% {
+    background-position: 30% 20%, 70% 40%, 30% 70%, 60% 30%, 40% 60%;
   }
   50% {
-    background-position: 30% 20%, 70% 40%, 40% 70%, 60% 30%;
-    filter: hue-rotate(5deg);
+    background-position: 60% 40%, 40% 60%, 70% 30%, 30% 70%, 60% 40%;
+  }
+  75% {
+    background-position: 40% 60%, 60% 20%, 50% 80%, 70% 50%, 30% 20%;
   }
   100% {
-    background-position: 10% 40%, 90% 20%, 60% 90%, 50% 50%;
-    filter: hue-rotate(0deg);
+    background-position: 0% 0%, 100% 0%, 50% 100%, 80% 60%, 20% 80%;
   }
 }
 
-/* ── Animated Gradient Orbs ── */
+/* ── Animated Gradient Orbs — larger, smoother ── */
 .ss-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
+  filter: blur(100px);
   pointer-events: none;
   will-change: transform;
 }
 
 .ss-orb-1 {
-  width: 500px;
-  height: 500px;
-  top: -10%;
-  left: -5%;
-  background: radial-gradient(circle, rgba(245, 130, 32, 0.12) 0%, transparent 70%);
-  animation: ss-orb-float-1 15s ease-in-out infinite;
+  width: 600px;
+  height: 600px;
+  top: -15%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(245, 130, 32, 0.15) 0%, transparent 65%);
+  animation: ss-orb-1 18s ease-in-out infinite;
 }
 
 .ss-orb-2 {
-  width: 400px;
-  height: 400px;
-  top: 30%;
-  right: -10%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-  animation: ss-orb-float-2 18s ease-in-out infinite;
+  width: 500px;
+  height: 500px;
+  top: 25%;
+  right: -12%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 65%);
+  animation: ss-orb-2 22s ease-in-out infinite;
 }
 
 .ss-orb-3 {
+  width: 450px;
+  height: 450px;
+  bottom: -8%;
+  left: 25%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 65%);
+  animation: ss-orb-3 25s ease-in-out infinite;
+}
+
+.ss-orb-4 {
   width: 350px;
   height: 350px;
-  bottom: -5%;
-  left: 30%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
-  animation: ss-orb-float-3 20s ease-in-out infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(245, 130, 32, 0.06) 0%, transparent 65%);
+  animation: ss-orb-4 16s ease-in-out infinite;
 }
 
-@keyframes ss-orb-float-1 {
+@keyframes ss-orb-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(60px, 40px) scale(1.1); }
-  66% { transform: translate(-30px, 60px) scale(0.95); }
+  25% { transform: translate(80px, 50px) scale(1.15); }
+  50% { transform: translate(30px, 80px) scale(0.95); }
+  75% { transform: translate(-40px, 30px) scale(1.08); }
 }
 
-@keyframes ss-orb-float-2 {
+@keyframes ss-orb-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-50px, -30px) scale(1.05); }
-  66% { transform: translate(40px, -50px) scale(0.9); }
+  25% { transform: translate(-60px, -40px) scale(1.1); }
+  50% { transform: translate(50px, -60px) scale(0.88); }
+  75% { transform: translate(-30px, 40px) scale(1.05); }
 }
 
-@keyframes ss-orb-float-3 {
+@keyframes ss-orb-3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(40px, -40px) scale(1.08); }
-  66% { transform: translate(-60px, 20px) scale(0.92); }
+  25% { transform: translate(50px, -50px) scale(1.12); }
+  50% { transform: translate(-70px, 30px) scale(0.9); }
+  75% { transform: translate(40px, -20px) scale(1.06); }
 }
 
-/* ── Noise Texture Overlay ── */
+@keyframes ss-orb-4 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  33% { transform: translate(-40%, -60%) scale(1.2); }
+  66% { transform: translate(-60%, -40%) scale(0.85); }
+}
+
+/* ── Grid Pattern (subtle dot grid) ── */
+.ss-grid-pattern {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Horizontal Scan Lines ── */
+.ss-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  pointer-events: none;
+}
+
+.ss-scanline-1 {
+  top: 30%;
+  background: linear-gradient(90deg, transparent, rgba(245, 130, 32, 0.08), transparent);
+  animation: ss-scan-move 8s ease-in-out infinite;
+}
+
+.ss-scanline-2 {
+  bottom: 25%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.025), transparent);
+  animation: ss-scan-move 12s ease-in-out infinite reverse;
+}
+
+@keyframes ss-scan-move {
+  0%, 100% { opacity: 0.3; transform: scaleX(0.5); }
+  50% { opacity: 1; transform: scaleX(1); }
+}
+
+/* ── Noise Texture ── */
 .ss-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
 }
 
+/* ── Hero CTA Button ── */
+.ss-hero-cta {
+  background: linear-gradient(135deg, rgba(245, 130, 32, 0.15), rgba(245, 130, 32, 0.05));
+  border: 1px solid rgba(245, 130, 32, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(245, 130, 32, 0.1);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss-hero-cta:hover {
+  background: linear-gradient(135deg, rgba(245, 130, 32, 0.25), rgba(245, 130, 32, 0.1));
+  border-color: rgba(245, 130, 32, 0.35);
+  box-shadow: 0 0 40px rgba(245, 130, 32, 0.15), 0 8px 32px rgba(245, 130, 32, 0.1);
+}
+
 /* ── Featured Card ── */
 .ss-featured-card {
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.2),
-    0 32px 80px rgba(0, 0, 0, 0.15);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 32px 80px rgba(0, 0, 0, 0.2);
   transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ss-featured-card:hover {
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.25),
-    0 40px 100px rgba(0, 0, 0, 0.2);
+    0 16px 48px rgba(0, 0, 0, 0.3),
+    0 48px 120px rgba(0, 0, 0, 0.25);
 }
 
-/* Mesh glow inside featured card */
+/* ── Mesh glow inside cards ── */
 .ss-mesh-glow {
   background:
-    radial-gradient(ellipse 40% 50% at 80% 20%, rgba(245, 130, 32, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 60%);
-  animation: ss-mesh-drift 10s ease-in-out infinite alternate;
+    radial-gradient(ellipse 40% 50% at 80% 20%, rgba(245, 130, 32, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(59, 130, 246, 0.03) 0%, transparent 60%);
+  animation: ss-glow-drift 10s ease-in-out infinite alternate;
 }
 
-/* Placed badge */
+@keyframes ss-glow-drift {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* ── Placed Badge ── */
 .ss-placed-badge {
   display: inline-flex;
   align-items: center;
   padding: 4px 12px;
   border-radius: 9999px;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.12);
   color: #34D399;
   font-size: 10px;
   font-weight: 700;
@@ -1727,50 +1806,20 @@
   text-transform: uppercase;
 }
 
-/* ── Story Card v2 ── */
-.ss-story-card-v2 {
-  border: 1px solid rgba(0, 0, 0, 0.04);
+/* ── Stacked Cards ── */
+.ss-stack-card-inner {
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.02),
-    0 4px 16px rgba(0, 0, 0, 0.02);
-  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    0 24px 64px rgba(0, 0, 0, 0.03);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.ss-story-card-v2:hover {
-  border-color: rgba(0, 0, 0, 0.06);
+.ss-stack-card-inner:hover {
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.03),
-    0 20px 60px rgba(0, 0, 0, 0.06),
-    0 40px 80px rgba(0, 0, 0, 0.03);
-  transform: translateY(-4px);
-}
-
-/* ── Stories Grid — Responsive masonry-like layout ── */
-.ss-stories-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-@media (min-width: 640px) {
-  .ss-stories-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ss-stories-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  /* Make first and last cards span 2 columns for visual interest */
-  .ss-stories-grid > *:first-child {
-    grid-column: span 2;
-  }
-  .ss-stories-grid > *:nth-child(6) {
-    grid-column: span 2;
-  }
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 16px 48px rgba(0, 0, 0, 0.06),
+    0 32px 80px rgba(0, 0, 0, 0.04);
 }
 
 /* ── Logo Card ── */
@@ -1782,20 +1831,16 @@
   min-width: 180px;
   border-radius: 16px;
   background: white;
-  border: 1px solid rgba(13, 27, 42, 0.05);
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.01),
-    0 4px 12px rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(13, 27, 42, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.015);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: default;
   flex-shrink: 0;
 }
 
 .ss-logo-card:hover {
-  border-color: rgba(245, 130, 32, 0.12);
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.02),
-    0 12px 32px rgba(0, 0, 0, 0.04);
+  border-color: rgba(245, 130, 32, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02), 0 12px 32px rgba(0, 0, 0, 0.04);
   transform: translateY(-3px);
 }
 
@@ -1804,7 +1849,7 @@
   height: 44px;
   border-radius: 12px;
   background: #F9FAFB;
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.025);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1814,33 +1859,35 @@
 
 .ss-logo-card:hover .ss-logo-icon {
   background: #FFF7ED;
-  border-color: rgba(245, 130, 32, 0.08);
+  border-color: rgba(245, 130, 32, 0.06);
 }
 
-/* ── CTA Card with animated gradient border ── */
+/* ── CTA Card ── */
 .ss-cta-card {
   position: relative;
 }
 
-.ss-gradient-border {
+/* ── Spinning Gradient Border (conic-gradient + hue-rotate) ── */
+.ss-spinning-border {
   background: conic-gradient(
-    from 0deg,
-    rgba(245, 130, 32, 0.3),
+    from var(--ss-border-angle, 0deg),
+    rgba(245, 130, 32, 0.35),
     rgba(59, 130, 246, 0.15),
     rgba(139, 92, 246, 0.2),
-    rgba(245, 130, 32, 0.1),
+    rgba(245, 130, 32, 0.08),
     rgba(16, 185, 129, 0.15),
-    rgba(245, 130, 32, 0.3)
+    rgba(236, 72, 153, 0.1),
+    rgba(245, 130, 32, 0.35)
   );
-  animation: ss-border-spin 6s linear infinite;
+  animation: ss-spin-border 8s linear infinite;
 }
 
-@keyframes ss-border-spin {
+@keyframes ss-spin-border {
   0% { filter: hue-rotate(0deg); }
   100% { filter: hue-rotate(360deg); }
 }
 
-/* CTA Button glow */
+/* ── CTA Button ── */
 .ss-cta-button {
   box-shadow:
     0 4px 24px rgba(245, 130, 32, 0.3),
@@ -1851,7 +1898,130 @@
 .ss-cta-button:hover {
   box-shadow:
     0 8px 40px rgba(245, 130, 32, 0.4),
-    0 0 0 4px rgba(245, 130, 32, 0.08);
+    0 0 0 4px rgba(245, 130, 32, 0.06);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SUCCESS STORIES V2 — Redesigned Components
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Floating Testimonial Pills (Hero) ── */
+.ss2-floating-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(255, 255, 255, 0.04) inset;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss2-floating-pill:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 0 0.5px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* ── Transformation Card (Featured Section) ── */
+.ss2-transformation-card {
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 32px 80px rgba(0, 0, 0, 0.2);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss2-transformation-card:hover {
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.3),
+    0 48px 120px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Bento Story Card ── */
+.ss2-bento-card {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.03),
+    0 12px 40px rgba(0, 0, 0, 0.02);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss2-bento-card:hover {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 16px 48px rgba(0, 0, 0, 0.06),
+    0 32px 80px rgba(0, 0, 0, 0.04);
+}
+
+/* ── Journey Step Card ── */
+.ss2-journey-card {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.01), 0 4px 12px rgba(0, 0, 0, 0.02);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss2-journey-card:hover {
+  border-color: rgba(245, 130, 32, 0.12);
+  box-shadow:
+    0 4px 12px rgba(245, 130, 32, 0.04),
+    0 16px 48px rgba(0, 0, 0, 0.05);
+  transform: translateY(-4px);
+}
+
+/* ── Stat Card (Dark cinematic) ── */
+.ss2-stat-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ss2-stat-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(245, 130, 32, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(245, 130, 32, 0.03);
+  transform: translateY(-4px);
+}
+
+/* ── Logo Card (Dark variant) ── */
+.ss2-logo-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  min-width: 180px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.ss2-logo-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(245, 130, 32, 0.1);
+  transform: translateY(-3px);
+}
+
+.ss2-logo-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.5s ease;
+}
+
+.ss2-logo-card:hover .ss2-logo-icon {
+  background: rgba(245, 130, 32, 0.06);
+  border-color: rgba(245, 130, 32, 0.1);
 }
 
 /* ── Reduced Motion Support ── */
