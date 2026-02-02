@@ -58,7 +58,7 @@ const testimonials = [
 /* ─── Colorful Brand Logos (inline JSX) ─── */
 function GoogleLogo() {
   return (
-    <span className="text-2xl font-semibold tracking-tight" style={{ fontFamily: "Product Sans, Arial, sans-serif" }}>
+    <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "Product Sans, Arial, sans-serif" }}>
       <span style={{ color: "#4285F4" }}>G</span>
       <span style={{ color: "#EA4335" }}>o</span>
       <span style={{ color: "#FBBC05" }}>o</span>
@@ -69,14 +69,10 @@ function GoogleLogo() {
   );
 }
 
-function AmazonLogo() {
+function FlipkartLogo() {
   return (
-    <span className="text-2xl font-bold tracking-tight" style={{ color: "#232F3E", fontFamily: "Arial, sans-serif" }}>
-      amazon
-      <svg className="inline -mt-1 ml-0" width="48" height="14" viewBox="0 0 40 12" fill="none">
-        <path d="M2 8C8 4 18 2 30 4" stroke="#FF9900" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        <path d="M26 2L31 4.5L26 6" stroke="#FF9900" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+    <span className="text-xl font-bold tracking-tight" style={{ color: "#F7D02C", fontFamily: "Arial, sans-serif" }}>
+      Flipkart
     </span>
   );
 }
@@ -84,13 +80,13 @@ function AmazonLogo() {
 function MicrosoftLogo() {
   return (
     <span className="flex items-center gap-1.5">
-      <svg width="22" height="22" viewBox="0 0 18 18">
+      <svg width="18" height="18" viewBox="0 0 18 18">
         <rect x="0" y="0" width="8.5" height="8.5" fill="#F25022" />
         <rect x="9.5" y="0" width="8.5" height="8.5" fill="#7FBA00" />
         <rect x="0" y="9.5" width="8.5" height="8.5" fill="#00A4EF" />
         <rect x="9.5" y="9.5" width="8.5" height="8.5" fill="#FFB900" />
       </svg>
-      <span className="text-xl font-normal" style={{ color: "#737373", fontFamily: "Segoe UI, Arial, sans-serif" }}>Microsoft</span>
+      <span className="text-lg font-normal text-white/80" style={{ fontFamily: "Segoe UI, Arial, sans-serif" }}>Microsoft</span>
     </span>
   );
 }
@@ -98,15 +94,15 @@ function MicrosoftLogo() {
 function DeloitteLogo() {
   return (
     <span className="flex items-center gap-0.5">
-      <span className="text-2xl font-bold" style={{ color: "#0D1B2A", fontFamily: "Arial, sans-serif" }}>Deloitte</span>
-      <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#86BC25" }} />
+      <span className="text-xl font-bold text-white" style={{ fontFamily: "Arial, sans-serif" }}>Deloitte</span>
+      <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: "#86BC25" }} />
     </span>
   );
 }
 
 function AccentureLogo() {
   return (
-    <span className="text-2xl font-semibold" style={{ color: "#A100FF", fontFamily: "Arial, sans-serif" }}>
+    <span className="text-xl font-semibold" style={{ color: "#A100FF", fontFamily: "Arial, sans-serif" }}>
       &gt; accenture
     </span>
   );
@@ -114,7 +110,7 @@ function AccentureLogo() {
 
 function InfosysLogo() {
   return (
-    <span className="text-2xl font-bold" style={{ color: "#007CC3", fontFamily: "Arial, sans-serif" }}>
+    <span className="text-xl font-bold" style={{ color: "#007CC3", fontFamily: "Arial, sans-serif" }}>
       Infosys
     </span>
   );
@@ -122,7 +118,7 @@ function InfosysLogo() {
 
 const brandLogos = [
   { name: "Google", component: GoogleLogo },
-  { name: "Amazon", component: AmazonLogo },
+  { name: "Flipkart", component: FlipkartLogo },
   { name: "Microsoft", component: MicrosoftLogo },
   { name: "Deloitte", component: DeloitteLogo },
   { name: "Accenture", component: AccentureLogo },
@@ -354,66 +350,37 @@ export default function LeadCaptureSection() {
   return (
     <section className="relative overflow-hidden bg-[#0D1B2A]">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[750px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
 
           {/* ── Left Side ── */}
-          <div className="relative px-6 md:px-10 lg:px-12 pt-12 md:pt-16 pb-0 flex flex-col">
+          <div className="relative px-6 md:px-10 lg:px-12 pt-10 md:pt-14 pb-8 flex flex-col justify-center">
             <ScrollReveal>
-              <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-white leading-tight mb-6">
-                Join 800+ engineers who transformed their careers and landed in world-class product companies.
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8 text-white">
+                Join 8000+ professionals who{" "}
+                <span className="text-orange-400">transformed their careers</span>
+                {" "}and landed roles at{" "}
+                <span className="text-orange-400">world-class companies.</span>
               </h2>
             </ScrollReveal>
 
-            {/* Trusted By - Staggered Grid matching reference */}
+            {/* Trusted By - Single row */}
             <ScrollReveal delay={0.1}>
-              <div className="mb-0 relative">
-                <h3 className="text-white font-bold text-xl mb-5">Trusted by</h3>
+              <div className="mb-0">
+                <h3 className="text-white/60 font-semibold text-sm uppercase tracking-widest mb-5">Trusted by</h3>
 
-                {/* Row 1: 3 logos */}
-                <div className="flex gap-4 mb-4">
-                  {brandLogos.slice(0, 3).map((logo) => (
-                    <div key={logo.name} className="bg-white rounded-2xl px-6 py-5 flex items-center justify-center h-[72px] min-w-[180px]">
-                      <logo.component />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Row 2: 2 logos, shifted right (space for woman image) */}
-                <div className="flex gap-4 mb-4 ml-[196px]">
-                  {brandLogos.slice(3, 5).map((logo) => (
-                    <div key={logo.name} className="bg-white rounded-2xl px-6 py-5 flex items-center justify-center h-[72px] min-w-[180px]">
-                      <logo.component />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Row 3: 1 logo, shifted more right */}
-                <div className="flex gap-4 ml-[392px]">
-                  {brandLogos.slice(5, 6).map((logo) => (
-                    <div key={logo.name} className="bg-white rounded-2xl px-6 py-5 flex items-center justify-center h-[72px] min-w-[180px]">
+                <div className="flex flex-wrap gap-3">
+                  {brandLogos.map((logo) => (
+                    <div key={logo.name} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 flex items-center justify-center hover:bg-white/15 transition-colors">
                       <logo.component />
                     </div>
                   ))}
                 </div>
               </div>
             </ScrollReveal>
-
-            {/* Woman Image - overlapping bottom left over logo rows */}
-            <div className="absolute bottom-0 left-6 md:left-10 lg:left-12 hidden lg:block z-10">
-              <div className="relative h-[440px] w-[320px]">
-                <Image
-                  src="/images/sections/lead-capture-person.png"
-                  alt="Career professional"
-                  fill
-                  className="object-contain object-bottom"
-                  sizes="240px"
-                />
-              </div>
-            </div>
           </div>
 
           {/* ── Right Side - Form ── */}
-          <div className="px-6 md:px-10 lg:px-12 py-12 md:py-16 flex items-start lg:items-center justify-center bg-[#F5F5F0]">
+          <div className="px-6 md:px-10 lg:px-12 py-10 md:py-14 flex items-start lg:items-center justify-center bg-[#0D1B2A]">
             <div className="w-full max-w-md">
               <InlineLeadForm />
             </div>

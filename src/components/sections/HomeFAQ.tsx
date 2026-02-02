@@ -7,42 +7,42 @@ import { ThemeProvider } from "@/lib/theme";
 const faqs = [
   {
     q: "What exactly is Linkway Learning?",
-    a: "We're a training company that gets people hired in data, AI, and finance roles. We run five programs - Data Analytics, Business Analytics, Data Science and AI, Agentic AI & Prompt Engineering, and Investment Banking - with live classes, real projects, and placement support baked in from day one.",
+    a: "Linkway Learning is an industry-driven learning organization that equips learners with in-demand data skills and supports them in securing relevant job opportunities.",
   },
   {
-    q: "How is this different from Coursera or Udemy?",
-    a: "Those are video libraries. We're live, instructor-led, and project-heavy. You get a mentor, portfolio projects, mock interviews, and a team that actively pushes your resume to hiring partners.",
+    q: "Why should I choose Linkway Learning?",
+    a: "Linkway Learning offers small class sizes, practical hands-on attack simulations, Microsoft-recognized certification, and a strong focus on job placements.",
   },
   {
-    q: "Do I need to know coding?",
-    a: "Not for Data Analytics - we start from absolute zero. For Data Science, some basic familiarity helps, but we teach everything from scratch there too.",
+    q: "Are flexible payment or financial options available?",
+    a: "Yes, no-cost EMI and financing options are available to make the program affordable for everyone.",
   },
   {
-    q: "How does placement assistance work?",
-    a: "If you complete everything - assignments, projects, assessments - we guarantee up to 10 interview opportunities with our hiring partners. Our team works with you until something sticks.",
+    q: "What kind of career assistance is provided?",
+    a: "You'll receive help with resume preparation, practice interviews, alumni referrals, and access to 400+ hiring partners to support job placements.",
   },
   {
-    q: "Which companies hire from Linkway?",
-    a: "Google, Amazon, TCS, Deloitte, Infosys, Wipro, Flipkart, IBM, Razorpay, Accenture, Nykaa, Meesho - and about 30 more. The list keeps growing.",
+    q: "Will I receive a certificate after completing the program?",
+    a: "You'll receive a Linkway Learning certificate and a Microsoft-recognized certificate after completion.",
   },
   {
-    q: "Can I pay in installments?",
-    a: "Absolutely. We offer 0% interest EMI starting at \u20B95,500/month. No hidden charges, no surprise fees.",
+    q: "What is the mode of instruction for the classes?",
+    a: "All classes are 100% live and highly interactive, led by experienced instructors. Batch sizes are intentionally kept small to ensure personalized attention and meaningful interaction. Each session is also recorded for future reference.",
   },
   {
-    q: "What certifications do I get?",
-    a: "Two: a Linkway Learning completion certificate and a Microsoft Azure AI Fundamentals credential. The Microsoft cert is globally recognized by Fortune 500 companies.",
+    q: "Do I need prior technical or coding knowledge to enroll?",
+    a: "No prior technical background is required. The program is designed to support beginners as well as professionals from non-technical backgrounds.",
   },
   {
-    q: "Are classes live or recorded?",
-    a: "Live, always. With real instructors you can ask questions to. Every session also gets recorded, so you can rewatch anything you missed.",
+    q: "Is there any support provided beyond the classroom sessions?",
+    a: "Yes, learners receive continuous academic support, including doubt-solving sessions and mentorship throughout the course.",
   },
 ];
 
 export default function HomeFAQ() {
   return (
     <ThemeProvider theme="light">
-      <section className="py-24 md:py-32 bg-[#f2f1ee]">
+      <section className="py-12 md:py-16 bg-[#f2f1ee]">
         <div className="max-w-3xl mx-auto px-6">
           <SectionHeading
             label="Got Questions?"

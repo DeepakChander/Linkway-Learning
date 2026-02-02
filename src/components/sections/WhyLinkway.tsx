@@ -39,6 +39,7 @@ const revealLines = [
 const partnerNames = [
   "Google", "Amazon", "Deloitte", "Microsoft", "Accenture",
   "TCS", "Infosys", "Wipro", "IBM", "Capgemini",
+  "Fractal", "Sony", "Genpact", "Tech Mahindra", "Sprinklr",
 ];
 
 const partnerLogos: Record<string, string> = {
@@ -52,6 +53,11 @@ const partnerLogos: Record<string, string> = {
   Wipro: "/images/companies/wipro.svg",
   Deloitte: "/images/companies/deloitte.svg",
   Capgemini: "/images/companies/capgemini.svg",
+  Fractal: "/images/companies/fractal.svg",
+  Sony: "/images/companies/sony.svg",
+  Genpact: "/images/companies/genpact.svg",
+  "Tech Mahindra": "/images/companies/tech-mahindra.svg",
+  Sprinklr: "/images/companies/sprinklr.svg",
 };
 
 function PartnerMarquee() {
@@ -63,32 +69,31 @@ function PartnerMarquee() {
     if (!track) return;
 
     requestAnimationFrame(() => {
-      const oneSetWidth = track.scrollWidth / 2;
+      const oneSetWidth = track.scrollWidth / 3;
       tweenRef.current = gsap.fromTo(
         track,
         { x: 0 },
-        { x: -oneSetWidth, duration: 30, ease: "none", repeat: -1 }
+        { x: -oneSetWidth, duration: 40, ease: "none", repeat: -1 }
       );
     });
 
     return () => { tweenRef.current?.kill(); };
   }, { scope: trackRef });
 
-  const items = [...partnerNames, ...partnerNames];
+  const items = [...partnerNames, ...partnerNames, ...partnerNames];
 
   return (
     <div className="overflow-hidden">
-      <div ref={trackRef} className="flex gap-12 w-max">
+      <div ref={trackRef} className="flex items-center gap-14 w-max">
         {items.map((name, i) => (
           <span
             key={`${name}-${i}`}
-            className="inline-flex items-center gap-2 text-lg md:text-xl font-bold text-navy-900 whitespace-nowrap"
+            className="inline-flex items-center gap-2.5 whitespace-nowrap"
           >
             {partnerLogos[name] && (
-              <img src={partnerLogos[name]} alt={name} width={22} height={22} className="w-[22px] h-[22px] object-contain" />
+              <img src={partnerLogos[name]} alt={name} width={24} height={24} className="w-6 h-6 object-contain" />
             )}
-            {name}
-            <span className="text-orange-400 mx-4">·</span>
+            <span className="text-base md:text-lg font-semibold text-navy-900">{name}</span>
           </span>
         ))}
       </div>
@@ -106,7 +111,7 @@ export default function WhyLinkway() {
         <div className="max-w-7xl mx-auto w-full relative">
           {/* Headline */}
           <div className="mb-16 text-center max-w-5xl mx-auto relative z-10">
-            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-100 text-orange-600 font-bold text-sm mb-6">
+            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-100 text-orange-600 font-bold text-lg md:text-xl mb-6">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>

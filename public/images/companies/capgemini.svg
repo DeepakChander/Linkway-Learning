@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60">
-  <path d="M120 2 C108 2 98 8 93 16 L100 20 C104 14 111 10 120 10 C133 10 143 20 143 33 C143 46 133 56 120 56 C111 56 104 52 100 46 L93 50 C98 58 108 64 120 64 C137 64 151 50 151 33 C151 16 137 2 120 2Z" fill="#0070AD"/>
-  <path d="M120 2 L117 6 L120 10 C133 10 143 20 143 33 C143 46 133 56 120 56 L117 60 L120 64 C137 64 151 50 151 33 C151 16 137 2 120 2Z" fill="#0070AD" opacity="0"/>
-  <text x="50" y="78" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0070AD" letter-spacing="3" transform="translate(0,-22)">CAPGEMINI</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 40">
+  <path d="M30 2 C18 2 8 8 3 16 L10 20 C14 14 21 10 30 10 C43 10 53 17 53 26 C53 35 43 42 30 42 C21 42 14 38 10 32 L3 36 C8 44 18 50 30 50 C47 50 61 39 61 26 C61 13 47 2 30 2Z" fill="#0070AD"/>
+  <text x="70" y="32" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold" fill="#0070AD" letter-spacing="2">capgemini</text>
 </svg>

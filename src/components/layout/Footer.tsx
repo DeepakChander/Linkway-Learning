@@ -12,6 +12,7 @@ const quickLinks = [
   { label: "About", href: "/about" },
   { label: "Success Stories", href: "/success-stories" },
   { label: "Blog", href: "/blog" },
+  { label: "Student Portal", href: "/student-portal" },
 ];
 
 const courseLinks = [

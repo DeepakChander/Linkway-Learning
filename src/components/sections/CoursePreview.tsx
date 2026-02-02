@@ -29,6 +29,7 @@ const courses = [
     duration: "6 Months",
     level: "Beginner to Advanced",
     category: "Data tools & visualization",
+    badge: "Most Popular",
     tagline: "Turn raw data into decisions that move businesses forward.",
     description: "Master Excel, SQL, Python, Tableau, and Power BI by solving real business problems. Walk out with a portfolio that proves you can deliver insights, not just run queries.",
     icon: BarChart3,
@@ -42,6 +43,7 @@ const courses = [
     duration: "6 Months",
     level: "Beginner to Advanced",
     category: "Business strategy & insights",
+    badge: "High Demand",
     tagline: "Bridge the gap between business strategy and data insights.",
     description: "Learn to translate business questions into data-driven answers. Master analytics frameworks, dashboards, and storytelling that executives actually act on.",
     icon: LineChart,
@@ -55,6 +57,7 @@ const courses = [
     duration: "12 Months",
     level: "Zero to Expert",
     category: "AI & machine learning",
+    badge: "Career Launcher",
     tagline: "Build, train, and deploy AI that solves real-world problems.",
     description: "The complete journey — from Python fundamentals to neural networks, NLP, generative AI, and production deployment. Ship models that work in the real world.",
     icon: Brain,
@@ -68,6 +71,7 @@ const courses = [
     duration: "6 Months",
     level: "Intermediate to Advanced",
     category: "AI agents & automation",
+    badge: "Future-Ready",
     tagline: "Master the art of building autonomous AI agents.",
     description: "Learn to design, build, and deploy AI agents that think, plan, and execute. From prompt engineering to agentic workflows — the future of AI.",
     icon: Brain,
@@ -81,6 +85,7 @@ const courses = [
     duration: "9 Months",
     level: "Beginner to Advanced",
     category: "Finance & valuation",
+    badge: "Wall Street Ready",
     tagline: "Break into the world of high-stakes finance.",
     description: "Master financial modeling, valuation, M&A, and deal structuring. Built for those who want to land roles at top investment banks and financial institutions.",
     icon: LineChart,
@@ -100,7 +105,7 @@ export default function CoursePreview() {
       {/* Top separator */}
       <div className="w-full h-px bg-gray-300/50" />
 
-      <div className="py-24 md:py-32 px-6">
+      <div className="py-12 md:py-16 px-6">
         <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -233,7 +238,7 @@ export default function CoursePreview() {
                   transition={{ delay: 0.1, duration: 0.3 }}
                 >
                   <CheckCircle2 className="w-3.5 h-3.5 text-orange-500" />
-                  <span className="text-[11px] font-semibold text-orange-600">Updated in 2026</span>
+                  <span className="text-[11px] font-semibold text-orange-600">{activeCourse.badge}</span>
                 </motion.div>
 
                 {/* Content */}
@@ -347,7 +352,7 @@ export default function CoursePreview() {
                     </div>
                     <div className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-orange-200/60 bg-white/70">
                       <CheckCircle2 className="w-3 h-3 text-orange-500" />
-                      <span className="text-[10px] font-semibold text-orange-600">Updated in 2026</span>
+                      <span className="text-[10px] font-semibold text-orange-600">{activeCourse.badge}</span>
                     </div>
                   </div>
 

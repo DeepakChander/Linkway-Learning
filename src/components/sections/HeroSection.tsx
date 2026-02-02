@@ -23,9 +23,9 @@ gsap.registerPlugin(ScrollTrigger);
    ROTATING HEADLINES
    ═══════════════════════════════════════════════════════════════════════════ */
 const headlines = [
-  { accent: "Data Careers", main: "Built Different." },
-  { accent: "Real Skills.", main: "Real Results." },
-  { accent: "Zero to Hired.", main: "We Make It Happen." },
+  { accent: "Learn Today.", main: "Lead Tomorrow." },
+  { accent: "Dream Big.", main: "Start Here." },
+  { accent: "Your Career.", main: "Our Mission." },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -258,15 +258,14 @@ function StatusPill() {
       initial={{ opacity: 0, y: 15, filter: "blur(10px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.7, delay: 0.1 }}
-      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-8 group hover:border-orange-500/20 transition-colors duration-500"
+      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-6 group hover:border-orange-500/20 transition-colors duration-500"
     >
       <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
       </span>
       <span className="text-[13px] text-gray-300 font-medium tracking-wide">
-        New Batch Starting{" "}
-        <span className="text-orange-400 font-semibold">Feb 2026</span> — Limited Seats
+        Enrollments Open — <span className="text-orange-400 font-semibold">Limited Seats Left</span>
       </span>
     </motion.div>
   );
@@ -443,8 +442,8 @@ function DataOrbitVisual({ mouseX, mouseY }: { mouseX: MotionValue<number>; mous
       {/* Floating course labels with glass effect */}
       {[
         { label: "Data Science", icon: "chart", pos: "top-[12%] left-[-8%]", color: "text-emerald-400", dur: 5 },
-        { label: "Business Intel", icon: "grid", pos: "bottom-[18%] left-[-3%]", color: "text-blue-400", dur: 6, delay: 1 },
-        { label: "AI / ML", icon: "layers", pos: "top-[45%] right-[-10%]", color: "text-orange-400", dur: 4.5, delay: 2 },
+        { label: "Industry Ready", icon: "grid", pos: "bottom-[18%] left-[-3%]", color: "text-blue-400", dur: 6, delay: 1 },
+        { label: "AI / ML", icon: "layers", pos: "top-[55%] left-[-10%]", color: "text-orange-400", dur: 4.5, delay: 2 },
       ].map((item) => (
         <motion.div
           key={item.label}
@@ -472,7 +471,7 @@ const metricCards = [
     value: "85",
     suffix: "%",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
     ),
     color: "emerald",
     position: "top-[3%] right-[2%] md:right-[6%]",
@@ -485,7 +484,7 @@ const metricCards = [
     value: "96.8",
     suffix: "%",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
     ),
     color: "orange",
     position: "top-[33%] right-[-3%] md:right-[1%]",
@@ -498,7 +497,7 @@ const metricCards = [
     value: "400",
     suffix: "+",
     icon: (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
     ),
     color: "blue",
     position: "bottom-[20%] right-[-1%] md:right-[4%]",
@@ -537,7 +536,7 @@ function FloatingMetricCard({
       style={{ x: springX, y: springY }}
     >
       <motion.div
-        className={`relative backdrop-blur-xl bg-gradient-to-br ${c.bg} border ${c.border} rounded-xl px-3 py-2.5 cursor-default select-none group`}
+        className={`relative backdrop-blur-xl bg-gradient-to-br ${c.bg} border ${c.border} rounded-lg px-2 py-1.5 cursor-default select-none group`}
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: card.floatDuration, repeat: Infinity, ease: "easeInOut" }}
         whileHover={{ scale: 1.05 }}
@@ -547,12 +546,12 @@ function FloatingMetricCard({
           className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{ background: `radial-gradient(circle at 50% 50%, ${c.glow}, transparent 70%)` }}
         />
-        <div className="relative flex items-center gap-2">
-          <div className={`${c.text} p-1.5 rounded-md bg-white/5`}>{card.icon}</div>
+        <div className="relative flex items-center gap-1.5">
+          <div className={`${c.text} p-1 rounded-md bg-white/5`}>{card.icon}</div>
           <div>
-            <p className="text-[9px] uppercase tracking-wider text-gray-400 font-medium">{card.label}</p>
-            <div className={`text-lg font-bold ${c.text} font-mono tabular-nums`}>
-              {card.value}<span className="text-sm">{card.suffix}</span>
+            <p className="text-[7px] uppercase tracking-wider text-gray-400 font-medium">{card.label}</p>
+            <div className={`text-sm font-bold ${c.text} font-mono tabular-nums`}>
+              {card.value}<span className="text-[10px]">{card.suffix}</span>
             </div>
           </div>
         </div>
@@ -618,7 +617,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen max-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* ── Background Layers ── */}
@@ -629,13 +628,11 @@ export default function HeroSection() {
       {/* ── Content ── */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-8"
+        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-40 md:pt-44 pb-16 md:pb-24"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* ── Left Column: Text ── */}
           <div className="lg:col-span-7 xl:col-span-6">
-            <StatusPill />
-
             {/* Headline with character-level animation */}
             <div className="min-h-[140px] md:min-h-[180px] lg:min-h-[200px] mb-6">
               <AnimatePresence mode="wait">
@@ -647,8 +644,8 @@ export default function HeroSection() {
                   exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
                   transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
-                  <span className="hero-gradient-text block whitespace-nowrap">{accent}</span>
-                  <span className="text-white block mt-1 whitespace-nowrap">{main}</span>
+                  <span className="text-white block whitespace-nowrap">{accent}</span>
+                  <span className="hero-gradient-text block mt-1 whitespace-nowrap">{main}</span>
                 </motion.h1>
               </AnimatePresence>
             </div>
@@ -667,13 +664,29 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.p
-              className="text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-10"
+              className="text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-10 font-[family-name:var(--font-poppins)]"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <ScrambleText text="8,200+ careers transformed. Yours is next." delay={1.2} />
+              {"8,200+ careers transformed. Yours is next.".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-[0.3em]"
+                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 1.2 + i * 0.12,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </motion.p>
+
+            <StatusPill />
 
             {/* CTA Buttons */}
             <motion.div
@@ -708,12 +721,12 @@ export default function HeroSection() {
                 { val: 96, suffix: "%", label: "Placement Rate", decimal: ".8" },
               ].map((stat, i) => (
                 <div key={i} className="text-left group">
-                  <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-mono tabular-nums transition-all duration-300 group-hover:text-orange-300">
+                  <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
                     <ScrollOdometer value={stat.val} duration={2} suffix="" className="text-orange-400" />
                     {stat.decimal && <span className="text-orange-400">{stat.decimal}</span>}
                     <span className="text-orange-400 text-lg ml-0.5">{stat.suffix}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-0.5 tracking-wide uppercase">{stat.label}</p>
+                  <p className="text-xs text-gray-500 mt-0.5 tracking-wide uppercase font-[family-name:var(--font-poppins)]">{stat.label}</p>
                 </div>
               ))}
             </motion.div>

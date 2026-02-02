@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { useEnquiryModal } from "@/components/forms/EnquiryModal";
 import {
   motion,
   useScroll,
@@ -18,13 +19,15 @@ import {
 function AnimatedCounter({
   target,
   suffix = "",
+  decimals = 0,
 }: {
   target: number;
   suffix?: string;
+  decimals?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
-  const [count, setCount] = useState(0);
+  const [display, setDisplay] = useState("0");
 
   useEffect(() => {
     if (!isInView) return;
@@ -33,17 +36,165 @@ function AnimatedCounter({
     function tick(now: number) {
       const p = Math.min((now - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - p, 4);
-      setCount(Math.floor(eased * target));
+      const val = eased * target;
+      if (decimals > 0) {
+        setDisplay(val.toFixed(decimals));
+      } else {
+        setDisplay(Math.floor(val).toLocaleString());
+      }
       if (p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-  }, [isInView, target]);
+  }, [isInView, target, decimals]);
 
   return (
     <span ref={ref} className="tabular-nums font-mono">
-      {count.toLocaleString()}
+      {display}
       {suffix}
     </span>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FEATURE STEPS WITH DASHED CONNECTOR
+   ═══════════════════════════════════════════════════════════════ */
+const featureSteps = [
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+    ),
+    title: "Flexible Learning",
+    desc: "Learn while working",
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+      </svg>
+    ),
+    title: "Expert Mentors",
+    desc: "FAANG professionals",
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <path d="M9 15l2 2 4-4" />
+      </svg>
+    ),
+    title: "Certified Program",
+    desc: "Microsoft accredited",
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+        <polyline points="22 4 12 14.01 9 11.01" />
+      </svg>
+    ),
+    title: "100% Placement",
+    desc: "Guaranteed assistance",
+  },
+];
+
+function FeatureSteps() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [pathD, setPathD] = useState("");
+
+  useEffect(() => {
+    const update = () => {
+      const container = containerRef.current;
+      if (!container) return;
+      const rect = container.getBoundingClientRect();
+      const centers = iconRefs.current.map((el) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return {
+          x: r.left + r.width / 2 - rect.left,
+          y: r.top + r.height / 2 - rect.top,
+        };
+      }).filter(Boolean) as { x: number; y: number }[];
+
+      if (centers.length < 4) return;
+
+      // Build smooth cubic bezier through all icon centers
+      let d = `M ${centers[0].x} ${centers[0].y}`;
+      for (let i = 0; i < centers.length - 1; i++) {
+        const curr = centers[i];
+        const next = centers[i + 1];
+        const cpX = (curr.x + next.x) / 2;
+        d += ` C ${cpX} ${curr.y}, ${cpX} ${next.y}, ${next.x} ${next.y}`;
+      }
+      setPathD(d);
+    };
+
+    // Delay to let layout settle
+    const timer = setTimeout(update, 100);
+    window.addEventListener("resize", update);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="relative max-w-3xl mx-auto mb-12 px-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 0.3 }}
+    >
+      {/* Dashed connector SVG - desktop only */}
+      {pathD && (
+        <svg className="absolute inset-0 w-full h-full hidden md:block pointer-events-none z-0">
+          <path
+            d={pathD}
+            stroke="#F58220"
+            strokeWidth="2.5"
+            strokeDasharray="10 8"
+            strokeLinecap="round"
+            fill="none"
+            opacity="0.45"
+          />
+        </svg>
+      )}
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 relative z-10">
+        {featureSteps.map((feature, i) => (
+          <motion.div
+            key={i}
+            className={`flex flex-col items-center text-center ${i % 2 === 1 ? "md:mt-8" : ""}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.35 + i * 0.1, duration: 0.5 }}
+          >
+            <div
+              ref={(el) => { iconRefs.current[i] = el; }}
+              className="w-14 h-14 rounded-full flex items-center justify-center mb-3 shrink-0"
+              style={{
+                background: "linear-gradient(135deg, #F58220, #E06A10)",
+                boxShadow: "0 8px 24px rgba(245, 130, 32, 0.35)",
+                border: "3px solid rgba(245, 130, 32, 0.3)",
+              }}
+            >
+              {feature.icon}
+            </div>
+            <h4 className="text-sm font-bold text-white mb-0.5">{feature.title}</h4>
+            <p className="text-xs text-white/45">{feature.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
   );
 }
 
@@ -51,6 +202,7 @@ function AnimatedCounter({
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
 export default function CertificationDisplay() {
+  const { openEnquiry } = useEnquiryModal();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -172,7 +324,7 @@ export default function CertificationDisplay() {
         </svg>
       </div>
 
-      <div className="relative z-10 py-24 md:py-32 lg:py-40 px-6">
+      <div className="relative z-10 py-16 md:py-20 lg:py-24 px-6">
         <div className="max-w-7xl mx-auto">
           {/* ════════════════════════════════════════════════
               TOP: Split layout — Text left, Certificates right
@@ -270,36 +422,65 @@ export default function CertificationDisplay() {
                 transition={{ duration: 0.6, delay: 0.35 }}
               >
                 {[
-                  { icon: "M9 12l2 2 4-4", text: "Verified Digital Credential" },
-                  { icon: "M9 12l2 2 4-4", text: "LinkedIn Ready" },
-                  { icon: "M9 12l2 2 4-4", text: "QR Verification" },
-                  { icon: "M9 12l2 2 4-4", text: "Globally Accepted" },
+                  {
+                    text: "Verified Digital Credential",
+                    svg: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C45D10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="M9 12l2 2 4-4" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    text: "LinkedIn Ready",
+                    svg: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C45D10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    text: "QR Verification",
+                    svg: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C45D10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                        <rect x="14" y="14" width="3" height="3" />
+                        <line x1="21" y1="14" x2="21" y2="14.01" />
+                        <line x1="21" y1="21" x2="21" y2="21.01" />
+                        <line x1="17" y1="21" x2="17" y2="21.01" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    text: "Globally Accepted",
+                    svg: (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C45D10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                      </svg>
+                    ),
+                  },
                 ].map((pill, i) => (
                   <motion.span
                     key={i}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+                    className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold shadow-sm"
                     style={{
-                      background: "rgba(245, 130, 32, 0.07)",
+                      background: "rgba(245, 130, 32, 0.08)",
                       color: "#92400e",
-                      border: "1px solid rgba(245, 130, 32, 0.12)",
+                      border: "1px solid rgba(245, 130, 32, 0.15)",
                     }}
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 + i * 0.08, duration: 0.4 }}
+                    whileHover={{ scale: 1.04, background: "rgba(245, 130, 32, 0.13)" }}
                   >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#C45D10"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d={pill.icon} />
-                    </svg>
+                    {pill.svg}
                     {pill.text}
                   </motion.span>
                 ))}
@@ -514,100 +695,128 @@ export default function CertificationDisplay() {
                 </motion.div>
               </motion.div>
 
-              {/* ── Floating badge: "Verified" ── */}
+              {/* ── Floating badge: "Verified Credential" ── */}
               <motion.div
                 className="absolute z-10"
-                style={{ right: "0%", top: "12%" }}
+                style={{ right: "-2%", top: "10%" }}
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-              <motion.div
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full"
-                style={{
-                  background: "white",
-                  boxShadow:
-                    "0 8px 30px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
-                }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: 1,
-                  type: "spring",
-                  stiffness: 200,
-                }}
-              >
-                <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center"
-                  style={{ background: "#10B981" }}
+                <motion.div
+                  className="flex items-center gap-2.5 px-5 py-3 rounded-2xl backdrop-blur-md"
+                  style={{
+                    background: "rgba(255,255,255,0.92)",
+                    boxShadow:
+                      "0 12px 40px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                    border: "1px solid rgba(245,130,32,0.12)",
+                  }}
+                  initial={{ opacity: 0, scale: 0.5, x: 30 }}
+                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 1,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
                 >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{ background: "linear-gradient(135deg, #10B981, #059669)" }}
                   >
-                    <path d="M9 12l2 2 4-4" />
-                  </svg>
-                </div>
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: "#0D1B2A" }}
-                >
-                  Verified
-                </span>
-              </motion.div>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold" style={{ color: "#0D1B2A" }}>Verified Credential</span>
+                    <span className="text-[10px] font-medium" style={{ color: "#10B981" }}>Digitally Secured</span>
+                  </div>
+                </motion.div>
               </motion.div>
 
               {/* ── Floating badge: "LinkedIn Ready" ── */}
               <motion.div
                 className="absolute z-10"
-                style={{ left: "0%", bottom: "8%" }}
+                style={{ left: "-2%", bottom: "6%" }}
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
-              <motion.div
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full"
-                style={{
-                  background: "white",
-                  boxShadow:
-                    "0 8px 30px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)",
-                }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: 1.2,
-                  type: "spring",
-                  stiffness: 200,
-                }}
-              >
-                <div
-                  className="w-7 h-7 rounded-full flex items-center justify-center"
-                  style={{ background: "#0077B5" }}
+                <motion.div
+                  className="flex items-center gap-2.5 px-5 py-3 rounded-2xl backdrop-blur-md"
+                  style={{
+                    background: "rgba(255,255,255,0.92)",
+                    boxShadow:
+                      "0 12px 40px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                    border: "1px solid rgba(0,119,181,0.12)",
+                  }}
+                  initial={{ opacity: 0, scale: 0.5, x: -30 }}
+                  whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 1.2,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
                 >
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 24 24"
-                    fill="white"
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{ background: "linear-gradient(135deg, #0077B5, #005a8c)" }}
                   >
-                    <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
-                  </svg>
-                </div>
-                <span
-                  className="text-sm font-bold"
-                  style={{ color: "#0D1B2A" }}
-                >
-                  LinkedIn Ready
-                </span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold" style={{ color: "#0D1B2A" }}>LinkedIn Ready</span>
+                    <span className="text-[10px] font-medium" style={{ color: "#0077B5" }}>Share Instantly</span>
+                  </div>
+                </motion.div>
               </motion.div>
+
+              {/* ── Floating badge: "Industry Recognized" ── */}
+              <motion.div
+                className="absolute z-10 hidden md:block"
+                style={{ right: "8%", bottom: "2%" }}
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <motion.div
+                  className="flex items-center gap-2.5 px-5 py-3 rounded-2xl backdrop-blur-md"
+                  style={{
+                    background: "rgba(255,255,255,0.92)",
+                    boxShadow:
+                      "0 12px 40px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                    border: "1px solid rgba(245,130,32,0.12)",
+                  }}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: 1.4,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
+                >
+                  <div
+                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{ background: "linear-gradient(135deg, #F58220, #C45D10)" }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M9 14l-2 8 5-3 5 3-2-8" />
+                    </svg>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold" style={{ color: "#0D1B2A" }}>Industry Recognized</span>
+                    <span className="text-[10px] font-medium" style={{ color: "#F58220" }}>400+ Partners</span>
+                  </div>
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
@@ -618,269 +827,157 @@ export default function CertificationDisplay() {
           <motion.div
             className="relative rounded-[2rem] overflow-hidden"
             style={{
-              background: "white",
-              border: "1px solid #e5e7eb",
-              boxShadow: "0 4px 30px rgba(0,0,0,0.04)",
+              background: "#0D1B2A",
+              boxShadow: "0 20px 60px rgba(13, 27, 42, 0.25)",
             }}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div className="px-8 py-14 md:px-16 md:py-20 text-center">
-              {/* Eyebrow pill */}
-              <motion.span
-                className="inline-block text-xs font-semibold tracking-[0.08em] px-5 py-2 rounded-full mb-8"
-                style={{
-                  border: "1.5px solid #F58220",
-                  color: "#C45D10",
-                  background: "white",
-                }}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                Transform Your Career Today
-              </motion.span>
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="absolute w-[500px] h-[500px] rounded-full" style={{ top: "-20%", right: "-10%", background: "radial-gradient(circle, rgba(245,130,32,0.12) 0%, transparent 60%)" }} />
+              <div className="absolute w-[300px] h-[300px] rounded-full" style={{ bottom: "-10%", left: "10%", background: "radial-gradient(circle, rgba(245,130,32,0.08) 0%, transparent 60%)" }} />
+              <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+            </div>
 
-              {/* Heading */}
-              <motion.h2
-                className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold leading-tight mb-5"
-                style={{ color: "#1a1a2e" }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                Ready to Level Up Your Career?
-              </motion.h2>
-
-              {/* Subtitle */}
-              <motion.p
-                className="text-base md:text-lg max-w-2xl mx-auto mb-16"
-                style={{ color: "#6B7280" }}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Join professionals who&apos;ve launched their careers with Linkway Learning.
-                Gain job-ready skills and step into high-demand roles today!
-              </motion.p>
-
-              {/* Four features with connecting dashed line */}
-              <motion.div
-                className="relative flex flex-wrap justify-center gap-y-10 gap-x-6 md:gap-x-0 mb-16 max-w-4xl mx-auto"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-              >
-                {/* Curved dashed connecting line (visible on md+) */}
-                <svg
-                  className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
-                  width="70%"
-                  height="60"
-                  viewBox="0 0 700 60"
-                  preserveAspectRatio="none"
-                  style={{ overflow: "visible", top: "4px" }}
+            <div className="relative z-10 px-8 py-12 md:px-14 md:py-16">
+              {/* Top: Heading + Subtitle */}
+              <div className="text-center mb-12">
+                <motion.span
+                  className="inline-block text-xs font-bold uppercase tracking-[0.15em] px-5 py-2 rounded-full mb-6"
+                  style={{
+                    border: "1px solid rgba(245, 130, 32, 0.4)",
+                    color: "#F58220",
+                    background: "rgba(245, 130, 32, 0.1)",
+                  }}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <path
-                    d="M0,30 C80,30 100,5 175,5 C250,5 270,55 350,55 C430,55 450,5 525,5 C600,5 620,30 700,30"
-                    fill="none"
-                    stroke="#F58220"
-                    strokeWidth="2.5"
-                    strokeDasharray="10 8"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                  Transform Your Career Today
+                </motion.span>
 
-                {[
-                  {
-                    icon: (
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="M21 21l-4.35-4.35" />
-                      </svg>
-                    ),
-                    title: "Flexible Learning",
-                    desc: "Learn while working",
-                  },
-                  {
-                    icon: (
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
-                      </svg>
-                    ),
-                    title: "Expert Mentors",
-                    desc: "FAANG professionals",
-                  },
-                  {
-                    icon: (
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="16" y1="13" x2="8" y2="13" />
-                        <line x1="16" y1="17" x2="8" y2="17" />
-                        <polyline points="10 9 9 9 8 9" />
-                      </svg>
-                    ),
-                    title: "Certified Program",
-                    desc: "Microsoft accredited",
-                  },
-                  {
-                    icon: (
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                      </svg>
-                    ),
-                    title: "100% Placement",
-                    desc: "Guaranteed assistance",
-                  },
-                ].map((feature, i) => (
-                  <motion.div
-                    key={i}
-                    className="relative flex flex-col items-center w-36 md:w-1/4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.35 + i * 0.1, duration: 0.5 }}
-                  >
-                    <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center mb-4 relative z-10"
-                      style={{
-                        background: "#F58220",
-                        boxShadow: "0 4px 14px rgba(245, 130, 32, 0.25)",
-                      }}
-                    >
-                      {feature.icon}
-                    </div>
-                    <h4
-                      className="text-sm md:text-base font-bold mb-1"
-                      style={{ color: "#1a1a2e" }}
-                    >
-                      {feature.title}
-                    </h4>
-                    <p className="text-xs" style={{ color: "#9CA3AF" }}>
-                      {feature.desc}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
+                <motion.h2
+                  className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  Ready to Level Up{" "}
+                  <span style={{ color: "#F58220" }}>Your Career?</span>
+                </motion.h2>
 
-              {/* Certificate Includes card */}
+                <motion.p
+                  className="text-base md:text-lg max-w-2xl mx-auto text-white/50"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Join professionals who&apos;ve launched their careers with Linkway Learning.
+                  Gain job-ready skills and step into high-demand roles today.
+                </motion.p>
+              </div>
+
+              {/* Feature icons with dashed connector */}
+              <FeatureSteps />
+
+              {/* Certificate Includes + CTA */}
               <motion.div
-                className="max-w-2xl mx-auto rounded-2xl p-8 md:p-10 mb-12"
+                className="max-w-3xl mx-auto rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-10"
                 style={{
-                  background: "#F8FAFC",
-                  border: "1px solid #e5e7eb",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.1)",
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                <h3
-                  className="text-lg md:text-xl font-bold mb-6 text-left"
-                  style={{ color: "#1a1a2e" }}
-                >
-                  Certificate Includes
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-                  {[
-                    "Free career counseling session",
-                    "Lifetime access to learning materials",
-                    "20% scholarship for early birds",
-                    "Alumni network access",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div
-                        className="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center"
-                        style={{ background: "#F58220" }}
-                      >
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                        >
-                          <path
-                            d="M2 6l3 3 5-5"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                <div className="flex-1">
+                  <h3 className="text-base md:text-lg font-bold mb-4 text-left text-white">
+                    Certificate Includes
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                    {[
+                      {
+                        text: "Free career counseling session",
+                        svg: <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 11.07 11.07 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 11.07 11.07 0 002.81.7A2 2 0 0122 16.92z" /></svg>,
+                      },
+                      {
+                        text: "Lifetime access to learning materials",
+                        svg: <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" /><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" /></svg>,
+                      },
+                      {
+                        text: "20% scholarship for early birds",
+                        svg: <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>,
+                      },
+                      {
+                        text: "Alumni network access",
+                        svg: <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>,
+                      },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-2.5">
+                        <div className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: "#F58220" }}>
+                          {item.svg}
+                        </div>
+                        <span className="text-sm font-medium text-white/70">{item.text}</span>
                       </div>
-                      <span
-                        className="text-sm font-medium text-left"
-                        style={{ color: "#374151" }}
-                      >
-                        {item}
-                      </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
 
-              {/* CTA Button */}
-              <motion.a
-                href="/contact"
-                className="inline-block px-10 py-4 rounded-full text-white font-bold text-base"
-                style={{
-                  background: "#1a1a2e",
-                  boxShadow: "0 8px 24px rgba(26, 26, 46, 0.2)",
-                }}
-                whileHover={{
-                  scale: 1.04,
-                  boxShadow: "0 12px 32px rgba(26, 26, 46, 0.3)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                Get in Touch
-              </motion.a>
+                <motion.button
+                  onClick={openEnquiry}
+                  className="px-8 py-3.5 rounded-full text-white font-bold text-sm whitespace-nowrap cursor-pointer"
+                  style={{
+                    background: "linear-gradient(135deg, #F58220, #E06A10)",
+                    boxShadow: "0 8px 24px rgba(245, 130, 32, 0.3)",
+                  }}
+                  whileHover={{
+                    scale: 1.04,
+                    boxShadow: "0 12px 32px rgba(245, 130, 32, 0.4)",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Get in Touch
+                </motion.button>
+              </motion.div>
             </div>
 
             {/* Bottom stats bar */}
             <div
               className="grid grid-cols-2 md:grid-cols-4"
               style={{
-                background: "#F8FAFC",
-                borderTop: "1px solid #e5e7eb",
+                borderTop: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(0,0,0,0.15)",
               }}
             >
               {[
-                { value: "4.8", suffix: "+", label: "Average Rating" },
-                { value: "18000", suffix: "+", label: "Happy Students" },
-                { value: "400", suffix: "+", label: "Hiring Partners" },
-                { value: "100", suffix: "%", label: "Salary Hike" },
+                { value: 4.74, suffix: "", label: "Average Rating", decimals: 2 },
+                { value: 18000, suffix: "+", label: "Happy Students", decimals: 0 },
+                { value: 400, suffix: "+", label: "Hiring Partners", decimals: 0 },
+                { value: 100, suffix: "%", label: "Salary Hike", decimals: 0 },
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className="relative px-4 py-7 md:py-9 text-center"
+                  className="relative px-4 py-5 md:py-7 text-center"
                   style={{
-                    borderRight:
-                      i < 3 ? "1px solid #e5e7eb" : "none",
+                    borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
                   }}
                 >
-                  <div
-                    className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-1"
-                    style={{ color: "#1a1a2e" }}
-                  >
+                  <div className="text-xl md:text-2xl lg:text-3xl font-extrabold mb-0.5 text-orange-400">
                     <AnimatedCounter
-                      target={Number(stat.value)}
+                      target={stat.value}
                       suffix={stat.suffix}
+                      decimals={stat.decimals}
                     />
                   </div>
-                  <div className="text-[10px] md:text-xs text-gray-400 uppercase tracking-wider font-medium">
+                  <div className="text-[10px] md:text-xs text-white/35 uppercase tracking-wider font-medium">
                     {stat.label}
                   </div>
                 </div>
