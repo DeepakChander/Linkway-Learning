@@ -308,8 +308,8 @@ function TestimonialCarousel() {
   return (
     <div className="mt-16 relative" onMouseEnter={() => tweenRef.current?.pause()} onMouseLeave={() => tweenRef.current?.resume()}>
       {/* Gradient fades matching parent bg */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-44 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #f9fafb, transparent)' }} />
-      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-44 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #f9fafb, transparent)' }} />
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-44 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #f1f5f9, transparent)' }} />
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-44 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #f1f5f9, transparent)' }} />
 
       <div className="overflow-hidden py-6">
         <div ref={trackRef} className="flex gap-7 w-max" style={{ willChange: "transform" }}>
@@ -1499,7 +1499,7 @@ export default function DataAnalyticsPage() {
                                 <motion.div
                                   className="shrink-0 mt-1 opacity-0 group-hover/topic:opacity-100 transition-opacity duration-300"
                                 >
-                                  <ArrowRightIcon className="w-4 h-4" style={{ color: mod.color }} />
+                                  <ArrowRightIcon className="w-4 h-4" />
                                 </motion.div>
                               </div>
                             </motion.div>
@@ -1645,8 +1645,8 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ TOOLS — Auto-scroll marquee ═══════ */}
-      <section className="relative py-16 px-6 bg-white">
+      {/* ═══════ TOOLS — Two-row marquee ═══════ */}
+      <section className="relative py-20 px-6 bg-white overflow-hidden">
         <Divider />
         <div className="max-w-6xl mx-auto pt-12">
           <ScrollReveal>
@@ -1656,36 +1656,27 @@ export default function DataAnalyticsPage() {
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_BLUE}, ${BRAND_ORANGE})` }}>Master</span>
             </h2>
           </ScrollReveal>
-          <div className="mt-8 space-y-3 relative">
-            <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
-            {/* Row 1 — scroll left */}
-            <div className="overflow-hidden">
-              <motion.div
-                className="flex gap-3 w-max"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ duration: 25, ease: "linear", repeat: Infinity }}
-              >
-                {[...tools.slice(0, 15), ...tools.slice(0, 15)].map((tool, i) => (
-                  <ToolLogo key={`r1-${tool}-${i}`} name={tool} className="!px-3 !py-1.5 !rounded-lg !gap-2 [&_img]:!w-5 [&_img]:!h-5 [&_span]:!text-xs [&>span]:!w-5 [&>span]:!h-5 [&>span]:!text-[10px]" />
-                ))}
-              </motion.div>
-            </div>
-            {/* Row 2 — scroll right */}
-            <div className="overflow-hidden">
-              <motion.div
-                className="flex gap-3 w-max"
-                animate={{ x: ["-50%", "0%"] }}
-                transition={{ duration: 28, ease: "linear", repeat: Infinity }}
-              >
-                {[...tools.slice(15), ...tools.slice(15)].map((tool, i) => (
-                  <ToolLogo key={`r2-${tool}-${i}`} name={tool} className="!px-3 !py-1.5 !rounded-lg !gap-2 [&_img]:!w-5 [&_img]:!h-5 [&_span]:!text-xs [&>span]:!w-5 [&>span]:!h-5 [&>span]:!text-[10px]" />
-                ))}
-              </motion.div>
-            </div>
+
+          {/* Two-row scrolling marquee */}
+          <div className="mt-14 space-y-4">
+            {[tools.slice(0, 15), tools.slice(15, 30)].map((row, ri) => (
+              <div key={ri} className="relative overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
+                <motion.div
+                  className="flex gap-4 w-max"
+                  animate={{ x: ri === 0 ? ["0%", "-50%"] : ["-50%", "0%"] }}
+                  transition={{ duration: ri === 0 ? 35 : 40, repeat: Infinity, ease: "linear" }}
+                >
+                  {[...row, ...row].map((tool, i) => (
+                    <div key={`${tool}-${i}`} className="shrink-0">
+                      <ToolLogo name={tool} />
+                    </div>
+                  ))}
+                </motion.div>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="mt-12"><Divider /></div>
+        <div className="mt-4"><Divider /></div>
       </section>
 
       {/* ═══════ PROJECTS — Compact stacked cards with spotlight hover ═══════ */}
@@ -1866,10 +1857,11 @@ export default function DataAnalyticsPage() {
 
       <WaveDivider from="#ffffff" to="#f9fafb" />
 
-      {/* ═══════ TESTIMONIALS — Auto-scroll carousel ═══════ */}
-      <section className="relative py-20 px-6 overflow-hidden bg-gray-50">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(${BRAND_ORANGE} 1px, transparent 1px)`, backgroundSize: '32px 32px' }} />
+      {/* ═══════ TESTIMONIALS — Premium carousel with floating orbs ═══════ */}
+      <section className="relative py-24 px-6 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #f1f5f9 50%, #f9fafb 100%)' }}>
+        {/* Animated floating orbs */}
+        <motion.div className="absolute top-20 left-[10%] w-72 h-72 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: `${BRAND_ORANGE}08` }} animate={{ x: [0, 40, 0], y: [0, -20, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute bottom-20 right-[10%] w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `${ACCENT_BLUE}06` }} animate={{ x: [0, -30, 0], y: [0, 25, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <ScrollReveal>
@@ -1878,7 +1870,7 @@ export default function DataAnalyticsPage() {
               What Learners Say{" "}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>About Us</span>
             </h2>
-            <p className="text-center text-gray-500 mt-3 max-w-xl mx-auto text-sm">
+            <p className="text-center text-gray-500 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
               Join hundreds of professionals who&apos;ve transformed their careers with Linkway Learning.
             </p>
           </ScrollReveal>
@@ -1887,64 +1879,47 @@ export default function DataAnalyticsPage() {
         <TestimonialCarousel />
       </section>
 
-      {/* ═══════ CAREER GROWTH ROADMAP ═══════ */}
-      <section className="relative py-20 px-6 bg-white overflow-hidden">
-        <div className="max-w-6xl mx-auto">
+            {/* ═══════ CAREER GROWTH ROADMAP — Animated SVG path ═══════ */}
+      <section className="relative py-24 px-6 bg-white overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none" style={{ background: `radial-gradient(ellipse, ${ACCENT_BLUE}05, transparent 70%)` }} />
+        <div className="max-w-6xl mx-auto relative z-10">
           <ScrollReveal>
             <SectionLabel center>Your Journey</SectionLabel>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
               Your Career Growth{" "}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>Roadmap</span>
             </h2>
-            <p className="text-center text-gray-500 mt-3 max-w-xl mx-auto text-sm">
+            <p className="text-center text-gray-500 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
               A proven 4-step path to take you from upskilling to your dream job
             </p>
           </ScrollReveal>
 
-          <div className="mt-16 relative">
-            {/* Connecting dashed line */}
-            <motion.div
-              className="hidden lg:block absolute top-[60px] left-[12%] right-[12%] h-0 border-t-2 border-dashed"
-              style={{ borderColor: `${ACCENT_BLUE}40` }}
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease }}
-            />
+          <div className="mt-20 relative">
+            {/* SVG curved dashed path with traveling dot */}
+            <svg className="hidden lg:block absolute top-[56px] left-0 w-full h-[50px] pointer-events-none" viewBox="0 0 1152 50" fill="none" preserveAspectRatio="none">
+              <motion.path d="M 100 25 C 220 25, 240 8, 330 8 C 420 8, 430 42, 520 42 C 610 42, 620 8, 710 8 C 800 8, 810 42, 900 42 C 940 42, 960 25, 1052 25" stroke="url(#rmGrad)" strokeWidth="2.5" strokeDasharray="10 7" strokeLinecap="round" fill="none" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 2.5, ease: "easeOut" }} />
+              <defs><linearGradient id="rmGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor={ACCENT_BLUE} stopOpacity={0.35} /><stop offset="50%" stopColor={BRAND_ORANGE} stopOpacity={0.4} /><stop offset="100%" stopColor={ACCENT_BLUE} stopOpacity={0.35} /></linearGradient></defs>
+              <motion.circle r="5" fill={BRAND_ORANGE} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 2 }}><animateMotion dur="5s" repeatCount="indefinite" path="M 100 25 C 220 25, 240 8, 330 8 C 420 8, 430 42, 520 42 C 610 42, 620 8, 710 8 C 800 8, 810 42, 900 42 C 940 42, 960 25, 1052 25" /></motion.circle>
+              <motion.circle r="12" fill={BRAND_ORANGE} opacity={0.15} initial={{ opacity: 0 }} whileInView={{ opacity: 0.15 }} viewport={{ once: true }} transition={{ delay: 2 }}><animateMotion dur="5s" repeatCount="indefinite" path="M 100 25 C 220 25, 240 8, 330 8 C 420 8, 430 42, 520 42 C 610 42, 620 8, 710 8 C 800 8, 810 42, 900 42 C 940 42, 960 25, 1052 25" /></motion.circle>
+            </svg>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
-              {[
-                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>, title: "Profile Power-Up", desc: "Stand out with a sharp resume, optimized LinkedIn/GitHub, and a strong personal brand." },
-                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>, title: "Interview Readiness", desc: "Ace every round with 1:1 mock interviews, role-specific training, and actionable feedback." },
-                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>, title: "Hiring Rounds", desc: "Apply to 200+ hiring partners and clear technical interview rounds with confidence." },
-                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.58-5.84L18 2.25l-3.107 3.107" /></svg>, title: "Offer Unlocked!", desc: "Land a high paying job offer from top product-based companies." },
-              ].map((step, i) => (
-                <motion.div
-                  key={step.title}
-                  className="flex flex-col items-center text-center group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.15, ease }}
-                >
-                  {/* Icon circle with pulse */}
-                  <motion.div
-                    className="relative mb-5"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <div className="absolute inset-0 rounded-full scale-[1.6] opacity-[0.08]" style={{ backgroundColor: ACCENT_BLUE }} />
-                    <div className="relative w-[72px] h-[72px] rounded-full flex items-center justify-center border-2 bg-white shadow-sm" style={{ borderColor: `${ACCENT_BLUE}30`, color: ACCENT_BLUE }}>
-                      {step.icon}
-                    </div>
-                    {/* Step number badge */}
-                    <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center text-white" style={{ backgroundColor: BRAND_ORANGE }}>
-                      {i + 1}
-                    </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+              {([
+                { title: "Profile Power-Up", desc: "Stand out with a sharp resume, optimized LinkedIn/GitHub, and a strong personal brand.", color: "#3B82F6", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><circle cx="18" cy="16" r="5.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M7 38c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><circle cx="35" cy="18" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M29 38c0-4.418 2.686-8 6-8s6 3.582 6 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.path d="M32 10l2-2 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1 }} /></svg>) },
+                { title: "Interview Readiness", desc: "Ace every round with 1:1 mock interviews, role-specific training, and actionable feedback.", color: "#8B5CF6", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" strokeWidth="2" /><circle cx="24" cy="18" r="5" stroke="currentColor" strokeWidth="2" /><path d="M16 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.path d="M30 14l3 3 5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.2 }} /></svg>) },
+                { title: "Hiring Rounds", desc: "Apply to 200+ hiring partners and clear technical interview rounds with confidence.", color: "#0EA5E9", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="10" y="8" width="28" height="32" rx="3" stroke="currentColor" strokeWidth="2" /><path d="M16 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M16 22h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M16 28h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.rect x="16" y="34" rx="1.5" height="3" fill="currentColor" opacity={0.6} animate={{ width: [8, 16, 8] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} /></svg>) },
+                { title: "Offer Unlocked!", desc: "Land a high paying job offer from top product-based companies.", color: "#F97316", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><motion.path d="M24 34V14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" animate={{ y: [0, -2, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} /><motion.path d="M17 21l7-7 7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" animate={{ y: [0, -2, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} /><path d="M10 40h28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.circle cx="24" cy="8" r="2.5" fill="currentColor" animate={{ scale: [0.8, 1.3, 0.8], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} /></svg>) },
+              ]).map((step, i) => (
+                <motion.div key={step.title} className="flex flex-col items-center text-center group" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-5%" }} transition={{ duration: 0.6, delay: i * 0.18, ease }}>
+                  <motion.div className="relative mb-7" whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }} transition={{ type: "spring", stiffness: 300 }}>
+                    <motion.div className="absolute inset-0 rounded-full scale-[1.6] blur-xl" style={{ backgroundColor: step.color }} animate={{ opacity: [0.05, 0.12, 0.05], scale: [1.4, 1.7, 1.4] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }} />
+                    <motion.div className="absolute -inset-[3px] rounded-full" style={{ background: `conic-gradient(from ${i * 90}deg, ${step.color}50, transparent 25%, transparent 75%, ${step.color}50)` }} animate={{ rotate: 360 }} transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "linear" }} />
+                    <div className="relative w-[82px] h-[82px] rounded-full flex items-center justify-center bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100 p-[18px]" style={{ color: step.color }}>{step.icon}</div>
+                    <motion.div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full text-[11px] font-bold flex items-center justify-center text-white shadow-lg" style={{ background: `linear-gradient(135deg, ${step.color}, ${step.color}bb)` }} animate={{ scale: [1, 1.12, 1] }} transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.3 }}>{i + 1}</motion.div>
                   </motion.div>
-
-                  <h4 className="text-base font-bold text-navy-900 mb-2">{step.title}</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed max-w-[220px]">{step.desc}</p>
+                  <h4 className="text-lg font-bold text-navy-900 mb-2">{step.title}</h4>
+                  <p className="text-[13px] text-gray-500 leading-relaxed max-w-[230px]">{step.desc}</p>
+                  <motion.div className="h-[3px] rounded-full mt-5" style={{ backgroundColor: step.color }} initial={{ width: 0, opacity: 0 }} whileInView={{ width: 48, opacity: 0.5 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.6 + i * 0.15 }} />
                 </motion.div>
               ))}
             </div>
