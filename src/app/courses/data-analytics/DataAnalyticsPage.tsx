@@ -1386,41 +1386,59 @@ export default function DataAnalyticsPage() {
                       style={{ background: `linear-gradient(135deg, ${mod.color}40, transparent 50%, ${mod.color}20)` }}
                     />
                     <div className="relative bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-7 h-full group-hover:bg-white/[0.06] transition-all duration-500">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] mb-5" style={{ color: mod.color }}>What you&apos;ll learn</p>
-                      <div className="space-y-4">
-                        {mod.topics.map((topic, j) => (
-                          <motion.div
-                            key={j}
-                            className="flex items-start gap-3.5 group/topic"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4, delay: 0.3 + j * 0.1 }}
-                          >
-                            <motion.div
-                              className="mt-1 shrink-0 w-6 h-6 rounded-lg flex items-center justify-center"
-                              style={{ backgroundColor: `${mod.color}15` }}
-                              whileHover={{ scale: 1.2, backgroundColor: `${mod.color}30` }}
-                              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                            >
-                              <CheckCircleIcon className="w-3.5 h-3.5" style={{ color: mod.color }} />
-                            </motion.div>
-                            <div className="flex-1">
-                              <p className="text-[15px] text-gray-300 leading-relaxed group-hover/topic:text-white transition-colors duration-300">
-                                {topic}
-                              </p>
-                            </div>
-                          </motion.div>
-                        ))}
+                      {/* Header with icon */}
+                      <div className="flex items-center gap-2.5 mb-6">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${mod.color}15` }}>
+                          <GraduationIcon className="w-4 h-4" style={{ color: mod.color }} />
+                        </div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.15em]" style={{ color: mod.color }}>What you&apos;ll learn</p>
                       </div>
 
-                      {/* Bottom decorative line */}
-                      <motion.div
-                        className="mt-6 h-px"
-                        style={{ transformOrigin: "left", background: `linear-gradient(90deg, ${mod.color}30, transparent)` }}
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.8, delay: 0.6 }}
-                      />
+                      <div className="space-y-3">
+                        {mod.topics.map((topic, j) => {
+                          const parts = topic.split(" — ");
+                          return (
+                            <motion.div
+                              key={j}
+                              className="group/topic relative rounded-xl bg-white/[0.02] border border-white/[0.05] p-4 hover:bg-white/[0.05] hover:border-white/[0.1] transition-all duration-300 overflow-hidden"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.4, delay: 0.3 + j * 0.12 }}
+                            >
+                              {/* Hover glow */}
+                              <div
+                                className="absolute inset-0 opacity-0 group-hover/topic:opacity-100 transition-opacity duration-500 pointer-events-none"
+                                style={{ background: `radial-gradient(200px circle at 0% 50%, ${mod.color}0a, transparent 60%)` }}
+                              />
+                              <div className="relative flex items-start gap-3.5">
+                                {/* Numbered badge */}
+                                <div
+                                  className="mt-0.5 shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold font-mono border"
+                                  style={{ color: mod.color, borderColor: `${mod.color}30`, backgroundColor: `${mod.color}08` }}
+                                >
+                                  {String(j + 1).padStart(2, "0")}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-[14px] font-semibold text-white/90 group-hover/topic:text-white transition-colors duration-300">
+                                    {parts[0]}
+                                  </p>
+                                  {parts[1] && (
+                                    <p className="text-[13px] text-gray-500 mt-1 leading-relaxed group-hover/topic:text-gray-400 transition-colors duration-300">
+                                      {parts[1]}
+                                    </p>
+                                  )}
+                                </div>
+                                {/* Arrow on hover */}
+                                <motion.div
+                                  className="shrink-0 mt-1 opacity-0 group-hover/topic:opacity-100 transition-opacity duration-300"
+                                >
+                                  <ArrowRightIcon className="w-4 h-4" style={{ color: mod.color }} />
+                                </motion.div>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </motion.div>
 
@@ -1492,13 +1510,13 @@ export default function DataAnalyticsPage() {
                 {/* Phase stats row */}
                 <div className="grid grid-cols-3 gap-3 mt-4">
                   {[
-                    { label: "Topics Covered", value: mod.topics.length.toString(), suffix: " modules" },
-                    { label: "Tools Used", value: mod.skills.length.toString(), suffix: " tools" },
-                    { label: "Duration", value: mod.duration.split(" ")[1].split("–")[1] || "8", suffix: " weeks" },
+                    { label: "Topics Covered", value: mod.topics.length.toString(), suffix: " modules", icon: <LayersIcon className="w-5 h-5" style={{ color: mod.color }} /> },
+                    { label: "Tools Used", value: mod.skills.length.toString(), suffix: " tools", icon: <svg className="w-5 h-5" style={{ color: mod.color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" /></svg> },
+                    { label: "Duration", value: mod.duration.split(" ")[1].split("–")[1] || "8", suffix: " weeks", icon: <ClockIcon className="w-5 h-5" style={{ color: mod.color }} /> },
                   ].map((stat, j) => (
                     <motion.div
                       key={j}
-                      className="relative group/stat rounded-xl bg-white/[0.03] border border-white/[0.06] p-4 text-center hover:bg-white/[0.05] transition-all duration-300 overflow-hidden"
+                      className="relative group/stat rounded-xl bg-white/[0.03] border border-white/[0.06] p-4 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden flex items-center gap-3"
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, delay: 0.5 + j * 0.08 }}
@@ -1507,8 +1525,13 @@ export default function DataAnalyticsPage() {
                         className="absolute inset-0 opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500 pointer-events-none"
                         style={{ background: `radial-gradient(120px circle at 50% 50%, ${mod.color}08, transparent 60%)` }}
                       />
-                      <p className="text-xl font-bold text-white relative">{stat.value}<span className="text-sm font-normal text-gray-500">{stat.suffix}</span></p>
-                      <p className="text-[10px] text-gray-500 font-mono uppercase tracking-wider mt-1 relative">{stat.label}</p>
+                      <div className="relative w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${mod.color}12` }}>
+                        {stat.icon}
+                      </div>
+                      <div className="relative">
+                        <p className="text-xl font-bold text-white">{stat.value}<span className="text-sm font-normal text-gray-500">{stat.suffix}</span></p>
+                        <p className="text-[10px] text-gray-500 font-mono uppercase tracking-wider">{stat.label}</p>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
