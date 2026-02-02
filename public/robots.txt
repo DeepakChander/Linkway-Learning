@@ -1,0 +1,12 @@
+# Linkway Learning - robots.txt
+User-agent: *
+Allow: /
+Disallow: /student-portal
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://linkwaylearning.com/sitemap.xml
+
+# Crawl-delay
+User-agent: *
+Crawl-delay: 1
