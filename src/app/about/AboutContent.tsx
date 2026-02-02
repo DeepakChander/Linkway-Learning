@@ -17,9 +17,8 @@ import {
   SpringReveal,
   LineMaskReveal,
   CrossFlicker,
-  ScrollTextReveal,
 } from "@/components/animation";
-import TextScramble from "@/components/animation/TextScramble";
+
 import ScrollOdometer from "@/components/animation/ScrollOdometer";
 import Marquee from "@/components/animation/Marquee";
 import Badge from "@/components/ui/Badge";
@@ -93,10 +92,10 @@ const instructors = [
 ];
 
 const stats = [
-  { target: 8200, suffix: "+", label: "Careers Launched" },
-  { target: 400, suffix: "+", label: "Hiring Partners" },
-  { target: 85, suffix: "%", label: "Avg Salary Jump" },
-  { target: 100, suffix: "%", label: "Placement Rate" },
+  { target: 8200, suffix: "+", label: "Careers Launched", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg> },
+  { target: 400, suffix: "+", label: "Hiring Partners", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg> },
+  { target: 85, suffix: "%", label: "Avg Salary Jump", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg> },
+  { target: 100, suffix: "%", label: "Placement Rate", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg> },
 ];
 
 const milestones = [
@@ -105,7 +104,7 @@ const milestones = [
   { year: "2021", title: "500+ Placed", desc: "Crossed 500 successful placements with top companies hiring our grads." },
   { year: "2022", title: "Industry Mentors", desc: "Brought on mentors from Google, PwC, Cognizant, and Autodesk." },
   { year: "2023", title: "8,200+ Careers", desc: "Became one of India\u2019s most trusted data career platforms." },
-  { year: "2024", title: "AI & Beyond", desc: "Launched AI/ML tracks and expanded to full-stack data engineering." },
+  { year: "2026", title: "AI & Beyond", desc: "Launched AI/ML tracks and expanded to full-stack data engineering." },
 ];
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -238,32 +237,57 @@ export default function AboutPage() {
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-32">
           {/* Left: Text */}
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/20 bg-orange-500/[0.06] text-orange-400 text-xs font-semibold tracking-wider uppercase mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-                About Linkway Learning
-              </span>
+            {/* About Linkway Learning — compact badge */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-orange-500/20 bg-orange-500/[0.06]">
+                <motion.svg
+                  width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  animate={{ rotate: [0, 8, -8, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </motion.svg>
+                <span className="text-orange-400 text-xs font-semibold tracking-[0.15em] uppercase">
+                  About Linkway Learning
+                </span>
+              </div>
             </motion.div>
 
             <motion.h1 initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight text-white">
-              We Build{" "}
-              <TextScramble delay={0.7} speed={25} iterations={4} highlightColor="orange">Data Careers</TextScramble>
+              We Build
+              <br />
+              <span className="hero-gradient-text">Data Careers</span>
               <span className="text-orange-500">.</span>
               <br />
-              <span className="text-white/30 text-3xl md:text-4xl lg:text-[2.8rem] font-light">Not Just Courses.</span>
+              <span className="text-gray-300 text-3xl md:text-4xl lg:text-[2.8rem] font-light italic">Not Just Courses.</span>
             </motion.h1>
 
             <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-6 text-base md:text-lg text-gray-400 max-w-lg leading-relaxed">
+              className="mt-6 text-base md:text-lg text-gray-300 max-w-lg leading-relaxed">
               Bridging the gap between ambition and industry &mdash; with skills, projects, mentorship, and placement support that actually work.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.95 }}
-              className="mt-8 flex flex-wrap gap-3">
-              <Badge variant="orange">8,200+ Careers Launched</Badge>
-              <Badge variant="orange">100% Placement Rate*</Badge>
+              className="mt-8 flex flex-wrap gap-6 text-sm font-medium">
+              <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-orange-500/15 bg-orange-500/[0.05] text-white">
+                <motion.svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  animate={{ y: [0, -2, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </motion.svg>
+                <span className="font-bold text-orange-400">8,200+</span> Careers Launched
+              </span>
+              <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-orange-500/15 bg-orange-500/[0.05] text-white">
+                <motion.svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+                </motion.svg>
+                <span className="font-bold text-orange-400">100%</span> Placement Rate*
+              </span>
             </motion.div>
           </div>
 
@@ -289,14 +313,6 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* Scroll hint */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-          <span className="text-[10px] text-gray-600 tracking-[0.25em] uppercase">Scroll</span>
-          <div className="w-5 h-8 rounded-full border border-gray-700 flex items-start justify-center p-1">
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-          </div>
-        </motion.div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════
@@ -357,12 +373,16 @@ export default function AboutPage() {
             </SpringReveal>
 
             <div className="space-y-4">
-              <ScrollTextReveal tag="p" className="text-navy-800/60 text-base md:text-lg leading-relaxed">
-                We kept seeing the same thing: smart people finishing college, picking up a degree, and then sitting at home wondering why nobody would hire them for a data role. It was not a knowledge problem it was a gap between what colleges teach and what companies need.
-              </ScrollTextReveal>
-              <ScrollTextReveal tag="p" className="text-navy-800/60 text-base md:text-lg leading-relaxed">
-                So we built Linkway to close that gap. Live classes from industry professionals, projects that mirror real business problems, and a placement team that does not stop until you are hired. Over 8200 people have made the switch through us so far.
-              </ScrollTextReveal>
+              <SpringReveal distance={30} damping={14} delay={0.2}>
+                <p className="text-navy-800/60 text-base md:text-lg leading-relaxed">
+                  We kept seeing the same thing: smart people finishing college, picking up a degree, and then sitting at home wondering why nobody would hire them for a data role. It was not a knowledge problem it was a gap between what colleges teach and what companies need.
+                </p>
+              </SpringReveal>
+              <SpringReveal distance={30} damping={14} delay={0.35}>
+                <p className="text-navy-800/60 text-base md:text-lg leading-relaxed">
+                  So we built Linkway to close that gap. Live classes from industry professionals, projects that mirror real business problems, and a placement team that does not stop until you are hired. Over 8200 people have made the switch through us so far.
+                </p>
+              </SpringReveal>
             </div>
           </div>
         </div>
@@ -443,10 +463,16 @@ export default function AboutPage() {
             {/* Left: label */}
             <SpringReveal distance={30} damping={14}>
               <div>
-                <span className="text-orange-400 text-xs font-bold tracking-[0.2em] uppercase">Our Impact</span>
-                <h3 className="text-2xl md:text-3xl font-bold text-white mt-2 leading-snug">
+                <span className="inline-flex items-center gap-2 text-orange-400 text-xs font-bold tracking-[0.2em] uppercase">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
+                  Our Impact
+                </span>
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mt-3 leading-snug">
                   Numbers that<br />
-                  <span className="text-orange-400">speak for us.</span>
+                  <span className="relative inline-block text-orange-400">
+                    speak for us.
+                    <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" fill="none" preserveAspectRatio="none"><path d="M2 5C30 2 70 2 100 4C130 6 170 5 198 3" stroke="#F58220" strokeWidth="2.5" strokeLinecap="round" /></svg>
+                  </span>
                 </h3>
               </div>
             </SpringReveal>
@@ -460,6 +486,9 @@ export default function AboutPage() {
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     <div className="relative z-10">
+                      <div className="text-orange-500/60 mb-3 group-hover:text-orange-400 transition-colors duration-400">
+                        {stat.icon}
+                      </div>
                       <div className="text-3xl md:text-4xl font-bold text-white leading-none group-hover:text-orange-400 transition-colors duration-400">
                         <ScrollOdometer value={stat.target} suffix={stat.suffix} duration={2} delay={0.3 + i * 0.15} />
                       </div>
@@ -532,7 +561,7 @@ export default function AboutPage() {
       {/* ══════════════════════════════════════════════════════════
           SECTION 6 — TIMELINE (Dark Navy, vertical cascade)
           ══════════════════════════════════════════════════════════ */}
-      <section className="relative bg-navy-900 overflow-hidden py-28 md:py-40">
+      <section className="relative bg-navy-900 overflow-hidden py-16 md:py-20">
         {/* Animated background */}
         <div className="absolute inset-0 hero-grid-overlay opacity-[0.02]" />
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -546,7 +575,7 @@ export default function AboutPage() {
 
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           {/* Section heading */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-10">
             <SpringReveal distance={40} damping={14}>
               <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
@@ -554,7 +583,7 @@ export default function AboutPage() {
               </span>
             </SpringReveal>
             <SpringReveal distance={50} damping={12} delay={0.1}>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
                 The <span className="hero-gradient-text">Timeline</span>
               </h2>
             </SpringReveal>
@@ -573,27 +602,27 @@ export default function AboutPage() {
             {milestones.map((m, i) => {
               const isLeft = i % 2 === 0;
               return (
-                <div key={i} className={`relative flex items-start gap-6 md:gap-0 mb-16 last:mb-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}>
+                <div key={i} className={`relative flex items-start gap-6 md:gap-0 mb-8 last:mb-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}>
                   {/* Content card */}
-                  <div className={`flex-1 pl-14 md:pl-0 ${isLeft ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
+                  <div className={`flex-1 pl-14 md:pl-0 ${isLeft ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
                     <SpringReveal distance={isLeft ? -60 : 60} direction={isLeft ? "right" : "left"} delay={i * 0.08}>
-                      <div className="group relative rounded-2xl p-6 md:p-7 bg-white/[0.03] border border-white/[0.07] hover:border-orange-500/20 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden backdrop-blur-sm hover:-translate-y-1">
+                      <div className="group relative rounded-xl p-4 md:p-5 bg-white/[0.03] border border-white/[0.07] hover:border-orange-500/20 hover:bg-white/[0.06] transition-all duration-500 overflow-hidden backdrop-blur-sm hover:-translate-y-1">
                         {/* Accent line top */}
                         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-orange-500 to-transparent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
 
                         {/* Year badge */}
-                        <span className="inline-flex items-center gap-1.5 text-orange-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">
+                        <span className="inline-flex items-center gap-1.5 text-orange-400 text-xs font-bold tracking-[0.15em] uppercase mb-1.5">
                           <span className="w-1 h-1 rounded-full bg-orange-500/60" />
                           {m.year}
                         </span>
 
-                        <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-orange-100 transition-colors duration-300">
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-1 group-hover:text-orange-100 transition-colors duration-300">
                           {m.title}
                         </h3>
                         <p className="text-gray-400 text-sm leading-relaxed">{m.desc}</p>
 
                         {/* Watermark year */}
-                        <span className="absolute -bottom-3 -right-2 text-[5rem] font-black text-white/[0.015] leading-none select-none pointer-events-none group-hover:text-white/[0.04] transition-colors duration-700">
+                        <span className="absolute -bottom-2 -right-2 text-[3.5rem] font-black text-white/[0.015] leading-none select-none pointer-events-none group-hover:text-white/[0.04] transition-colors duration-700">
                           {m.year}
                         </span>
 
@@ -688,31 +717,55 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 8 — CTA (Orange gradient)
+          SECTION 8 — CTA (Navy compact with glass card)
           ══════════════════════════════════════════════════════════ */}
-      <section className="relative py-28 md:py-36 px-6 overflow-hidden about-warm-gradient">
-        <div className="absolute inset-0 noise-overlay" />
+      <section className="relative py-16 md:py-20 px-6 overflow-hidden bg-navy-900">
+        {/* Subtle animated gradient orbs */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-orange-500/10 via-transparent to-blue-500/10 blur-[120px] pointer-events-none animate-pulse" />
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-orange-500/5 blur-[80px] pointer-events-none" />
+        <div className="absolute inset-0 hero-grid-overlay opacity-[0.02]" />
 
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <SpringReveal distance={50} damping={12}>
-            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight">
-              Ready to Build Your Data Career?
-            </h2>
-          </SpringReveal>
-          <SpringReveal distance={30} damping={14} delay={0.15}>
-            <p className="mt-5 text-base md:text-lg text-white/70 max-w-lg mx-auto">
-              Join 8,200+ professionals who transformed their careers through Linkway Learning.
-            </p>
-          </SpringReveal>
-          <SpringReveal distance={20} damping={14} delay={0.3}>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a href="/courses" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-navy-900 font-bold text-base hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:scale-[1.02] transition-all duration-300">
-                <span>Explore Courses</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </a>
-              <a href="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-white/30 text-white font-bold text-base hover:bg-white/10 hover:border-white/50 transition-all duration-300">
-                Talk to Us
-              </a>
+        <div className="max-w-4xl mx-auto relative z-10">
+          <SpringReveal distance={40} damping={14}>
+            <div className="relative rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm p-8 md:p-12 overflow-hidden">
+              {/* Inner glow */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange-500/10 blur-[60px] pointer-events-none" />
+              <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-blue-500/10 blur-[60px] pointer-events-none" />
+
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                {/* Left: Text */}
+                <div className="max-w-md">
+                  <span className="inline-block text-orange-400 text-[10px] font-bold tracking-[0.25em] uppercase mb-3">Start Your Journey</span>
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                    Ready to Build Your Data Career?
+                  </h2>
+                  <p className="mt-3 text-sm md:text-base text-gray-400 leading-relaxed">
+                    Join 8,200+ professionals who transformed their careers through Linkway Learning.
+                  </p>
+                </div>
+
+                {/* Right: Buttons */}
+                <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0">
+                  <a href="/courses" className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-400 text-white font-bold text-sm hover:shadow-[0_0_30px_rgba(245,130,32,0.3)] hover:scale-[1.03] transition-all duration-300">
+                    <span>Explore Courses</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </a>
+                  <a href="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-white/70 font-semibold text-sm hover:bg-white/[0.05] hover:text-white hover:border-white/20 transition-all duration-300">
+                    Talk to Us
+                  </a>
+                </div>
+              </div>
+
+              {/* Top-right corner accent */}
+              <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden pointer-events-none">
+                <div className="absolute top-3 right-3 w-[1px] h-8 bg-gradient-to-b from-orange-500/40 to-transparent" />
+                <div className="absolute top-3 right-3 h-[1px] w-8 bg-gradient-to-l from-orange-500/40 to-transparent" />
+              </div>
+              {/* Bottom-left corner accent */}
+              <div className="absolute bottom-0 left-0 w-20 h-20 overflow-hidden pointer-events-none">
+                <div className="absolute bottom-3 left-3 w-[1px] h-8 bg-gradient-to-t from-orange-500/40 to-transparent" />
+                <div className="absolute bottom-3 left-3 h-[1px] w-8 bg-gradient-to-r from-orange-500/40 to-transparent" />
+              </div>
             </div>
           </SpringReveal>
         </div>
