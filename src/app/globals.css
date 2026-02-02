@@ -1951,6 +1951,21 @@
     0 32px 80px rgba(0, 0, 0, 0.04);
 }
 
+.ss2-company-name {
+  position: relative;
+  animation: ss2-name-shimmer 2.5s ease-in-out infinite;
+}
+
+.ss2-bento-card:hover .ss2-company-name {
+  animation-duration: 1.2s;
+  filter: brightness(1.3);
+}
+
+@keyframes ss2-name-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* ── Journey Step Card ── */
 .ss2-journey-card {
   background: white;
@@ -2025,132 +2040,238 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   CTA Section — Aurora Background Animations
+   CTA Section — Orbital System Background Animations
    ═══════════════════════════════════════════════════════════════════ */
 
-/* ── Aurora gradient blobs ── */
-.ss2-aurora-blob {
+/* ── Orbital Rings System ── */
+.ss2-orbit-system {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  will-change: transform, opacity;
-  mix-blend-mode: screen;
+  top: 50%;
+  left: 25%;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
 }
 
-.ss2-aurora-1 {
+.ss2-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  top: 50%;
+  left: 50%;
+}
+
+.ss2-ring-1 {
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  animation: ss2-orbit-spin 20s linear infinite;
+  border-color: rgba(245, 130, 32, 0.08);
+}
+
+.ss2-ring-2 {
   width: 500px;
   height: 500px;
-  top: -20%;
-  left: -10%;
-  background: radial-gradient(circle, rgba(245, 130, 32, 0.18) 0%, transparent 70%);
-  animation: ss2-aurora-drift-1 14s ease-in-out infinite;
+  margin: -250px 0 0 -250px;
+  animation: ss2-orbit-spin 35s linear infinite reverse;
+  border-color: rgba(59, 130, 246, 0.06);
 }
 
-.ss2-aurora-2 {
-  width: 400px;
-  height: 400px;
-  bottom: -15%;
-  right: -8%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
-  animation: ss2-aurora-drift-2 18s ease-in-out infinite;
+.ss2-ring-3 {
+  width: 700px;
+  height: 700px;
+  margin: -350px 0 0 -350px;
+  animation: ss2-orbit-spin 50s linear infinite;
+  border-color: rgba(139, 92, 246, 0.04);
+  border-style: dashed;
 }
 
-.ss2-aurora-3 {
-  width: 350px;
-  height: 350px;
-  top: 30%;
-  left: 40%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-  animation: ss2-aurora-drift-3 20s ease-in-out infinite;
+@keyframes ss2-orbit-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@keyframes ss2-aurora-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
-  30% { transform: translate(60px, 40px) scale(1.2); opacity: 0.5; }
-  60% { transform: translate(-30px, 60px) scale(0.9); opacity: 0.3; }
-}
-
-@keyframes ss2-aurora-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-  40% { transform: translate(-50px, -30px) scale(1.15); opacity: 0.45; }
-  70% { transform: translate(40px, -50px) scale(0.85); opacity: 0.25; }
-}
-
-@keyframes ss2-aurora-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-  35% { transform: translate(40px, -40px) scale(1.3); opacity: 0.35; }
-  65% { transform: translate(-60px, 20px) scale(0.8); opacity: 0.15; }
-}
-
-/* ── Perspective grid ── */
-.ss2-perspective-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent 100%);
-  animation: ss2-grid-pulse 8s ease-in-out infinite;
-}
-
-@keyframes ss2-grid-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-}
-
-/* ── Floating particles ── */
-.ss2-particle {
+/* ── Orbital Nodes ── */
+.ss2-orbit-node {
   position: absolute;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: rgba(245, 130, 32, 0.4);
-  box-shadow: 0 0 6px rgba(245, 130, 32, 0.3);
-  animation: ss2-particle-float 8s ease-in-out infinite;
-  opacity: 0;
 }
 
-.ss2-particle:nth-child(odd) {
-  background: rgba(59, 130, 246, 0.35);
-  box-shadow: 0 0 6px rgba(59, 130, 246, 0.25);
+.ss2-node-orange {
+  top: 0;
+  left: 50%;
+  margin-left: -3px;
+  margin-top: -3px;
+  background: #F58220;
+  box-shadow: 0 0 12px 4px rgba(245, 130, 32, 0.5), 0 0 30px 8px rgba(245, 130, 32, 0.2);
+  animation: ss2-node-pulse 3s ease-in-out infinite;
 }
 
-.ss2-particle:nth-child(3n) {
-  background: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 0 6px rgba(139, 92, 246, 0.2);
-}
-
-@keyframes ss2-particle-float {
-  0% { transform: translateY(0) scale(0); opacity: 0; }
-  15% { opacity: 0.7; transform: translateY(-10px) scale(1); }
-  85% { opacity: 0.5; transform: translateY(-60px) scale(0.8); }
-  100% { transform: translateY(-80px) scale(0); opacity: 0; }
-}
-
-/* ── Horizontal beam sweeps ── */
-.ss2-beam {
-  position: absolute;
-  left: 0;
+.ss2-node-blue {
+  top: 50%;
   right: 0;
+  margin-top: -3px;
+  margin-right: -3px;
+  background: #3B82F6;
+  box-shadow: 0 0 12px 4px rgba(59, 130, 246, 0.5), 0 0 30px 8px rgba(59, 130, 246, 0.2);
+  animation: ss2-node-pulse 3s ease-in-out 1s infinite;
+}
+
+.ss2-node-blue-2 {
+  bottom: 0;
+  left: 30%;
+  margin-bottom: -3px;
+  width: 4px;
+  height: 4px;
+  background: #60A5FA;
+  box-shadow: 0 0 8px 3px rgba(96, 165, 250, 0.4), 0 0 20px 6px rgba(96, 165, 250, 0.15);
+  animation: ss2-node-pulse 4s ease-in-out 0.5s infinite;
+}
+
+.ss2-node-purple {
+  top: 20%;
+  left: 0;
+  margin-left: -3px;
+  width: 5px;
+  height: 5px;
+  background: #8B5CF6;
+  box-shadow: 0 0 10px 4px rgba(139, 92, 246, 0.4), 0 0 25px 8px rgba(139, 92, 246, 0.15);
+  animation: ss2-node-pulse 3.5s ease-in-out 1.5s infinite;
+}
+
+@keyframes ss2-node-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* ── Center Pulse ── */
+.ss2-orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: rgba(245, 130, 32, 0.6);
+  box-shadow: 0 0 20px 8px rgba(245, 130, 32, 0.25), 0 0 60px 20px rgba(245, 130, 32, 0.08);
+  animation: ss2-center-breathe 4s ease-in-out infinite;
+}
+
+@keyframes ss2-center-breathe {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 20px 8px rgba(245, 130, 32, 0.25), 0 0 60px 20px rgba(245, 130, 32, 0.08); }
+  50% { transform: scale(1.3); box-shadow: 0 0 30px 12px rgba(245, 130, 32, 0.35), 0 0 80px 30px rgba(245, 130, 32, 0.12); }
+}
+
+/* ── Morphing Gradient Blob ── */
+.ss2-morph-blob {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 450px;
+  height: 450px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at 40% 40%,
+    rgba(245, 130, 32, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 40%,
+    transparent 70%
+  );
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: ss2-morph 12s ease-in-out infinite;
+  filter: blur(40px);
+}
+
+@keyframes ss2-morph {
+  0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: translate(-50%, -50%) rotate(0deg); }
+  25% { border-radius: 58% 42% 36% 64% / 52% 68% 32% 48%; }
+  50% { border-radius: 50% 50% 34% 66% / 56% 36% 64% 44%; transform: translate(-50%, -50%) rotate(180deg); }
+  75% { border-radius: 38% 62% 64% 36% / 44% 58% 42% 56%; }
+  100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ── Star Field ── */
+.ss2-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0;
+  animation: ss2-star-twinkle 3s ease-in-out infinite;
+}
+
+.ss2-star:nth-child(odd) {
+  width: 1px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 130, 32, 0.15), rgba(245, 130, 32, 0.3), rgba(245, 130, 32, 0.15), transparent);
+}
+
+.ss2-star:nth-child(3n) {
+  background: rgba(245, 130, 32, 0.8);
+}
+
+.ss2-star:nth-child(5n) {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+@keyframes ss2-star-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.7; transform: scale(1); }
+}
+
+/* ── Diagonal Light Streaks ── */
+.ss2-streak {
+  position: absolute;
+  width: 200%;
+  height: 1px;
   opacity: 0;
 }
 
-.ss2-beam-1 {
-  top: 25%;
-  animation: ss2-beam-sweep 6s ease-in-out infinite;
+.ss2-streak-1 {
+  top: 30%;
+  left: -50%;
+  background: linear-gradient(90deg, transparent 0%, rgba(245, 130, 32, 0.12) 20%, rgba(245, 130, 32, 0.25) 50%, rgba(245, 130, 32, 0.12) 80%, transparent 100%);
+  transform: rotate(-15deg);
+  animation: ss2-streak-flash-1 8s ease-in-out infinite;
 }
 
-.ss2-beam-2 {
-  bottom: 30%;
-  animation: ss2-beam-sweep 8s ease-in-out 3s infinite;
+.ss2-streak-2 {
+  top: 55%;
+  left: -50%;
+  background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.08) 20%, rgba(59, 130, 246, 0.18) 50%, rgba(59, 130, 246, 0.08) 80%, transparent 100%);
+  transform: rotate(-12deg);
+  animation: ss2-streak-flash-2 10s ease-in-out 3s infinite;
 }
 
-@keyframes ss2-beam-sweep {
-  0% { opacity: 0; transform: scaleX(0); transform-origin: left; }
-  30% { opacity: 1; transform: scaleX(1); transform-origin: left; }
-  60% { opacity: 1; transform: scaleX(1); transform-origin: right; }
-  100% { opacity: 0; transform: scaleX(0); transform-origin: right; }
+.ss2-streak-3 {
+  top: 75%;
+  left: -50%;
+  background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.06) 20%, rgba(139, 92, 246, 0.12) 50%, rgba(139, 92, 246, 0.06) 80%, transparent 100%);
+  transform: rotate(-18deg);
+  animation: ss2-streak-flash-3 12s ease-in-out 6s infinite;
+}
+
+@keyframes ss2-streak-flash-1 {
+  0%, 100% { opacity: 0; transform: rotate(-15deg) translateX(-30%); }
+  15% { opacity: 1; }
+  50% { opacity: 0.6; transform: rotate(-15deg) translateX(30%); }
+  85% { opacity: 0; }
+}
+
+@keyframes ss2-streak-flash-2 {
+  0%, 100% { opacity: 0; transform: rotate(-12deg) translateX(-30%); }
+  15% { opacity: 1; }
+  50% { opacity: 0.6; transform: rotate(-12deg) translateX(30%); }
+  85% { opacity: 0; }
+}
+
+@keyframes ss2-streak-flash-3 {
+  0%, 100% { opacity: 0; transform: rotate(-18deg) translateX(-30%); }
+  15% { opacity: 1; }
+  50% { opacity: 0.6; transform: rotate(-18deg) translateX(30%); }
+  85% { opacity: 0; }
 }
 
 /* ── Reduced Motion Support ── */

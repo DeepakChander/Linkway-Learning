@@ -1631,12 +1631,24 @@ export default function DataAnalyticsPage() {
   ];
 
   const roles = [
-    { title: "Data Analyst", range: "6–10 LPA" },
-    { title: "Business Analyst", range: "7–12 LPA" },
-    { title: "BI Analyst", range: "6–10 LPA" },
-    { title: "Data Engineer", range: "8–15 LPA" },
-    { title: "Database Administrator", range: "6–12 LPA" },
-    { title: "Analytics Consultant", range: "8–14 LPA" },
+    { title: "Data Analyst", range: "6–10 LPA", icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg>
+    )},
+    { title: "Business Analyst", range: "7–12 LPA", icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M2 20h20"/><path d="M5 20V10l4-4 4 4 4-8 4 4v14"/></svg>
+    )},
+    { title: "BI Analyst", range: "6–10 LPA", icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    )},
+    { title: "Data Engineer", range: "8–15 LPA", icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+    )},
+    { title: "Database Administrator", range: "6–12 LPA", icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>
+    )},
+    { title: "Analytics Consultant", range: "8–14 LPA", icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg>
+    )},
   ];
 
   const faqs = [
@@ -2946,8 +2958,12 @@ export default function DataAnalyticsPage() {
       </section>
 
       {/* ═══════ CAREER OUTCOMES ═══════ */}
-      <section className="relative py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-20 px-6 bg-white overflow-hidden">
+        {/* Animated background accents */}
+        <motion.div className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `${BRAND_ORANGE}0A` }} animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full blur-[140px] pointer-events-none" style={{ backgroundColor: `${ACCENT_BLUE}08` }} animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
+
+        <div className="max-w-6xl mx-auto relative z-10">
           <ScrollReveal>
             <SectionLabel>Outcomes</SectionLabel>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight">
@@ -2956,20 +2972,43 @@ export default function DataAnalyticsPage() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-14">
             {/* Roles — 3 columns */}
-            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {roles.map((role, i) => (
-                <SlideIn key={i} direction="up" delay={i * 0.05}>
-                  <Card accent={ACCENT_BLUE}>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="text-sm font-semibold text-navy-900">{role.title}</h4>
-                        <p className="text-xs text-gray-500 mt-0.5 font-mono">{role.range}</p>
+                <SlideIn key={i} direction="up" delay={i * 0.08}>
+                  <motion.div
+                    className="group relative rounded-2xl border border-gray-100 bg-white p-5 cursor-default overflow-hidden"
+                    whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    {/* Hover gradient border effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                      style={{ background: `linear-gradient(135deg, ${BRAND_ORANGE}15, ${ACCENT_BLUE}15)` }}
+                    />
+                    <div className="relative flex items-center gap-4">
+                      <motion.div
+                        className="flex items-center justify-center w-11 h-11 rounded-xl shrink-0"
+                        style={{ backgroundColor: `${i % 2 === 0 ? BRAND_ORANGE : ACCENT_BLUE}12` }}
+                        whileHover={{ rotate: 8, scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      >
+                        <span style={{ color: i % 2 === 0 ? BRAND_ORANGE : ACCENT_BLUE }}>{role.icon}</span>
+                      </motion.div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-semibold text-gray-900">{role.title}</h4>
+                        <p className="text-xs text-gray-500 mt-0.5 font-mono tracking-wide">{role.range}</p>
                       </div>
-                      <TargetIcon className="w-4 h-4 text-gray-300" />
+                      <motion.div
+                        className="opacity-0 group-hover:opacity-100 transition-opacity"
+                        initial={false}
+                        whileHover={{ x: 3 }}
+                      >
+                        <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                      </motion.div>
                     </div>
-                  </Card>
+                  </motion.div>
                 </SlideIn>
               ))}
             </div>
@@ -2977,30 +3016,70 @@ export default function DataAnalyticsPage() {
             {/* Right side — salary + guarantees */}
             <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
               <SlideIn direction="right">
-                <div className="bg-gray-50 rounded-2xl border border-gray-100 p-6">
-                  <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Expected Salary Range</p>
-                  <p className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>₹6–15 LPA</p>
-                </div>
+                <motion.div
+                  className="relative rounded-2xl border border-gray-100 p-7 overflow-hidden"
+                  style={{ background: "linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)" }}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  {/* Animated shimmer */}
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: `linear-gradient(105deg, transparent 40%, ${BRAND_ORANGE}08 50%, transparent 60%)` }}
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
+                  />
+                  <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-3 relative">Expected Salary Range</p>
+                  <motion.p
+                    className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent relative"
+                    style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}
+                    initial={{ backgroundSize: "100%" }}
+                  >
+                    ₹6–15 LPA
+                  </motion.p>
+                </motion.div>
               </SlideIn>
 
               <SlideIn direction="right" delay={0.1}>
-                <div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50">
-                  <ShieldIcon className="w-5 h-5 shrink-0" style={{ color: BRAND_ORANGE }} />
+                <motion.div
+                  className="flex items-center gap-4 px-5 py-4 rounded-xl border border-gray-100 bg-gradient-to-r from-gray-50 to-white"
+                  whileHover={{ x: 4, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <motion.div
+                    className="flex items-center justify-center w-10 h-10 rounded-full shrink-0"
+                    style={{ backgroundColor: `${BRAND_ORANGE}15` }}
+                    animate={{ scale: [1, 1.08, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ShieldIcon className="w-5 h-5" style={{ color: BRAND_ORANGE }} />
+                  </motion.div>
                   <div>
-                    <p className="text-sm text-navy-900 font-semibold">Only 100% Placement</p>
+                    <p className="text-sm text-gray-900 font-semibold">Only 100% Placement</p>
                     <p className="text-xs text-gray-500">No guarantee or assistance</p>
                   </div>
-                </div>
+                </motion.div>
               </SlideIn>
 
               <SlideIn direction="right" delay={0.2}>
-                <div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50">
-                  <SparklesIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_BLUE }} />
+                <motion.div
+                  className="flex items-center gap-4 px-5 py-4 rounded-xl border border-gray-100 bg-gradient-to-r from-gray-50 to-white"
+                  whileHover={{ x: 4, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <motion.div
+                    className="flex items-center justify-center w-10 h-10 rounded-full shrink-0"
+                    style={{ backgroundColor: `${ACCENT_BLUE}15` }}
+                    animate={{ rotate: [0, 10, 0, -10, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", type: "tween" }}
+                  >
+                    <SparklesIcon className="w-5 h-5" style={{ color: ACCENT_BLUE }} />
+                  </motion.div>
                   <div>
-                    <p className="text-sm text-navy-900 font-semibold">Microsoft Azure AI Certification</p>
+                    <p className="text-sm text-gray-900 font-semibold">Microsoft Azure AI Certification</p>
                     <p className="text-xs text-gray-500">Exam preparation included</p>
                   </div>
-                </div>
+                </motion.div>
               </SlideIn>
             </div>
           </div>

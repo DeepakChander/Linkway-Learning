@@ -88,6 +88,14 @@ const companyLogos: Record<string, string> = {
   "Uptime AI": "/images/companies/uptime-ai.svg",
   MUFG: "/images/companies/mufg.svg",
   MiQ: "/images/companies/miq.svg",
+  Globussoft: "/images/companies/globussoft.svg",
+  EaseMyTrip: "/images/companies/easemytrip.svg",
+  Razorpay: "/images/companies/razorpay.svg",
+  EXL: "/images/companies/exl.svg",
+  "Booking.com": "/images/companies/booking.svg",
+  "Vishal Mega Mart": "/images/companies/vishal-mega-mart.svg",
+  Safegraph: "/images/companies/safegraph.svg",
+  Accenture: "/images/companies/accenture.svg",
   HUL: "/images/companies/hul.svg",
   Genpact: "/images/companies/genpact.svg",
   Sprinklr: "/images/companies/sprinklr.svg",
@@ -301,14 +309,13 @@ function TransformationCard({ person, isActive }: { person: (typeof testimonials
 }
 
 /* ── Bento Story Card ── */
-function BentoStoryCard({ person, size = "normal" }: { person: (typeof testimonials)[0]; size?: "large" | "normal" }) {
+function BentoStoryCard({ person }: { person: (typeof testimonials)[0] }) {
   const logo = companyLogos[person.company];
-  const isLarge = size === "large";
 
   return (
     <SpotlightCard spotlightColor={`${person.color}10`} borderRadius="20px">
       <motion.div
-        className={`ss2-bento-card relative rounded-[20px] overflow-hidden bg-white border border-gray-100/80 h-full ${isLarge ? "p-8 md:p-10" : "p-6 md:p-8"}`}
+        className="ss2-bento-card relative rounded-[20px] overflow-hidden bg-white border border-gray-100/80 h-full flex flex-col p-6 md:p-8"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
@@ -319,26 +326,38 @@ function BentoStoryCard({ person, size = "normal" }: { person: (typeof testimoni
         <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${person.color}50, ${person.color}, ${person.color}50)` }} />
 
         {/* Avatar + Identity */}
-        <div className="flex items-start gap-4 mb-5">
+        <div className="flex items-start gap-4 mb-4">
           <div
-            className={`${isLarge ? "w-14 h-14" : "w-12 h-12"} rounded-2xl flex items-center justify-center text-white font-bold ${isLarge ? "text-lg" : "text-sm"} shrink-0`}
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-sm shrink-0"
             style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)`, boxShadow: `0 8px 24px ${person.color}25` }}
           >
             {person.initials}
           </div>
           <div className="min-w-0">
-            <h3 className={`${isLarge ? "text-lg" : "text-base"} font-bold text-navy-900`}>{person.name}</h3>
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <h3 className="text-base font-bold text-navy-900">{person.name}</h3>
+            {/* Company logo + animated name */}
+            <div className="flex items-center gap-2 mt-1">
               {logo && (
-                <img src={logo} alt="" width={14} height={14} className={`w-3.5 h-3.5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-50" : "opacity-60"}`} />
+                <img src={logo} alt={person.company} width={20} height={20} className={`w-5 h-5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-70" : "opacity-80"}`} />
               )}
-              <span className="text-xs text-gray-400 font-medium">{person.company}</span>
+              <span
+                className="ss2-company-name text-xs font-bold tracking-wide"
+                style={{
+                  background: `linear-gradient(90deg, ${person.color}, ${person.color}80, ${person.color}FF, ${person.color}80, ${person.color})`,
+                  backgroundSize: "200% 100%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {person.company}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Transformation journey - horizontal */}
-        <div className="flex items-center gap-2 mb-5 flex-wrap">
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
           <span className="text-[11px] font-medium text-gray-400 bg-gray-50 border border-gray-100 rounded-lg px-2.5 py-1">{person.from}</span>
           <svg width="20" height="10" viewBox="0 0 20 10" fill="none" className="shrink-0">
             <path d="M0 5H18M18 5L14 1M18 5L14 9" stroke={person.color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
@@ -349,9 +368,9 @@ function BentoStoryCard({ person, size = "normal" }: { person: (typeof testimoni
         </div>
 
         {/* Quote */}
-        <div className="relative">
+        <div className="relative flex-1">
           <span className="absolute -top-3 -left-1 text-[48px] font-serif leading-none select-none pointer-events-none" style={{ color: `${person.color}08` }}>&ldquo;</span>
-          <p className={`text-gray-500 leading-[1.85] relative z-10 ${isLarge ? "text-[15px]" : "text-sm"}`}>
+          <p className="text-gray-500 leading-[1.85] relative z-10 text-sm line-clamp-4">
             {person.desc}
           </p>
         </div>
@@ -1214,9 +1233,9 @@ export default function SuccessStoriesPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className={i === 0 ? "md:col-span-2 lg:col-span-1 lg:row-span-1" : ""}
+                    className=""
                   >
-                    <BentoStoryCard person={person} size={i === 0 ? "large" : "normal"} />
+                    <BentoStoryCard person={person} />
                   </motion.div>
                 ))}
               </AnimatePresence>
