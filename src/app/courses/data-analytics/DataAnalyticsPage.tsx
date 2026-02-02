@@ -187,6 +187,141 @@ function Divider({ className }: { className?: string }) {
   );
 }
 
+/* ═══════════════════════════════════════════════════════
+   TESTIMONIAL CAROUSEL — Premium 3D tilt glassmorphism
+   ═══════════════════════════════════════════════════════ */
+const learnerTestimonials = [
+  { name: "Rehan Siddiqui", from: "Non-Tech", to: "Data Analyst", company: "Amazon", exp: "1.5 yrs exp.", accentFrom: "#10b981", accentTo: "#34d399", gradientBg: "linear-gradient(135deg, #ecfdf5, #d1fae5 40%, #ffffff)", desc: "I had zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems every day." },
+  { name: "Junaid Khan", from: "Banking Ops", to: "Business Analyst", company: "Razorpay", exp: "2 yrs exp.", accentFrom: "#eab308", accentTo: "#facc15", gradientBg: "linear-gradient(135deg, #fefce8, #fef9c3 40%, #ffffff)", desc: "I was stuck in banking ops with no clear growth path. Six months later, I'm a business analyst at Razorpay working on things that actually excite me." },
+  { name: "Shivani Rawat", from: "Operations", to: "Business Analyst", company: "Booking.com", exp: "2 yrs exp.", accentFrom: "#0ea5e9", accentTo: "#38bdf8", gradientBg: "linear-gradient(135deg, #f0f9ff, #bae6fd 40%, #ffffff)", desc: "Operations felt like a dead end. The program gave me the technical skills I was missing, and now I'm doing requirement analysis at Booking.com." },
+  { name: "Vansh Pathak", from: "Accounting", to: "Reporting Analyst", company: "Accenture", exp: "1 yr exp.", accentFrom: "#f43f5e", accentTo: "#fb7185", gradientBg: "linear-gradient(135deg, #fff1f2, #fecdd3 40%, #ffffff)", desc: "Went from crunching numbers in spreadsheets to building actual reports with SQL at Accenture. The mentors made the jump doable." },
+  { name: "Aditya Srivastava", from: "Full-Stack Dev", to: "Data Scientist", company: "Globussoft", exp: "3 yrs exp.", accentFrom: "#8b5cf6", accentTo: "#a78bfa", gradientBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe 40%, #ffffff)", desc: "I could code, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works." },
+  { name: "Priya Mehta", from: "Graphic Designer", to: "Data Scientist", company: "Meesho", exp: "2 yrs exp.", accentFrom: "#f97316", accentTo: "#fb923c", gradientBg: "linear-gradient(135deg, #fff7ed, #fed7aa 40%, #ffffff)", desc: "From design to data, Linkway taught me how to think analytically. I learned Python, ML, and dashboarding. My fashion image classification project clicked with Meesho." },
+];
+
+function TestimonialCard3D({ t, index }: { t: typeof learnerTestimonials[number]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const smoothX = useSpring(rotateX, { stiffness: 150, damping: 20 });
+  const smoothY = useSpring(rotateY, { stiffness: 150, damping: 20 });
+  const glowX = useMotionValue(50);
+  const glowY = useMotionValue(50);
+
+  const handleMouse = useCallback((e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    rotateX.set((py - 0.5) * -10);
+    rotateY.set((px - 0.5) * 10);
+    glowX.set(px * 100);
+    glowY.set(py * 100);
+  }, [rotateX, rotateY, glowX, glowY]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="shrink-0 w-[340px] md:w-[400px]"
+      style={{ perspective: 1200 }}
+      onMouseMove={handleMouse}
+      onMouseLeave={() => { rotateX.set(0); rotateY.set(0); glowX.set(50); glowY.set(50); }}
+    >
+      <motion.div
+        className="relative h-full rounded-3xl overflow-hidden border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_24px_64px_rgba(0,0,0,0.15)] transition-shadow duration-700"
+        style={{ rotateX: smoothX, rotateY: smoothY, transformStyle: "preserve-3d", background: t.gradientBg }}
+      >
+        {/* Floating orb top-right */}
+        <motion.div
+          className="absolute -top-10 -right-10 w-36 h-36 rounded-full blur-3xl pointer-events-none"
+          style={{ backgroundColor: t.accentFrom, opacity: 0.12 }}
+          animate={{ scale: [1, 1.3, 1], x: [0, 8, 0], y: [0, -5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }}
+        />
+        {/* Floating orb bottom-left */}
+        <motion.div
+          className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full blur-3xl pointer-events-none"
+          style={{ backgroundColor: t.accentTo, opacity: 0.1 }}
+          animate={{ scale: [1.2, 0.9, 1.2], x: [0, -6, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: index * 0.6 }}
+        />
+
+        {/* 3D pushed content */}
+        <div className="relative p-7 pb-6" style={{ transform: "translateZ(40px)" }}>
+          {/* Large SVG quote watermark */}
+          <svg className="absolute top-2 right-4 w-20 h-20 pointer-events-none" viewBox="0 0 64 64" fill="none">
+            <path d="M20 34c0-6.627 5.373-12 12-12v-6c-9.941 0-18 8.059-18 18v12h18V34H20zm24 0c0-6.627 5.373-12 12-12v-6c-9.941 0-18 8.059-18 18v12h18V34H44z" fill={t.accentFrom} opacity="0.06" />
+          </svg>
+
+          {/* Experience badge */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase backdrop-blur-md" style={{ backgroundColor: `${t.accentFrom}10`, color: t.accentFrom, border: `1.5px solid ${t.accentFrom}20`, boxShadow: `0 0 12px ${t.accentFrom}08` }}>
+              <motion.span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: t.accentFrom }} animate={{ scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity }} />
+              {t.exp}
+            </span>
+            <motion.div className="flex-1 h-[1.5px] rounded-full origin-left" style={{ background: `linear-gradient(90deg, ${t.accentFrom}35, ${t.accentTo}15, transparent)` }} initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.3 }} />
+          </div>
+
+          {/* Testimonial text */}
+          <p className="text-[14px] text-gray-700 leading-[1.8] mb-7 relative z-10 font-[450]">
+            &ldquo;{t.desc}&rdquo;
+          </p>
+
+          {/* Gradient divider */}
+          <div className="h-[1.5px] mb-5 rounded-full" style={{ background: `linear-gradient(90deg, ${t.accentFrom}20, ${t.accentTo}12, transparent)` }} />
+
+          {/* Author row with spinning ring avatar */}
+          <div className="flex items-center gap-3.5">
+            <div className="relative">
+              <motion.div className="absolute -inset-[2.5px] rounded-full" style={{ background: `conic-gradient(from 0deg, ${t.accentFrom}, ${t.accentTo}, transparent, ${t.accentFrom})` }} animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} />
+              <div className="relative w-11 h-11 rounded-full flex items-center justify-center text-[13px] font-bold text-white shadow-lg" style={{ background: `linear-gradient(135deg, ${t.accentFrom}, ${t.accentTo})` }}>
+                {t.name.split(" ").map(n => n[0]).join("")}
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="font-bold text-gray-900 text-[15px] leading-tight truncate">{t.name}</h4>
+              <p className="text-[11.5px] text-gray-500 mt-0.5 font-medium">
+                {t.from} <motion.span className="inline-block" style={{ color: t.accentFrom }} animate={{ x: [0, 3, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>&rarr;</motion.span> {t.to}, <span className="font-semibold text-gray-600">{t.company}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function TestimonialCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    requestAnimationFrame(() => {
+      const oneSetWidth = track.scrollWidth / 2;
+      tweenRef.current = gsap.fromTo(track, { x: 0 }, { x: -oneSetWidth, duration: 50, ease: "none", repeat: -1 });
+    });
+    return () => { tweenRef.current?.kill(); };
+  }, []);
+
+  return (
+    <div className="mt-16 relative" onMouseEnter={() => tweenRef.current?.pause()} onMouseLeave={() => tweenRef.current?.resume()}>
+      {/* Gradient fades matching parent bg */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-44 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #f9fafb, transparent)' }} />
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-44 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #f9fafb, transparent)' }} />
+
+      <div className="overflow-hidden py-6">
+        <div ref={trackRef} className="flex gap-7 w-max" style={{ willChange: "transform" }}>
+          {[...learnerTestimonials, ...learnerTestimonials].map((t, i) => (
+            <TestimonialCard3D key={`${t.name}-${i}`} t={t} index={i} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* SVG wave section divider — Clever-inspired */
 function WaveDivider({ flip = false, from = "#f9fafb", to = "#ffffff" }: { flip?: boolean; from?: string; to?: string }) {
   return (
@@ -492,74 +627,6 @@ function HeroImageCarousel({ className }: { className?: string }) {
   );
 }
 
-/* Animated dashboard output mock */
-function DashboardMock({ className }: { className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-10%" });
-
-  const bars = [
-    { label: "Data Analyst", value: 85, color: BRAND_ORANGE },
-    { label: "Business Analyst", value: 78, color: ACCENT_BLUE },
-    { label: "BI Developer", value: 70, color: ACCENT_CYAN },
-    { label: "Data Engineer", value: 65, color: BRAND_ORANGE },
-    { label: "ML Engineer", value: 55, color: ACCENT_BLUE },
-  ];
-
-  const metrics = [
-    { label: "Avg. Salary", value: "₹8.5 LPA", delta: "+24%" },
-    { label: "Placed", value: "500+", delta: "+89%" },
-    { label: "Hiring Partners", value: "120+", delta: "+34%" },
-  ];
-
-  return (
-    <div ref={ref} className={cn("rounded-2xl overflow-hidden border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)]", className)}>
-      {/* Title bar */}
-      <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-100">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-400" />
-          <span className="text-xs font-mono text-gray-500">placement_analytics.dashboard</span>
-        </div>
-        <span className="text-[10px] font-mono text-gray-400">LIVE</span>
-      </div>
-      <div className="bg-white p-5">
-        {/* Metrics row */}
-        <div className="grid grid-cols-3 gap-3 mb-5">
-          {metrics.map((m, i) => (
-            <motion.div
-              key={i}
-              className="text-center p-3 rounded-xl bg-gray-50 border border-gray-100"
-              initial={{ opacity: 0, y: 10 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.3, delay: 0.2 + i * 0.1 }}
-            >
-              <p className="text-lg font-bold text-navy-900">{m.value}</p>
-              <p className="text-[10px] text-gray-500">{m.label}</p>
-              <span className="text-[10px] font-mono text-green-500">{m.delta}</span>
-            </motion.div>
-          ))}
-        </div>
-        {/* Bar chart */}
-        <div className="space-y-2.5">
-          {bars.map((bar, i) => (
-            <div key={i} className="flex items-center gap-3">
-              <span className="text-xs text-gray-500 w-28 shrink-0 text-right">{bar.label}</span>
-              <div className="flex-1 h-5 bg-gray-100 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{ backgroundColor: bar.color }}
-                  initial={{ width: 0 }}
-                  animate={inView ? { width: `${bar.value}%` } : {}}
-                  transition={{ duration: 0.8, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                />
-              </div>
-              <span className="text-xs font-mono text-gray-400 w-8">{bar.value}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* Infinite scrolling tool marquee — modern touch */
 function ToolMarquee({ tools }: { tools: string[] }) {
@@ -696,7 +763,7 @@ export default function DataAnalyticsPage() {
     ]},
   ];
 
-  const tools = ["Excel", "MySQL", "Tableau", "Power BI", "Python", "R", "NumPy", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "Google Colab", "Scikit-learn", "Git", "SQL", "PySpark", "Statsmodels", "SciPy"];
+  const tools = ["Excel", "MySQL", "Tableau", "Power BI", "Python", "R", "NumPy", "Pandas", "Matplotlib", "Seaborn", "Jupyter", "Google Colab", "Scikit-learn", "Git", "SQL", "PySpark", "Statsmodels", "SciPy", "TensorFlow", "Keras", "Apache Spark", "MongoDB", "PostgreSQL", "Looker", "dbt", "Airflow", "BigQuery", "Snowflake", "Hadoop", "Docker"];
 
   const projects = [
     { title: "Sales Performance Dashboard", desc: "Interactive Excel + Power BI dashboard analyzing multi-channel sales data with forecasting.", tags: ["Excel", "Power BI", "SQL"], color: BRAND_ORANGE },
@@ -1578,77 +1645,139 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ TOOLS — Infinite marquee ═══════ */}
+      {/* ═══════ TOOLS — Auto-scroll marquee ═══════ */}
       <section className="relative py-16 px-6 bg-white">
         <Divider />
         <div className="max-w-6xl mx-auto pt-12">
           <ScrollReveal>
             <SectionLabel center>Tech Stack</SectionLabel>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
-              18 Tools You&apos;ll{" "}
+              30+ Tools You&apos;ll{" "}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_BLUE}, ${BRAND_ORANGE})` }}>Master</span>
             </h2>
           </ScrollReveal>
-          <div className="mt-10">
-            <ToolMarquee tools={tools} />
+          <div className="mt-8 space-y-3 relative">
+            <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+            {/* Row 1 — scroll left */}
+            <div className="overflow-hidden">
+              <motion.div
+                className="flex gap-3 w-max"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 25, ease: "linear", repeat: Infinity }}
+              >
+                {[...tools.slice(0, 15), ...tools.slice(0, 15)].map((tool, i) => (
+                  <ToolLogo key={`r1-${tool}-${i}`} name={tool} className="!px-3 !py-1.5 !rounded-lg !gap-2 [&_img]:!w-5 [&_img]:!h-5 [&_span]:!text-xs [&>span]:!w-5 [&>span]:!h-5 [&>span]:!text-[10px]" />
+                ))}
+              </motion.div>
+            </div>
+            {/* Row 2 — scroll right */}
+            <div className="overflow-hidden">
+              <motion.div
+                className="flex gap-3 w-max"
+                animate={{ x: ["-50%", "0%"] }}
+                transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+              >
+                {[...tools.slice(15), ...tools.slice(15)].map((tool, i) => (
+                  <ToolLogo key={`r2-${tool}-${i}`} name={tool} className="!px-3 !py-1.5 !rounded-lg !gap-2 [&_img]:!w-5 [&_img]:!h-5 [&_span]:!text-xs [&>span]:!w-5 [&>span]:!h-5 [&>span]:!text-[10px]" />
+                ))}
+              </motion.div>
+            </div>
           </div>
         </div>
         <div className="mt-12"><Divider /></div>
       </section>
 
-      {/* ═══════ PROJECTS — Dark section with timeline ═══════ */}
-      <section className="relative py-20 px-6" style={{ backgroundColor: DARK_BG }}>
-        <div className="max-w-6xl mx-auto">
+      {/* ═══════ PROJECTS — Compact stacked cards with spotlight hover ═══════ */}
+      <section className="relative py-20 px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
+        {/* Subtle mesh bg */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: `radial-gradient(ellipse 80% 50% at 50% 0%, ${BRAND_ORANGE}08, transparent)`
+        }} />
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <ScrollReveal>
             <SectionLabel light>Hands-On</SectionLabel>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
               Projects You&apos;ll{" "}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_CYAN}, ${BRAND_ORANGE})` }}>Ship</span>
             </h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg">Real-world projects that become your portfolio.</p>
+            <p className="mt-3 text-gray-500 text-base max-w-md">Real-world projects that become your portfolio.</p>
           </ScrollReveal>
 
-          {/* Timeline layout */}
-          <div className="relative mt-14">
-            {/* Vertical line */}
-            <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px bg-white/[0.08] -translate-x-1/2 hidden md:block" />
-
+          {/* Project cards — stacked rows with spotlight hover */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
             {projects.map((project, i) => (
-              <SlideIn key={i} direction={i % 2 === 0 ? "left" : "right"} delay={i * 0.1} className="mb-6 last:mb-0">
-                <div className={cn(
-                  "md:w-[calc(50%-2rem)] relative",
-                  i % 2 === 0 ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
-                )}>
-                  {/* Connector dot */}
-                  <div className={cn(
-                    "hidden md:block absolute top-6 w-3 h-3 rounded-full border-2 border-white/20",
-                    i % 2 === 0 ? "-right-[7px]" : "-left-[7px]"
-                  )} style={{ backgroundColor: project.color }} />
+              <motion.div
+                key={i}
+                className="group relative rounded-2xl overflow-hidden cursor-default"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-5%" }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease }}
+                whileHover={{ y: -4 }}
+              >
+                {/* Border */}
+                <div className="absolute inset-0 rounded-2xl border border-white/[0.06] group-hover:border-white/[0.14] transition-colors duration-500 pointer-events-none z-20" />
 
-                  <div className="relative group rounded-2xl overflow-hidden border border-white/[0.08] bg-white/[0.03] p-6 hover:border-white/20 hover:bg-white/[0.05] transition-all duration-300">
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${project.color}18` }}>
-                          <span className="text-xs font-bold font-mono" style={{ color: project.color }}>{String(i + 1).padStart(2, "0")}</span>
-                        </div>
-                        <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${project.color}30, transparent)` }} />
-                      </div>
-                      <h4 className="text-base font-bold text-white">{project.title}</h4>
-                      <p className="text-sm text-gray-400 leading-relaxed">{project.desc}</p>
-                      <div className="flex flex-wrap gap-1.5 pt-1">
-                        {project.tags.map((tag) => (
-                          <span key={tag} className="px-2 py-0.5 rounded text-xs font-mono border" style={{ color: project.color, borderColor: `${project.color}30`, backgroundColor: `${project.color}0a` }}>{tag}</span>
-                        ))}
-                      </div>
-                    </div>
+                {/* Spotlight cursor glow — tracks mouse position */}
+                <div className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: `radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${project.color}12, transparent 60%)` }}
+                />
+
+                {/* Card body */}
+                <div
+                  className="relative z-10 p-6"
+                  style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    e.currentTarget.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+                    e.currentTarget.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+                  }}
+                >
+                  {/* Top row: number badge + colored line */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono shrink-0"
+                      style={{ color: project.color, backgroundColor: `${project.color}15`, border: `1px solid ${project.color}20` }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <motion.div
+                      className="h-px flex-1 origin-left"
+                      style={{ background: `linear-gradient(90deg, ${project.color}35, transparent)` }}
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, delay: 0.2 + i * 0.08 }}
+                    />
+                  </div>
+
+                  {/* Title */}
+                  <h4 className="text-base font-bold text-white/90 group-hover:text-white transition-colors duration-300 mb-2 leading-snug">
+                    {project.title}
+                  </h4>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors duration-300 leading-relaxed mb-4">
+                    {project.desc}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span key={tag}
+                        className="px-2 py-0.5 rounded text-[11px] font-mono font-medium border"
+                        style={{ color: `${project.color}cc`, borderColor: `${project.color}20`, backgroundColor: `${project.color}08` }}>
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </SlideIn>
+              </motion.div>
             ))}
           </div>
 
           {/* Pipeline terminal */}
-          <motion.div className="mt-16 relative max-w-3xl mx-auto" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <motion.div className="mt-16 relative max-w-3xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <Terminal
               title="pipeline.sh — bash"
               lines={[
@@ -1732,10 +1861,94 @@ export default function DataAnalyticsPage() {
             </div>
           </div>
 
-          {/* Dashboard mock */}
-          <motion.div className="mt-12" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <DashboardMock />
-          </motion.div>
+        </div>
+      </section>
+
+      <WaveDivider from="#ffffff" to="#f9fafb" />
+
+      {/* ═══════ TESTIMONIALS — Auto-scroll carousel ═══════ */}
+      <section className="relative py-20 px-6 overflow-hidden bg-gray-50">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `radial-gradient(${BRAND_ORANGE} 1px, transparent 1px)`, backgroundSize: '32px 32px' }} />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <ScrollReveal>
+            <SectionLabel center>Success Stories</SectionLabel>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
+              What Learners Say{" "}
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>About Us</span>
+            </h2>
+            <p className="text-center text-gray-500 mt-3 max-w-xl mx-auto text-sm">
+              Join hundreds of professionals who&apos;ve transformed their careers with Linkway Learning.
+            </p>
+          </ScrollReveal>
+        </div>
+
+        <TestimonialCarousel />
+      </section>
+
+      {/* ═══════ CAREER GROWTH ROADMAP ═══════ */}
+      <section className="relative py-20 px-6 bg-white overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <SectionLabel center>Your Journey</SectionLabel>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
+              Your Career Growth{" "}
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>Roadmap</span>
+            </h2>
+            <p className="text-center text-gray-500 mt-3 max-w-xl mx-auto text-sm">
+              A proven 4-step path to take you from upskilling to your dream job
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-16 relative">
+            {/* Connecting dashed line */}
+            <motion.div
+              className="hidden lg:block absolute top-[60px] left-[12%] right-[12%] h-0 border-t-2 border-dashed"
+              style={{ borderColor: `${ACCENT_BLUE}40` }}
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease }}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
+              {[
+                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>, title: "Profile Power-Up", desc: "Stand out with a sharp resume, optimized LinkedIn/GitHub, and a strong personal brand." },
+                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>, title: "Interview Readiness", desc: "Ace every round with 1:1 mock interviews, role-specific training, and actionable feedback." },
+                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>, title: "Hiring Rounds", desc: "Apply to 200+ hiring partners and clear technical interview rounds with confidence." },
+                { icon: <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.58-5.84L18 2.25l-3.107 3.107" /></svg>, title: "Offer Unlocked!", desc: "Land a high paying job offer from top product-based companies." },
+              ].map((step, i) => (
+                <motion.div
+                  key={step.title}
+                  className="flex flex-col items-center text-center group"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.15, ease }}
+                >
+                  {/* Icon circle with pulse */}
+                  <motion.div
+                    className="relative mb-5"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="absolute inset-0 rounded-full scale-[1.6] opacity-[0.08]" style={{ backgroundColor: ACCENT_BLUE }} />
+                    <div className="relative w-[72px] h-[72px] rounded-full flex items-center justify-center border-2 bg-white shadow-sm" style={{ borderColor: `${ACCENT_BLUE}30`, color: ACCENT_BLUE }}>
+                      {step.icon}
+                    </div>
+                    {/* Step number badge */}
+                    <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center text-white" style={{ backgroundColor: BRAND_ORANGE }}>
+                      {i + 1}
+                    </div>
+                  </motion.div>
+
+                  <h4 className="text-base font-bold text-navy-900 mb-2">{step.title}</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed max-w-[220px]">{step.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
