@@ -568,6 +568,195 @@ function Terminal({ title, lines, className }: { title: string; lines: { text: s
   );
 }
 
+/* ─── Interactive Dashboard Preview ─── */
+function DashboardPreview() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const [activeTab, setActiveTab] = useState(0);
+
+  const kpis = [
+    { label: "Total Revenue", value: "$1.24M", change: "+12.4%", up: true },
+    { label: "Avg Order Value", value: "$86.50", change: "+3.2%", up: true },
+    { label: "Churn Rate", value: "4.1%", change: "-1.8%", up: false },
+    { label: "Accuracy", value: "94.2%", change: "+2.6%", up: true },
+  ];
+
+  const tabs = ["Overview", "Sales", "Predictions"];
+
+  // Bar chart data
+  const bars = [
+    { label: "Jan", h: 40 }, { label: "Feb", h: 55 }, { label: "Mar", h: 45 },
+    { label: "Apr", h: 70 }, { label: "May", h: 62 }, { label: "Jun", h: 85 },
+    { label: "Jul", h: 78 }, { label: "Aug", h: 90 }, { label: "Sep", h: 72 },
+    { label: "Oct", h: 95 }, { label: "Nov", h: 88 }, { label: "Dec", h: 100 },
+  ];
+
+  // Donut segments
+  const donutData = [
+    { label: "Direct", pct: 38, color: BRAND_ORANGE },
+    { label: "Organic", pct: 28, color: ACCENT_BLUE },
+    { label: "Referral", pct: 20, color: ACCENT_CYAN },
+    { label: "Social", pct: 14, color: "#7ee787" },
+  ];
+
+  // SVG donut
+  const radius = 40;
+  const circumference = 2 * Math.PI * radius;
+  let cumulativeOffset = 0;
+
+  return (
+    <div ref={ref} className="rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl bg-[#0d1117]">
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-5 py-3 bg-[#1a1e2e] border-b border-white/[0.06]">
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+            <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+            <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <span className="text-xs font-mono text-gray-500">analytics_dashboard.py</span>
+        </div>
+        <div className="flex gap-1">
+          {tabs.map((tab, i) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(i)}
+              className={`px-3 py-1 rounded-md text-[11px] font-medium transition-all duration-200 ${
+                activeTab === i
+                  ? "bg-white/[0.1] text-white"
+                  : "text-gray-500 hover:text-gray-300"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Dashboard body */}
+      <div className="p-5 space-y-5">
+        {/* KPI Cards Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {kpis.map((kpi, i) => (
+            <motion.div
+              key={kpi.label}
+              initial={{ opacity: 0, y: 12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="rounded-xl bg-white/[0.04] border border-white/[0.06] p-3.5 hover:border-white/[0.12] transition-colors duration-300"
+            >
+              <p className="text-[10px] text-gray-500 uppercase tracking-wider">{kpi.label}</p>
+              <p className="text-xl font-bold text-white mt-1 font-mono">{kpi.value}</p>
+              <span className={`text-[11px] font-mono font-medium ${kpi.up ? "text-[#7ee787]" : "text-[#ff7b72]"}`}>
+                {kpi.change}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Charts Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Bar Chart — 2 cols */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="md:col-span-2 rounded-xl bg-white/[0.03] border border-white/[0.06] p-4"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-xs font-medium text-gray-400">Monthly Revenue</p>
+              <span className="text-[10px] text-gray-600 font-mono">FY 2024-25</span>
+            </div>
+            <div className="flex items-end gap-[6px] h-32">
+              {bars.map((bar, i) => (
+                <div key={bar.label} className="flex-1 flex flex-col items-center h-full justify-end">
+                  <motion.div
+                    className="w-full rounded-t-sm min-h-[2px]"
+                    style={{
+                      background: i >= 9
+                        ? `linear-gradient(180deg, ${BRAND_ORANGE}, ${BRAND_ORANGE}80)`
+                        : `linear-gradient(180deg, ${ACCENT_BLUE}90, ${ACCENT_BLUE}40)`,
+                      height: 0,
+                    }}
+                    initial={{ height: 0 }}
+                    animate={inView ? { height: `${bar.h}%` } : { height: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 + i * 0.05, ease: "easeOut" }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-[6px] mt-1">
+              {bars.map((bar) => (
+                <span key={bar.label} className="flex-1 text-center text-[8px] text-gray-600">{bar.label}</span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Donut Chart */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-4"
+          >
+            <p className="text-xs font-medium text-gray-400 mb-3">Traffic Sources</p>
+            <div className="flex justify-center">
+              <svg viewBox="0 0 100 100" className="w-28 h-28">
+                {donutData.map((seg) => {
+                  const dashLength = (seg.pct / 100) * circumference;
+                  const offset = cumulativeOffset;
+                  cumulativeOffset += dashLength;
+                  return (
+                    <motion.circle
+                      key={seg.label}
+                      cx="50" cy="50" r={radius}
+                      fill="none"
+                      stroke={seg.color}
+                      strokeWidth="10"
+                      strokeDasharray={`${dashLength} ${circumference - dashLength}`}
+                      strokeDashoffset={-offset}
+                      strokeLinecap="round"
+                      initial={{ opacity: 0 }}
+                      animate={inView ? { opacity: 1 } : {}}
+                      transition={{ duration: 0.5, delay: 0.8 }}
+                      className="origin-center -rotate-90"
+                      style={{ transformOrigin: "50px 50px" }}
+                    />
+                  );
+                })}
+              </svg>
+            </div>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1 mt-3">
+              {donutData.map((seg) => (
+                <div key={seg.label} className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: seg.color }} />
+                  <span className="text-[10px] text-gray-500">{seg.label}</span>
+                  <span className="text-[10px] text-gray-400 font-mono ml-auto">{seg.pct}%</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom stats strip */}
+        <div className="flex flex-wrap items-center justify-center gap-5 pt-2 border-t border-white/[0.04]">
+          {[
+            { label: "Projects", value: "4", color: BRAND_ORANGE },
+            { label: "Tools", value: "8+", color: ACCENT_BLUE },
+            { label: "Code", value: "2K+", color: ACCENT_CYAN },
+            { label: "Portfolio", value: "100%", color: "#7ee787" },
+          ].map((s) => (
+            <div key={s.label} className="flex items-center gap-1.5">
+              <span className="text-sm font-bold font-mono" style={{ color: s.color }}>{s.value}</span>
+              <span className="text-[10px] text-gray-600">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Hero Image Carousel ─── */
 const heroImages = [
   "/images/1.png",
@@ -1103,31 +1292,85 @@ function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
         linear-gradient(135deg, #fefce8 0%, #fef9ef 20%, #fdf2f8 40%, #f0f9ff 60%, #ecfeff 80%, #f0fdf4 100%)
       `
     }}>
-      {/* ── Animated mesh gradient orbs — Stripe-inspired ── */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
-        style={{ top: "-5%", left: "-10%", background: "radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%)" }}
-        animate={{ x: [0, 60, 0], y: [0, 40, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute w-[450px] h-[450px] rounded-full blur-[100px] pointer-events-none"
-        style={{ top: "40%", right: "-8%", background: "radial-gradient(circle, rgba(139,92,246,0.1), transparent 70%)" }}
-        animate={{ x: [0, -50, 0], y: [0, -35, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-      />
-      <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none"
-        style={{ bottom: "-5%", left: "30%", background: "radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%)" }}
-        animate={{ x: [0, 40, -30, 0], y: [0, -20, 30, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-      />
+      {/* ── Morphing aurora blobs with conic gradients ── */}
+      <motion.div className="absolute w-[600px] h-[600px] pointer-events-none" style={{ top: "-15%", left: "-10%", background: "conic-gradient(from 0deg, rgba(251,191,36,0.12), rgba(236,72,153,0.08), rgba(139,92,246,0.1), rgba(251,191,36,0.12))", borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%", filter: "blur(80px)" }}
+        animate={{ borderRadius: ["40% 60% 55% 45% / 55% 40% 60% 45%", "55% 45% 40% 60% / 40% 55% 45% 60%", "45% 55% 60% 40% / 60% 45% 55% 40%", "40% 60% 55% 45% / 55% 40% 60% 45%"], rotate: [0, 120, 240, 360] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.div className="absolute w-[500px] h-[500px] pointer-events-none" style={{ top: "30%", right: "-5%", background: "conic-gradient(from 180deg, rgba(6,182,212,0.1), rgba(59,130,246,0.08), rgba(139,92,246,0.1), rgba(6,182,212,0.1))", borderRadius: "60% 40% 45% 55% / 45% 60% 40% 55%", filter: "blur(80px)" }}
+        animate={{ borderRadius: ["60% 40% 45% 55% / 45% 60% 40% 55%", "40% 60% 55% 45% / 60% 40% 55% 45%", "55% 45% 40% 60% / 40% 55% 45% 60%", "60% 40% 45% 55% / 45% 60% 40% 55%"], rotate: [0, -90, -180, -360] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.div className="absolute w-[450px] h-[450px] pointer-events-none" style={{ bottom: "-10%", left: "20%", background: "conic-gradient(from 90deg, rgba(245,130,32,0.08), rgba(16,185,129,0.1), rgba(59,130,246,0.06), rgba(245,130,32,0.08))", borderRadius: "45% 55% 60% 40% / 55% 45% 55% 45%", filter: "blur(70px)" }}
+        animate={{ borderRadius: ["45% 55% 60% 40% / 55% 45% 55% 45%", "55% 45% 45% 55% / 45% 55% 60% 40%", "40% 60% 55% 45% / 60% 40% 45% 55%", "45% 55% 60% 40% / 55% 45% 55% 45%"], rotate: [0, 60, 180, 360], scale: [1, 1.15, 0.95, 1] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }} />
 
-      {/* ── Soft dot grid pattern overlay ── */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: "radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)",
-        backgroundSize: "32px 32px",
-      }} />
+      {/* ── Floating constellation SVG ── */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="mod-lg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f59e0b" stopOpacity="0.15" /><stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.08" /></linearGradient>
+          <linearGradient id="mod-lg2" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#06b6d4" stopOpacity="0.12" /><stop offset="100%" stopColor="#ec4899" stopOpacity="0.06" /></linearGradient>
+        </defs>
+        {[
+          { x1: "10%", y1: "15%", x2: "35%", y2: "25%", g: "url(#mod-lg1)", d: 0.5 },
+          { x1: "35%", y1: "25%", x2: "25%", y2: "55%", g: "url(#mod-lg1)", d: 0.8 },
+          { x1: "25%", y1: "55%", x2: "10%", y2: "75%", g: "url(#mod-lg2)", d: 1.1 },
+          { x1: "65%", y1: "10%", x2: "80%", y2: "35%", g: "url(#mod-lg2)", d: 0.6 },
+          { x1: "80%", y1: "35%", x2: "70%", y2: "60%", g: "url(#mod-lg1)", d: 0.9 },
+          { x1: "70%", y1: "60%", x2: "90%", y2: "80%", g: "url(#mod-lg2)", d: 1.2 },
+          { x1: "35%", y1: "25%", x2: "65%", y2: "10%", g: "url(#mod-lg2)", d: 1.0 },
+          { x1: "25%", y1: "55%", x2: "70%", y2: "60%", g: "url(#mod-lg1)", d: 1.3 },
+        ].map((l, i) => (
+          <motion.line key={`cl${i}`} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={l.g} strokeWidth="1"
+            initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }}
+            viewport={{ once: true }} transition={{ duration: 2, delay: l.d }} />
+        ))}
+        {[
+          { cx: "10%", cy: "15%", c: "#f59e0b", r: 4, d: 0 },
+          { cx: "35%", cy: "25%", c: "#8b5cf6", r: 5, d: 1 },
+          { cx: "25%", cy: "55%", c: "#ec4899", r: 4, d: 2 },
+          { cx: "10%", cy: "75%", c: "#10b981", r: 3.5, d: 3 },
+          { cx: "65%", cy: "10%", c: "#06b6d4", r: 4, d: 0.5 },
+          { cx: "80%", cy: "35%", c: "#3b82f6", r: 5, d: 1.5 },
+          { cx: "70%", cy: "60%", c: "#d97706", r: 4, d: 2.5 },
+          { cx: "90%", cy: "80%", c: "#7c3aed", r: 3.5, d: 3.5 },
+        ].map((dot, i) => (
+          <motion.circle key={`nd${i}`} cx={dot.cx} cy={dot.cy} r={dot.r} fill={dot.c} opacity={0.2}
+            animate={{ r: [dot.r, dot.r + 2, dot.r], opacity: [0.15, 0.3, 0.15] }}
+            transition={{ duration: 3, repeat: Infinity, delay: dot.d, ease: "easeInOut" }} />
+        ))}
+        {[0, 2.5, 5].map((d, i) => (
+          <motion.circle key={`tp${i}`} r="1.5" fill={["#f59e0b", "#8b5cf6", "#06b6d4"][i]} opacity={0.2}
+            animate={{ cx: ["10%", "35%", "25%", "70%", "90%", "65%", "10%"], cy: ["15%", "25%", "55%", "60%", "80%", "10%", "15%"] }}
+            transition={{ duration: 9 + i, repeat: Infinity, delay: d, ease: "linear" }} />
+        ))}
+      </svg>
+
+      {/* ── Floating geometric shapes ── */}
+      {[
+        { top: "8%", left: "5%", sz: 40, rot: 45, c: "rgba(245,130,32,0.06)", bc: "rgba(245,130,32,0.15)", dur: 15, br: "6px" },
+        { top: "20%", right: "8%", sz: 55, rot: 0, c: "rgba(139,92,246,0.05)", bc: "rgba(139,92,246,0.12)", dur: 20, br: "25% 10%" },
+        { top: "60%", left: "3%", sz: 35, rot: 30, c: "rgba(6,182,212,0.06)", bc: "rgba(6,182,212,0.15)", dur: 18, br: "0 50% 50%" },
+        { top: "75%", right: "6%", sz: 45, rot: 0, c: "rgba(236,72,153,0.05)", bc: "rgba(236,72,153,0.12)", dur: 16, br: "50%" },
+        { top: "45%", left: "50%", sz: 28, rot: 60, c: "rgba(16,185,129,0.05)", bc: "rgba(16,185,129,0.12)", dur: 22, br: "4px" },
+      ].map((s, i) => (
+        <motion.div key={`geo-${i}`} className="absolute pointer-events-none"
+          style={{ top: s.top, ...("left" in s ? { left: s.left } : {}), ...("right" in s ? { right: (s as unknown as Record<string, string>).right } : {}), width: s.sz, height: s.sz, border: `1.5px solid ${s.bc}`, backgroundColor: s.c, borderRadius: s.br, transform: `rotate(${s.rot}deg)` }}
+          animate={{ y: [0, -20, 10, -15, 0], rotate: [s.rot, s.rot + 90, s.rot + 180, s.rot + 270, s.rot + 360], scale: [1, 1.1, 0.95, 1.05, 1] }}
+          transition={{ duration: s.dur, repeat: Infinity, ease: "easeInOut" }} />
+      ))}
+
+      {/* ── Animated light streaks ── */}
+      <motion.div className="absolute top-[18%] left-0 w-full h-px pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(245,130,32,0.08) 20%, rgba(139,92,246,0.06) 50%, rgba(6,182,212,0.08) 80%, transparent)" }}
+        animate={{ opacity: [0, 0.6, 0], x: ["-10%", "5%", "-10%"] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.div className="absolute top-[52%] left-0 w-full h-px pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(6,182,212,0.06) 30%, rgba(236,72,153,0.08) 60%, transparent)" }}
+        animate={{ opacity: [0, 0.5, 0], x: ["5%", "-8%", "5%"] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
+      <motion.div className="absolute top-[82%] left-0 w-full h-px pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(16,185,129,0.08) 40%, rgba(245,130,32,0.06) 70%, transparent)" }}
+        animate={{ opacity: [0, 0.4, 0], x: ["-5%", "8%", "-5%"] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 5 }} />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* ── Section Header ── */}
@@ -2695,41 +2938,9 @@ export default function DataAnalyticsPage() {
             ))}
           </div>
 
-          {/* Terminal — compact */}
-          <motion.div className="mt-10 relative max-w-3xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <Terminal
-              title="pipeline.sh — bash"
-              lines={[
-                { text: "$ python run_pipeline.py --env production", color: "#e6edf3", delay: 400 },
-                { text: "", delay: 100 },
-                { text: "[1/5] Extracting data from MySQL...", color: "#f0883e", delay: 300 },
-                { text: "  ✓ 12,847 rows fetched from sales_db", color: "#7ee787", delay: 500 },
-                { text: "[2/5] Cleaning & transforming...", color: "#f0883e", delay: 300 },
-                { text: "  ✓ Removed 23 duplicates, filled 156 nulls", color: "#7ee787", delay: 400 },
-                { text: "[3/5] Feature engineering...", color: "#f0883e", delay: 300 },
-                { text: "  ✓ Created 8 new features (revenue_per_unit, month_trend...)", color: "#7ee787", delay: 400 },
-                { text: "[4/5] Training model (RandomForest)...", color: "#f0883e", delay: 300 },
-                { text: "  ✓ Accuracy: 94.2% | F1: 0.91 | AUC: 0.96", color: "#7ee787", delay: 600 },
-                { text: "[5/5] Exporting to Tableau...", color: "#f0883e", delay: 300 },
-                { text: "  ✓ Dashboard published → analytics.linkway.io/sales", color: "#7ee787", delay: 500 },
-                { text: "", delay: 100 },
-                { text: "Pipeline completed in 4.2s", color: "#79c0ff", delay: 400 },
-              ]}
-            />
-            {/* Inline stats */}
-            <div className="flex flex-wrap items-center justify-center gap-5 mt-4">
-              {[
-                { label: "Projects", value: "4", color: BRAND_ORANGE },
-                { label: "Tools", value: "8+", color: ACCENT_BLUE },
-                { label: "Code", value: "2K+", color: ACCENT_CYAN },
-                { label: "Portfolio", value: "100%", color: "#7ee787" },
-              ].map((s) => (
-                <div key={s.label} className="flex items-center gap-1.5">
-                  <span className="text-sm font-bold font-mono" style={{ color: s.color }}>{s.value}</span>
-                  <span className="text-[10px] text-gray-600">{s.label}</span>
-                </div>
-              ))}
-            </div>
+          {/* Interactive Dashboard Preview */}
+          <motion.div className="mt-10 relative max-w-4xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <DashboardPreview />
           </motion.div>
         </div>
       </section>

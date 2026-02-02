@@ -25,6 +25,8 @@ import {
 } from "@/components/animation";
 import TextScramble from "@/components/animation/TextScramble";
 import { ThemeProvider } from "@/lib/theme";
+import Image from "next/image";
+import { ArrowRight, Star, StarHalf, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -563,6 +565,258 @@ function HorizontalStats() {
   );
 }
 
+/* ── Brand Logos (inline JSX — same as home page) ── */
+function GoogleLogo() {
+  return (
+    <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "Product Sans, Arial, sans-serif" }}>
+      <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span>
+    </span>
+  );
+}
+function FlipkartLogo() { return <span className="text-xl font-bold tracking-tight" style={{ color: "#F7D02C", fontFamily: "Arial, sans-serif" }}>Flipkart</span>; }
+function MicrosoftLogo() {
+  return (
+    <span className="flex items-center gap-1.5">
+      <svg width="18" height="18" viewBox="0 0 18 18"><rect x="0" y="0" width="8.5" height="8.5" fill="#F25022" /><rect x="9.5" y="0" width="8.5" height="8.5" fill="#7FBA00" /><rect x="0" y="9.5" width="8.5" height="8.5" fill="#00A4EF" /><rect x="9.5" y="9.5" width="8.5" height="8.5" fill="#FFB900" /></svg>
+      <span className="text-lg font-normal text-white/80" style={{ fontFamily: "Segoe UI, Arial, sans-serif" }}>Microsoft</span>
+    </span>
+  );
+}
+function DeloitteLogo() {
+  return <span className="flex items-center gap-0.5"><span className="text-xl font-bold text-white" style={{ fontFamily: "Arial, sans-serif" }}>Deloitte</span><span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: "#86BC25" }} /></span>;
+}
+function AccentureLogo() { return <span className="text-xl font-semibold" style={{ color: "#A100FF", fontFamily: "Arial, sans-serif" }}>&gt; accenture</span>; }
+function InfosysLogo() { return <span className="text-xl font-bold" style={{ color: "#007CC3", fontFamily: "Arial, sans-serif" }}>Infosys</span>; }
+
+const brandLogos = [
+  { name: "Google", component: GoogleLogo },
+  { name: "Flipkart", component: FlipkartLogo },
+  { name: "Microsoft", component: MicrosoftLogo },
+  { name: "Deloitte", component: DeloitteLogo },
+  { name: "Accenture", component: AccentureLogo },
+  { name: "Infosys", component: InfosysLogo },
+];
+
+/* ── Inline Lead Form (same as home page) ── */
+function SSLeadForm() {
+  const [formState, setFormState] = useState<"idle" | "loading" | "success">("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    designation: "",
+    experience: "",
+    company: "",
+    course: "",
+  });
+
+  const validate = (): boolean => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.fullName.trim()) newErrors.fullName = "Name is required";
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Valid email required";
+    if (!formData.phone.trim() || !/^\+?\d{10,15}$/.test(formData.phone.replace(/\s/g, "")))
+      newErrors.phone = "Valid phone number required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+    setFormState("loading");
+    try {
+      const res = await fetch("https://formspree.io/f/xpwdzgkl", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setFormState("success");
+      } else {
+        setFormState("idle");
+        setErrors({ email: "Submission failed. Please try again." });
+      }
+    } catch {
+      setFormState("idle");
+      setErrors({ email: "Network error. Please try again." });
+    }
+  };
+
+  const handleChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
+  };
+
+  if (formState === "success") {
+    return (
+      <div className="bg-white rounded-2xl p-8 shadow-xl flex flex-col items-center justify-center text-center min-h-[480px]">
+        <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-5">
+          <CheckCircle2 className="w-8 h-8 text-green-500" />
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">We&apos;ve Got Your Details!</h3>
+        <p className="text-gray-500 text-sm">Our counselor will reach out within 24 hours to help you get started.</p>
+      </div>
+    );
+  }
+
+  const inputClass = (field: string) =>
+    `w-full bg-white border rounded-lg px-4 py-3 text-gray-900 text-sm placeholder:text-gray-400 focus:outline-none transition-colors ${
+      errors[field] ? "border-red-400 focus:border-red-400" : "border-gray-200 focus:border-orange-500"
+    }`;
+
+  const selectClass =
+    "w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-orange-500 transition-colors appearance-none cursor-pointer";
+
+  return (
+    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl">
+      <h3 className="text-lg md:text-xl font-bold text-gray-900 text-center mb-6">
+        Ready to Write Your Success Story?
+      </h3>
+
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <div>
+          <label className="text-xs font-medium text-gray-600 mb-1 block">Full Name</label>
+          <input type="text" placeholder="John Doe" value={formData.fullName} onChange={(e) => handleChange("fullName", e.target.value)} className={inputClass("fullName")} />
+          {errors.fullName && <p className="text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.fullName}</p>}
+        </div>
+
+        <div>
+          <label className="text-xs font-medium text-gray-600 mb-1 block">Email Address</label>
+          <input type="email" placeholder="abc@gmail.com" value={formData.email} onChange={(e) => handleChange("email", e.target.value)} className={inputClass("email")} />
+          {errors.email && <p className="text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.email}</p>}
+        </div>
+
+        <div>
+          <label className="text-xs font-medium text-gray-600 mb-1 block">Contact Number</label>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-lg px-3 py-3 text-sm text-gray-700 shrink-0">
+              <span>IN</span><span>+91</span><span className="text-gray-300">&middot;</span>
+            </div>
+            <input type="tel" placeholder="81234 56789" value={formData.phone} onChange={(e) => handleChange("phone", e.target.value)} className={inputClass("phone")} />
+          </div>
+          {errors.phone && <p className="text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.phone}</p>}
+        </div>
+
+        <div>
+          <label className="text-xs font-medium text-gray-600 mb-1 block">Program preference</label>
+          <select value={formData.course} onChange={(e) => handleChange("course", e.target.value)} className={selectClass}>
+            <option value="">Select</option>
+            <option value="Data Analytics">Data Analytics</option>
+            <option value="Business Analytics">Business Analytics</option>
+            <option value="Data Science and AI">Data Science and AI</option>
+            <option value="Agentic AI & Prompt Engineering">Agentic AI &amp; Prompt Engineering</option>
+            <option value="Investment Banking">Investment Banking</option>
+            <option value="Not Sure">Not Sure Yet</option>
+          </select>
+        </div>
+
+        <button type="submit" disabled={formState === "loading"} className="w-full bg-[#0D1B2A] hover:bg-[#162d45] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
+          {formState === "loading" ? <Loader2 className="w-5 h-5 animate-spin" /> : "Start My Transformation"}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+/* ── Success Stories CTA Section (home page style) ── */
+function SuccessStoriesCTA() {
+  return (
+    <section className="relative overflow-hidden bg-[#0D1B2A]">
+
+      {/* ── Orbital Rings System ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="ss2-orbit-system">
+          {/* Concentric rotating rings */}
+          <div className="ss2-orbit-ring ss2-ring-1">
+            <div className="ss2-orbit-node ss2-node-orange" />
+          </div>
+          <div className="ss2-orbit-ring ss2-ring-2">
+            <div className="ss2-orbit-node ss2-node-blue" />
+            <div className="ss2-orbit-node ss2-node-blue-2" />
+          </div>
+          <div className="ss2-orbit-ring ss2-ring-3">
+            <div className="ss2-orbit-node ss2-node-purple" />
+          </div>
+          {/* Center pulse */}
+          <div className="ss2-orbit-center" />
+        </div>
+      </div>
+
+      {/* ── Morphing Gradient Blob ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="ss2-morph-blob" />
+      </div>
+
+      {/* ── Star Field ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="ss2-star"
+            style={{
+              left: `${(i * 3.37) % 100}%`,
+              top: `${(i * 7.13) % 100}%`,
+              animationDelay: `${(i * 0.4) % 5}s`,
+              animationDuration: `${3 + (i % 3) * 1.5}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ── Diagonal Light Streaks ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="ss2-streak ss2-streak-1" />
+        <div className="ss2-streak ss2-streak-2" />
+        <div className="ss2-streak ss2-streak-3" />
+      </div>
+
+      {/* Noise + vignette */}
+      <div className="absolute inset-0 ss-noise opacity-[0.018] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,transparent_20%,#0D1B2A_100%)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2">
+
+          {/* Left Side */}
+          <div className="relative px-6 md:px-10 lg:px-12 pt-10 md:pt-14 pb-8 flex flex-col justify-center">
+            <ScrollReveal>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8 text-white">
+                500+ learners already{" "}
+                <span className="text-orange-400">wrote their success story</span>
+                {" "}with us. Your turn to join{" "}
+                <span className="text-orange-400">world-class companies.</span>
+              </h2>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="mb-0">
+                <h3 className="text-white/60 font-semibold text-sm uppercase tracking-widest mb-5">Our graduates work at</h3>
+
+                <div className="flex flex-wrap gap-3">
+                  {brandLogos.map((logo) => (
+                    <div key={logo.name} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 flex items-center justify-center hover:bg-white/15 transition-colors">
+                      <logo.component />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Right Side — Form */}
+          <div className="px-6 md:px-10 lg:px-12 py-10 md:py-14 flex items-start lg:items-center justify-center bg-[#0D1B2A]">
+            <div className="w-full max-w-md">
+              <SSLeadForm />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE
    ═══════════════════════════════════════════════════════════════════ */
@@ -715,25 +969,6 @@ export default function SuccessStoriesPage() {
               </a>
             </motion.div>
 
-            {/* Scroll indicator */}
-            <motion.div
-              className="absolute bottom-10 left-1/2 -translate-x-1/2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.5 }}
-            >
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                className="w-6 h-10 rounded-full border border-white/10 flex items-start justify-center p-1.5"
-              >
-                <motion.div
-                  className="w-1 h-2 rounded-full bg-white/30"
-                  animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </motion.div>
-            </motion.div>
           </motion.div>
         </section>
 
@@ -1130,85 +1365,9 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 7 — CTA (Enhanced with social proof)              ║
+            ║  SECTION 7 — CTA (Lead Capture — same style as home page)  ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-16 md:py-24 bg-[#050a14] overflow-hidden">
-          <div className="absolute inset-0 ss-stripe-gradient opacity-20" />
-          <div className="absolute inset-0 ss-grid-pattern" />
-
-          {/* Section separator */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.04] to-transparent" />
-
-          <div className="max-w-2xl mx-auto px-6 relative z-10 text-center">
-            <SpringReveal distance={60} damping={14}>
-              <div className="ss-cta-card relative rounded-[28px] p-1 overflow-hidden">
-                <div className="absolute inset-0 rounded-[28px] ss-spinning-border" />
-
-                <div className="relative rounded-[27px] bg-[#0a1628]/95 backdrop-blur-xl p-8 md:p-10 overflow-hidden">
-                  {/* Ambient glow */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-36 bg-orange-500/[0.04] blur-3xl rounded-full pointer-events-none" />
-
-                  {/* Corner accents */}
-                  <div className="absolute top-4 left-4 w-6 h-6 border-t border-l border-orange-500/15 rounded-tl-lg" />
-                  <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-orange-500/15 rounded-tr-lg" />
-                  <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-orange-500/15 rounded-bl-lg" />
-                  <div className="absolute bottom-4 right-4 w-6 h-6 border-b border-r border-orange-500/15 rounded-br-lg" />
-
-                  <div className="relative z-10">
-                    {/* Avatar stack */}
-                    <div className="flex items-center justify-center mb-5">
-                      <div className="flex -space-x-2.5">
-                        {testimonials.slice(0, 5).map((t) => (
-                          <div
-                            key={t.initials}
-                            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[10px] font-bold border-2 border-[#0a1628]"
-                            style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}CC)` }}
-                          >
-                            {t.initials}
-                          </div>
-                        ))}
-                      </div>
-                      <span className="ml-2.5 text-white/30 text-xs font-medium">+495 more</span>
-                    </div>
-
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-tight">
-                      Ready to Write <span className="hero-gradient-text">Your Story?</span>
-                    </h3>
-                    <p className="mt-3 text-gray-400 text-base max-w-sm mx-auto leading-relaxed">
-                      Join 500+ professionals who transformed their careers with Linkway Learning.
-                    </p>
-                    <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
-                      <a
-                        href="/#contact"
-                        className="ss-cta-button group/btn inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-base transition-all duration-500 hover:-translate-y-1"
-                      >
-                        Start Your Journey
-                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" className="transition-transform duration-300 group-hover/btn:translate-x-1">
-                          <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </a>
-                      <a
-                        href="/programs"
-                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl border border-white/[0.06] text-white/50 font-medium text-sm hover:bg-white/[0.04] hover:text-white/70 hover:border-white/[0.1] transition-all duration-500"
-                      >
-                        View Programs
-                      </a>
-                    </div>
-
-                    {/* Trust badges */}
-                    <div className="mt-6 pt-5 border-t border-white/[0.04] flex items-center justify-center gap-4 flex-wrap">
-                      <span className="text-white/15 text-[11px] font-medium">100% Placement Rate</span>
-                      <span className="w-1 h-1 rounded-full bg-white/10" />
-                      <span className="text-white/15 text-[11px] font-medium">6-Month Programs</span>
-                      <span className="w-1 h-1 rounded-full bg-white/10" />
-                      <span className="text-white/15 text-[11px] font-medium">EMI Available</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SpringReveal>
-          </div>
-        </section>
+        <SuccessStoriesCTA />
       </div>
     </ThemeProvider>
   );

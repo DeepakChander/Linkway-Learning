@@ -2024,6 +2024,135 @@
   border-color: rgba(245, 130, 32, 0.1);
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   CTA Section — Aurora Background Animations
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Aurora gradient blobs ── */
+.ss2-aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  will-change: transform, opacity;
+  mix-blend-mode: screen;
+}
+
+.ss2-aurora-1 {
+  width: 500px;
+  height: 500px;
+  top: -20%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(245, 130, 32, 0.18) 0%, transparent 70%);
+  animation: ss2-aurora-drift-1 14s ease-in-out infinite;
+}
+
+.ss2-aurora-2 {
+  width: 400px;
+  height: 400px;
+  bottom: -15%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  animation: ss2-aurora-drift-2 18s ease-in-out infinite;
+}
+
+.ss2-aurora-3 {
+  width: 350px;
+  height: 350px;
+  top: 30%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+  animation: ss2-aurora-drift-3 20s ease-in-out infinite;
+}
+
+@keyframes ss2-aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.35; }
+  30% { transform: translate(60px, 40px) scale(1.2); opacity: 0.5; }
+  60% { transform: translate(-30px, 60px) scale(0.9); opacity: 0.3; }
+}
+
+@keyframes ss2-aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  40% { transform: translate(-50px, -30px) scale(1.15); opacity: 0.45; }
+  70% { transform: translate(40px, -50px) scale(0.85); opacity: 0.25; }
+}
+
+@keyframes ss2-aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  35% { transform: translate(40px, -40px) scale(1.3); opacity: 0.35; }
+  65% { transform: translate(-60px, 20px) scale(0.8); opacity: 0.15; }
+}
+
+/* ── Perspective grid ── */
+.ss2-perspective-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 70%, transparent 100%);
+  animation: ss2-grid-pulse 8s ease-in-out infinite;
+}
+
+@keyframes ss2-grid-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* ── Floating particles ── */
+.ss2-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(245, 130, 32, 0.4);
+  box-shadow: 0 0 6px rgba(245, 130, 32, 0.3);
+  animation: ss2-particle-float 8s ease-in-out infinite;
+  opacity: 0;
+}
+
+.ss2-particle:nth-child(odd) {
+  background: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.25);
+}
+
+.ss2-particle:nth-child(3n) {
+  background: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 0 6px rgba(139, 92, 246, 0.2);
+}
+
+@keyframes ss2-particle-float {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  15% { opacity: 0.7; transform: translateY(-10px) scale(1); }
+  85% { opacity: 0.5; transform: translateY(-60px) scale(0.8); }
+  100% { transform: translateY(-80px) scale(0); opacity: 0; }
+}
+
+/* ── Horizontal beam sweeps ── */
+.ss2-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(245, 130, 32, 0.15), rgba(245, 130, 32, 0.3), rgba(245, 130, 32, 0.15), transparent);
+  opacity: 0;
+}
+
+.ss2-beam-1 {
+  top: 25%;
+  animation: ss2-beam-sweep 6s ease-in-out infinite;
+}
+
+.ss2-beam-2 {
+  bottom: 30%;
+  animation: ss2-beam-sweep 8s ease-in-out 3s infinite;
+}
+
+@keyframes ss2-beam-sweep {
+  0% { opacity: 0; transform: scaleX(0); transform-origin: left; }
+  30% { opacity: 1; transform: scaleX(1); transform-origin: left; }
+  60% { opacity: 1; transform: scaleX(1); transform-origin: right; }
+  100% { opacity: 0; transform: scaleX(0); transform-origin: right; }
+}
+
 /* ── Reduced Motion Support ── */
 @media (prefers-reduced-motion: reduce) {
   *,
