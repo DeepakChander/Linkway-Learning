@@ -34,19 +34,19 @@ gsap.registerPlugin(ScrollTrigger);
    DATA
    ═══════════════════════════════════════════════════════════════════ */
 const testimonials = [
-  { name: "Aditya Srivastava", from: "Full-Stack Developer", to: "Junior Data Scientist", company: "Globussoft", desc: "I could build apps, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works. Now I'm doing data science full-time.", initials: "AS", color: "#F59E0B", category: "tech" },
-  { name: "Arpit Jain", from: "Hospitality Professional", to: "Business Analyst", company: "EaseMyTrip", desc: "Hospitality was all I knew. I picked up SQL and analytics from scratch, and now I'm analyzing booking trends at EaseMyTrip. Completely different life.", initials: "AJ", color: "#3B82F6", category: "career-switch" },
-  { name: "Junaid Khan", from: "Operations & Banking", to: "Business Analyst", company: "Razorpay", desc: "Banking ops had no growth path for me. Six months of focused learning later, I'm a business analyst at Razorpay doing work that actually excites me.", initials: "JK", color: "#10B981", category: "career-switch" },
-  { name: "Rajeev Chauhan", from: "Operations Executive", to: "Business Research Analyst", company: "EXL", desc: "I was stuck in operations. The program taught me how to think analytically and back decisions with data. Now I do exactly that at EXL.", initials: "RC", color: "#8B5CF6", category: "upskill" },
-  { name: "Rehan Siddiqui", from: "Non-Tech Background", to: "Data Analyst", company: "Amazon", desc: "Zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems.", initials: "RS", color: "#F58220", category: "career-switch" },
-  { name: "Shivani Rawat", from: "Operations & Product", to: "Business Analyst", company: "Booking.com", desc: "Operations felt like a dead end. The program gave me the technical edge I needed, and now I'm doing requirement analysis at Booking.com.", initials: "SR", color: "#EC4899", category: "upskill" },
-  { name: "Shalendra Gupta", from: "Sales Executive", to: "Business Analyst", company: "Vishal Mega Mart", desc: "Went from selling on the floor to analyzing what sells. Excel and Power BI changed how I see business — and my career.", initials: "SG", color: "#06B6D4", category: "career-switch" },
-  { name: "Syed Nehal", from: "HR & Accounting", to: "Data Analyst", company: "Safegraph", desc: "HR and accounting weren't going anywhere for me. Project-based learning made the switch possible. Now I'm a data analyst working globally.", initials: "SN", color: "#6366F1", category: "career-switch" },
-  { name: "Vansh Pathak", from: "Accounting Intern", to: "Reporting Analyst", company: "Accenture", desc: "From crunching numbers in spreadsheets to building real SQL reports at Accenture. The jump felt huge, but the mentors made it doable.", initials: "VP", color: "#14B8A6", category: "upskill" },
+  { name: "Aditya Srivastava", from: "Full-Stack Developer", to: "Junior Data Scientist", company: "Globussoft", desc: "I could build apps, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works. Now I'm doing data science full-time.", initials: "AS", color: "#F59E0B", category: "tech", avatar: "/images/avatars/avatar-1.svg" },
+  { name: "Arpit Jain", from: "Hospitality Professional", to: "Business Analyst", company: "EaseMyTrip", desc: "Hospitality was all I knew. I picked up SQL and analytics from scratch, and now I'm analyzing booking trends at EaseMyTrip. Completely different life.", initials: "AJ", color: "#3B82F6", category: "career-switch", avatar: "/images/avatars/avatar-2.svg" },
+  { name: "Junaid Khan", from: "Operations & Banking", to: "Business Analyst", company: "Razorpay", desc: "Banking ops had no growth path for me. Six months of focused learning later, I'm a business analyst at Razorpay doing work that actually excites me.", initials: "JK", color: "#10B981", category: "career-switch", avatar: "/images/avatars/avatar-3.svg" },
+  { name: "Rajeev Chauhan", from: "Operations Executive", to: "Business Research Analyst", company: "EXL", desc: "I was stuck in operations. The program taught me how to think analytically and back decisions with data. Now I do exactly that at EXL.", initials: "RC", color: "#8B5CF6", category: "upskill", avatar: "/images/avatars/avatar-4.svg" },
+  { name: "Rehan Siddiqui", from: "Non-Tech Background", to: "Data Analyst", company: "Amazon", desc: "Zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems.", initials: "RS", color: "#F58220", category: "career-switch", avatar: "/images/avatars/avatar-5.svg" },
+  { name: "Shivani Rawat", from: "Operations & Product", to: "Business Analyst", company: "Booking.com", desc: "Operations felt like a dead end. The program gave me the technical edge I needed, and now I'm doing requirement analysis at Booking.com.", initials: "SR", color: "#EC4899", category: "upskill", avatar: "/images/avatars/avatar-1.svg" },
+  { name: "Shalendra Gupta", from: "Sales Executive", to: "Business Analyst", company: "Vishal Mega Mart", desc: "Went from selling on the floor to analyzing what sells. Excel and Power BI changed how I see business — and my career.", initials: "SG", color: "#06B6D4", category: "career-switch", avatar: "/images/avatars/avatar-2.svg" },
+  { name: "Syed Nehal", from: "HR & Accounting", to: "Data Analyst", company: "Safegraph", desc: "HR and accounting weren't going anywhere for me. Project-based learning made the switch possible. Now I'm a data analyst working globally.", initials: "SN", color: "#6366F1", category: "career-switch", avatar: "/images/avatars/avatar-3.svg" },
+  { name: "Vansh Pathak", from: "Accounting Intern", to: "Reporting Analyst", company: "Accenture", desc: "From crunching numbers in spreadsheets to building real SQL reports at Accenture. The jump felt huge, but the mentors made it doable.", initials: "VP", color: "#14B8A6", category: "upskill", avatar: "/images/avatars/avatar-4.svg" },
 ];
 
 const stats = [
-  { target: 500, suffix: "+", label: "Careers Launched", icon: "rocket", description: "Professionals placed in top companies" },
+  { target: 8200, suffix: "+", label: "Careers Launched", icon: "rocket", description: "Professionals placed in top companies" },
   { target: 400, suffix: "+", label: "Hiring Partners", icon: "building", description: "Companies actively recruiting from us" },
   { target: 85, suffix: "%", label: "Avg Salary Jump", icon: "trending", description: "Average increase in compensation" },
   { target: 100, suffix: "%", label: "Placement Rate", icon: "target", description: "Of committed learners get placed" },
@@ -188,10 +188,16 @@ function FloatingPill({
         transition={{ duration: 4 + delay, repeat: Infinity, ease: "easeInOut" }}
       >
         <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center text-white text-xs font-bold shrink-0"
+          className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 overflow-hidden"
           style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}BB)` }}
         >
-          {person.initials}
+          <Image
+            src={person.avatar}
+            alt={person.name}
+            width={40}
+            height={40}
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="min-w-0">
           <p className="text-white text-sm font-semibold truncate">{person.name}</p>
@@ -802,7 +808,7 @@ function SuccessStoriesCTA() {
           <div className="relative px-6 md:px-10 lg:px-12 pt-10 md:pt-14 pb-8 flex flex-col justify-center">
             <ScrollReveal>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8 text-white">
-                500+ learners already{" "}
+                8200+ learners already{" "}
                 <span className="text-orange-400">wrote their success story</span>
                 {" "}with us. Your turn to join{" "}
                 <span className="text-orange-400">world-class companies.</span>
@@ -846,9 +852,9 @@ export default function SuccessStoriesPage() {
     offset: ["start start", "end start"],
   });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const heroBlur = useTransform(scrollYProgress, [0, 0.6], [0, 10]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeFeatured, setActiveFeatured] = useState(0);
@@ -875,7 +881,7 @@ export default function SuccessStoriesPage() {
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section
           ref={heroRef}
-          className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050a14]"
+          className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-[#050a14] py-24 md:py-28"
         >
           {/* Animated mesh gradient */}
           <div className="absolute inset-0 ss-stripe-gradient" />
@@ -910,34 +916,36 @@ export default function SuccessStoriesPage() {
           {/* Content */}
           <motion.div
             className="relative z-10 text-center max-w-5xl mx-auto px-6"
-            style={{ opacity: heroOpacity, scale: heroScale, filter: useMotionTemplate`blur(${heroBlur}px)` }}
+            style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
           >
             {/* Eyebrow */}
-            <SpringReveal distance={30} damping={18} delay={0.1}>
-              <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-xl mb-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-xl mb-6">
                 <span className="w-2 h-2 rounded-full bg-orange-500 about-pulse-dot" />
-                <TextScramble className="text-sm text-gray-300 font-medium" delay={0.5} speed={25}>
-                  500+ careers transformed and counting
-                </TextScramble>
+                <span className="text-sm text-gray-300 font-medium">8200+ careers transformed and counting</span>
               </span>
-            </SpringReveal>
+            </motion.div>
 
             {/* Main heading */}
             <StaggerLines baseDelay={0.3} staggerDelay={0.14} skewY={-5} distance={140}>
-              <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black text-white leading-[0.92] tracking-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] font-black text-white leading-[0.95] tracking-tight">
                 They Were You.
               </h1>
-              <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-black leading-[0.92] tracking-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight">
                 <span className="hero-gradient-text">Now They&apos;re Here.</span>
               </h1>
             </StaggerLines>
 
             {/* Subtitle */}
-            <LineMaskReveal delay={1} staggerDelay={0.2} className="mt-10 max-w-2xl mx-auto">
-              <p className="text-lg md:text-xl text-gray-500 leading-relaxed">
+            <LineMaskReveal delay={1} staggerDelay={0.2} className="mt-6 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-gray-500 leading-relaxed">
                 Real people. Real career transformations.
               </p>
-              <p className="text-lg md:text-xl text-white/50 leading-relaxed">
+              <p className="text-base md:text-lg text-white/50 leading-relaxed">
                 From zero tech background to top companies.
               </p>
             </LineMaskReveal>
@@ -947,16 +955,16 @@ export default function SuccessStoriesPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-14 flex items-center justify-center gap-8 md:gap-14 flex-wrap"
+              className="mt-8 flex items-center justify-center gap-8 md:gap-12 flex-wrap"
             >
               {[
-                { value: "500+", label: "Placed" },
+                { value: "8200+", label: "Placed" },
                 { value: "85%", label: "Salary Jump" },
                 { value: "400+", label: "Partners" },
               ].map((s, i) => (
                 <div key={s.label} className="text-center">
                   <span className="text-2xl md:text-3xl font-black text-white">{s.value}</span>
-                  <p className="text-xs text-white/25 font-medium mt-1 tracking-wider uppercase">{s.label}</p>
+                  <p className="text-[10px] text-white/25 font-medium mt-0.5 tracking-wider uppercase">{s.label}</p>
                 </div>
               ))}
             </motion.div>
@@ -966,7 +974,7 @@ export default function SuccessStoriesPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.8, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-10 flex items-center justify-center gap-4 flex-wrap"
+              className="mt-8 flex items-center justify-center gap-4 flex-wrap"
             >
               <a
                 href="#stories"
