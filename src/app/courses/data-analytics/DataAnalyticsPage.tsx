@@ -373,7 +373,7 @@ function ProjectCarousel({ projects }: { projects: { title: string; domain: stri
     if (!track) return;
     requestAnimationFrame(() => {
       const oneSetWidth = track.scrollWidth / 2;
-      tweenRef.current = gsap.fromTo(track, { x: 0 }, { x: -oneSetWidth, duration: 45, ease: "none", repeat: -1 });
+      tweenRef.current = gsap.fromTo(track, { x: 0 }, { x: -oneSetWidth, duration: 90, ease: "none", repeat: -1 });
     });
     return () => { tweenRef.current?.kill(); };
   }, []);

@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import KineticText from "@/components/animation/KineticText";
 import ScrollReveal from "@/components/animation/ScrollReveal";
-import { ScrollTextReveal, BorderGlow, CharacterSplit, CrossFlicker } from "@/components/animation";
+import { BorderGlow, CharacterSplit, CrossFlicker } from "@/components/animation";
 import SpringReveal from "@/components/animation/SpringReveal";
 import ScrollOdometer from "@/components/animation/ScrollOdometer";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -114,112 +113,310 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-navy-900 text-white">
       {/* ═══════════════════════════════════════════════════════════
-          HERO SECTION - Enhanced with animations
+          HERO SECTION - Premium Modern Design with Advanced Animations
           ═══════════════════════════════════════════════════════════ */}
-      <section className="relative pt-32 pb-20 px-6 text-center overflow-hidden bg-navy-900">
-        {/* Animated background elements */}
-        <div className="absolute inset-0">
-          <div className="hero-aurora-1" />
-          <div className="hero-aurora-2" />
-          <div className="hero-aurora-3" />
-        </div>
-        <div className="absolute inset-0 hero-grid-overlay opacity-[0.02]" />
+      <section className="relative min-h-[85vh] flex items-center justify-center px-6 text-center overflow-hidden bg-navy-900">
+        {/* Animated Mesh Gradient Background */}
+        <div className="contact-hero-mesh" />
 
-        {/* Floating geometric shapes */}
+        {/* Floating Glass Orbs */}
+        <div className="contact-hero-orb contact-hero-orb-1" />
+        <div className="contact-hero-orb contact-hero-orb-2" />
+        <div className="contact-hero-orb contact-hero-orb-3" />
+
+        {/* Morphing Blob */}
+        <div className="contact-hero-blob top-[20%] left-[10%]" />
+        <div className="contact-hero-blob bottom-[10%] right-[5%]" style={{ animationDelay: '-6s' }} />
+
+        {/* Animated Grid */}
+        <div className="contact-hero-grid" />
+
+        {/* Pulsing Rings */}
+        <div className="contact-hero-ring contact-hero-ring-1" />
+        <div className="contact-hero-ring contact-hero-ring-2" />
+        <div className="contact-hero-ring contact-hero-ring-3" />
+
+        {/* Particle System */}
+        <div className="contact-hero-particles">
+          <div className="contact-particle" style={{ left: '5%' }} />
+          <div className="contact-particle" />
+          <div className="contact-particle" />
+          <div className="contact-particle" />
+          <div className="contact-particle" />
+          <div className="contact-particle" />
+        </div>
+
+        {/* Scan Line */}
+        <div className="contact-hero-scanline" />
+
+        {/* Noise Texture */}
+        <div className="contact-hero-noise" />
+
+        {/* Floating Geometric Elements */}
         <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[15%] right-[10%] w-16 h-16 border border-orange-500/15 rounded-xl pointer-events-none"
+          animate={{
+            rotate: 360,
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            rotate: { duration: 50, repeat: Infinity, ease: "linear" },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute top-[15%] right-[12%] w-20 h-20 border border-orange-500/20 rounded-2xl backdrop-blur-sm bg-orange-500/[0.02] pointer-events-none"
         />
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[20%] left-[8%] w-12 h-12 border border-blue-400/10 rounded-lg pointer-events-none"
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[18%] left-[10%] w-14 h-14 border border-blue-400/15 rounded-xl backdrop-blur-sm bg-blue-400/[0.02] pointer-events-none"
         />
         <motion.div
-          animate={{ y: [-20, 20, -20], x: [-10, 10, -10] }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[45%] left-[5%] w-8 h-8 border border-purple-400/15 rotate-45 pointer-events-none"
+        />
+
+        {/* Animated Dots */}
+        <motion.div
+          animate={{
+            y: [-30, 30, -30],
+            x: [-15, 15, -15],
+            opacity: [0.3, 0.8, 0.3]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[30%] right-[18%] w-3 h-3 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shadow-lg shadow-orange-500/30 pointer-events-none"
+        />
+        <motion.div
+          animate={{
+            y: [20, -20, 20],
+            opacity: [0.2, 0.6, 0.2]
+          }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[35%] right-[20%] w-3 h-3 rounded-full bg-orange-500/20 pointer-events-none"
+          className="absolute bottom-[25%] left-[20%] w-2 h-2 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg shadow-blue-500/20 pointer-events-none"
         />
         <motion.div
-          animate={{ y: [15, -15, 15] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[30%] left-[15%] w-2 h-2 rounded-full bg-blue-400/15 pointer-events-none"
+          animate={{
+            y: [-15, 25, -15],
+            x: [10, -10, 10],
+            scale: [1, 1.3, 1]
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[60%] right-[8%] w-2.5 h-2.5 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 shadow-lg shadow-purple-500/20 pointer-events-none"
         />
 
-        {/* Animated scan lines */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: "200%" }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
-            className="absolute top-[30%] w-[300px] h-[1px] bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"
-          />
-          <motion.div
-            initial={{ y: "-100%" }}
-            animate={{ y: "200%" }}
-            transition={{ duration: 12, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
-            className="absolute left-[25%] w-[1px] h-[300px] bg-gradient-to-b from-transparent via-orange-500/10 to-transparent"
-          />
-        </div>
-
-        {/* Corner accents */}
+        {/* Glowing Lines */}
         <motion.div
-          animate={{ opacity: [0.1, 0.3, 0.1] }}
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute top-[20%] left-0 w-[30%] h-[1px] bg-gradient-to-r from-transparent via-orange-500/30 to-transparent origin-left"
+        />
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-[25%] right-0 w-[25%] h-[1px] bg-gradient-to-l from-transparent via-blue-500/20 to-transparent origin-right"
+        />
+
+        {/* Corner Decorations */}
+        <motion.div
+          animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.1, 1] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute top-12 left-12 text-orange-500/30 text-2xl font-light pointer-events-none select-none"
+          className="absolute top-16 left-16 pointer-events-none select-none"
         >
-          +
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="text-orange-500/30">
+            <path d="M20 0v40M0 20h40" stroke="currentColor" strokeWidth="1"/>
+            <circle cx="20" cy="20" r="4" fill="currentColor" opacity="0.5"/>
+          </svg>
         </motion.div>
         <motion.div
-          animate={{ opacity: [0.15, 0.35, 0.15] }}
+          animate={{ opacity: [0.15, 0.4, 0.15], rotate: 45 }}
           transition={{ duration: 4, repeat: Infinity }}
-          className="absolute bottom-12 right-12 text-orange-500/30 text-2xl font-light pointer-events-none select-none"
+          className="absolute bottom-16 right-16 pointer-events-none select-none"
         >
-          +
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="text-blue-400/25">
+            <rect x="4" y="4" width="24" height="24" stroke="currentColor" strokeWidth="1"/>
+            <rect x="10" y="10" width="12" height="12" stroke="currentColor" strokeWidth="1"/>
+          </svg>
         </motion.div>
 
+        {/* Main Content */}
         <div className="max-w-5xl mx-auto relative z-10">
-          {/* Animated badge */}
+          {/* Animated Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="contact-hero-badge"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-orange-500/20 bg-orange-500/[0.06]">
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
+            <div className="inline-flex items-center gap-3 px-5 py-2 mb-8 rounded-full border border-orange-500/30 bg-gradient-to-r from-orange-500/[0.08] to-orange-500/[0.02] backdrop-blur-md shadow-lg shadow-orange-500/10">
+              <motion.div
+                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="w-2 h-2 rounded-full bg-orange-500"
-              />
-              <span className="text-orange-400 text-xs font-semibold tracking-[0.15em] uppercase">
-                Get In Touch
+                className="relative"
+              >
+                <span className="absolute inset-0 w-2.5 h-2.5 rounded-full bg-orange-500/50 animate-ping" />
+                <span className="relative w-2.5 h-2.5 rounded-full bg-orange-500 block" />
+              </motion.div>
+              <span className="text-orange-400 text-sm font-semibold tracking-[0.2em] uppercase">
+                Start Your Journey
               </span>
+              <motion.svg
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-orange-400"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </motion.svg>
             </div>
           </motion.div>
 
-          {/* KineticText with scaleUp - zoom-in effect */}
-          <KineticText
-            text="Let's Talk About Your Future"
-            as="h1"
-            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-            animation="scaleUp"
-          />
-
-          {/* ScrollTextReveal subtitle */}
-          <div className="mt-6 max-w-2xl mx-auto">
-            <ScrollTextReveal className="text-gray-400 text-lg md:text-xl" tag="p">
-              Whether you have a question or you're ready to jump in - we're here. No pressure, just honest guidance.
-            </ScrollTextReveal>
+          {/* Main Heading with Staggered Animation */}
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight"
+            >
+              <span className="block text-white mb-2">Let's Build</span>
+              <span className="block">
+                <span className="contact-hero-title-gradient">Your Future</span>
+                <motion.span
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1.2 }}
+                  className="inline-block ml-2"
+                >
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="inline-block -mt-2">
+                    <motion.path
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 1.5, delay: 1.4, ease: "easeInOut" }}
+                      d="M24 4L28 14L38 18L28 22L24 32L20 22L10 18L20 14L24 4Z"
+                      stroke="#F58220"
+                      strokeWidth="2"
+                      fill="rgba(245, 130, 32, 0.2)"
+                    />
+                  </svg>
+                </motion.span>
+              </span>
+              <span className="block text-white mt-2">
+                <span className="text-gray-400 font-normal">Together</span>
+              </span>
+            </motion.h1>
           </div>
 
-          {/* Animated underline */}
+          {/* Subtitle with Fade Up */}
           <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 mx-auto w-24 h-1 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 origin-center"
-          />
+            className="mt-8 max-w-2xl mx-auto"
+          >
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
+              Whether you have a question or you're ready to transform your career —
+              <span className="text-white font-medium"> we're here to help</span>.
+              No pressure, just{" "}
+              <span className="relative inline-block">
+                <span className="text-orange-400">honest guidance</span>
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.6, delay: 1.4 }}
+                  className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-orange-500 to-orange-300 origin-left"
+                />
+              </span>
+              .
+            </p>
+          </motion.div>
+
+          {/* Animated Stats Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-12 flex flex-wrap justify-center gap-8 md:gap-12"
+          >
+            {[
+              { value: "8,200+", label: "Students Placed" },
+              { value: "100%", label: "Placement Rate" },
+              { value: "24hr", label: "Response Time" },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1.2 + i * 0.15 }}
+                className="text-center group"
+              >
+                <div className="text-2xl md:text-3xl font-bold text-white group-hover:text-orange-400 transition-colors duration-300">
+                  {stat.value}
+                </div>
+                <div className="text-xs text-gray-500 uppercase tracking-wider mt-1">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <motion.a
+              href="#contact-form"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl shadow-xl shadow-orange-500/25 hover:shadow-orange-500/40 transition-all duration-300 overflow-hidden"
+            >
+              <span className="relative z-10">Get Started Today</span>
+              <motion.svg
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-5 h-5 relative z-10"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </motion.svg>
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-orange-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.a>
+
+            <motion.a
+              href="https://wa.me/919315647113"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="group inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white font-semibold rounded-xl backdrop-blur-sm bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 transition-all duration-300"
+            >
+              <MessageCircle className="w-5 h-5 text-green-400 group-hover:text-green-300 transition-colors" />
+              <span>Chat on WhatsApp</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 2 }}
+            className="absolute -bottom-20 left-1/2 -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-2 text-gray-500"
+            >
+              <span className="text-xs uppercase tracking-wider">Scroll to explore</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gray-400">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -260,7 +457,7 @@ export default function ContactPage() {
       {/* ═══════════════════════════════════════════════════════════
           CONTACT FORM SECTION - Split Layout
           ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 px-6 bg-navy-900">
+      <section id="contact-form" className="py-20 px-6 bg-navy-900 scroll-mt-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Left Side - Content */}
