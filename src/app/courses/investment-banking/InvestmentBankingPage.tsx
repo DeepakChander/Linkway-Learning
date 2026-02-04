@@ -674,12 +674,12 @@ export default function InvestmentBankingPage() {
     { question: "Do I need a finance background?", answer: "No. We start from accounting fundamentals and build up. Many of our top performers come from engineering, commerce, or even non-finance backgrounds." },
     { question: "Is this program relevant for Indian IB roles?", answer: "Absolutely. The curriculum covers both global and India-specific deal structures, regulations, and market dynamics. Our hiring partners include Indian and international banks." },
     { question: "How hands-on is the program?", answer: "Extremely. You'll build 5+ full financial models, analyze real deals, and create pitch books. By the end, your portfolio demonstrates you can do the actual work of an IB analyst." },
-    { question: "What kind of placement support do you offer?", answer: "Only 100% placement. No guarantee or assistance." },
+    { question: "What kind of placement support do you offer?", answer: "100% placement." },
     { question: "Can I do this alongside a full-time job?", answer: "Yes. We offer flexible scheduling with evening and weekend sessions. All classes are recorded, and you can work through the material at your own pace." },
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "Only 100% Placement", sub: "No guarantee or assistance", color: ACCENT_GOLD },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: ACCENT_GOLD },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹6,500/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "CFA Prep Included", sub: "Level 1 exam prep", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: ACCENT_GOLD },
@@ -1242,7 +1242,7 @@ export default function InvestmentBankingPage() {
             </div>
             <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
               <SlideIn direction="right"><div className="bg-gray-50 rounded-2xl border border-gray-100 p-6"><p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Expected Salary Range</p><p className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_GOLD}, ${ACCENT_BLUE})` }}>₹8–16 LPA</p></div></SlideIn>
-              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_GOLD }} /><div><p className="text-sm text-navy-900 font-semibold">Only 100% Placement</p><p className="text-xs text-gray-500">No guarantee or assistance</p></div></div></SlideIn>
+              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_GOLD }} /><div><p className="text-sm text-navy-900 font-semibold">100% Placement</p><p className="text-xs text-gray-500">Dedicated career support</p></div></div></SlideIn>
               <SlideIn direction="right" delay={0.2}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><SparklesIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_BLUE }} /><div><p className="text-sm text-navy-900 font-semibold">CFA Level 1 Prep Included</p><p className="text-xs text-gray-500">Industry-recognized certification prep</p></div></div></SlideIn>
             </div>
           </div>

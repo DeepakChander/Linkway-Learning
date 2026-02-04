@@ -1618,13 +1618,13 @@ export default function DataAnalyticsPage() {
   const faqs = [
     { question: "Do I need to know coding?", answer: "Nope. We start from the basics — Excel, then SQL, then Python. Everything is taught step by step with exercises, so you're never lost." },
     { question: "What's the schedule like?", answer: "Both weekday and weekend batches are available. Everything is live with a real instructor, and every session gets recorded in case you miss one." },
-    { question: "How does placement assistance work?", answer: "Only 100% placement. No guarantee or assistance." },
+    { question: "How does placement work?", answer: "100% placement with dedicated career support including resume reviews, mock interviews, and direct company referrals." },
     { question: "Can I pay in EMIs?", answer: "Yes — 0% interest EMI starting at ₹5,500/month. We want cost to be the last thing holding you back." },
     { question: "What certifications do I get?", answer: "A Linkway Learning completion certificate plus prep for the Microsoft Azure AI Fundamentals certification exam." },
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "Only 100% Placement", sub: "No guarantee or assistance", color: BRAND_ORANGE },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: BRAND_ORANGE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹5,500/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "Azure AI Certification", sub: "Exam prep included", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: BRAND_ORANGE },
@@ -1814,7 +1814,7 @@ export default function DataAnalyticsPage() {
               </motion.div>
 
               <motion.p className="mt-5 text-base md:text-lg text-gray-400 leading-relaxed max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
-                Go from spreadsheets to strategic thinking in 6 months. Real tools, real projects, only 100% placement. No guarantee or assistance.
+                Go from spreadsheets to strategic thinking in 6 months. Real tools, real projects, 100% placement.
               </motion.p>
 
               <motion.div className="mt-8 flex flex-wrap items-center gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}>
@@ -3019,8 +3019,8 @@ export default function DataAnalyticsPage() {
                     <ShieldIcon className="w-5 h-5" style={{ color: BRAND_ORANGE }} />
                   </motion.div>
                   <div>
-                    <p className="text-sm text-gray-900 font-semibold">Only 100% Placement</p>
-                    <p className="text-xs text-gray-500">No guarantee or assistance</p>
+                    <p className="text-sm text-gray-900 font-semibold">100% Placement</p>
+                    <p className="text-xs text-gray-500">Dedicated career support</p>
                   </div>
                 </motion.div>
               </SlideIn>

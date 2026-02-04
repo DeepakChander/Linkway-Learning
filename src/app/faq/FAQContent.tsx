@@ -11,7 +11,7 @@ const faqCategories = [
     items: [
       {
         q: "What exactly is Linkway Learning?",
-        a: "We're a training company that gets people hired in data, AI, and finance roles. We run five programs - Data Analytics, Business Analytics, Data Science and AI, Agentic AI & Prompt Engineering, and Investment Banking - with live classes, real projects, and only 100% placement. No guarantee or assistance.",
+        a: "We're a training company that gets people hired in data, AI, and finance roles. We run five programs - Data Analytics, Business Analytics, Data Science and AI, Agentic AI & Prompt Engineering, and Investment Banking - with live classes, real projects, and 100% placement.",
       },
       {
         q: "How is this different from Coursera or Udemy?",
@@ -53,7 +53,7 @@ const faqCategories = [
     items: [
       {
         q: "How does placement work?",
-        a: "Only 100% placement. No guarantee or assistance.",
+        a: "100% placement.",
       },
       {
         q: "Which companies hire from Linkway?",

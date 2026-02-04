@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Linkway Learning",
   },
   description:
-    "Transform your career with industry-driven programs in Data Analytics, Data Science & AI, Business Analytics, and Investment Banking. Only 100% placement. No guarantee or assistance. Mentors from Google, Amazon & Microsoft.",
+    "Transform your career with industry-driven programs in Data Analytics, Data Science & AI, Business Analytics, and Investment Banking. 100% placement. Mentors from Google, Amazon & Microsoft.",
   keywords: [
     "data analytics course",
     "data science course",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
     description:
-      "Only 100% placement. No guarantee or assistance. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
+      "100% placement. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
     type: "website",
     locale: "en_IN",
     siteName: "Linkway Learning",
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
     description:
-      "Only 100% placement. No guarantee or assistance. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
+      "100% placement. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
     images: ["/images/og/og-default.png"],
   },
   robots: {

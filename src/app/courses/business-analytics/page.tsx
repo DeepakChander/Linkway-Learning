@@ -5,7 +5,7 @@ import { CourseJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Business Analytics Course — BI Tools, Predictive Analytics, AI",
   description:
-    "Master BI tools, predictive analytics, and AI-powered decision-making. Designed for professionals, MBAs, and business leaders. Only 100% placement. No guarantee or assistance. Linkway Learning.",
+    "Master BI tools, predictive analytics, and AI-powered decision-making. Designed for professionals, MBAs, and business leaders. 100% placement. Linkway Learning.",
   alternates: { canonical: "https://linkwaylearning.com/courses/business-analytics" },
   openGraph: {
     title: "Business Analytics Course — BI, Predictive Analytics, AI",

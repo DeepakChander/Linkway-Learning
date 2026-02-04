@@ -595,7 +595,7 @@ export default function CoursePageTemplate({
               >
                 {v === "activetheory" && <DotFlash />}
                 <span className="text-2xl">✦</span>
-                <span className={cn("text-navy-900 font-semibold", v === "activetheory" && "font-mono")}>Only 100% Placement. No guarantee or assistance</span>
+                <span className={cn("text-navy-900 font-semibold", v === "activetheory" && "font-mono")}>100% Placement</span>
               </div>
             </motion.div>
           </div>

@@ -1344,11 +1344,11 @@ export default function DataScienceAIPage() {
     { question: "How is this different from Data Analytics?", answer: "Data Analytics focuses on visualization and reporting. This goes way deeper — deep learning, NLP, generative AI, MLOps, cloud deployment. It's for people who want to build AI, not just look at dashboards." },
     { question: "What's the capstone project like?", answer: "You build a full ML system end-to-end: define the problem, collect data, train models, deploy a production API, and set up monitoring. Past students have built fraud detectors, medical image classifiers, and chatbots." },
     { question: "Do you cover generative AI?", answer: "Yes — GANs, LLMs, prompt engineering, fine-tuning with HuggingFace. You'll build actual generative AI applications, not just talk about them." },
-    { question: "What about placement support?", answer: "Only 100% placement. No guarantee or assistance." },
+    { question: "What about placement support?", answer: "100% placement." },
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "Only 100% Placement", sub: "No guarantee or assistance", color: BRAND_ORANGE },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: BRAND_ORANGE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹8,000/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "AI Certifications", sub: "AWS + Azure ML prep", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: BRAND_ORANGE },
@@ -1480,7 +1480,7 @@ export default function DataScienceAIPage() {
               </motion.div>
 
               <motion.p className="mt-5 text-base md:text-lg text-gray-400 leading-relaxed max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
-                From your first Python script to deploying ML in production. 12 months of intensive, hands-on AI training. Only 100% placement. No guarantee or assistance.
+                From your first Python script to deploying ML in production. 12 months of intensive, hands-on AI training. 100% placement.
               </motion.p>
 
               <motion.div className="mt-8 flex flex-wrap items-center gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}>
@@ -1827,8 +1827,8 @@ export default function DataScienceAIPage() {
                     <ShieldIcon className="w-5 h-5" style={{ color: BRAND_ORANGE }} />
                   </motion.div>
                   <div>
-                    <p className="text-sm text-gray-900 font-semibold">Only 100% Placement</p>
-                    <p className="text-xs text-gray-500">No guarantee or assistance</p>
+                    <p className="text-sm text-gray-900 font-semibold">100% Placement</p>
+                    <p className="text-xs text-gray-500">Dedicated career support</p>
                   </div>
                 </motion.div>
               </SlideIn>

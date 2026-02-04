@@ -149,7 +149,7 @@ export const STATS: Stat[] = [
   { number: 500, suffix: "+", label: "Careers Transformed" },
   { number: 400, suffix: "+", label: "Hiring Partners" },
   { number: 85, suffix: "%", label: "Average Salary Hike" },
-  { number: 100, suffix: "%", label: "Only 100% Placement" },
+  { number: 100, suffix: "%", label: "100% Placement" },
 ] as const satisfies Stat[];
 
 // -----------------------------------------------------------------------------
@@ -170,7 +170,7 @@ export const COURSES: Course[] = [
     description:
       "A comprehensive 6-month program designed to take you from spreadsheet basics to advanced machine learning. Master the tools, techniques, and thinking that drive data-driven decisions across industries.",
     heroDescription:
-      "Launch your analytics career in just 6 months. Learn Excel, SQL, Python, R, Tableau, Power BI, and machine learning - with hands-on projects and only 100% placement. No guarantee or assistance.",
+      "Launch your analytics career in just 6 months. Learn Excel, SQL, Python, R, Tableau, Power BI, and machine learning - with hands-on projects and 100% placement.",
     color: "#4F46E5",
     icon: "BarChart3",
     whoIsThisFor: [
@@ -287,7 +287,7 @@ export const COURSES: Course[] = [
       {
         question: "Is this course enough to land a data analyst job?",
         answer:
-          "Yes. The curriculum covers every skill that hiring managers look for - Excel, SQL, Python, Tableau/Power BI, statistics, and machine learning. Combined with our only 100% placement, no guarantee or assistance, you will be fully prepared.",
+          "Yes. The curriculum covers every skill that hiring managers look for - Excel, SQL, Python, Tableau/Power BI, statistics, and machine learning. Combined with our 100% placement, you will be fully prepared.",
       },
       {
         question: "How much time do I need to dedicate per week?",
@@ -315,7 +315,7 @@ export const COURSES: Course[] = [
     description:
       "An intensive 12-month program that takes you from zero to expert across the entire data science and AI landscape. From Python fundamentals to deploying production-grade ML models, this program covers it all.",
     heroDescription:
-      "Become a complete data scientist and AI engineer in 12 months. Master Python, machine learning, deep learning, NLP, Generative AI, MLOps, and cloud deployment - with 7+ real-world projects and only 100% placement. No guarantee or assistance.",
+      "Become a complete data scientist and AI engineer in 12 months. Master Python, machine learning, deep learning, NLP, Generative AI, MLOps, and cloud deployment - with 7+ real-world projects and 100% placement.",
     color: "#7C3AED",
     icon: "Brain",
     whoIsThisFor: [
@@ -566,7 +566,7 @@ export const COURSES: Course[] = [
       {
         question: "What placement support is provided?",
         answer:
-          "Only 100% placement. No guarantee or assistance.",
+          "100% placement.",
       },
     ],
   },
@@ -904,7 +904,7 @@ export const FAQS: FAQCategory[] = [
     questions: [
       {
         q: "What is Linkway Learning?",
-        a: "Linkway Learning is a career-focused data science and analytics institute that provides industry-aligned courses, hands-on projects, and only 100% placement. No guarantee or assistance. We help learners transition into high-growth data careers through structured programs taught by industry practitioners.",
+        a: "Linkway Learning is a career-focused data science and analytics institute that provides industry-aligned courses, hands-on projects, and 100% placement. We help learners transition into high-growth data careers through structured programs taught by industry practitioners.",
       },
       {
         q: "Who are the instructors?",
@@ -945,8 +945,8 @@ export const FAQS: FAQCategory[] = [
     category: "Placement",
     questions: [
       {
-        q: "Does Linkway guarantee placement?",
-        a: "Only 100% placement. No guarantee or assistance.",
+        q: "What is the placement rate at Linkway?",
+        a: "100% placement.",
       },
       {
         q: "What companies hire from Linkway?",
@@ -1091,7 +1091,7 @@ export const COMPARISON_TABLE: ComparisonTable = {
       businessIntelligence: "Business Analyst, Analytics Manager",
     },
     {
-      feature: "Only 100% Placement",
+      feature: "100% Placement",
       dataAnalytics: "Yes - 100%",
       dataScienceAI: "Yes - 100%",
       businessIntelligence: "Yes - 100%",

@@ -5,11 +5,11 @@ import { CourseJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Data Analytics Course — Master Excel, SQL, Python, Power BI",
   description:
-    "Master Excel, SQL, Python, Tableau, Power BI, and ML fundamentals in 6 intensive months. Only 100% placement. No guarantee or assistance. Mentors from top companies. Enroll now at Linkway Learning.",
+    "Master Excel, SQL, Python, Tableau, Power BI, and ML fundamentals in 6 intensive months. 100% placement. Mentors from top companies. Enroll now at Linkway Learning.",
   alternates: { canonical: "https://linkwaylearning.com/courses/data-analytics" },
   openGraph: {
     title: "Data Analytics Course — Excel, SQL, Python, Power BI",
-    description: "6-month intensive program. Only 100% placement. No guarantee or assistance. Enroll now.",
+    description: "6-month intensive program. 100% placement. Enroll now.",
     url: "https://linkwaylearning.com/courses/data-analytics",
   },
 };
@@ -19,7 +19,7 @@ export default function Page() {
     <>
       <CourseJsonLd
         name="Data Analytics Course"
-        description="Master Excel, SQL, Python, Tableau, Power BI, and ML fundamentals in 6 intensive months . Only 100% placement. No guarantee or assistance."
+        description="Master Excel, SQL, Python, Tableau, Power BI, and ML fundamentals in 6 intensive months . 100% placement."
         url="https://linkwaylearning.com/courses/data-analytics"
         duration="P6M"
         skills={["Excel", "SQL", "Python", "Tableau", "Power BI", "Machine Learning"]}

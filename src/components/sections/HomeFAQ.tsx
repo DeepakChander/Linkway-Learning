@@ -11,15 +11,15 @@ const faqs = [
   },
   {
     q: "Why should I choose Linkway Learning?",
-    a: "Linkway Learning offers small class sizes, practical hands-on attack simulations, Microsoft-recognized certification, and only 100% placement. No guarantee or assistance.",
+    a: "Linkway Learning offers small class sizes, practical hands-on attack simulations, Microsoft-recognized certification, and 100% placement.",
   },
   {
     q: "Are flexible payment or financial options available?",
     a: "Yes, no-cost EMI and financing options are available to make the program affordable for everyone.",
   },
   {
-    q: "What kind of career assistance is provided?",
-    a: "Only 100% placement. No guarantee or assistance.",
+    q: "What kind of career support is provided?",
+    a: "100% placement with dedicated career coaching, resume reviews, and interview preparation.",
   },
   {
     q: "Will I receive a certificate after completing the program?",

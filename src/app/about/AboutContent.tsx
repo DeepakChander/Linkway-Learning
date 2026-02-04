@@ -95,7 +95,7 @@ const stats = [
   { target: 8200, suffix: "+", label: "Careers Launched", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg> },
   { target: 400, suffix: "+", label: "Hiring Partners", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg> },
   { target: 85, suffix: "%", label: "Avg Salary Jump", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg> },
-  { target: 100, suffix: "%", label: "Only 100% Placement", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg> },
+  { target: 100, suffix: "%", label: "100% Placement", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg> },
 ];
 
 const milestones = [
@@ -267,7 +267,7 @@ export default function AboutPage() {
 
             <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
               className="mt-6 text-base md:text-lg text-gray-300 max-w-lg leading-relaxed">
-              Bridging the gap between ambition and industry &mdash; with skills, projects, mentorship, and only 100% placement. No guarantee or assistance.
+              Bridging the gap between ambition and industry &mdash; with skills, projects, mentorship, and 100% placement.
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.95 }}
@@ -286,7 +286,7 @@ export default function AboutPage() {
                 >
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
                 </motion.svg>
-                <span className="font-bold text-orange-400">Only 100% Placement</span> No guarantee or assistance
+                <span className="font-bold text-orange-400">100% Placement</span>
               </span>
             </motion.div>
           </div>
@@ -822,7 +822,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 gap-3">
               {[
                 { value: "8,200+", label: "Careers Launched", color: "orange", percent: "92%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>, gradient: "from-orange-500 to-orange-400" },
-                { value: "100%", label: "Only 100% Placement", color: "emerald", percent: "100%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>, gradient: "from-emerald-500 to-emerald-400" },
+                { value: "100%", label: "100% Placement", color: "emerald", percent: "100%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>, gradient: "from-emerald-500 to-emerald-400" },
                 { value: "85%", label: "Avg Salary Jump", color: "blue", percent: "85%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>, gradient: "from-blue-500 to-blue-400" },
               ].map((card, i) => (
                 <SpringReveal key={i} distance={40} damping={12} delay={0.15 + i * 0.1}>

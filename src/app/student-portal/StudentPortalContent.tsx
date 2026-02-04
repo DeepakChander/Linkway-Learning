@@ -61,7 +61,7 @@ const portalFeatures = [
     icon: Briefcase,
     title: "Career Services",
     description:
-      "Only 100% placement. No guarantee or assistance.",
+      "100% placement with dedicated career support.",
     color: "#F59E0B",
   },
 ];
@@ -88,7 +88,7 @@ const howItWorks = [
   {
     step: "04",
     title: "Get Certified & Placed",
-    description: "Earn your certificates and leverage our only 100% placement. No guarantee or assistance to land your dream role.",
+    description: "Earn your certificates and leverage our 100% placement support to land your dream role.",
     icon: Award,
   },
 ];

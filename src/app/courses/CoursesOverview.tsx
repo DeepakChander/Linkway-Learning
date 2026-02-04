@@ -20,13 +20,13 @@ const courses = [
     level: "Beginner to Advanced",
     tagline: "Go from spreadsheets to strategic thinking — fast.",
     description:
-      "Master Excel, SQL, Python, Tableau, and Power BI by building real analytics projects. Not toy datasets — actual business problems with only 100% placement. No guarantee or assistance.",
+      "Master Excel, SQL, Python, Tableau, and Power BI by building real analytics projects. Not toy datasets — actual business problems with 100% placement.",
     color: "#4F46E5",
     gradient: "from-indigo-600 via-blue-600 to-cyan-500",
     lightGradient: "from-indigo-50 to-blue-50",
     accentBg: "bg-indigo-500",
     href: "/courses/data-analytics",
-    highlights: ["18+ Tools", "4 Portfolio Projects", "Only 100% Placement"],
+    highlights: ["18+ Tools", "4 Portfolio Projects", "100% Placement"],
     tools: ["Excel", "SQL", "Python", "Tableau", "Power BI", "Pandas"],
     salary: "₹6–12 LPA",
     topRole: "Data Analyst",
@@ -143,7 +143,7 @@ const courses = [
     lightGradient: "from-amber-50 to-yellow-50",
     accentBg: "bg-amber-500",
     href: "/courses/investment-banking",
-    highlights: ["15+ Tools", "Finance Projects", "Only 100% Placement"],
+    highlights: ["15+ Tools", "Finance Projects", "100% Placement"],
     tools: ["Excel", "Bloomberg", "Python", "VBA", "SQL", "Argus"],
     salary: "₹8–16 LPA",
     topRole: "IB Analyst",
@@ -543,7 +543,7 @@ export default function CoursesOverview() {
               className="text-center text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mt-6 leading-relaxed"
             >
               Industry-grade programs designed by practitioners, not academics.
-              Pick the one that matches where you are — every program comes with real projects and only 100% placement. No guarantee or assistance.
+              Pick the one that matches where you are — every program comes with real projects and 100% placement.
             </motion.p>
 
             {/* CTA buttons */}
@@ -1022,7 +1022,7 @@ export default function CoursesOverview() {
                 {
                   step: "04",
                   title: "Get Placed",
-                  desc: "Only 100% placement. No guarantee or assistance.",
+                  desc: "100% placement.",
                   iconPath: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
                 },
               ].map((item, i) => (
@@ -1118,7 +1118,7 @@ export default function CoursesOverview() {
                     <circle cx="8" cy="8" r="8" fill="currentColor" opacity="0.15" />
                     <path d="M11 6L7 10.5L5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  Only 100% Placement. No guarantee or assistance
+                  100% Placement
                 </div>
                 <div className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-emerald-400" viewBox="0 0 16 16" fill="none">
