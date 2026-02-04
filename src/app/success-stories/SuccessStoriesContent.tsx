@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,12 +12,10 @@ import {
   useSpring,
   useInView,
   useMotionTemplate,
-  AnimatePresence,
 } from "framer-motion";
 import Counter from "@/components/animation/Counter";
 import {
   SpringReveal,
-  ScrollTextReveal,
   CharacterSplit,
   LineMaskReveal,
   ScrollReveal,
@@ -52,12 +50,6 @@ const stats = [
   { target: 100, suffix: "%", label: "Placement Rate", icon: "target", description: "Of committed learners get placed" },
 ];
 
-const categories = [
-  { id: "all", label: "All Stories" },
-  { id: "career-switch", label: "Career Switchers" },
-  { id: "upskill", label: "Upskilled" },
-  { id: "tech", label: "Tech Background" },
-];
 
 const journeySteps = [
   { step: "01", title: "Apply & Get Assessed", desc: "Take a quick aptitude test. We identify your strengths and craft a personalized path.", icon: "clipboard" },
@@ -212,187 +204,49 @@ function FloatingPill({
   );
 }
 
-/* ── Transformation Card (Featured Section) ── */
-function TransformationCard({ person, isActive }: { person: (typeof testimonials)[0]; isActive: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [4, -4]), { stiffness: 250, damping: 20 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-4, 4]), { stiffness: 250, damping: 20 });
-
-  const onMove = useCallback((e: React.MouseEvent) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (!rect) return;
-    x.set((e.clientX - rect.left) / rect.width - 0.5);
-    y.set((e.clientY - rect.top) / rect.height - 0.5);
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  }, [x, y, mouseX, mouseY]);
-
-  const onLeave = useCallback(() => { x.set(0); y.set(0); }, [x, y]);
-  const logo = companyLogos[person.company];
-  const spotlightBg = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, ${person.color}12, transparent 70%)`;
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1200 }}
-      className="h-full"
-      layout
-    >
-      <div className="ss2-transformation-card relative rounded-[28px] overflow-hidden h-full group">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#080f1e] via-[#0d1b2a] to-[#080f1e]" />
-        <motion.div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-[1]" style={{ background: spotlightBg }} />
-        <div className="absolute inset-0 ss-mesh-glow" />
-        <div className="absolute inset-0 ss-noise opacity-[0.02]" />
-        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl" style={{ background: `${person.color}08` }} />
-
-        <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-8">
-            {logo && (
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.07] flex items-center justify-center backdrop-blur-sm">
-                  <img src={logo} alt={person.company} width={28} height={28} className="w-7 h-7 object-contain brightness-0 invert opacity-60" />
-                </div>
-                <div>
-                  <span className="text-white/60 font-semibold text-sm">{person.company}</span>
-                  <p className="text-white/20 text-[11px]">Hired through Linkway</p>
-                </div>
-              </div>
-            )}
-            <span className="ss-placed-badge">
-              <span className="relative flex h-2 w-2 mr-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
-              </span>
-              Placed
-            </span>
-          </div>
-
-          {/* Identity transformation */}
-          <div className="flex-1 mb-8">
-            <div className="mb-6">
-              <span className="text-[10px] text-white/20 font-semibold tracking-[0.2em] uppercase block mb-2">Identity Shift</span>
-              <div className="flex items-center gap-3 flex-wrap">
-                <span className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-white/40 text-sm font-medium">{person.from}</span>
-                <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="shrink-0">
-                  <path d="M0 6H22M22 6L17 1M22 6L17 11" stroke={person.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
-                </svg>
-                <span className="px-3 py-1.5 rounded-lg text-sm font-bold" style={{ background: `${person.color}15`, color: person.color, border: `1px solid ${person.color}25` }}>
-                  {person.to}
-                </span>
-              </div>
-            </div>
-
-            <blockquote className="text-white/50 text-[15px] leading-[1.8] relative pl-4 border-l-2" style={{ borderColor: `${person.color}30` }}>
-              &ldquo;{person.desc}&rdquo;
-            </blockquote>
-          </div>
-
-          {/* Bottom metrics */}
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { label: "Program", value: "Data Analytics" },
-              { label: "Duration", value: "6 Months" },
-              { label: "Salary Hike", value: "120%" },
-            ].map((m) => (
-              <div key={m.label} className="text-center p-3.5 rounded-2xl bg-white/[0.025] border border-white/[0.04] hover:bg-white/[0.05] transition-all duration-500">
-                <span className="text-white/60 font-bold text-sm block">{m.value}</span>
-                <span className="text-white/15 text-[10px] font-medium tracking-wider uppercase">{m.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 /* ── Bento Story Card ── */
 function BentoStoryCard({ person }: { person: (typeof testimonials)[0] }) {
   const logo = companyLogos[person.company];
 
   return (
-    <SpotlightCard spotlightColor={`${person.color}10`} borderRadius="20px">
-      <motion.div
-        className="ss2-bento-card relative rounded-[20px] overflow-hidden bg-white border border-gray-100/80 h-full flex flex-col p-6 md:p-8"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        whileHover={{ y: -4, transition: { duration: 0.3 } }}
-      >
-        {/* Subtle gradient wash at top */}
-        <div className="absolute top-0 left-0 right-0 h-1" style={{ background: `linear-gradient(90deg, ${person.color}50, ${person.color}, ${person.color}50)` }} />
-
-        {/* Avatar + Identity */}
-        <div className="flex items-start gap-4 mb-4">
-          <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-sm shrink-0"
-            style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)`, boxShadow: `0 8px 24px ${person.color}25` }}
-          >
-            {person.initials}
-          </div>
-          <div className="min-w-0">
-            <h3 className="text-base font-bold text-navy-900">{person.name}</h3>
-            {/* Company logo + animated name */}
-            <div className="flex items-center gap-2 mt-1">
-              {logo && (
-                <img src={logo} alt={person.company} width={20} height={20} className={`w-5 h-5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-70" : "opacity-80"}`} />
-              )}
-              <span
-                className="ss2-company-name text-xs font-bold tracking-wide"
-                style={{
-                  background: `linear-gradient(90deg, ${person.color}, ${person.color}80, ${person.color}FF, ${person.color}80, ${person.color})`,
-                  backgroundSize: "200% 100%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {person.company}
-              </span>
-            </div>
-          </div>
+    <motion.div
+      className="h-full rounded-2xl p-6 bg-[#F2F1EE] border border-[#e5e4e0] hover:border-[#d5d4d0] hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Transformation journey */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-gray-500 font-medium">{person.from}</span>
+          <ArrowRight className="w-3 h-3 text-gray-400" />
+          <span className="text-[11px] text-orange-600 font-semibold">{person.to}</span>
         </div>
+        {logo && (
+          <img src={logo} alt={person.company} width={20} height={20} className={`w-5 h-5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-60" : "opacity-70"}`} />
+        )}
+      </div>
 
-        {/* Transformation journey - horizontal */}
-        <div className="flex items-center gap-2 mb-4 flex-wrap">
-          <span className="text-[11px] font-medium text-gray-400 bg-gray-50 border border-gray-100 rounded-lg px-2.5 py-1">{person.from}</span>
-          <svg width="20" height="10" viewBox="0 0 20 10" fill="none" className="shrink-0">
-            <path d="M0 5H18M18 5L14 1M18 5L14 9" stroke={person.color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.5" />
-          </svg>
-          <span className="text-[11px] font-semibold rounded-lg px-2.5 py-1" style={{ background: `${person.color}10`, color: person.color, border: `1px solid ${person.color}18` }}>
-            {person.to}
-          </span>
-        </div>
+      {/* Quote */}
+      <p className="text-gray-600 leading-relaxed text-[13px] mb-6 flex-1">
+        &ldquo;{person.desc}&rdquo;
+      </p>
 
-        {/* Quote */}
-        <div className="relative flex-1">
-          <span className="absolute -top-3 -left-1 text-[48px] font-serif leading-none select-none pointer-events-none" style={{ color: `${person.color}08` }}>&ldquo;</span>
-          <p className="text-gray-500 leading-[1.85] relative z-10 text-sm line-clamp-4">
-            {person.desc}
-          </p>
+      {/* Bottom - Avatar + Name + Company */}
+      <div className="flex items-center gap-3 pt-4 border-t border-black/[0.06]">
+        <div
+          className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0"
+          style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)` }}
+        >
+          {person.initials}
         </div>
-
-        {/* Bottom */}
-        <div className="mt-5 pt-4 border-t border-gray-50 flex items-center justify-between">
-          <span className="text-[10px] text-gray-300 font-medium tracking-wider uppercase">Career Transformation</span>
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <svg key={star} width="12" height="12" viewBox="0 0 12 12" fill={person.color} opacity="0.3">
-                <path d="M6 0.5L7.5 4.5H11.5L8.5 7L9.5 11L6 8.5L2.5 11L3.5 7L0.5 4.5H4.5L6 0.5Z" />
-              </svg>
-            ))}
-          </div>
+        <div className="min-w-0">
+          <h4 className="font-medium text-gray-900 text-sm leading-tight truncate">{person.name}</h4>
+          <span className="text-[11px] text-gray-500">{person.company}</span>
         </div>
-      </motion.div>
-    </SpotlightCard>
+      </div>
+    </motion.div>
   );
 }
 
@@ -855,21 +709,6 @@ export default function SuccessStoriesPage() {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [activeFeatured, setActiveFeatured] = useState(0);
-
-  const featured = [testimonials[4], testimonials[2], testimonials[5]]; // Rehan, Junaid, Shivani
-  const filteredTestimonials = activeCategory === "all"
-    ? testimonials
-    : testimonials.filter((t) => t.category === activeCategory);
-
-  // Auto-rotate featured
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeatured((prev) => (prev + 1) % featured.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [featured.length]);
 
   return (
     <ThemeProvider theme="light">
@@ -999,254 +838,30 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 2 — FEATURED TRANSFORMATIONS (Interactive)        ║
+            ║  SECTION 3 — ALL STORIES (Bento Grid)                       ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-28 md:py-40 bg-white overflow-hidden">
-          <div className="absolute inset-0 about-light-dots opacity-15" />
-
-          {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <motion.div
-              className="absolute top-[8%] right-[6%] w-[240px] h-[240px] rounded-full border border-orange-100/30"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div
-              className="absolute top-[12%] right-[8%] w-[180px] h-[180px] rounded-full border border-orange-100/20"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-            />
-            <div className="absolute bottom-[15%] left-[3%] w-[180px] h-[180px] rounded-full bg-orange-50/40 blur-3xl" />
-          </div>
-
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
-            {/* Section header */}
-            <div className="text-center mb-16">
-              <ScrollReveal>
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200/50 mb-6">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
-                  <span className="text-orange-600 text-xs font-semibold tracking-[0.2em] uppercase">Featured Transformations</span>
-                </span>
-              </ScrollReveal>
-
-              <SpringReveal distance={40} damping={14} delay={0.1}>
-                <h2 className="text-3xl md:text-5xl font-black text-navy-900 leading-tight mb-4">
-                  From &ldquo;I can&apos;t&rdquo; to &ldquo;I did&rdquo;
-                </h2>
-              </SpringReveal>
-
-              <ScrollReveal delay={0.2}>
-                <p className="text-gray-400 text-lg max-w-lg mx-auto">
-                  Click on each story to see the full transformation journey.
-                </p>
-              </ScrollReveal>
-            </div>
-
-            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-start">
-              {/* Left — Story selector + quote */}
-              <div>
-                {/* Person tabs */}
-                <div className="space-y-3 mb-10">
-                  {featured.map((person, i) => (
-                    <motion.button
-                      key={person.name}
-                      onClick={() => setActiveFeatured(i)}
-                      className={`w-full text-left p-5 rounded-2xl border transition-all duration-500 relative overflow-hidden ${
-                        activeFeatured === i
-                          ? "bg-white border-gray-200 shadow-lg shadow-gray-100/50"
-                          : "bg-transparent border-gray-100 hover:bg-gray-50/50"
-                      }`}
-                      whileHover={{ x: 4 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {/* Progress bar for active */}
-                      {activeFeatured === i && (
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-[2px]"
-                          style={{ background: person.color }}
-                          initial={{ width: "0%" }}
-                          animate={{ width: "100%" }}
-                          transition={{ duration: 6, ease: "linear" }}
-                          key={`progress-${i}-${activeFeatured}`}
-                        />
-                      )}
-
-                      <div className="flex items-center gap-4">
-                        <div
-                          className={`w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0 transition-all duration-500 ${
-                            activeFeatured === i ? "scale-110" : "scale-100 opacity-60"
-                          }`}
-                          style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)` }}
-                        >
-                          {person.initials}
-                        </div>
-                        <div className="min-w-0">
-                          <h4 className={`font-bold transition-colors duration-300 ${activeFeatured === i ? "text-navy-900" : "text-gray-400"}`}>
-                            {person.name}
-                          </h4>
-                          <p className="text-sm text-gray-400 truncate">
-                            {person.from} → {person.to}
-                          </p>
-                        </div>
-                        <div className="ml-auto flex items-center gap-2">
-                          {companyLogos[person.company] && (
-                            <img
-                              src={companyLogos[person.company]}
-                              alt=""
-                              width={20}
-                              height={20}
-                              className={`w-5 h-5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-40" : "opacity-50"}`}
-                            />
-                          )}
-                        </div>
-                      </div>
-                    </motion.button>
-                  ))}
-                </div>
-
-                {/* Active person quote */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeFeatured}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <div className="relative mb-6">
-                      <span className="absolute -top-10 -left-3 text-[140px] font-serif leading-none text-orange-500/[0.05] select-none pointer-events-none">&ldquo;</span>
-                      <blockquote className="relative z-10 text-xl md:text-2xl font-medium text-navy-900 leading-[1.65] pl-1">
-                        {featured[activeFeatured].desc}
-                      </blockquote>
-                    </div>
-
-                    <motion.div
-                      className="h-[2px] mb-6 rounded-full overflow-hidden"
-                      initial={{ width: 0 }}
-                      animate={{ width: 80 }}
-                      transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <div className="w-full h-full" style={{ background: `linear-gradient(90deg, ${featured[activeFeatured].color}, ${featured[activeFeatured].color}80)` }} />
-                    </motion.div>
-
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <h3 className="text-lg font-bold text-navy-900">{featured[activeFeatured].name}</h3>
-                        <p className="text-sm text-gray-400">{featured[activeFeatured].to} at {featured[activeFeatured].company}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Right — Immersive transformation card */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeFeatured}
-                  initial={{ opacity: 0, scale: 0.95, x: 30 }}
-                  animate={{ opacity: 1, scale: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, x: -30 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="lg:sticky lg:top-32"
-                >
-                  <TransformationCard person={featured[activeFeatured]} isActive={true} />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </div>
-        </section>
-
-        {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 3 — ALL STORIES (Bento Grid + Filters)            ║
-            ╚══════════════════════════════════════════════════════════════╝ */}
-        <section id="stories" className="relative bg-[#FAFBFC] overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
-
-          {/* Decorative */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-[5%] right-[8%] w-[400px] h-[400px] bg-orange-50/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-[10%] left-[3%] w-[300px] h-[300px] bg-blue-50/15 rounded-full blur-3xl" />
-          </div>
-
-          {/* Header + Filters */}
-          <div className="pt-28 md:pt-40 pb-12 max-w-7xl mx-auto px-6 relative z-10">
+        <section id="stories" className="relative overflow-hidden" style={{ backgroundColor: "#f2f1ee" }}>
+          {/* Header */}
+          <div className="pt-16 md:pt-20 pb-10 max-w-7xl mx-auto px-6 relative z-10">
             <ScrollReveal>
-              <div className="text-center mb-5">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-900/[0.03] border border-navy-900/[0.06]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                  <span className="text-navy-900/50 text-xs font-semibold tracking-[0.2em] uppercase">All Transformations</span>
+              <div className="text-center max-w-2xl mx-auto">
+                <span className="inline-block py-1.5 px-4 rounded-full bg-orange-100 text-orange-600 font-semibold text-xs mb-5 tracking-widest uppercase">
+                  Success Stories
                 </span>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy-900 leading-tight">
+                  They Were Where <span className="text-orange-500">You Are</span> Right Now.
+                </h2>
               </div>
             </ScrollReveal>
+          </div>
 
-            <div className="text-center mb-4">
-              <ScrollTextReveal
-                className="text-3xl md:text-5xl font-black text-navy-900 leading-tight"
-                tag="h2"
-                mode="word"
-                scrub={1.5}
-              >
-                Every story started with a single decision
-              </ScrollTextReveal>
-            </div>
-
-            <ScrollReveal delay={0.2}>
-              <p className="text-center text-gray-400 text-lg max-w-lg mx-auto mb-12">
-                Different backgrounds. Different goals. Same transformation.
-              </p>
-            </ScrollReveal>
-
-            {/* Filter pills */}
-            <div className="flex items-center justify-center gap-2 flex-wrap mb-16">
-              {categories.map((cat) => (
-                <motion.button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-400 border ${
-                    activeCategory === cat.id
-                      ? "bg-navy-900 text-white border-navy-900 shadow-lg shadow-navy-900/20"
-                      : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
-                  }`}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {cat.label}
-                  {activeCategory === cat.id && (
-                    <motion.span
-                      className="ml-2 inline-flex items-center justify-center w-5 h-5 rounded-full bg-white/20 text-xs"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                    >
-                      {filteredTestimonials.length}
-                    </motion.span>
-                  )}
-                </motion.button>
+          {/* Cards Grid */}
+          <div className="max-w-7xl mx-auto px-6 relative z-10 pb-16 md:pb-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {testimonials.map((person) => (
+                <BentoStoryCard key={person.name} person={person} />
               ))}
             </div>
-          </div>
-
-          {/* Bento Grid */}
-          <div className="max-w-7xl mx-auto px-6 relative z-10 pb-28 md:pb-40">
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
-              layout
-            >
-              <AnimatePresence mode="popLayout">
-                {filteredTestimonials.map((person, i) => (
-                  <motion.div
-                    key={person.name}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className=""
-                  >
-                    <BentoStoryCard person={person} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
           </div>
         </section>
 
