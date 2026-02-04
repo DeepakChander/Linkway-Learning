@@ -16,6 +16,7 @@ import { AccordionItem } from "@/components/ui/Accordion";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
+import FooterCTA from "@/components/sections/FooterCTA";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -628,60 +629,7 @@ export default function CoursePageTemplate({
       </section>
 
       {/* ==================== ENROLLMENT CTA ==================== */}
-      <section id="enroll" className={cn("py-32 px-6 bg-gray-50", v === "redbull" && "rb-scanlines")}>
-        <div className="max-w-4xl mx-auto text-center relative">
-          <motion.h2
-            className={cn(
-              "text-4xl md:text-6xl font-bold text-navy-900 mb-6",
-              v === "redbull" && "rb-fluid-h1",
-              v === "activetheory" && "font-mono",
-            )}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: transitionDuration, ease }}
-          >
-            {v === "activetheory" ? <TerminalText>Ready to Start?</TerminalText> : "Ready to Start?"}
-          </motion.h2>
-          <motion.p
-            className="text-gray-600 text-lg max-w-2xl mx-auto mb-10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: transitionDuration, delay: 0.15, ease }}
-          >
-            500+ people have already made the switch through Linkway.
-            The next batch is filling up - and your seat won't hold itself.
-          </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: transitionDuration, delay: 0.3, ease }}
-          >
-            <MagneticWrap>
-              <div className="pulse-corners text-orange-500">
-                <Button variant="primary" size="lg" onClick={openEnquiry} className={cn(
-                  v === "orano" && "btn-border-glow orano-focus",
-                  v === "activetheory" && "at-spring-enter",
-                )}>
-                  Enroll Now
-                </Button>
-              </div>
-            </MagneticWrap>
-            <MagneticWrap>
-              <Button variant="outline" size="lg" href="/contact" className={cn(
-                v === "orano" && "orano-brightness",
-                v === "activetheory" && "at-spring-enter",
-                v === "redbull" && "btn-border-glow",
-              )}>
-                Talk to a Counselor
-              </Button>
-            </MagneticWrap>
-          </motion.div>
-        </div>
-      </section>
+      <FooterCTA />
     </div>
     </ThemeProvider>
   );
