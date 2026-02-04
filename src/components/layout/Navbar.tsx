@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { X, ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useEnquiryModal } from "@/components/forms/EnquiryModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -102,6 +103,7 @@ const mobileItemVariants = {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { openEnquiry } = useEnquiryModal();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [coursesOpen, setCoursesOpen] = useState(false);
@@ -334,10 +336,10 @@ export default function Navbar() {
             </ul>
 
             {/* CTA Button */}
-            <Link
-              href="/enroll"
+            <button
+              onClick={openEnquiry}
               className={cn(
-                "group shrink-0 relative flex items-center justify-center font-bold gap-2 px-6 py-2.5 rounded-xl transition-all duration-500 text-[14px] overflow-hidden",
+                "group shrink-0 relative flex items-center justify-center font-bold gap-2 px-6 py-2.5 rounded-xl transition-all duration-500 text-[14px] overflow-hidden cursor-pointer",
                 isHome
                   ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:shadow-xl"
                   : "bg-navy-900 text-white hover:bg-navy-800 shadow-lg shadow-navy-900/25"
@@ -349,7 +351,7 @@ export default function Navbar() {
               </span>
               <span className="relative z-10">Enroll Now</span>
               <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Link>
+            </button>
           </div>
 
           {/* Mobile layout */}
@@ -364,17 +366,17 @@ export default function Navbar() {
             </Link>
 
             <div className="flex items-center gap-2">
-              <Link
-                href="/enroll"
+              <button
+                onClick={openEnquiry}
                 className={cn(
-                  "hidden xs:flex items-center justify-center font-bold px-4 py-2 rounded-xl transition-all duration-300 text-sm",
+                  "hidden xs:flex items-center justify-center font-bold px-4 py-2 rounded-xl transition-all duration-300 text-sm cursor-pointer",
                   isHome
                     ? "bg-gradient-to-r from-orange-500 to-orange-600 text-white"
                     : "bg-navy-900 text-white hover:bg-navy-800"
                 )}
               >
                 Enroll Now
-              </Link>
+              </button>
               <button
                 className={cn(
                   "relative p-2.5 mr-1 transition-colors duration-300 rounded-lg",
@@ -501,14 +503,16 @@ export default function Navbar() {
                 animate="open"
                 className="relative px-6 py-6 border-t border-white/[0.06]"
               >
-                <Link
-                  href="/enroll"
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full font-bold px-5 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300"
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openEnquiry();
+                  }}
+                  className="flex items-center justify-center gap-2 w-full font-bold px-5 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300 cursor-pointer"
                 >
                   Enroll Now
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </button>
               </motion.div>
             </motion.div>
           </>

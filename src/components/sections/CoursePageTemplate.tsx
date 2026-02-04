@@ -249,7 +249,7 @@ export default function CoursePageTemplate({
           >
             {/* Orano: Button with glow border focus */}
             <MagneticWrap>
-              <Button variant="primary" size="lg" href="#enroll" className={cn(
+              <Button variant="primary" size="lg" onClick={openEnquiry} className={cn(
                 v === "orano" && "btn-border-glow orano-focus",
                 v === "activetheory" && "at-spring-enter",
                 "pulse-corners",

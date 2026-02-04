@@ -1033,110 +1033,75 @@ const MODULE_DATA = [
   },
 ];
 
-/* ── Module Card with glassmorphism + bento hover ── */
+/* ── Module Card — Option 1: Refined Original ── */
 function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; index: number; onEnquiry: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  }, [mouseX, mouseY]);
 
   return (
     <motion.div
-      ref={cardRef}
       className="group relative"
-      initial={{ opacity: 0, y: 60, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
     >
-      {/* Spotlight follow cursor — Aceternity-inspired */}
-      <motion.div
-        className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-        style={{
-          background: useTransform(
-            [mouseX, mouseY],
-            ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, ${mod.color}18, transparent 60%)`
-          ),
-        }}
-      />
-
-      {/* Card body — glassmorphism */}
+      {/* Card with glassmorphism */}
       <div
-        className="relative z-10 rounded-3xl border border-white/60 overflow-hidden cursor-pointer transition-all duration-500"
+        className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 border border-white/60 hover:shadow-xl hover:-translate-y-0.5"
         style={{
-          background: "rgba(255,255,255,0.65)",
-          backdropFilter: "blur(20px) saturate(180%)",
-          WebkitBackdropFilter: "blur(20px) saturate(180%)",
-          boxShadow: isHovered
-            ? `0 20px 60px -15px ${mod.color}25, 0 0 0 1px ${mod.color}20`
-            : "0 4px 24px -8px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.6)",
+          background: "rgba(255,255,255,0.75)",
+          backdropFilter: "blur(12px)",
+          boxShadow: "0 4px 24px -8px rgba(0,0,0,0.1)",
         }}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {/* Top colored accent bar with shimmer */}
-        <div className="relative h-1.5 overflow-hidden" style={{ background: mod.iconBg }}>
-          <motion.div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%)" }}
-            animate={{ x: ["-100%", "200%"] }}
-            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
-          />
-        </div>
+        {/* Top accent bar */}
+        <div className="h-1" style={{ background: mod.iconBg }} />
 
-        <div className="p-6">
+        <div className="p-5">
           {/* Header row */}
           <div className="flex items-start gap-4">
-            {/* Icon with gradient bg */}
-            <motion.div
-              className="shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg border border-white/80"
-              style={{ background: mod.lightBg }}
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            {/* Icon */}
+            <div
+              className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border border-white/80"
+              style={{ background: mod.lightBg, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.1)" }}
             >
               {mod.icon}
-            </motion.div>
+            </div>
 
             <div className="flex-1 min-w-0">
-              {/* Module badge */}
-              <div className="flex items-center gap-2 mb-1.5">
+              {/* Module badge + topics */}
+              <div className="flex items-center gap-2 mb-1">
                 <span
-                  className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full tracking-wider"
+                  className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
                   style={{ color: mod.color, backgroundColor: mod.lightBg }}
                 >
-                  MODULE {mod.id}
+                  Module {mod.id}
                 </span>
-                <span className="text-[10px] text-gray-400 font-mono">{mod.topics.length} topics</span>
+                <span className="text-[10px] text-gray-400">{mod.topics.length} topics</span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 leading-tight group-hover:text-gray-800">
-                {mod.title}
-              </h3>
+
+              {/* Title */}
+              <h3 className="text-lg font-bold text-gray-900 leading-tight">{mod.title}</h3>
+
+              {/* Subtitle */}
               <p className="mt-0.5 text-sm text-gray-500">{mod.subtitle}</p>
             </div>
 
             {/* Expand toggle */}
             <motion.div
-              className="shrink-0 w-9 h-9 rounded-xl flex items-center justify-center mt-0.5 border border-gray-200 group-hover:border-gray-300 transition-colors"
-              style={{ backgroundColor: isOpen ? mod.lightBg : "white" }}
+              className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
               animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
+              transition={{ duration: 0.25 }}
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke={isOpen ? mod.color : "#9ca3af"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+              <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
             </motion.div>
           </div>
 
-          {/* Progress bar indicator — Duolingo-inspired */}
-          <div className="mt-4 flex items-center gap-2">
+          {/* Progress bar */}
+          <div className="mt-4 flex items-center gap-3">
             <div className="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
@@ -1144,137 +1109,61 @@ function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; ind
                 initial={{ width: "0%" }}
                 whileInView={{ width: "100%" }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.2, delay: 0.3 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
               />
             </div>
-            <span className="text-[10px] font-mono font-semibold" style={{ color: mod.color }}>
+            <span className="text-[11px] font-medium" style={{ color: mod.color }}>
               {mod.topics.length} lessons
             </span>
           </div>
 
-          {/* Expandable topics — Accordion */}
+          {/* Expandable topics */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <div className="mt-5 pt-5 border-t border-gray-100">
-                  <div className="grid gap-2">
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <div className="space-y-2">
                     {mod.topics.map((topic, tIdx) => {
                       const parts = topic.split(" — ");
-                      const topicIconMap: Record<number, React.ReactNode[]> = {
-                        1: [ // Excel
-                          <svg key="fx" viewBox="0 0 20 20" fill="none" className="w-full h-full"><text x="3" y="15" fontSize="12" fontWeight="bold" fontFamily="monospace" fill="currentColor">fx</text></svg>,
-                          <svg key="pivot" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><rect x="11" y="2" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><rect x="2" y="11" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><rect x="11" y="11" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/></svg>,
-                          <svg key="format" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M3 8h14M8 3v14" stroke="currentColor" strokeWidth="1.2"/><circle cx="13" cy="13" r="2" fill="currentColor" opacity="0.4"/></svg>,
-                          <svg key="forecast" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M3 15L7 10L11 12L17 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M13 5h4v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-                          <svg key="dash" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="2" y="2" width="16" height="16" rx="3" stroke="currentColor" strokeWidth="1.5"/><rect x="5" y="10" width="3" height="5" rx="0.5" fill="currentColor" opacity="0.5"/><rect x="9" y="7" width="3" height="8" rx="0.5" fill="currentColor" opacity="0.6"/><rect x="13" y="5" width="3" height="10" rx="0.5" fill="currentColor" opacity="0.7"/></svg>,
-                          <svg key="query" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M4 6h12M4 10h8M4 14h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M14 12l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><circle cx="14" cy="12" r="2.5" stroke="currentColor" strokeWidth="1.5"/></svg>,
-                        ],
-                        2: [ // Tableau
-                          <svg key="connect" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="6" cy="10" r="3" stroke="currentColor" strokeWidth="1.5"/><circle cx="14" cy="10" r="3" stroke="currentColor" strokeWidth="1.5"/><path d="M9 10h2" stroke="currentColor" strokeWidth="1.5"/></svg>,
-                          <svg key="dash" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="2" y="2" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><rect x="11" y="2" width="7" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><rect x="2" y="11" width="16" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/></svg>,
-                          <svg key="calc" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5"/><path d="M7 10h6M10 7v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="geo" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5"/><ellipse cx="10" cy="10" rx="3" ry="7" stroke="currentColor" strokeWidth="1.2"/><path d="M3 10h14" stroke="currentColor" strokeWidth="1.2"/></svg>,
-                          <svg key="pub" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M10 3v10M6 9l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M3 14v2a1 1 0 001 1h12a1 1 0 001-1v-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="design" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M14 3l3 3-10 10H4v-3L14 3z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-                        ],
-                        3: [ // Power BI
-                          <svg key="dax" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M7 10h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M10 7v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="report" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M7 6h6M7 10h4M7 14h5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>,
-                          <svg key="etl" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M4 6h4l2 4-2 4H4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M10 10h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><circle cx="16" cy="10" r="1.5" fill="currentColor"/></svg>,
-                          <svg key="lock" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="5" y="9" width="10" height="8" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M7 9V6a3 3 0 016 0v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="perf" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="10" cy="11" r="6" stroke="currentColor" strokeWidth="1.5"/><path d="M10 8v3l2 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M8 3h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="share" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="14" cy="5" r="2.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="6" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="14" cy="15" r="2.5" stroke="currentColor" strokeWidth="1.5"/><path d="M8.2 8.8l3.6-2.6M8.2 11.2l3.6 2.6" stroke="currentColor" strokeWidth="1.3"/></svg>,
-                        ],
-                        4: [ // Python
-                          <svg key="code" viewBox="0 0 20 20" fill="none" className="w-full h-full"><polyline points="13 5 17 10 13 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><polyline points="7 5 3 10 7 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-                          <svg key="array" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="3" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3"/><rect x="12" y="3" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3"/><rect x="3" y="12" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3"/><rect x="12" y="12" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3"/></svg>,
-                          <svg key="table" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="2" y="3" width="16" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M2 7h16M2 11h16M8 7v10M13 7v10" stroke="currentColor" strokeWidth="1.2"/></svg>,
-                          <svg key="chart" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M3 17V3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M3 17h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M5 13l4-5 3 3 5-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-                          <svg key="stats" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M3 14c2-8 5-8 7 0s5-8 7 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="clean" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M4 4l12 12M4 16L16 4" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0.3"/><path d="M3 10h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M10 3v14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                        ],
-                        5: [ // ML
-                          <svg key="regr" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M3 15L17 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><circle cx="5" cy="13" r="1.5" fill="currentColor" opacity="0.4"/><circle cx="9" cy="10" r="1.5" fill="currentColor" opacity="0.4"/><circle cx="14" cy="7" r="1.5" fill="currentColor" opacity="0.4"/></svg>,
-                          <svg key="tree" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="10" cy="4" r="2" stroke="currentColor" strokeWidth="1.3"/><circle cx="5" cy="11" r="2" stroke="currentColor" strokeWidth="1.3"/><circle cx="15" cy="11" r="2" stroke="currentColor" strokeWidth="1.3"/><circle cx="3" cy="17" r="1.5" fill="currentColor" opacity="0.4"/><circle cx="7" cy="17" r="1.5" fill="currentColor" opacity="0.4"/><path d="M10 6v1.5L5 9M10 6v1.5l5 1.5M5 13v1l-2 1.5M5 13v1l2 1.5" stroke="currentColor" strokeWidth="1.2"/></svg>,
-                          <svg key="cluster" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="7" cy="7" r="4" stroke="currentColor" strokeWidth="1.3" strokeDasharray="2 1.5"/><circle cx="13" cy="13" r="4" stroke="currentColor" strokeWidth="1.3" strokeDasharray="2 1.5"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="8" cy="8" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="14" cy="14" r="1" fill="currentColor"/></svg>,
-                          <svg key="eval" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M10 3v14M3 10h14" stroke="currentColor" strokeWidth="1.2"/><rect x="4" y="4" width="5" height="5" rx="0.5" fill="currentColor" opacity="0.2"/><rect x="11" y="11" width="5" height="5" rx="0.5" fill="currentColor" opacity="0.15"/></svg>,
-                          <svg key="time" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M2 14c2-3 3-8 5-6s2 7 4 4 2-8 4-5 1 6 3 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="rec" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M4 4h4v4H4zM8 8h4v4H8zM12 4h4v4h-4zM4 12h4v4H4z" stroke="currentColor" strokeWidth="1.2" rx="0.5"/><rect x="5" y="5" width="2" height="2" fill="currentColor" opacity="0.5" rx="0.3"/><rect x="13" y="5" width="2" height="2" fill="currentColor" opacity="0.3" rx="0.3"/><rect x="9" y="9" width="2" height="2" fill="currentColor" opacity="0.4" rx="0.3"/></svg>,
-                        ],
-                        6: [ // SQL
-                          <svg key="select" viewBox="0 0 20 20" fill="none" className="w-full h-full"><ellipse cx="10" cy="6" rx="7" ry="3" stroke="currentColor" strokeWidth="1.5"/><path d="M3 6v8c0 1.66 3.13 3 7 3s7-1.34 7-3V6" stroke="currentColor" strokeWidth="1.5"/></svg>,
-                          <svg key="design" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="3" width="14" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><rect x="3" y="12" width="14" height="5" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 8v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-                          <svg key="window" viewBox="0 0 20 20" fill="none" className="w-full h-full"><rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M3 7h14" stroke="currentColor" strokeWidth="1.2"/><path d="M7 7v10" stroke="currentColor" strokeWidth="1.2"/><path d="M8 11h8M8 14h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
-                          <svg key="pydb" viewBox="0 0 20 20" fill="none" className="w-full h-full"><polyline points="12 5 16 10 12 15" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/><polyline points="8 5 4 10 8 15" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/><circle cx="10" cy="10" r="1.5" fill="currentColor" opacity="0.4"/></svg>,
-                          <svg key="spark" viewBox="0 0 20 20" fill="none" className="w-full h-full"><path d="M10 2l2 5h5l-4 3 1.5 5L10 12l-4.5 3L7 10 3 7h5l2-5z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round"/></svg>,
-                          <svg key="dist" viewBox="0 0 20 20" fill="none" className="w-full h-full"><circle cx="10" cy="10" r="2" stroke="currentColor" strokeWidth="1.5"/><circle cx="4" cy="5" r="1.5" stroke="currentColor" strokeWidth="1.2"/><circle cx="16" cy="5" r="1.5" stroke="currentColor" strokeWidth="1.2"/><circle cx="4" cy="15" r="1.5" stroke="currentColor" strokeWidth="1.2"/><circle cx="16" cy="15" r="1.5" stroke="currentColor" strokeWidth="1.2"/><path d="M8.5 8.5L5.5 6M11.5 8.5L14.5 6M8.5 11.5L5.5 14M11.5 11.5l3 2.5" stroke="currentColor" strokeWidth="1"/></svg>,
-                        ],
-                      };
-                      const topicIcon = topicIconMap[mod.id]?.[tIdx];
                       return (
                         <motion.div
                           key={tIdx}
-                          className="flex items-start gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-gray-50/80"
-                          style={{ backgroundColor: `${mod.lightBg}60` }}
-                          initial={{ opacity: 0, x: -15 }}
+                          className="flex items-start gap-3 p-2.5 rounded-lg transition-colors hover:bg-white/60"
+                          style={{ backgroundColor: `${mod.lightBg}80` }}
+                          initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.3, delay: tIdx * 0.05 }}
+                          transition={{ delay: tIdx * 0.03 }}
                         >
-                          <motion.div
-                            className="shrink-0 mt-0.5 w-7 h-7 rounded-lg flex items-center justify-center p-1"
-                            style={{ color: mod.color, backgroundColor: mod.lightBg, border: `1px solid ${mod.color}20` }}
-                            initial={{ scale: 0, rotate: -180 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: 0.15 + tIdx * 0.05, type: "spring", stiffness: 400 }}
+                          <div
+                            className="shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5"
+                            style={{ backgroundColor: mod.lightBg, color: mod.color }}
                           >
-                            {topicIcon}
-                          </motion.div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-[13px] font-semibold text-gray-800">
-                              {parts[0]}
-                            </p>
-                            {parts[1] && (
-                              <p className="text-[12px] text-gray-500 mt-0.5 leading-relaxed">
-                                {parts[1]}
-                              </p>
-                            )}
+                            {tIdx + 1}
+                          </div>
+                          <div className="flex-1">
+                            <p className="text-[13px] font-medium text-gray-800">{parts[0]}</p>
+                            {parts[1] && <p className="text-[11px] text-gray-500 mt-0.5">{parts[1]}</p>}
                           </div>
                         </motion.div>
                       );
                     })}
                   </div>
 
-                  {/* Footer CTA */}
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                      {[...Array(mod.topics.length)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="w-1.5 h-1.5 rounded-full"
-                          style={{ backgroundColor: mod.color }}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.3 + i * 0.04, type: "spring" }}
-                        />
-                      ))}
-                    </div>
-                    <motion.button
-                      onClick={(e) => { e.stopPropagation(); onEnquiry(); }}
-                      className="text-[11px] font-semibold flex items-center gap-1.5 px-3.5 py-2 rounded-xl shadow-sm transition-all duration-300 text-white cursor-pointer"
-                      style={{ background: mod.iconBg }}
-                      whileHover={{ scale: 1.05, boxShadow: `0 4px 15px ${mod.color}40` }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Get Detailed Syllabus
-                      <ArrowRightIcon className="w-3 h-3" />
-                    </motion.button>
-                  </div>
+                  <motion.button
+                    onClick={(e) => { e.stopPropagation(); onEnquiry(); }}
+                    className="mt-4 w-full py-2.5 rounded-xl text-sm font-semibold text-white cursor-pointer transition-transform"
+                    style={{ background: mod.iconBg }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Get Detailed Syllabus
+                  </motion.button>
                 </div>
               </motion.div>
             )}
@@ -1439,40 +1328,115 @@ function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
           ))}
         </div>
 
-        {/* ── Bottom Stats Bar — Apple-inspired ── */}
+        {/* ── Bottom Stats Cards — Modern Dashboard Style ── */}
         <motion.div
-          className="mt-14 flex justify-center"
+          className="mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 px-8 py-5 rounded-2xl bg-white/60 backdrop-blur-md border border-white/80 shadow-lg">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
             {[
-              { value: "6", label: "Modules", color: BRAND_ORANGE },
-              { value: "36+", label: "Topics", color: "#7c3aed" },
-              { value: "24", label: "Weeks", color: "#0891b2" },
-              { value: "30+", label: "Tools", color: "#059669" },
+              {
+                value: "6",
+                label: "Modules",
+                color: BRAND_ORANGE,
+                gradient: "from-orange-500 to-amber-400",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+                    <rect x="3" y="3" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="14" y="3" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="3" y="14" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <rect x="14" y="14" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                )
+              },
+              {
+                value: "36+",
+                label: "Topics",
+                color: "#7c3aed",
+                gradient: "from-violet-500 to-purple-400",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M9 12h6M9 16h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                )
+              },
+              {
+                value: "24",
+                label: "Weeks",
+                color: "#0891b2",
+                gradient: "from-cyan-500 to-teal-400",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+                    <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M3 10h18" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M8 2v4M16 2v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                )
+              },
+              {
+                value: "30+",
+                label: "Tools",
+                color: "#059669",
+                gradient: "from-emerald-500 to-green-400",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+                    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )
+              },
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                className="text-center"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="group relative"
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5 + i * 0.1 }}
+                transition={{ delay: 0.5 + i * 0.1, type: "spring", stiffness: 200 }}
               >
-                <motion.p
-                  className="text-3xl md:text-4xl font-bold"
-                  style={{ color: stat.color }}
-                  initial={{ scale: 0.5 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 + i * 0.1, type: "spring", stiffness: 200 }}
+                <div
+                  className="relative overflow-hidden rounded-2xl p-5 md:p-6 bg-white/70 backdrop-blur-sm border border-white/80 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1"
                 >
-                  {stat.value}
-                </motion.p>
-                <p className="text-xs text-gray-500 font-medium mt-0.5 uppercase tracking-wider">{stat.label}</p>
+                  {/* Decorative gradient blob */}
+                  <div
+                    className={`absolute -top-8 -right-8 w-24 h-24 rounded-full bg-gradient-to-br ${stat.gradient} opacity-20 blur-2xl group-hover:opacity-30 transition-opacity`}
+                  />
+
+                  {/* Icon with colored background */}
+                  <div
+                    className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-3"
+                    style={{ backgroundColor: `${stat.color}15` }}
+                  >
+                    <div style={{ color: stat.color }}>
+                      {stat.icon}
+                    </div>
+                  </div>
+
+                  {/* Value */}
+                  <motion.p
+                    className="relative text-3xl md:text-4xl font-bold"
+                    style={{ color: stat.color }}
+                    initial={{ scale: 0.5 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 + i * 0.1, type: "spring", stiffness: 200 }}
+                  >
+                    {stat.value}
+                  </motion.p>
+
+                  {/* Label */}
+                  <p className="relative text-sm text-gray-600 font-medium mt-1 uppercase tracking-wide">{stat.label}</p>
+
+                  {/* Bottom accent line */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ background: `linear-gradient(90deg, ${stat.color}, ${stat.color}80)` }}
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
