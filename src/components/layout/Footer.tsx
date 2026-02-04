@@ -12,6 +12,7 @@ const quickLinks = [
   { label: "About", href: "/about" },
   { label: "Success Stories", href: "/success-stories" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
   { label: "Student Portal", href: "/student-portal" },
 ];
 

@@ -1,12 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import KineticText from "@/components/animation/KineticText";
 import ScrollReveal from "@/components/animation/ScrollReveal";
 import { ScrollTextReveal, BorderGlow, CharacterSplit, CrossFlicker } from "@/components/animation";
+import SpringReveal from "@/components/animation/SpringReveal";
+import ScrollOdometer from "@/components/animation/ScrollOdometer";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
+import { AccordionItem } from "@/components/ui/Accordion";
+import { ThemeProvider } from "@/lib/theme";
+import { Mail, Phone, MapPin, MessageCircle, Clock, Users, Briefcase, CheckCircle, Building2, Calendar } from "lucide-react";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -68,278 +74,654 @@ export default function ContactPage() {
     },
   ];
 
+  const stats = [
+    { value: 8200, suffix: "+", label: "Careers Launched", icon: Users },
+    { value: 100, suffix: "%", label: "Placement Rate", icon: CheckCircle },
+    { value: 400, suffix: "+", label: "Hiring Partners", icon: Briefcase },
+    { value: 24, suffix: "hr", label: "Response Time", icon: Clock },
+  ];
+
+  const contactFaqs = [
+    {
+      q: "How do I enroll in a program?",
+      a: "Simply fill out the contact form above or reach out via WhatsApp. Our counselor will guide you through the enrollment process, help you choose the right program, and explain the payment options available.",
+    },
+    {
+      q: "Is placement really guaranteed?",
+      a: "Yes, we offer 100% placement assistance. Our dedicated placement team works with 400+ hiring partners and provides personalized support including resume reviews, mock interviews, and direct referrals until you land your desired role.",
+    },
+    {
+      q: "What are the payment options?",
+      a: "We offer flexible payment options including no-cost EMI, part payments, and financing options to make the program affordable for everyone. Our counselor will explain all available options during your consultation.",
+    },
+    {
+      q: "How long do the programs take?",
+      a: "Our programs range from 3 to 6 months depending on the track you choose. Data Analytics and Business Analytics are typically 3-4 months, while Data Science and AI programs run for 5-6 months.",
+    },
+    {
+      q: "Can I attend classes while working?",
+      a: "Absolutely! All our classes are scheduled on weekends and evenings to accommodate working professionals. Plus, every session is recorded so you never miss anything important.",
+    },
+    {
+      q: "What happens after I submit this form?",
+      a: "You'll receive an email confirmation immediately. Within 24 hours, one of our counselors will call you to understand your goals, answer questions, and recommend the best program for your career transition.",
+    },
+  ];
+
   const inputClass =
     "w-full bg-white/[0.04] border border-white/[0.1] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/30 transition-colors";
 
   return (
     <div className="min-h-screen bg-navy-900 text-white">
-      {/* Hero */}
-      <section className="relative pt-32 pb-16 px-6 text-center max-w-5xl mx-auto overflow-hidden">
-        {/* Gradient mesh background */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-10 left-1/3 w-96 h-96 bg-orange-500/[0.07] rounded-full blur-[120px]" />
-          <div className="absolute top-32 right-1/4 w-72 h-72 bg-blue-600/[0.06] rounded-full blur-[100px]" />
+      {/* ═══════════════════════════════════════════════════════════
+          HERO SECTION - Enhanced with animations
+          ═══════════════════════════════════════════════════════════ */}
+      <section className="relative pt-32 pb-20 px-6 text-center overflow-hidden bg-navy-900">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="hero-aurora-1" />
+          <div className="hero-aurora-2" />
+          <div className="hero-aurora-3" />
         </div>
+        <div className="absolute inset-0 hero-grid-overlay opacity-[0.02]" />
 
-        {/* UNIQUE: KineticText with scaleUp - zoom-in effect */}
-        <KineticText
-          text="Let's Talk About Your Future"
-          as="h1"
-          className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-          animation="scaleUp"
+        {/* Floating geometric shapes */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[15%] right-[10%] w-16 h-16 border border-orange-500/15 rounded-xl pointer-events-none"
         />
-        {/* UNIQUE: ScrollTextReveal subtitle - scroll-scrubbed word reveal */}
-        <div className="mt-6 max-w-2xl mx-auto">
-          <ScrollTextReveal className="text-gray-400 text-lg md:text-xl" tag="p">
-            Whether you have a question or you're ready to jump in - we're here. No pressure, just honest guidance.
-          </ScrollTextReveal>
-        </div>
-        {/* Orange accent line */}
-        <div className="mt-8 mx-auto w-24 h-1 rounded-full bg-gradient-to-r from-orange-500 to-orange-400" />
-      </section>
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[20%] left-[8%] w-12 h-12 border border-blue-400/10 rounded-lg pointer-events-none"
+        />
+        <motion.div
+          animate={{ y: [-20, 20, -20], x: [-10, 10, -10] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[35%] right-[20%] w-3 h-3 rounded-full bg-orange-500/20 pointer-events-none"
+        />
+        <motion.div
+          animate={{ y: [15, -15, 15] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[30%] left-[15%] w-2 h-2 rounded-full bg-blue-400/15 pointer-events-none"
+        />
 
-      {/* Contact Form */}
-      <section className="py-16 px-6 max-w-2xl mx-auto">
-        <ScrollReveal>
-          {submitted ? (
-            <Card variant="accent" className="text-center py-12">
-              <div className="text-5xl mb-4">&#10003;</div>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Inquiry Sent!
-              </h3>
-              <p className="text-gray-400">
-                Thank you, {form.name}. Our team will get back to you within 24
-                hours.
-              </p>
-            </Card>
-          ) : (
-            <BorderGlow glowColor="orange" glowIntensity="subtle">
-              <Card>
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label htmlFor="contact-name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      name="name"
-                      required
-                      value={form.name}
-                      onChange={handleChange}
-                      placeholder="Your full name"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email
-                    </label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      name="email"
-                      required
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="you@email.com"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-300 mb-2">
-                      Phone
-                    </label>
-                    <input
-                      id="contact-phone"
-                      type="tel"
-                      name="phone"
-                      value={form.phone}
-                      onChange={handleChange}
-                      placeholder="+91 XXXXX XXXXX"
-                      className={inputClass}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="contact-course" className="block text-sm font-medium text-gray-300 mb-2">
-                      Course Interested In
-                    </label>
-                    <select
-                      id="contact-course"
-                      name="course"
-                      value={form.course}
-                      onChange={handleChange}
-                      className={inputClass}
-                    >
-                      <option value="" className="bg-navy-900 text-white">
-                        Select a course
-                      </option>
-                      <option value="data-analytics" className="bg-navy-900 text-white">
-                        Data Analytics
-                      </option>
-                      <option value="business-analytics" className="bg-navy-900 text-white">
-                        Business Analytics
-                      </option>
-                      <option value="data-science-ai" className="bg-navy-900 text-white">
-                        Data Science and AI
-                      </option>
-                      <option value="agentic-ai" className="bg-navy-900 text-white">
-                        Agentic AI & Prompt Engineering
-                      </option>
-                      <option value="investment-banking" className="bg-navy-900 text-white">
-                        Investment Banking
-                      </option>
-                      <option value="not-sure" className="bg-navy-900 text-white">
-                        Not Sure Yet
-                      </option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="contact-message" className="block text-sm font-medium text-gray-300 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      rows={4}
-                      value={form.message}
-                      onChange={handleChange}
-                      placeholder="Tell us about your goals..."
-                      className={inputClass + " resize-none"}
-                    />
-                  </div>
-                  {error && (
-                    <p className="text-red-400 text-sm text-center">{error}</p>
-                  )}
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="w-full"
-                    disabled={submitting}
-                  >
-                    {submitting ? "Sending..." : "Send Inquiry"}
-                  </Button>
-                </form>
-              </Card>
-            </BorderGlow>
-          )}
-        </ScrollReveal>
-      </section>
-
-      {/* How to Enroll */}
-      <section className="py-20 px-6 max-w-6xl mx-auto">
-        <ScrollReveal>
-          <SectionHeading
-            label="How It Works"
-            title="Three Steps. That's It."
+        {/* Animated scan lines */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: "200%" }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
+            className="absolute top-[30%] w-[300px] h-[1px] bg-gradient-to-r from-transparent via-orange-500/20 to-transparent"
           />
-        </ScrollReveal>
-        <div className="mt-12 grid md:grid-cols-3 gap-8">
-          {steps.map((s, i) => (
-            <ScrollReveal key={i} delay={i * 0.15}>
-              <Card className="h-full text-center">
-                <div className="text-4xl font-bold text-orange-500/30 mb-4">
-                  <CharacterSplit
-                    delay={0.3 + i * 0.2}
-                    staggerDelay={0.05}
-                    highlightColor="orange"
-                  >
-                    {s.step}
-                  </CharacterSplit>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {s.title}
-                </h3>
-                <p className="text-gray-400">{s.desc}</p>
-              </Card>
-            </ScrollReveal>
-          ))}
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: "200%" }}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
+            className="absolute left-[25%] w-[1px] h-[300px] bg-gradient-to-b from-transparent via-orange-500/10 to-transparent"
+          />
+        </div>
+
+        {/* Corner accents */}
+        <motion.div
+          animate={{ opacity: [0.1, 0.3, 0.1] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute top-12 left-12 text-orange-500/30 text-2xl font-light pointer-events-none select-none"
+        >
+          +
+        </motion.div>
+        <motion.div
+          animate={{ opacity: [0.15, 0.35, 0.15] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute bottom-12 right-12 text-orange-500/30 text-2xl font-light pointer-events-none select-none"
+        >
+          +
+        </motion.div>
+
+        <div className="max-w-5xl mx-auto relative z-10">
+          {/* Animated badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-orange-500/20 bg-orange-500/[0.06]">
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-2 h-2 rounded-full bg-orange-500"
+              />
+              <span className="text-orange-400 text-xs font-semibold tracking-[0.15em] uppercase">
+                Get In Touch
+              </span>
+            </div>
+          </motion.div>
+
+          {/* KineticText with scaleUp - zoom-in effect */}
+          <KineticText
+            text="Let's Talk About Your Future"
+            as="h1"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            animation="scaleUp"
+          />
+
+          {/* ScrollTextReveal subtitle */}
+          <div className="mt-6 max-w-2xl mx-auto">
+            <ScrollTextReveal className="text-gray-400 text-lg md:text-xl" tag="p">
+              Whether you have a question or you're ready to jump in - we're here. No pressure, just honest guidance.
+            </ScrollTextReveal>
+          </div>
+
+          {/* Animated underline */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 mx-auto w-24 h-1 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 origin-center"
+          />
         </div>
       </section>
 
-      {/* Direct Contact */}
-      <section className="py-20 px-6 max-w-4xl mx-auto">
-        <ScrollReveal>
-          <SectionHeading label="Reach Out" title="Direct Contact" />
-        </ScrollReveal>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-          <ScrollReveal delay={0.1}>
-            <div className="relative">
-              <CrossFlicker
-                position="top-right"
-                color="orange"
-                size="sm"
-                delay={0.2}
-              />
-              <Card className="h-full">
-                <div className="text-orange-400 text-2xl mb-3">&#9993;</div>
-                <h4 className="text-white font-semibold mb-1">Email</h4>
-                <a
-                  href="mailto:hello@linkwaylearning.com"
-                  className="text-gray-400 hover:text-orange-400 transition-colors text-sm"
-                >
-                  hello@linkwaylearning.com
-                </a>
-              </Card>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <div className="relative">
-              <CrossFlicker
-                position="top-right"
-                color="orange"
-                size="sm"
-                delay={0.4}
-              />
-              <Card className="h-full">
-                <div className="text-orange-400 text-2xl mb-3">&#9742;</div>
-                <h4 className="text-white font-semibold mb-1">Phone</h4>
-                <a href="tel:+919315647113" className="text-gray-400 hover:text-orange-400 transition-colors text-sm">+91-93156-47113</a>
-              </Card>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.3}>
-            <div className="relative">
-              <CrossFlicker
-                position="top-right"
-                color="orange"
-                size="sm"
-                delay={0.6}
-              />
-              <Card className="h-full">
-                <div className="text-orange-400 text-2xl mb-3">&#128172;</div>
-                <h4 className="text-white font-semibold mb-1">WhatsApp</h4>
-                <a
-                  href="https://wa.me/919315647113"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-orange-400 transition-colors text-sm"
-                >
-                  Message us on WhatsApp
-                </a>
-              </Card>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.4}>
-            <div className="relative">
-              <CrossFlicker
-                position="top-right"
-                color="orange"
-                size="sm"
-                delay={0.8}
-              />
-              <Card className="h-full">
-                <div className="text-orange-400 text-2xl mb-3">&#127970;</div>
-                <h4 className="text-white font-semibold mb-1">Office</h4>
-                <p className="text-gray-400 text-sm">
-                  D-23, Sector-59, Noida, 201301, UP
-                </p>
-              </Card>
-            </div>
-          </ScrollReveal>
+      {/* ═══════════════════════════════════════════════════════════
+          TRUST INDICATORS STRIP
+          ═══════════════════════════════════════════════════════════ */}
+      <section className="relative py-12 px-6 bg-navy-900 border-y border-white/[0.05]">
+        <div className="absolute inset-0 pointer-events-none" style={{
+          backgroundImage: "radial-gradient(circle, rgba(245,130,32,0.03) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }} />
+
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {stats.map((stat, i) => (
+              <SpringReveal key={i} delay={0.1 * i} distance={30} damping={14}>
+                <div className="group relative rounded-xl p-5 bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] hover:border-orange-500/20 transition-all duration-500 text-center">
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
+
+                  <div className="relative z-10">
+                    <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
+                      <stat.icon className="w-5 h-5 text-orange-400" />
+                    </div>
+                    <div className="text-2xl md:text-3xl font-bold text-white mb-1">
+                      <ScrollOdometer value={stat.value} suffix={stat.suffix} duration={1.5} delay={0.3 + i * 0.15} />
+                    </div>
+                    <p className="text-gray-500 text-xs tracking-wider uppercase">{stat.label}</p>
+                  </div>
+
+                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-500 to-orange-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-xl" />
+                </div>
+              </SpringReveal>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          CONTACT FORM SECTION - Split Layout
+          ═══════════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6 bg-navy-900">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left Side - Content */}
+            <div className="lg:pr-8">
+              <SpringReveal distance={40} damping={14}>
+                <div className="flex items-center gap-3 mb-4">
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="h-[2px] w-12 bg-gradient-to-r from-orange-500 to-orange-300 origin-left"
+                  />
+                  <span className="text-orange-400 text-xs font-bold tracking-[0.2em] uppercase">Ready to Start?</span>
+                </div>
+              </SpringReveal>
+
+              <SpringReveal distance={50} damping={12} delay={0.1}>
+                <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+                  Your Career Upgrade{" "}
+                  <span className="relative">
+                    <span className="text-orange-400">Starts Here</span>
+                    <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" fill="none">
+                      <path d="M1 4C30 1.5 60 0.5 100 2.5C140 4.5 170 3.5 199 1.5" stroke="#F58220" strokeWidth="2.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </h2>
+              </SpringReveal>
+
+              <SpringReveal distance={30} damping={14} delay={0.2}>
+                <p className="text-gray-400 text-base leading-relaxed mb-8">
+                  Fill out the form and our team will reach out within 24 hours. We'll help you choose the right program, understand the curriculum, and answer any questions you have.
+                </p>
+              </SpringReveal>
+
+              <SpringReveal distance={30} damping={14} delay={0.3}>
+                <div className="space-y-4 mb-8">
+                  {[
+                    { icon: CheckCircle, text: "Free career counseling session" },
+                    { icon: CheckCircle, text: "No obligation to enroll" },
+                    { icon: CheckCircle, text: "Personalized program recommendation" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 text-gray-300">
+                      <item.icon className="w-5 h-5 text-orange-400 shrink-0" />
+                      <span>{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </SpringReveal>
+
+              {/* Decorative element */}
+              <SpringReveal distance={20} damping={14} delay={0.4}>
+                <div className="hidden lg:block relative mt-12 p-6 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center shrink-0">
+                      <MessageCircle className="w-6 h-6 text-orange-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-medium mb-1">Prefer WhatsApp?</p>
+                      <p className="text-gray-400 text-sm mb-3">Get instant replies on WhatsApp</p>
+                      <a
+                        href="https://wa.me/919315647113"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 transition-colors text-sm font-medium"
+                      >
+                        Message us now
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </SpringReveal>
+            </div>
+
+            {/* Right Side - Form */}
+            <div>
+              <ScrollReveal>
+                {submitted ? (
+                  <Card variant="accent" className="text-center py-12">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
+                      <CheckCircle className="w-8 h-8 text-green-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      Inquiry Sent!
+                    </h3>
+                    <p className="text-gray-400">
+                      Thank you, {form.name}. Our team will get back to you within 24 hours.
+                    </p>
+                  </Card>
+                ) : (
+                  <BorderGlow glowColor="orange" glowIntensity="subtle">
+                    <Card className="p-6 md:p-8">
+                      <form onSubmit={handleSubmit} className="space-y-5">
+                        <div>
+                          <label htmlFor="contact-name" className="block text-sm font-medium text-gray-300 mb-2">
+                            Full Name
+                          </label>
+                          <input
+                            id="contact-name"
+                            type="text"
+                            name="name"
+                            required
+                            value={form.name}
+                            onChange={handleChange}
+                            placeholder="Your full name"
+                            className={inputClass}
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="contact-email" className="block text-sm font-medium text-gray-300 mb-2">
+                            Email
+                          </label>
+                          <input
+                            id="contact-email"
+                            type="email"
+                            name="email"
+                            required
+                            value={form.email}
+                            onChange={handleChange}
+                            placeholder="you@email.com"
+                            className={inputClass}
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-300 mb-2">
+                            Phone
+                          </label>
+                          <input
+                            id="contact-phone"
+                            type="tel"
+                            name="phone"
+                            value={form.phone}
+                            onChange={handleChange}
+                            placeholder="+91 XXXXX XXXXX"
+                            className={inputClass}
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="contact-course" className="block text-sm font-medium text-gray-300 mb-2">
+                            Course Interested In
+                          </label>
+                          <select
+                            id="contact-course"
+                            name="course"
+                            value={form.course}
+                            onChange={handleChange}
+                            className={inputClass}
+                          >
+                            <option value="" className="bg-navy-900 text-white">
+                              Select a course
+                            </option>
+                            <option value="data-analytics" className="bg-navy-900 text-white">
+                              Data Analytics
+                            </option>
+                            <option value="business-analytics" className="bg-navy-900 text-white">
+                              Business Analytics
+                            </option>
+                            <option value="data-science-ai" className="bg-navy-900 text-white">
+                              Data Science and AI
+                            </option>
+                            <option value="agentic-ai" className="bg-navy-900 text-white">
+                              Agentic AI & Prompt Engineering
+                            </option>
+                            <option value="investment-banking" className="bg-navy-900 text-white">
+                              Investment Banking
+                            </option>
+                            <option value="not-sure" className="bg-navy-900 text-white">
+                              Not Sure Yet
+                            </option>
+                          </select>
+                        </div>
+                        <div>
+                          <label htmlFor="contact-message" className="block text-sm font-medium text-gray-300 mb-2">
+                            Message
+                          </label>
+                          <textarea
+                            id="contact-message"
+                            name="message"
+                            rows={4}
+                            value={form.message}
+                            onChange={handleChange}
+                            placeholder="Tell us about your goals..."
+                            className={inputClass + " resize-none"}
+                          />
+                        </div>
+                        {error && (
+                          <p className="text-red-400 text-sm text-center">{error}</p>
+                        )}
+                        <Button
+                          type="submit"
+                          variant="primary"
+                          size="lg"
+                          className="w-full"
+                          disabled={submitting}
+                        >
+                          {submitting ? "Sending..." : "Send Inquiry"}
+                        </Button>
+                      </form>
+                    </Card>
+                  </BorderGlow>
+                )}
+              </ScrollReveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          HOW IT WORKS - Light Theme
+          ═══════════════════════════════════════════════════════════ */}
+      <ThemeProvider theme="light">
+        <section className="py-20 px-6" style={{ background: "#f2f1ee" }}>
+          <div className="max-w-6xl mx-auto">
+            <ScrollReveal>
+              <SectionHeading
+                label="How It Works"
+                title="Three Steps. That's It."
+                align="center"
+              />
+            </ScrollReveal>
+            <div className="mt-12 grid md:grid-cols-3 gap-8">
+              {steps.map((s, i) => (
+                <ScrollReveal key={i} delay={i * 0.15}>
+                  <div className="relative h-full rounded-2xl p-6 bg-white border border-gray-100 shadow-xl shadow-gray-200/50 text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+                    <div className="text-5xl font-bold text-orange-500/20 mb-4">
+                      <CharacterSplit
+                        delay={0.3 + i * 0.2}
+                        staggerDelay={0.05}
+                        highlightColor="orange"
+                      >
+                        {s.step}
+                      </CharacterSplit>
+                    </div>
+                    <h3 className="text-xl font-bold text-navy-900 mb-3">
+                      {s.title}
+                    </h3>
+                    <p className="text-gray-500">{s.desc}</p>
+
+                    {/* Connecting line for desktop */}
+                    {i < steps.length - 1 && (
+                      <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-[2px] bg-gradient-to-r from-orange-300 to-orange-100" />
+                    )}
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      </ThemeProvider>
+
+      {/* ═══════════════════════════════════════════════════════════
+          DIRECT CONTACT - Enhanced Cards
+          ═══════════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6 bg-navy-900">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal>
+            <SectionHeading label="Reach Out" title="Direct Contact" align="center" />
+          </ScrollReveal>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: Mail,
+                title: "Email",
+                value: "hello@linkwaylearning.com",
+                href: "mailto:hello@linkwaylearning.com",
+                color: "from-blue-500/20 to-blue-600/10",
+              },
+              {
+                icon: Phone,
+                title: "Phone",
+                value: "+91-93156-47113",
+                href: "tel:+919315647113",
+                color: "from-green-500/20 to-green-600/10",
+              },
+              {
+                icon: MessageCircle,
+                title: "WhatsApp",
+                value: "Message us",
+                href: "https://wa.me/919315647113",
+                external: true,
+                color: "from-emerald-500/20 to-emerald-600/10",
+              },
+              {
+                icon: MapPin,
+                title: "Office",
+                value: "D-23, Sector-59, Noida",
+                color: "from-orange-500/20 to-orange-600/10",
+              },
+            ].map((contact, i) => (
+              <ScrollReveal key={i} delay={0.1 * i}>
+                <div className="relative group">
+                  <CrossFlicker
+                    position="top-right"
+                    color="orange"
+                    size="sm"
+                    delay={0.2 * i}
+                  />
+                  <div className="h-full rounded-xl p-6 bg-white/[0.03] border border-white/[0.08] hover:border-orange-500/30 backdrop-blur-sm transition-all duration-500 text-center overflow-hidden">
+                    {/* Gradient hover effect */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${contact.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                    <div className="relative z-10">
+                      <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 group-hover:scale-110 transition-all duration-300">
+                        <contact.icon className="w-6 h-6 text-orange-400" />
+                      </div>
+                      <h4 className="text-white font-semibold mb-2">{contact.title}</h4>
+                      {contact.href ? (
+                        <a
+                          href={contact.href}
+                          target={contact.external ? "_blank" : undefined}
+                          rel={contact.external ? "noopener noreferrer" : undefined}
+                          className="text-gray-400 hover:text-orange-400 transition-colors text-sm"
+                        >
+                          {contact.value}
+                        </a>
+                      ) : (
+                        <p className="text-gray-400 text-sm">{contact.value}</p>
+                      )}
+                    </div>
+
+                    {/* Bottom accent */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-500 to-orange-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          OFFICE LOCATION - Light Theme
+          ═══════════════════════════════════════════════════════════ */}
+      <ThemeProvider theme="light">
+        <section className="py-20 px-6" style={{ background: "#f2f1ee" }}>
+          <div className="max-w-4xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">
+                  Visit Us
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
+                  Our Office
+                </h2>
+              </div>
+            </ScrollReveal>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Address Card */}
+              <SpringReveal distance={40} damping={14}>
+                <div className="h-full rounded-2xl p-8 bg-white border border-gray-100 shadow-xl shadow-gray-200/50">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-orange-500 flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/25">
+                      <Building2 className="w-7 h-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-navy-900 mb-1">Linkway Learning</h3>
+                      <p className="text-gray-500 text-sm">Head Office</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <MapPin className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
+                      <div>
+                        <p className="text-navy-800 font-medium">D-23, Sector-59</p>
+                        <p className="text-gray-500">Noida, Gautam Buddha Nagar</p>
+                        <p className="text-gray-500">Uttar Pradesh - 201301</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Phone className="w-5 h-5 text-orange-500 shrink-0" />
+                      <a href="tel:+919315647113" className="text-navy-800 hover:text-orange-500 transition-colors">
+                        +91-93156-47113
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-5 h-5 text-orange-500 shrink-0" />
+                      <a href="mailto:hello@linkwaylearning.com" className="text-navy-800 hover:text-orange-500 transition-colors">
+                        hello@linkwaylearning.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </SpringReveal>
+
+              {/* Office Hours Card */}
+              <SpringReveal distance={40} damping={14} delay={0.1}>
+                <div className="h-full rounded-2xl p-8 bg-white border border-gray-100 shadow-xl shadow-gray-200/50">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-navy-800 flex items-center justify-center shrink-0 shadow-lg shadow-navy-800/25">
+                      <Calendar className="w-7 h-7 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-navy-900 mb-1">Office Hours</h3>
+                      <p className="text-gray-500 text-sm">When to reach us</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                      <span className="text-navy-800 font-medium">Monday - Friday</span>
+                      <span className="text-gray-500">10:00 AM - 7:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-3 border-b border-gray-100">
+                      <span className="text-navy-800 font-medium">Saturday</span>
+                      <span className="text-gray-500">10:00 AM - 5:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-3">
+                      <span className="text-navy-800 font-medium">Sunday</span>
+                      <span className="text-orange-500 font-medium">Closed</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 p-4 rounded-xl bg-orange-50 border border-orange-100">
+                    <p className="text-sm text-orange-800">
+                      <span className="font-semibold">Note:</span> Classes run on weekends and evenings to accommodate working professionals.
+                    </p>
+                  </div>
+                </div>
+              </SpringReveal>
+            </div>
+          </div>
+        </section>
+      </ThemeProvider>
+
+      {/* ═══════════════════════════════════════════════════════════
+          CONTACT FAQ - Light Theme
+          ═══════════════════════════════════════════════════════════ */}
+      <ThemeProvider theme="light">
+        <section className="py-20 px-6" style={{ background: "#f2f1ee" }}>
+          <div className="max-w-3xl mx-auto">
+            <ScrollReveal>
+              <div className="text-center mb-12">
+                <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">
+                  Common Questions
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
+                  Frequently Asked Questions
+                </h2>
+                <p className="mt-4 text-gray-500">
+                  Quick answers about enrollment and what to expect.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl shadow-gray-200/50 border border-gray-100">
+                {contactFaqs.map((faq, i) => (
+                  <AccordionItem key={i} title={faq.q} defaultOpen={i === 0}>
+                    {faq.a}
+                  </AccordionItem>
+                ))}
+              </div>
+            </ScrollReveal>
+          </div>
+        </section>
+      </ThemeProvider>
     </div>
   );
 }

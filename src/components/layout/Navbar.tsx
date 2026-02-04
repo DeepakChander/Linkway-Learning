@@ -21,7 +21,7 @@ const navLinks = [
       { label: "Investment Banking", href: "/courses/investment-banking", desc: "Financial modeling & valuation" },
     ],
   },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Success Stories", href: "/success-stories" },
   { label: "Blog", href: "/blog" },
 ];
