@@ -84,16 +84,16 @@ function PartnerMarquee() {
 
   return (
     <div className="overflow-hidden">
-      <div ref={trackRef} className="flex items-center gap-14 w-max">
+      <div ref={trackRef} className="flex items-center gap-8 sm:gap-10 md:gap-14 w-max">
         {items.map((name, i) => (
           <span
             key={`${name}-${i}`}
-            className="inline-flex items-center gap-2.5 whitespace-nowrap"
+            className="inline-flex items-center gap-2 sm:gap-2.5 whitespace-nowrap"
           >
             {partnerLogos[name] && (
-              <img src={partnerLogos[name]} alt={name} width={24} height={24} className="w-6 h-6 object-contain" />
+              <img src={partnerLogos[name]} alt={name} width={24} height={24} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
             )}
-            <span className="text-base md:text-lg font-semibold text-navy-900">{name}</span>
+            <span className="text-sm sm:text-base md:text-lg font-semibold text-navy-900">{name}</span>
           </span>
         ))}
       </div>
@@ -104,20 +104,20 @@ function PartnerMarquee() {
 export default function WhyLinkway() {
   return (
     <section className="relative text-navy-900 overflow-hidden" style={{ backgroundColor: "#f2f1ee" }}>
-      <div className="min-h-screen flex flex-col items-center justify-center px-6 py-24 relative">
+      <div className="min-h-[auto] md:min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-12 sm:py-16 md:py-24 relative">
         <CrossFlicker position="top-left" color="navy" size="lg" delay={0.2} />
         <CrossFlicker position="top-right" color="orange" size="md" delay={0.4} />
 
         <div className="max-w-7xl mx-auto w-full relative">
           {/* Headline */}
-          <div className="mb-16 text-center max-w-5xl mx-auto relative z-10">
-            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-100 text-orange-600 font-bold text-lg md:text-xl mb-6">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="mb-8 sm:mb-12 md:mb-16 text-center max-w-5xl mx-auto relative z-10">
+            <span className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-orange-100 text-orange-600 font-bold text-base sm:text-lg md:text-xl mb-4 sm:mb-6">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
               </svg>
               Why Linkway?
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 tracking-tight leading-tight">
               {revealLines.map((line, li) => (
                 <span key={li} className="block">
                   {line}
@@ -127,7 +127,7 @@ export default function WhyLinkway() {
           </div>
 
           {/* Radial Layout with cards */}
-          <div className="relative mt-4 md:mt-12 min-h-[500px] flex items-center justify-center">
+          <div className="relative mt-0 sm:mt-4 md:mt-12 min-h-[auto] md:min-h-[500px] flex items-center justify-center">
             {/* SVG Connector Lines */}
             <div className="absolute inset-0 hidden md:block pointer-events-none">
               <svg className="w-full h-full" viewBox="0 0 1000 600" preserveAspectRatio="none">
@@ -222,20 +222,20 @@ export default function WhyLinkway() {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-48 md:gap-y-32 w-full max-w-5xl relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-x-48 md:gap-y-32 w-full max-w-5xl relative z-10">
               {values.map((v, i) => (
                 <div key={i} className="h-full">
                   <BorderGlow glowColor="orange" glowIntensity="subtle">
-                    <div className="h-full bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 hover:-translate-y-1 group">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-lg bg-orange-50 flex items-center justify-center group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300">
-                          <v.icon className="w-6 h-6 text-orange-600 group-hover:text-white transition-colors duration-300" />
+                    <div className="h-full bg-white p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-100 shadow-lg sm:shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-300 hover:-translate-y-1 group">
+                      <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-orange-50 flex items-center justify-center group-hover:bg-orange-500 group-hover:scale-110 transition-all duration-300 shrink-0">
+                          <v.icon className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600 group-hover:text-white transition-colors duration-300" />
                         </div>
-                        <h3 className="text-xl font-bold text-navy-900 leading-tight group-hover:text-orange-600 transition-colors duration-300">
+                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-navy-900 leading-tight group-hover:text-orange-600 transition-colors duration-300">
                           {v.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                         {v.description}
                       </p>
                     </div>
@@ -246,9 +246,9 @@ export default function WhyLinkway() {
           </div>
 
           {/* Partner names - auto-scrolling marquee */}
-          <div className="mt-16 relative z-10">
-            <p className="text-base text-orange-500 uppercase tracking-widest mb-5 font-bold text-center">Trusted by teams at</p>
-            <div className="border-y border-gray-200 py-5">
+          <div className="mt-10 sm:mt-12 md:mt-16 relative z-10">
+            <p className="text-sm sm:text-base text-orange-500 uppercase tracking-widest mb-4 sm:mb-5 font-bold text-center">Trusted by teams at</p>
+            <div className="border-y border-gray-200 py-4 sm:py-5">
               <PartnerMarquee />
             </div>
           </div>

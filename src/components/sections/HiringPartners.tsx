@@ -92,21 +92,21 @@ const row3 = [
 function CompanyCard({ name }: { name: string }) {
   const role = companyRoles[name];
   return (
-    <div className="group relative flex items-center gap-4 px-5 py-4 w-60 md:w-64 rounded-xl border border-white/[0.08] bg-white/[0.03] shrink-0 overflow-hidden hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300">
-      <div className="w-11 h-11 rounded-xl bg-white/[0.06] flex items-center justify-center shrink-0 aspect-square">
+    <div className="group relative flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 sm:py-4 w-52 sm:w-60 md:w-64 rounded-xl border border-white/[0.08] bg-white/[0.03] shrink-0 overflow-hidden hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300">
+      <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg sm:rounded-xl bg-white/[0.06] flex items-center justify-center shrink-0 aspect-square">
         <img
           src={companyLogos[name]}
           alt={name}
           width={28}
           height={28}
-          className={`w-7 h-7 object-contain ${monoLogos.has(name) ? "brightness-0 invert" : ""}`}
+          className={`w-5 h-5 sm:w-7 sm:h-7 object-contain ${monoLogos.has(name) ? "brightness-0 invert" : ""}`}
         />
       </div>
       <div className="flex flex-col min-w-0">
-        <span className="text-sm font-medium text-white/80 truncate">
+        <span className="text-xs sm:text-sm font-medium text-white/80 truncate">
           {name}
         </span>
-        <span className="text-xs text-gray-600 truncate">
+        <span className="text-[10px] sm:text-xs text-gray-600 truncate">
           {role}
         </span>
       </div>
@@ -216,21 +216,21 @@ export default function HiringPartners() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-black">
-      <div className="flex flex-col items-center justify-center px-6 py-10 md:py-16 relative">
-        <div className="max-w-4xl mx-auto w-full mb-16 text-center">
-          <span className="hp-badge inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-xs mb-6 tracking-widest uppercase">
+      <div className="flex flex-col items-center justify-center px-4 sm:px-6 py-10 md:py-16 relative">
+        <div className="max-w-4xl mx-auto w-full mb-10 sm:mb-12 md:mb-16 text-center">
+          <span className="hp-badge inline-block py-1 sm:py-1.5 px-3 sm:px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-[10px] sm:text-xs mb-4 sm:mb-6 tracking-widest uppercase">
             Where You Could Work Next
           </span>
 
           <h2
             ref={headlineRef}
-            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-5 text-white whitespace-nowrap"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4 sm:mb-5 text-white"
             style={{ perspective: "800px" }}
           >
             {headlineWords.map((word, i) => (
               <span
                 key={i}
-                className={`hw inline-block will-change-[opacity,filter,transform] mr-[0.3em] last:mr-0 ${word === "Already" || word === "Hiring" ? "text-orange-400" : ""}`}
+                className={`hw inline-block will-change-[opacity,filter,transform] mr-[0.2em] sm:mr-[0.3em] last:mr-0 ${word === "Already" || word === "Hiring" ? "text-orange-400" : ""}`}
                 style={{ transformStyle: "preserve-3d" }}
               >
                 {word}
@@ -238,23 +238,23 @@ export default function HiringPartners() {
             ))}
           </h2>
 
-          <p className="hp-subtitle text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="hp-subtitle text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto px-2">
             Real roles. Real companies. These are the teams our graduates walk into.
           </p>
         </div>
 
         {/* Three auto-scrolling rows */}
-        <div className="w-full space-y-3 md:space-y-4 relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        <div className="w-full space-y-2 sm:space-y-3 md:space-y-4 relative">
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
           <InfiniteRow items={row1} direction="left" speed={70} className="marquee-row" />
           <InfiniteRow items={row2} direction="right" speed={60} className="marquee-row" />
           <InfiniteRow items={row3} direction="left" speed={65} className="marquee-row" />
         </div>
 
-        <div className="mt-8 text-center">
-          <div className="text-gray-300 text-sm">
+        <div className="mt-6 sm:mt-8 text-center px-4">
+          <div className="text-gray-300 text-xs sm:text-sm">
             <ScrollOdometer value={400} duration={2} suffix="+" animateSuffix className="text-orange-400 font-bold" /> hiring partners. New roles added every quarter across <span className="text-white font-medium">AI, data, cloud, and engineering.</span>
           </div>
         </div>

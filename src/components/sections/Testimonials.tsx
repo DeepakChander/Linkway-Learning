@@ -192,28 +192,28 @@ function RatingStars({ rating }: { rating: number }) {
 
 function TestimonialCard({ t }: { t: (typeof testimonials)[number] }) {
   return (
-    <div className="shrink-0 w-[320px] md:w-[350px]">
-      <div className="h-full rounded-2xl p-6 bg-[#F2F1EE] border border-[#e5e4e0] hover:border-[#d5d4d0] transition-all duration-300">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-gray-500 font-medium">{t.from}</span>
-            <ArrowRight className="w-3 h-3 text-gray-400" />
-            <span className="text-[11px] text-orange-600 font-semibold">{t.to}</span>
+    <div className="shrink-0 w-[260px] sm:w-[290px] md:w-[350px]">
+      <div className="h-full rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 bg-[#F2F1EE] border border-[#e5e4e0] hover:border-[#d5d4d0] transition-all duration-300">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="text-[10px] sm:text-[11px] text-gray-500 font-medium">{t.from}</span>
+            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-400" />
+            <span className="text-[10px] sm:text-[11px] text-orange-600 font-semibold">{t.to}</span>
           </div>
           <RatingStars rating={t.rating} />
         </div>
 
-        <p className="text-gray-600 leading-relaxed text-[13px] mb-6">
+        <p className="text-gray-600 leading-relaxed text-xs sm:text-[13px] mb-4 sm:mb-6">
           &ldquo;{t.desc}&rdquo;
         </p>
 
-        <div className="flex items-center gap-3 pt-4 border-t border-black/[0.06]">
-          <div className="w-9 h-9 rounded-full bg-black/[0.08] overflow-hidden shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 pt-3 sm:pt-4 border-t border-black/[0.06]">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/[0.08] overflow-hidden shrink-0">
             <Image src={t.avatar} alt={t.name} width={36} height={36} className="w-full h-full object-cover" />
           </div>
           <div className="min-w-0">
-            <h4 className="font-medium text-gray-900 text-sm leading-tight truncate">{t.name}</h4>
-            <span className="text-[11px] text-gray-500">{t.company}</span>
+            <h4 className="font-medium text-gray-900 text-xs sm:text-sm leading-tight truncate">{t.name}</h4>
+            <span className="text-[10px] sm:text-[11px] text-gray-500">{t.company}</span>
           </div>
         </div>
       </div>
@@ -257,13 +257,13 @@ export default function Testimonials() {
 
   return (
     <section className="pt-6 md:pt-8 pb-8 md:pb-10 text-white overflow-hidden relative bg-black">
-      <div className="max-w-7xl mx-auto px-6 mb-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10 md:mb-12 relative z-10">
         <ScrollReveal>
           <div className="text-center max-w-2xl mx-auto">
-            <span className="inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-xs mb-6 tracking-widest uppercase">
+            <span className="inline-block py-1 sm:py-1.5 px-3 sm:px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-[10px] sm:text-xs mb-4 sm:mb-6 tracking-widest uppercase">
               Success Stories
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
               <span className="text-white">They Were Where </span>
               <span className="text-orange-400">You Are</span>
               <span className="text-white"> Right Now.</span>
@@ -277,13 +277,13 @@ export default function Testimonials() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
         <div className="overflow-hidden">
           <div
             ref={trackRef}
-            className="flex gap-5 w-max"
+            className="flex gap-3 sm:gap-4 md:gap-5 w-max"
             style={{ willChange: "transform" }}
           >
             {[...testimonials, ...testimonials].map((t, i) => (

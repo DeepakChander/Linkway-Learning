@@ -258,14 +258,14 @@ function StatusPill() {
       initial={{ opacity: 0, y: 15, filter: "blur(10px)" }}
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       transition={{ duration: 0.7, delay: 0.1 }}
-      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-6 group hover:border-orange-500/20 transition-colors duration-500"
+      className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4 sm:mb-6 group hover:border-orange-500/20 transition-colors duration-500"
     >
       <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
       </span>
-      <span className="text-[13px] text-gray-300 font-medium tracking-wide">
-        Enrollments Open — <span className="text-orange-400 font-semibold">Limited Seats Left</span>
+      <span className="text-[11px] sm:text-[13px] text-gray-300 font-medium tracking-wide">
+        Enrollments Open — <span className="text-orange-400 font-semibold">Limited Seats</span>
       </span>
     </motion.div>
   );
@@ -628,31 +628,31 @@ export default function HeroSection() {
       {/* ── Content ── */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-40 md:pt-44 pb-16 md:pb-24"
+        className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-28 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-24"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* ── Left Column: Text ── */}
           <div className="lg:col-span-7 xl:col-span-6">
             {/* Headline with character-level animation */}
-            <div className="min-h-[140px] md:min-h-[180px] lg:min-h-[200px] mb-6">
+            <div className="min-h-[100px] sm:min-h-[120px] md:min-h-[180px] lg:min-h-[200px] mb-4 sm:mb-6">
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={headlineIndex}
-                  className="text-[2.75rem] md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+                  className="text-[2rem] sm:text-[2.5rem] md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
                   initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
                   transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
-                  <span className="text-white block whitespace-nowrap">{accent}</span>
-                  <span className="hero-gradient-text block mt-1 whitespace-nowrap">{main}</span>
+                  <span className="text-white block">{accent}</span>
+                  <span className="hero-gradient-text block mt-1">{main}</span>
                 </motion.h1>
               </AnimatePresence>
             </div>
 
             {/* Subtitle */}
             <motion.p
-              className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed mb-3"
+              className="text-sm sm:text-base md:text-lg text-gray-400 max-w-xl leading-relaxed mb-2 sm:mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
@@ -664,7 +664,7 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.p
-              className="text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-10 font-[family-name:var(--font-poppins)]"
+              className="text-xs sm:text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-6 sm:mb-10 font-[family-name:var(--font-poppins)]"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -690,27 +690,27 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row items-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 mb-6 sm:mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
             >
               <BorderGlow glowColor="orange" glowIntensity="medium">
-                <Button variant="primary" size="lg" href="/courses" className="group">
+                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center">
                   Explore Courses
-                  <svg className="w-5 h-5 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 sm:w-5 h-4 sm:h-5 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Button>
               </BorderGlow>
-              <Button variant="outline" size="lg" onClick={openEnquiry}>
+              <Button variant="outline" size="lg" onClick={openEnquiry} className="w-full sm:w-auto justify-center">
                 Book Free Counselling
               </Button>
             </motion.div>
 
             {/* Trust Stats */}
             <motion.div
-              className="flex items-center gap-6 md:gap-10"
+              className="flex items-center justify-between sm:justify-start gap-4 sm:gap-6 md:gap-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.9 }}
@@ -718,14 +718,14 @@ export default function HeroSection() {
               {[
                 { val: 8200, suffix: "+", label: "Careers Launched" },
                 { val: 400, suffix: "+", label: "Hiring Partners" },
-                { val: 100, suffix: "%", label: "100% Placement" },
+                { val: 100, suffix: "%", label: "Placement" },
               ].map((stat, i) => (
                 <div key={i} className="text-left group">
-                  <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
+                  <div className="flex items-baseline text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
                     <ScrollOdometer value={stat.val} duration={2} suffix="" className="text-orange-400" />
-                    <span className="text-orange-400 text-lg ml-0.5">{stat.suffix}</span>
+                    <span className="text-orange-400 text-sm sm:text-lg ml-0.5">{stat.suffix}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-0.5 tracking-wide uppercase font-[family-name:var(--font-poppins)]">{stat.label}</p>
+                  <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 tracking-wide uppercase font-[family-name:var(--font-poppins)]">{stat.label}</p>
                 </div>
               ))}
             </motion.div>

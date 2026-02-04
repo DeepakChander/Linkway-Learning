@@ -105,26 +105,26 @@ export default function CoursePreview() {
       {/* Top separator */}
       <div className="w-full h-px bg-gray-300/50" />
 
-      <div className="py-12 md:py-16 px-6">
+      <div className="py-10 sm:py-12 md:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="mb-12 md:mb-14">
+        <div className="mb-8 sm:mb-10 md:mb-14">
           <div className="overflow-hidden">
             <motion.div
-              className="flex items-center gap-3 mb-4"
+              className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4"
               initial={{ y: "100%" }}
               whileInView={{ y: "0%" }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
             >
-              <span className="w-8 h-[2px] bg-orange-500" />
-              <span className="text-orange-500 text-sm font-semibold tracking-widest uppercase">Programs</span>
+              <span className="w-6 sm:w-8 h-[2px] bg-orange-500" />
+              <span className="text-orange-500 text-xs sm:text-sm font-semibold tracking-widest uppercase">Programs</span>
             </motion.div>
           </div>
           <div className="overflow-hidden">
             <motion.h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
               initial={{ y: "100%" }}
               whileInView={{ y: "0%" }}
               viewport={{ once: true }}
@@ -136,7 +136,7 @@ export default function CoursePreview() {
         </div>
 
         {/* Two-column: Left list + Right card */}
-        <div className="flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+        <div className="flex flex-col lg:flex-row bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
 
           {/* Left: Course list */}
           <div className="w-full lg:w-[360px] xl:w-[400px] shrink-0 lg:border-r border-gray-100">
@@ -159,15 +159,15 @@ export default function CoursePreview() {
                   aria-expanded={isActive}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveIndex(i); } }}
                 >
-                  <div className="flex items-center justify-between px-6 py-5">
+                  <div className="flex items-center justify-between px-4 sm:px-5 md:px-6 py-3.5 sm:py-4 md:py-5">
                     <h3 className={cn(
-                      "text-[16px] font-semibold transition-colors duration-200",
+                      "text-sm sm:text-[15px] md:text-[16px] font-semibold transition-colors duration-200",
                       isActive ? "text-gray-900" : "text-gray-400 group-hover:text-gray-600"
                     )}>
                       {course.name}
                     </h3>
                     <ArrowRight className={cn(
-                      "w-[18px] h-[18px] shrink-0 ml-3 transition-all duration-200",
+                      "w-4 h-4 sm:w-[18px] sm:h-[18px] shrink-0 ml-2 sm:ml-3 transition-all duration-200",
                       isActive ? "text-orange-500 translate-x-0.5" : "text-gray-300 group-hover:text-gray-400"
                     )} />
                   </div>
@@ -344,32 +344,32 @@ export default function CoursePreview() {
                 }}
               >
                 <div className={cn("absolute inset-0 bg-gradient-to-br opacity-40", activeCourse.gradient)} />
-                <div className="relative z-10 px-6 py-6">
-                  <div className="flex items-center justify-between mb-4">
+                <div className="relative z-10 px-4 sm:px-6 py-5 sm:py-6">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
                     <div className="flex items-center gap-1.5 text-gray-500">
-                      <Clock className="w-3.5 h-3.5" />
-                      <span className="text-sm font-medium">{activeCourse.duration}</span>
+                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <span className="text-xs sm:text-sm font-medium">{activeCourse.duration}</span>
                     </div>
-                    <div className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-orange-200/60 bg-white/70">
-                      <CheckCircle2 className="w-3 h-3 text-orange-500" />
-                      <span className="text-[10px] font-semibold text-orange-600">{activeCourse.badge}</span>
+                    <div className="flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-orange-200/60 bg-white/70">
+                      <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-orange-500" />
+                      <span className="text-[9px] sm:text-[10px] font-semibold text-orange-600">{activeCourse.badge}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{activeCourse.name}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">{activeCourse.name}</h3>
 
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-400 text-white mb-4">
-                    <Zap className="w-3 h-3" />
-                    <span className="text-[11px] font-semibold capitalize">{activeCourse.category}</span>
+                  <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-orange-400 text-white mb-3 sm:mb-4">
+                    <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                    <span className="text-[10px] sm:text-[11px] font-semibold capitalize">{activeCourse.category}</span>
                   </div>
 
-                  <p className="text-gray-600 text-sm leading-relaxed mb-5">{activeCourse.description}</p>
+                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5">{activeCourse.description}</p>
 
-                  <div className="flex flex-wrap gap-1.5 mb-6">
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-5 sm:mb-6">
                     {activeCourse.tools.map((tool) => (
-                      <span key={tool} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/80 border border-gray-200/60 text-[11px] text-gray-600 font-medium shadow-sm">
+                      <span key={tool} className="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-white/80 border border-gray-200/60 text-[10px] sm:text-[11px] text-gray-600 font-medium shadow-sm">
                         {toolLogos[tool] && (
-                          <img src={toolLogos[tool]} alt={tool} width={12} height={12} className="w-3 h-3 object-contain" />
+                          <img src={toolLogos[tool]} alt={tool} width={12} height={12} className="w-2.5 h-2.5 sm:w-3 sm:h-3 object-contain" />
                         )}
                         {tool}
                       </span>
@@ -378,9 +378,9 @@ export default function CoursePreview() {
 
                   <div className="flex justify-end">
                     <Link href={`/courses/${activeCourse.slug}`}>
-                      <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-900 text-gray-900 text-sm font-semibold">
+                      <span className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-gray-900 text-gray-900 text-xs sm:text-sm font-semibold">
                         Discover program
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </span>
                     </Link>
                   </div>

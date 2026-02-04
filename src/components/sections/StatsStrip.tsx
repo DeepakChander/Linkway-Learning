@@ -61,7 +61,7 @@ export default function StatsStrip() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen flex items-center py-24 px-6 relative overflow-hidden bg-gradient-to-r from-orange-600 to-orange-500 text-white"
+      className="min-h-[auto] sm:min-h-screen flex items-center py-12 sm:py-16 md:py-24 px-4 sm:px-6 relative overflow-hidden bg-gradient-to-r from-orange-600 to-orange-500 text-white"
     >
       {/* Background pattern */}
       <div
@@ -76,26 +76,26 @@ export default function StatsStrip() {
       <div className="max-w-7xl mx-auto relative z-10 w-full">
         <div
           ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
         >
           {stats.map((stat, i) => (
             <div key={i} className="stat-card">
               <BorderGlow glowColor="white" glowIntensity="strong">
-                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
                   {/* Glow border accent */}
                   <div
-                    className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    className="absolute inset-0 rounded-xl sm:rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ boxShadow: "0 0 30px rgba(255,255,255,0.15) inset" }}
                   />
 
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="p-3 bg-white/20 rounded-2xl text-white">
-                      <stat.icon className="w-6 h-6" />
+                  <div className="flex justify-between items-start mb-3 sm:mb-4 md:mb-6">
+                    <div className="p-2 sm:p-2.5 md:p-3 bg-white/20 rounded-lg sm:rounded-xl md:rounded-2xl text-white">
+                      <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                     </div>
 
                     {/* Circular Progress Ring */}
-                    <div className="relative w-12 h-12">
-                      <svg className="w-full h-full -rotate-90">
+                    <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12">
+                      <svg className="w-full h-full -rotate-90" viewBox="0 0 48 48">
                         <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-white/20" />
                         <motion.circle
                           cx="24" cy="24" r="20"
@@ -111,14 +111,14 @@ export default function StatsStrip() {
                           transition={{ duration: 2, delay: 0.5 + i * 0.15, ease: "easeOut" }}
                         />
                       </svg>
-                      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold">
+                      <span className="absolute inset-0 flex items-center justify-center text-[8px] sm:text-[9px] md:text-[10px] font-bold">
                         {stat.progress}%
                       </span>
                     </div>
                   </div>
 
                   {/* ScrollOdometer */}
-                  <div className="text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-sm data-display">
+                  <div className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 drop-shadow-sm data-display">
                     <ScrollOdometer
                       value={stat.target}
                       suffix={stat.suffix}
@@ -127,7 +127,7 @@ export default function StatsStrip() {
                       animateSuffix
                     />
                   </div>
-                  <p className="text-orange-50 font-medium text-sm tracking-wide uppercase opacity-90">
+                  <p className="text-orange-50 font-medium text-[10px] sm:text-xs md:text-sm tracking-wide uppercase opacity-90">
                     {stat.label}
                   </p>
                 </div>

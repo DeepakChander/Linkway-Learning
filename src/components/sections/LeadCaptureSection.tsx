@@ -58,7 +58,7 @@ const testimonials = [
 /* ─── Colorful Brand Logos (inline JSX) ─── */
 function GoogleLogo() {
   return (
-    <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "Product Sans, Arial, sans-serif" }}>
+    <span className="text-base sm:text-lg md:text-xl font-semibold tracking-tight" style={{ fontFamily: "Product Sans, Arial, sans-serif" }}>
       <span style={{ color: "#4285F4" }}>G</span>
       <span style={{ color: "#EA4335" }}>o</span>
       <span style={{ color: "#FBBC05" }}>o</span>
@@ -71,7 +71,7 @@ function GoogleLogo() {
 
 function FlipkartLogo() {
   return (
-    <span className="text-xl font-bold tracking-tight" style={{ color: "#F7D02C", fontFamily: "Arial, sans-serif" }}>
+    <span className="text-base sm:text-lg md:text-xl font-bold tracking-tight" style={{ color: "#F7D02C", fontFamily: "Arial, sans-serif" }}>
       Flipkart
     </span>
   );
@@ -79,14 +79,14 @@ function FlipkartLogo() {
 
 function MicrosoftLogo() {
   return (
-    <span className="flex items-center gap-1.5">
-      <svg width="18" height="18" viewBox="0 0 18 18">
+    <span className="flex items-center gap-1 sm:gap-1.5">
+      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]" viewBox="0 0 18 18">
         <rect x="0" y="0" width="8.5" height="8.5" fill="#F25022" />
         <rect x="9.5" y="0" width="8.5" height="8.5" fill="#7FBA00" />
         <rect x="0" y="9.5" width="8.5" height="8.5" fill="#00A4EF" />
         <rect x="9.5" y="9.5" width="8.5" height="8.5" fill="#FFB900" />
       </svg>
-      <span className="text-lg font-normal text-white/80" style={{ fontFamily: "Segoe UI, Arial, sans-serif" }}>Microsoft</span>
+      <span className="text-sm sm:text-base md:text-lg font-normal text-white/80" style={{ fontFamily: "Segoe UI, Arial, sans-serif" }}>Microsoft</span>
     </span>
   );
 }
@@ -94,15 +94,15 @@ function MicrosoftLogo() {
 function DeloitteLogo() {
   return (
     <span className="flex items-center gap-0.5">
-      <span className="text-xl font-bold text-white" style={{ fontFamily: "Arial, sans-serif" }}>Deloitte</span>
-      <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: "#86BC25" }} />
+      <span className="text-base sm:text-lg md:text-xl font-bold text-white" style={{ fontFamily: "Arial, sans-serif" }}>Deloitte</span>
+      <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full" style={{ backgroundColor: "#86BC25" }} />
     </span>
   );
 }
 
 function AccentureLogo() {
   return (
-    <span className="text-xl font-semibold" style={{ color: "#A100FF", fontFamily: "Arial, sans-serif" }}>
+    <span className="text-base sm:text-lg md:text-xl font-semibold" style={{ color: "#A100FF", fontFamily: "Arial, sans-serif" }}>
       &gt; accenture
     </span>
   );
@@ -110,7 +110,7 @@ function AccentureLogo() {
 
 function InfosysLogo() {
   return (
-    <span className="text-xl font-bold" style={{ color: "#007CC3", fontFamily: "Arial, sans-serif" }}>
+    <span className="text-base sm:text-lg md:text-xl font-bold" style={{ color: "#007CC3", fontFamily: "Arial, sans-serif" }}>
       Infosys
     </span>
   );
@@ -241,50 +241,50 @@ function InlineLeadForm() {
   }
 
   const inputClass = (field: string) =>
-    `w-full bg-white border rounded-lg px-4 py-3 text-gray-900 text-sm placeholder:text-gray-400 focus:outline-none transition-colors ${
+    `w-full bg-white border rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-gray-900 text-xs sm:text-sm placeholder:text-gray-400 focus:outline-none transition-colors ${
       errors[field] ? "border-red-400 focus:border-red-400" : "border-gray-200 focus:border-orange-500"
     }`;
 
   const selectClass =
-    "w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-orange-500 transition-colors appearance-none cursor-pointer";
+    "w-full bg-white border border-gray-200 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-gray-900 text-xs sm:text-sm focus:outline-none focus:border-orange-500 transition-colors appearance-none cursor-pointer";
 
   return (
-    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl">
-      <h3 className="text-lg md:text-xl font-bold text-gray-900 text-center mb-6">
+    <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-xl">
+      <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 text-center mb-4 sm:mb-6">
         Upgrade Your Skills to Achieve Your Dream Job
       </h3>
 
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4" noValidate>
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Full Name</label>
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Full Name</label>
           <input type="text" placeholder="John Doe" value={formData.fullName} onChange={(e) => handleChange("fullName", e.target.value)} className={inputClass("fullName")} />
-          {errors.fullName && <p className="text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.fullName}</p>}
+          {errors.fullName && <p className="text-[10px] sm:text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> {errors.fullName}</p>}
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Email Address</label>
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Email Address</label>
           <input type="email" placeholder="abc@gmail.com" value={formData.email} onChange={(e) => handleChange("email", e.target.value)} className={inputClass("email")} />
-          {errors.email && <p className="text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.email}</p>}
+          {errors.email && <p className="text-[10px] sm:text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> {errors.email}</p>}
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Contact Number</label>
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-lg px-3 py-3 text-sm text-gray-700 shrink-0">
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Contact Number</label>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-1 sm:gap-1.5 bg-white border border-gray-200 rounded-lg px-2 sm:px-3 py-2.5 sm:py-3 text-xs sm:text-sm text-gray-700 shrink-0">
               <span>🇮🇳</span><span>+91</span><span className="text-gray-300">·</span>
             </div>
             <input type="tel" placeholder="81234 56789" value={formData.phone} onChange={(e) => handleChange("phone", e.target.value)} className={inputClass("phone")} />
           </div>
-          {errors.phone && <p className="text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.phone}</p>}
+          {errors.phone && <p className="text-[10px] sm:text-xs text-red-400 flex items-center gap-1 mt-1"><AlertCircle className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> {errors.phone}</p>}
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Designation</label>
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Designation</label>
           <input type="text" placeholder="e.g. Software Engineer" value={formData.designation} onChange={(e) => handleChange("designation", e.target.value)} className={inputClass("designation")} />
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Years of Experience</label>
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Years of Experience</label>
           <select value={formData.experience} onChange={(e) => handleChange("experience", e.target.value)} className={selectClass}>
             <option value="">Select</option>
             <option value="0-1">0 - 1 years</option>
@@ -296,12 +296,12 @@ function InlineLeadForm() {
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Current Company/College Name</label>
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Current Company/College Name</label>
           <input type="text" placeholder="e.g. TCS, IIT Delhi" value={formData.company} onChange={(e) => handleChange("company", e.target.value)} className={inputClass("company")} />
         </div>
 
         <div>
-          <label className="text-xs font-medium text-gray-600 mb-1 block">Program preference</label>
+          <label className="text-[10px] sm:text-xs font-medium text-gray-600 mb-1 block">Program preference</label>
           <select value={formData.course} onChange={(e) => handleChange("course", e.target.value)} className={selectClass}>
             <option value="">Select</option>
             <option value="Data Analytics">Data Analytics</option>
@@ -313,8 +313,8 @@ function InlineLeadForm() {
           </select>
         </div>
 
-        <button type="submit" disabled={formState === "loading"} className="w-full bg-[#0D1B2A] hover:bg-[#162d45] text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer">
-          {formState === "loading" ? <Loader2 className="w-5 h-5 animate-spin" /> : "Submit Now"}
+        <button type="submit" disabled={formState === "loading"} className="w-full bg-[#0D1B2A] hover:bg-[#162d45] text-white font-bold py-3 sm:py-3.5 rounded-lg sm:rounded-xl flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base">
+          {formState === "loading" ? <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" /> : "Submit Now"}
         </button>
       </form>
     </div>
@@ -353,9 +353,9 @@ export default function LeadCaptureSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2">
 
           {/* ── Left Side ── */}
-          <div className="relative px-6 md:px-10 lg:px-12 pt-10 md:pt-14 pb-8 flex flex-col justify-center">
+          <div className="relative px-4 sm:px-6 md:px-10 lg:px-12 pt-8 sm:pt-10 md:pt-14 pb-6 sm:pb-8 flex flex-col justify-center">
             <ScrollReveal>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8 text-white">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6 sm:mb-8 text-white">
                 Join 8000+ professionals who{" "}
                 <span className="text-orange-400">transformed their careers</span>
                 {" "}and landed roles at{" "}
@@ -366,11 +366,11 @@ export default function LeadCaptureSection() {
             {/* Trusted By - Single row */}
             <ScrollReveal delay={0.1}>
               <div className="mb-0">
-                <h3 className="text-white/60 font-semibold text-sm uppercase tracking-widest mb-5">Trusted by</h3>
+                <h3 className="text-white/60 font-semibold text-xs sm:text-sm uppercase tracking-widest mb-4 sm:mb-5">Trusted by</h3>
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {brandLogos.map((logo) => (
-                    <div key={logo.name} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl px-5 py-3.5 flex items-center justify-center hover:bg-white/15 transition-colors">
+                    <div key={logo.name} className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-5 py-2.5 sm:py-3.5 flex items-center justify-center hover:bg-white/15 transition-colors">
                       <logo.component />
                     </div>
                   ))}
@@ -380,7 +380,7 @@ export default function LeadCaptureSection() {
           </div>
 
           {/* ── Right Side - Form ── */}
-          <div className="px-6 md:px-10 lg:px-12 py-10 md:py-14 flex items-start lg:items-center justify-center bg-[#0D1B2A]">
+          <div className="px-4 sm:px-6 md:px-10 lg:px-12 py-8 sm:py-10 md:py-14 flex items-start lg:items-center justify-center bg-[#0D1B2A]">
             <div className="w-full max-w-md">
               <InlineLeadForm />
             </div>

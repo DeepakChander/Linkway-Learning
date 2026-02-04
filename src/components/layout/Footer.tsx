@@ -49,9 +49,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 relative z-10 pb-12">
 
         {/* Brand Statement */}
-        <div className="mb-10 border-b border-white/5 pb-8">
+        <div className="mb-8 sm:mb-10 border-b border-white/5 pb-6 sm:pb-8">
           <motion.h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight select-none"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight select-none"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -63,34 +63,34 @@ export default function Footer() {
         </div>
 
         {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 mb-8">
 
           {/* Brand Column */}
-          <div className="lg:col-span-4">
-            <Link href="/" className="block mb-6">
-              <span className="text-2xl font-bold text-white tracking-tight">
+          <div className="col-span-2 sm:col-span-2 lg:col-span-4">
+            <Link href="/" className="block mb-4 sm:mb-6">
+              <span className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Linkway Learning<span className="text-orange-500">.</span>
               </span>
             </Link>
-            <p className="text-gray-300 leading-relaxed mb-6 max-w-sm">
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 max-w-sm">
               Linkway Learning Private Limited. We exist because college alone doesn't prepare you for the industry. We fill that gap.
             </p>
-            <div className="space-y-3 mb-8">
-              <div className="flex items-start gap-3">
+            <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
+              <div className="flex items-start gap-2 sm:gap-3">
                 <MapPin className="w-4 h-4 text-orange-500 mt-0.5 shrink-0" />
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                   D-23, Sector-59, Noida<br />
                   Gautam Buddha Nagar - 201301<br />
                   Uttar Pradesh, India
                 </p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <Phone className="w-4 h-4 text-orange-500 shrink-0" />
-                <a href="tel:+919315647113" className="text-gray-300 text-sm hover:text-orange-400 transition-colors">+91-93156-47113</a>
+                <a href="tel:+919315647113" className="text-gray-300 text-xs sm:text-sm hover:text-orange-400 transition-colors">+91-93156-47113</a>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <Mail className="w-4 h-4 text-orange-500 shrink-0" />
-                <a href="mailto:support@linkwaylearning.com" className="text-gray-300 text-sm hover:text-orange-400 transition-colors">support@linkwaylearning.com</a>
+                <a href="mailto:support@linkwaylearning.com" className="text-gray-300 text-xs sm:text-sm hover:text-orange-400 transition-colors break-all">support@linkwaylearning.com</a>
               </div>
             </div>
           </div>
@@ -98,9 +98,9 @@ export default function Footer() {
           <div className="hidden lg:block lg:col-span-2" />
 
           {/* Links Column 1 */}
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold tracking-[0.2em] text-white uppercase mb-6">Pages</h4>
-            <ul className="space-y-4 text-sm">
+          <div className="col-span-1 lg:col-span-2">
+            <h4 className="text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] text-white uppercase mb-4 sm:mb-6">Pages</h4>
+            <ul className="space-y-2 sm:space-y-4 text-xs sm:text-sm">
               {quickLinks.map((link) => (
                 <li key={link.href}><FooterLink {...link} /></li>
               ))}
@@ -108,9 +108,9 @@ export default function Footer() {
           </div>
 
           {/* Links Column 2 */}
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold tracking-[0.2em] text-white uppercase mb-6">Programs</h4>
-            <ul className="space-y-4 text-sm">
+          <div className="col-span-1 lg:col-span-2">
+            <h4 className="text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] text-white uppercase mb-4 sm:mb-6">Programs</h4>
+            <ul className="space-y-2 sm:space-y-4 text-xs sm:text-sm">
               {courseLinks.map((link) => (
                 <li key={link.href}><FooterLink {...link} /></li>
               ))}
@@ -118,9 +118,9 @@ export default function Footer() {
           </div>
 
           {/* Links Column 3 */}
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold tracking-[0.2em] text-white uppercase mb-6">Legal</h4>
-            <ul className="space-y-4 text-sm">
+          <div className="col-span-2 sm:col-span-1 lg:col-span-2">
+            <h4 className="text-xs sm:text-sm font-bold tracking-[0.15em] sm:tracking-[0.2em] text-white uppercase mb-4 sm:mb-6">Legal</h4>
+            <ul className="space-y-2 sm:space-y-4 text-xs sm:text-sm flex flex-row sm:flex-col gap-4 sm:gap-0">
               {legalLinks.map((link) => (
                 <li key={link.href}><FooterLink {...link} /></li>
               ))}
@@ -130,8 +130,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-white/5 text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Linkway Learning Private Limited.</p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-4 border-t border-white/5 text-xs sm:text-sm text-gray-400">
+          <p className="text-center md:text-left">&copy; {new Date().getFullYear()} Linkway Learning Pvt. Ltd.</p>
           <div className="flex gap-3">
             {[
               { icon: Facebook, name: "Facebook", href: "https://www.facebook.com/share/1AxrBp9iYo/" },
@@ -143,10 +143,10 @@ export default function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all duration-300"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all duration-300"
                 aria-label={`Follow us on ${social.name}`}
               >
-                <social.icon className="w-4 h-4" />
+                <social.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </a>
             ))}
           </div>

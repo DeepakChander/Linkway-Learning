@@ -324,28 +324,28 @@ export default function CertificationDisplay() {
         </svg>
       </div>
 
-      <div className="relative z-10 py-16 md:py-20 lg:py-24 px-6">
+      <div className="relative z-10 py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* ════════════════════════════════════════════════
               TOP: Split layout — Text left, Certificates right
               ════════════════════════════════════════════════ */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center mb-28 md:mb-36">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center mb-16 sm:mb-20 md:mb-28 lg:mb-36">
             {/* ── LEFT: Copy ── */}
             <div>
               {/* Eyebrow */}
               <motion.div
-                className="inline-flex items-center gap-2.5 mb-7"
+                className="inline-flex items-center gap-2 sm:gap-2.5 mb-4 sm:mb-7"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
                 <span
-                  className="w-8 h-[2px] rounded-full"
+                  className="w-6 sm:w-8 h-[2px] rounded-full"
                   style={{ background: "#F58220" }}
                 />
                 <span
-                  className="text-xs font-bold uppercase tracking-[0.18em]"
+                  className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.15em] sm:tracking-[0.18em]"
                   style={{ color: "#C45D10" }}
                 >
                   Industry-Recognized Credentials
@@ -354,7 +354,7 @@ export default function CertificationDisplay() {
 
               {/* Heading */}
               <motion.h2
-                className="text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.08] mb-6"
+                className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.08] mb-4 sm:mb-6"
                 style={{ color: "#0D1B2A" }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -401,7 +401,7 @@ export default function CertificationDisplay() {
 
               {/* Description */}
               <motion.p
-                className="text-lg md:text-xl leading-relaxed mb-10 max-w-lg"
+                className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 md:mb-10 max-w-lg"
                 style={{ color: "#4A5568" }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -415,7 +415,7 @@ export default function CertificationDisplay() {
 
               {/* Feature pills */}
               <motion.div
-                className="flex flex-wrap gap-3 mb-10"
+                className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 md:mb-10"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -488,7 +488,7 @@ export default function CertificationDisplay() {
 
               {/* Stats row */}
               <motion.div
-                className="grid grid-cols-4 gap-0 rounded-2xl overflow-hidden"
+                className="grid grid-cols-2 sm:grid-cols-4 gap-0 rounded-xl sm:rounded-2xl overflow-hidden"
                 style={{
                   background: "#0D1B2A",
                   boxShadow: "0 20px 60px rgba(13, 27, 42, 0.15)",
@@ -501,19 +501,21 @@ export default function CertificationDisplay() {
                 {stats.map((stat, i) => (
                   <div
                     key={i}
-                    className="relative px-3 py-5 md:px-5 md:py-7 text-center"
+                    className="relative px-2 sm:px-3 py-4 sm:py-5 md:px-5 md:py-7 text-center"
                     style={{
                       borderRight:
-                        i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                        i === 0 || i === 2 ? "1px solid rgba(255,255,255,0.06)" : i === 1 ? "none" : "1px solid rgba(255,255,255,0.06)",
+                      borderBottom:
+                        i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
                     }}
                   >
-                    <div className="text-xl md:text-2xl lg:text-3xl font-bold text-orange-400 mb-1">
+                    <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-400 mb-0.5 sm:mb-1">
                       <AnimatedCounter
                         target={stat.value}
                         suffix={stat.suffix}
                       />
                     </div>
-                    <div className="text-[10px] md:text-xs text-white/40 uppercase tracking-wider font-medium">
+                    <div className="text-[9px] sm:text-[10px] md:text-xs text-white/40 uppercase tracking-wider font-medium">
                       {stat.label}
                     </div>
                   </div>
@@ -524,7 +526,7 @@ export default function CertificationDisplay() {
             {/* ── RIGHT: Certificate Showcase ── */}
             <motion.div
               ref={showcaseRef}
-              className="relative flex items-center justify-center min-h-[500px] md:min-h-[600px] lg:min-h-[650px]"
+              className="relative flex items-center justify-center min-h-[350px] sm:min-h-[450px] md:min-h-[600px] lg:min-h-[650px]"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               style={{
@@ -569,7 +571,7 @@ export default function CertificationDisplay() {
 
               {/* ── Linkway Certificate (back, tilted left) ── */}
               <motion.div
-                className="absolute w-[280px] md:w-[340px] lg:w-[380px]"
+                className="absolute w-[200px] sm:w-[240px] md:w-[340px] lg:w-[380px]"
                 style={{
                   y: cert1Y,
                   rotate: cert1Rotate,
@@ -608,12 +610,11 @@ export default function CertificationDisplay() {
                   </div>
                   {/* Label strip */}
                   <div
-                    className="px-4 py-3 flex items-center gap-2.5"
+                    className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 flex items-center gap-1.5 sm:gap-2.5"
                     style={{ background: "#F58220" }}
                   >
                     <svg
-                      width="18"
-                      height="18"
+                      className="w-3 h-3 sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="white"
@@ -624,10 +625,10 @@ export default function CertificationDisplay() {
                       <circle cx="12" cy="8" r="6" />
                       <path d="M9 14l-2 8 5-3 5 3-2-8" />
                     </svg>
-                    <span className="text-white text-sm font-bold">
+                    <span className="text-white text-[10px] sm:text-xs md:text-sm font-bold">
                       Linkway Learning
                     </span>
-                    <span className="text-white/60 text-xs ml-auto">
+                    <span className="text-white/60 text-[8px] sm:text-[10px] md:text-xs ml-auto hidden sm:inline">
                       Completion Certificate
                     </span>
                   </div>
@@ -636,7 +637,7 @@ export default function CertificationDisplay() {
 
               {/* ── Microsoft Certificate (front, tilted right) ── */}
               <motion.div
-                className="absolute w-[280px] md:w-[340px] lg:w-[380px]"
+                className="absolute w-[200px] sm:w-[240px] md:w-[340px] lg:w-[380px]"
                 style={{
                   y: cert2Y,
                   rotate: cert2Rotate,
@@ -675,20 +676,20 @@ export default function CertificationDisplay() {
                   </div>
                   {/* Label strip */}
                   <div
-                    className="px-4 py-3 flex items-center gap-2.5"
+                    className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 flex items-center gap-1.5 sm:gap-2.5"
                     style={{ background: "#2563eb" }}
                   >
                     {/* Microsoft logo squares */}
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="white">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 16 16" fill="white">
                       <rect x="0" y="0" width="7" height="7" />
                       <rect x="9" y="0" width="7" height="7" />
                       <rect x="0" y="9" width="7" height="7" />
                       <rect x="9" y="9" width="7" height="7" />
                     </svg>
-                    <span className="text-white text-sm font-bold">
+                    <span className="text-white text-[10px] sm:text-xs md:text-sm font-bold">
                       Microsoft Certified
                     </span>
-                    <span className="text-white/60 text-xs ml-auto">
+                    <span className="text-white/60 text-[8px] sm:text-[10px] md:text-xs ml-auto hidden sm:inline">
                       Azure AI (AI-900)
                     </span>
                   </div>
@@ -697,13 +698,13 @@ export default function CertificationDisplay() {
 
               {/* ── Floating badge: "Verified Credential" ── */}
               <motion.div
-                className="absolute z-10"
+                className="absolute z-10 hidden sm:block"
                 style={{ right: "-2%", top: "10%" }}
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
                 <motion.div
-                  className="flex items-center gap-2.5 px-5 py-3 rounded-2xl backdrop-blur-md"
+                  className="flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2 sm:py-3 rounded-xl sm:rounded-2xl backdrop-blur-md"
                   style={{
                     background: "rgba(255,255,255,0.92)",
                     boxShadow:
@@ -721,17 +722,17 @@ export default function CertificationDisplay() {
                   }}
                 >
                   <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl flex items-center justify-center"
                     style={{ background: "linear-gradient(135deg, #10B981, #059669)" }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                       <path d="M9 12l2 2 4-4" />
                     </svg>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs font-bold" style={{ color: "#0D1B2A" }}>Verified Credential</span>
-                    <span className="text-[10px] font-medium" style={{ color: "#10B981" }}>Digitally Secured</span>
+                    <span className="text-[10px] sm:text-xs font-bold" style={{ color: "#0D1B2A" }}>Verified Credential</span>
+                    <span className="text-[8px] sm:text-[10px] font-medium" style={{ color: "#10B981" }}>Digitally Secured</span>
                   </div>
                 </motion.div>
               </motion.div>
