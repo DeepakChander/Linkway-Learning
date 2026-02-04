@@ -32,22 +32,37 @@ gsap.registerPlugin(ScrollTrigger);
    DATA
    ═══════════════════════════════════════════════════════════════════ */
 const testimonials = [
-  { name: "Aditya Srivastava", from: "Full-Stack Developer", to: "Junior Data Scientist", company: "Globussoft", desc: "I could build apps, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works. Now I'm doing data science full-time.", initials: "AS", color: "#F59E0B", category: "tech", avatar: "/images/avatars/avatar-1.svg" },
-  { name: "Arpit Jain", from: "Hospitality Professional", to: "Business Analyst", company: "EaseMyTrip", desc: "Hospitality was all I knew. I picked up SQL and analytics from scratch, and now I'm analyzing booking trends at EaseMyTrip. Completely different life.", initials: "AJ", color: "#3B82F6", category: "career-switch", avatar: "/images/avatars/avatar-2.svg" },
-  { name: "Junaid Khan", from: "Operations & Banking", to: "Business Analyst", company: "Razorpay", desc: "Banking ops had no growth path for me. Six months of focused learning later, I'm a business analyst at Razorpay doing work that actually excites me.", initials: "JK", color: "#10B981", category: "career-switch", avatar: "/images/avatars/avatar-3.svg" },
-  { name: "Rajeev Chauhan", from: "Operations Executive", to: "Business Research Analyst", company: "EXL", desc: "I was stuck in operations. The program taught me how to think analytically and back decisions with data. Now I do exactly that at EXL.", initials: "RC", color: "#8B5CF6", category: "upskill", avatar: "/images/avatars/avatar-4.svg" },
-  { name: "Rehan Siddiqui", from: "Non-Tech Background", to: "Data Analyst", company: "Amazon", desc: "Zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems.", initials: "RS", color: "#F58220", category: "career-switch", avatar: "/images/avatars/avatar-5.svg" },
-  { name: "Shivani Rawat", from: "Operations & Product", to: "Business Analyst", company: "Booking.com", desc: "Operations felt like a dead end. The program gave me the technical edge I needed, and now I'm doing requirement analysis at Booking.com.", initials: "SR", color: "#EC4899", category: "upskill", avatar: "/images/avatars/avatar-1.svg" },
-  { name: "Shalendra Gupta", from: "Sales Executive", to: "Business Analyst", company: "Vishal Mega Mart", desc: "Went from selling on the floor to analyzing what sells. Excel and Power BI changed how I see business — and my career.", initials: "SG", color: "#06B6D4", category: "career-switch", avatar: "/images/avatars/avatar-2.svg" },
-  { name: "Syed Nehal", from: "HR & Accounting", to: "Data Analyst", company: "Safegraph", desc: "HR and accounting weren't going anywhere for me. Project-based learning made the switch possible. Now I'm a data analyst working globally.", initials: "SN", color: "#6366F1", category: "career-switch", avatar: "/images/avatars/avatar-3.svg" },
-  { name: "Vansh Pathak", from: "Accounting Intern", to: "Reporting Analyst", company: "Accenture", desc: "From crunching numbers in spreadsheets to building real SQL reports at Accenture. The jump felt huge, but the mentors made it doable.", initials: "VP", color: "#14B8A6", category: "upskill", avatar: "/images/avatars/avatar-4.svg" },
+  { name: "Rehan Siddiqui", from: "Non-Tech", to: "Data Analyst", company: "Amazon", rating: 5, avatar: "/images/avatars/avatar-1.svg", color: "#F58220", desc: "I had zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems every day." },
+  { name: "Junaid Khan", from: "Banking Ops", to: "Business Analyst", company: "Razorpay", rating: 4.5, avatar: "/images/avatars/avatar-2.svg", color: "#10B981", desc: "I was stuck in banking ops with no clear growth path. Six months later, I'm a business analyst at Razorpay working on things that actually excite me." },
+  { name: "Shivani Rawat", from: "Operations", to: "Business Analyst", company: "Booking.com", rating: 4.8, avatar: "/images/avatars/avatar-3.svg", color: "#EC4899", desc: "Operations felt like a dead end. The program gave me the technical skills I was missing, and now I'm doing requirement analysis at Booking.com." },
+  { name: "Vansh Pathak", from: "Accounting", to: "Reporting Analyst", company: "Accenture", rating: 4.3, avatar: "/images/avatars/avatar-4.svg", color: "#14B8A6", desc: "Went from crunching numbers in spreadsheets to building actual reports with SQL at Accenture. The mentors made the jump doable." },
+  { name: "Aditya Srivastava", from: "Full-Stack Dev", to: "Data Scientist", company: "Globussoft", rating: 4.6, avatar: "/images/avatars/avatar-5.svg", color: "#F59E0B", desc: "I could code, but I didn't know ML. Linkway filled that gap with real projects - computer vision, forecasting, the works." },
+  { name: "Priya Sharma", from: "HR Executive", to: "People Analytics", company: "Infosys", rating: 4.7, avatar: "/images/avatars/avatar-1.svg", color: "#8B5CF6", desc: "HR felt repetitive after 3 years. Learned Python and started automating reports. Now I build dashboards that actually help hiring decisions at Infosys." },
+  { name: "Rohit Verma", from: "Mech Engineer", to: "Data Engineer", company: "TCS", rating: 4.4, avatar: "/images/avatars/avatar-2.svg", color: "#3B82F6", desc: "Mechanical engineering wasn't for me. Picked up SQL, learned ETL pipelines here. Cracked TCS interview on my third attempt. Worth every rupee." },
+  { name: "Sneha Patel", from: "School Teacher", to: "Data Analyst", company: "Deloitte", rating: 4.9, avatar: "/images/avatars/avatar-3.svg", color: "#06B6D4", desc: "Left teaching after 5 years. Everyone said I was crazy. But the structured learning here helped me land Deloitte. My students were my first cheerleaders." },
+  { name: "Amit Kumar", from: "Sales Exec", to: "BI Analyst", company: "Wipro", rating: 4.2, avatar: "/images/avatars/avatar-4.svg", color: "#6366F1", desc: "Sales targets were killing me. Started learning Excel seriously, then Power BI. Now I make dashboards for sales teams instead of chasing targets myself." },
+  { name: "Kavita Nair", from: "Support", to: "Analytics", company: "Fractal", rating: 4.6, avatar: "/images/avatars/avatar-5.svg", color: "#EF4444", desc: "Customer support to analytics sounds impossible, but the mentors here pushed me. SQL clicked after week 3. Got placed at Fractal within 2 months of finishing." },
+  { name: "Arjun Menon", from: "BPO", to: "Data Analyst", company: "EXL", rating: 4.5, avatar: "/images/avatars/avatar-1.svg", color: "#F58220", desc: "Night shifts at BPO for 4 years. Completed this course while working. The placement team was persistent - helped me prep for 7 interviews before I cleared EXL." },
+  { name: "Pooja Gupta", from: "Content Writer", to: "Marketing Analyst", company: "HUL", rating: 4.8, avatar: "/images/avatars/avatar-2.svg", color: "#10B981", desc: "Writing blogs wasn't paying enough. Learned Google Analytics, some SQL. Now I analyze campaign performance at HUL. Still write sometimes, but data pays better." },
+  { name: "Vikram Singh", from: "Retail Staff", to: "Supply Chain Analyst", company: "Vishal Mega Mart", rating: 4.3, avatar: "/images/avatars/avatar-3.svg", color: "#EC4899", desc: "Worked at a store for 6 years. Knew retail inside out but no technical skills. Excel + SQL training here changed everything. Same industry, much better role." },
+  { name: "Neeraj Joshi", from: "CA Articleship", to: "Investment Banking", company: "MUFG Bank", rating: 4.7, avatar: "/images/avatars/avatar-4.svg", color: "#14B8A6", desc: "CA was too slow for me. Learned financial modeling, valuation, and Excel shortcuts that actually matter. MUFG hired me straight out of the program." },
+  { name: "Meghna Reddy", from: "Bank Clerk", to: "Credit Analyst", company: "IDFC First Bank", rating: 4.5, avatar: "/images/avatars/avatar-5.svg", color: "#F59E0B", desc: "Was a clerk at SBI for 3 years. The investment banking module opened my eyes to how finance actually works. Now doing credit analysis at IDFC First." },
+  { name: "Saurabh Tiwari", from: "Commerce Grad", to: "Equity Research", company: "BNY Mellon", rating: 4.8, avatar: "/images/avatars/avatar-1.svg", color: "#8B5CF6", desc: "Fresh B.Com graduate with no clue what to do. The valuation and financial statement analysis modules were gold. Got into BNY Mellon's research team." },
+  { name: "Ankita Deshmukh", from: "Back Office", to: "Risk Analyst", company: "Bandhan Bank", rating: 4.4, avatar: "/images/avatars/avatar-2.svg", color: "#3B82F6", desc: "Back office work was mind-numbing. Learned risk modeling and some VBA here. Moved to risk analytics at Bandhan. Finally using my brain at work." },
+  { name: "Ravi Shankar", from: "Insurance Agent", to: "Financial Analyst", company: "AXA", rating: 4.6, avatar: "/images/avatars/avatar-3.svg", color: "#06B6D4", desc: "Selling policies for 5 years taught me client handling but nothing technical. Excel modeling and DCF here changed my career. Now I'm on the analytics side at AXA." },
 ];
 
-const stats = [
-  { target: 8200, suffix: "+", label: "Careers Launched", icon: "rocket", description: "Professionals placed in top companies" },
-  { target: 400, suffix: "+", label: "Hiring Partners", icon: "building", description: "Companies actively recruiting from us" },
-  { target: 85, suffix: "%", label: "Avg Salary Jump", icon: "trending", description: "Average increase in compensation" },
-  { target: 100, suffix: "%", label: "Placement Rate", icon: "target", description: "Of committed learners get placed" },
+type StatItem = {
+  label: string;
+  description: string;
+  icon: string;
+} & ({ target: number; suffix: string } | { value: string });
+
+const stats: StatItem[] = [
+  { target: 8200, suffix: "+", label: "Careers Launched", description: "Professionals placed in top companies", icon: "rocket" },
+  { target: 400, suffix: "+", label: "Hiring Partners", description: "Companies actively recruiting our graduates", icon: "building" },
+  { target: 85, suffix: "%", label: "Avg Salary Hike", description: "Average increase in compensation", icon: "trending" },
+  { value: "Unlimited", label: "1:1 Doubt Clearing", description: "Personal mentorship until you succeed", icon: "headset" },
 ];
 
 
@@ -101,9 +116,14 @@ const companyLogos: Record<string, string> = {
 
 const darkLogos = new Set(["Amazon", "Microsoft", "IBM", "Wipro"]);
 
-const partnerRow1 = ["Google", "Amazon", "Accenture", "Deloitte", "TCS", "Tech Mahindra", "Saint-Gobain", "BNY Mellon", "Infosys", "Microsoft"];
-const partnerRow2 = ["Turing", "IDFC First Bank", "AXA", "Juniper Networks", "iOPEX", "Fractal", "Sony Pictures", "AT&T", "SpringWorks", "Capgemini"];
-const partnerRow3 = ["Uptime AI", "MUFG", "MiQ", "HUL", "Genpact", "Sprinklr", "Bandhan Bank", "GlobalLogic", "Wipro", "IBM"];
+// Row 1: Big Tech & IT Services
+const partnerRow1 = ["Google", "Amazon", "Microsoft", "Accenture", "Deloitte", "TCS", "Infosys", "Wipro", "IBM", "Capgemini"];
+// Row 2: Finance & Consulting
+const partnerRow2 = ["BNY Mellon", "MUFG", "AXA", "IDFC First Bank", "Bandhan Bank", "EXL", "Fractal", "Genpact", "MiQ", "Turing"];
+// Row 3: Tech & Digital
+const partnerRow3 = ["Tech Mahindra", "GlobalLogic", "Razorpay", "Sprinklr", "iOPEX", "SpringWorks", "Uptime AI", "Globussoft", "EaseMyTrip", "Safegraph"];
+// Row 4: Enterprise & Consumer
+const partnerRow4 = ["Sony Pictures", "Juniper Networks", "AT&T", "HUL", "Saint-Gobain", "Booking.com", "Vishal Mega Mart", "Google", "Amazon", "Microsoft"];
 
 /* ═══════════════════════════════════════════════════════════════════
    MICRO-COMPONENTS
@@ -204,10 +224,28 @@ function FloatingPill({
   );
 }
 
+/* ── Rating Stars ── */
+function RatingStars({ rating }: { rating: number }) {
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating - fullStars >= 0.3;
+  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+
+  return (
+    <div className="flex items-center gap-0.5">
+      {[...Array(fullStars)].map((_, j) => (
+        <Star key={`f-${j}`} className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />
+      ))}
+      {hasHalf && <StarHalf className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />}
+      {[...Array(emptyStars)].map((_, j) => (
+        <Star key={`e-${j}`} className="w-3.5 h-3.5 text-gray-300" />
+      ))}
+      <span className="text-[11px] text-gray-400 ml-1.5 font-medium">{rating}</span>
+    </div>
+  );
+}
+
 /* ── Bento Story Card ── */
 function BentoStoryCard({ person }: { person: (typeof testimonials)[0] }) {
-  const logo = companyLogos[person.company];
-
   return (
     <motion.div
       className="h-full rounded-2xl p-6 bg-[#F2F1EE] border border-[#e5e4e0] hover:border-[#d5d4d0] hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1 flex flex-col"
@@ -216,16 +254,14 @@ function BentoStoryCard({ person }: { person: (typeof testimonials)[0] }) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5 }}
     >
-      {/* Transformation journey */}
+      {/* Header - Transformation + Rating */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <span className="text-[11px] text-gray-500 font-medium">{person.from}</span>
           <ArrowRight className="w-3 h-3 text-gray-400" />
           <span className="text-[11px] text-orange-600 font-semibold">{person.to}</span>
         </div>
-        {logo && (
-          <img src={logo} alt={person.company} width={20} height={20} className={`w-5 h-5 object-contain ${darkLogos.has(person.company) ? "brightness-0 opacity-60" : "opacity-70"}`} />
-        )}
+        <RatingStars rating={person.rating} />
       </div>
 
       {/* Quote */}
@@ -235,11 +271,8 @@ function BentoStoryCard({ person }: { person: (typeof testimonials)[0] }) {
 
       {/* Bottom - Avatar + Name + Company */}
       <div className="flex items-center gap-3 pt-4 border-t border-black/[0.06]">
-        <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0"
-          style={{ background: `linear-gradient(135deg, ${person.color}, ${person.color}CC)` }}
-        >
-          {person.initials}
+        <div className="w-9 h-9 rounded-full bg-black/[0.08] overflow-hidden shrink-0">
+          <Image src={person.avatar} alt={person.name} width={36} height={36} className="w-full h-full object-cover" />
         </div>
         <div className="min-w-0">
           <h4 className="font-medium text-gray-900 text-sm leading-tight truncate">{person.name}</h4>
@@ -310,32 +343,45 @@ function JourneyStepCard({ step, index }: { step: (typeof journeySteps)[0]; inde
   );
 }
 
-/* ── Stat Card (Cinematic) ── */
-function StatCard({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
+/* ── Stat Card ── */
+function StatCard({ stat, index }: { stat: StatItem; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const icons: Record<string, React.ReactNode> = {
     rocket: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
         <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
-        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" /><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
       </svg>
     ),
     building: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="4" y="2" width="16" height="20" rx="2" ry="2" /><path d="M9 22v-4h6v4" /><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01" />
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+        <path d="M9 22v-4h6v4" />
+        <path d="M8 6h.01" />
+        <path d="M16 6h.01" />
+        <path d="M12 6h.01" />
+        <path d="M12 10h.01" />
+        <path d="M12 14h.01" />
+        <path d="M16 10h.01" />
+        <path d="M16 14h.01" />
+        <path d="M8 10h.01" />
+        <path d="M8 14h.01" />
       </svg>
     ),
     trending: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+        <polyline points="16 7 22 7 22 13" />
       </svg>
     ),
-    target: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+    headset: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 18v-6a9 9 0 0118 0v6" />
+        <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z" />
       </svg>
     ),
   };
@@ -343,30 +389,23 @@ function StatCard({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, delay: index * 0.1 }}
     >
-      <SpotlightCard spotlightColor="rgba(245, 130, 32, 0.05)" borderRadius="24px">
-        <div className="ss2-stat-card relative rounded-[20px] p-6 md:p-7 overflow-hidden group h-full">
-          <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full bg-orange-500/[0.03] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-          <div className="relative z-10">
-            <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-orange-400/60 mb-5 group-hover:border-orange-500/20 group-hover:text-orange-400 transition-all duration-500 [&>svg]:w-5 [&>svg]:h-5">
-              {icons[stat.icon]}
-            </div>
-
-            <div className="mb-2">
-              <span className="text-3xl md:text-4xl font-black text-white tabular-nums">
-                <Counter target={stat.target} suffix={stat.suffix} />
-              </span>
-            </div>
-
-            <h3 className="text-white/80 text-sm font-semibold mb-1">{stat.label}</h3>
-            <p className="text-white/25 text-xs leading-relaxed">{stat.description}</p>
-          </div>
+      <div className="relative rounded-2xl p-6 bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.1] transition-all duration-300 h-full">
+        {/* Icon */}
+        <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 mb-4">
+          {icons[stat.icon]}
         </div>
-      </SpotlightCard>
+        <div className="mb-2">
+          <span className="text-3xl md:text-4xl font-black text-white tabular-nums">
+            {"value" in stat ? stat.value : <Counter target={stat.target} suffix={stat.suffix} />}
+          </span>
+        </div>
+        <h3 className="text-white/90 text-sm font-semibold mb-1">{stat.label}</h3>
+        <p className="text-white/40 text-xs leading-relaxed">{stat.description}</p>
+      </div>
     </motion.div>
   );
 }
@@ -840,7 +879,7 @@ export default function SuccessStoriesPage() {
         {/* ╔══════════════════════════════════════════════════════════════╗
             ║  SECTION 3 — ALL STORIES (Bento Grid)                       ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section id="stories" className="relative overflow-hidden" style={{ backgroundColor: "#f2f1ee" }}>
+        <section id="stories" className="relative overflow-hidden bg-[#f2f1ee]">
           {/* Header */}
           <div className="pt-16 md:pt-20 pb-10 max-w-7xl mx-auto px-6 relative z-10">
             <ScrollReveal>
@@ -866,34 +905,21 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 4 — IMPACT NUMBERS (Cinematic stat cards)         ║
+            ║  SECTION 4 — IMPACT NUMBERS                                 ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-16 md:py-24 bg-[#050a14] overflow-hidden">
-          <div className="absolute inset-0 ss-stripe-gradient opacity-30" />
-          <div className="absolute inset-0 ss-grid-pattern" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,transparent_20%,#050a14_80%)]" />
-
+        <section className="relative py-16 md:py-20 bg-[#0D1B2A] overflow-hidden">
           <div className="max-w-6xl mx-auto px-6 relative z-10">
+            {/* Header */}
             <ScrollReveal>
-              <div className="text-center mb-3">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.05]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
-                  <span className="text-white/30 text-[11px] font-semibold tracking-[0.2em] uppercase">The Numbers</span>
+              <div className="text-center mb-12">
+                <span className="inline-block py-1.5 px-4 rounded-full bg-orange-500/10 text-orange-400 font-semibold text-xs mb-5 tracking-widest uppercase">
+                  Our Impact
                 </span>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                  Numbers That <span className="text-orange-400">Speak</span> for Themselves
+                </h2>
               </div>
             </ScrollReveal>
-
-            <div className="text-center mb-12">
-              <CharacterSplit
-                className="text-2xl md:text-4xl font-black text-white leading-tight"
-                highlightColor="white"
-                effect="blur"
-                delay={0}
-                staggerDelay={0.025}
-              >
-                Impact that speaks for itself
-              </CharacterSplit>
-            </div>
 
             {/* Stat cards grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
@@ -907,12 +933,10 @@ export default function SuccessStoriesPage() {
         {/* ╔══════════════════════════════════════════════════════════════╗
             ║  SECTION 5 — YOUR JOURNEY (Step-by-step visualization)     ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-28 md:py-40 bg-white overflow-hidden">
-          <div className="absolute inset-0 about-light-dots opacity-15" />
-
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             {/* Header */}
-            <div className="text-center mb-20">
+            <div className="text-center mb-12">
               <ScrollReveal>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200/50 mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-orange-500 about-pulse-dot" />
@@ -922,7 +946,7 @@ export default function SuccessStoriesPage() {
 
               <SpringReveal distance={40} damping={14} delay={0.1}>
                 <h2 className="text-3xl md:text-5xl font-black text-navy-900 leading-tight mb-4">
-                  Your transformation in four steps
+                  Your transformation in <span className="text-orange-500">four steps</span>
                 </h2>
               </SpringReveal>
 
@@ -939,25 +963,13 @@ export default function SuccessStoriesPage() {
                 <JourneyStepCard key={step.step} step={step} index={i} />
               ))}
             </div>
-
-            {/* Connecting line - desktop */}
-            <div className="hidden lg:block relative -mt-[calc(50%+1rem)] mb-[calc(50%+1rem)] mx-12 pointer-events-none">
-              <motion.div
-                className="h-[2px] bg-gradient-to-r from-orange-200/40 via-orange-400/40 to-orange-200/40"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                style={{ transformOrigin: "left" }}
-              />
-            </div>
           </div>
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
             ║  SECTION 6 — HIRING PARTNERS (Dark theme with glow)        ║
             ╚══════════════════════════════════════════════════════════════╝ */}
-        <section className="relative py-28 md:py-36 bg-[#050a14] overflow-hidden">
+        <section className="relative py-16 md:py-20 bg-[#050a14] overflow-hidden">
           <div className="absolute inset-0 ss-stripe-gradient opacity-15" />
           <div className="absolute inset-0 ss-grid-pattern" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,transparent_20%,#050a14_80%)]" />
@@ -965,7 +977,7 @@ export default function SuccessStoriesPage() {
           <div className="relative z-10">
             <div className="max-w-6xl mx-auto px-6">
               <ScrollReveal>
-                <div className="text-center mb-5">
+                <div className="text-center mb-4">
                   <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05]">
                     <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                     <span className="text-white/30 text-xs font-semibold tracking-[0.2em] uppercase">Hiring Partners</span>
@@ -973,21 +985,17 @@ export default function SuccessStoriesPage() {
                 </div>
               </ScrollReveal>
 
-              <div className="text-center mb-4">
-                <CharacterSplit
-                  className="text-3xl md:text-5xl font-black text-white leading-tight"
-                  highlightColor="white"
-                  effect="blur"
-                  delay={0}
-                  staggerDelay={0.025}
-                >
-                  Where our graduates build careers
-                </CharacterSplit>
-              </div>
+              <ScrollReveal>
+                <h2 className="text-center text-3xl md:text-4xl font-black leading-tight mb-3">
+                  <span className="text-white">Where our graduates </span>
+                  <span className="text-orange-400">build careers</span>
+                </h2>
+              </ScrollReveal>
 
-              <ScrollReveal delay={0.2}>
-                <p className="text-center text-white/25 text-lg max-w-lg mx-auto mb-16">
-                  400+ companies actively recruit from Linkway. Here&apos;s a snapshot.
+              <ScrollReveal delay={0.1}>
+                <p className="text-center text-base max-w-lg mx-auto mb-10">
+                  <span className="text-white/50">400+ companies</span>
+                  <span className="text-white/25"> actively recruit from Linkway. Here&apos;s a snapshot.</span>
                 </p>
               </ScrollReveal>
             </div>
@@ -996,10 +1004,11 @@ export default function SuccessStoriesPage() {
               <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#050a14] to-transparent z-10 pointer-events-none" />
               <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#050a14] to-transparent z-10 pointer-events-none" />
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <InfiniteLogoRow items={partnerRow1} direction="left" speed={60} />
                 <InfiniteLogoRow items={partnerRow2} direction="right" speed={50} />
                 <InfiniteLogoRow items={partnerRow3} direction="left" speed={55} />
+                <InfiniteLogoRow items={partnerRow4} direction="right" speed={45} />
               </div>
             </div>
           </div>
