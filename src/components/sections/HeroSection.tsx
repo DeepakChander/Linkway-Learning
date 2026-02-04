@@ -723,7 +723,6 @@ export default function HeroSection() {
                 <div key={i} className="text-left group">
                   <div className="flex items-baseline text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
                     <ScrollOdometer value={stat.val} duration={2} suffix="" className="text-orange-400" />
-                    {stat.decimal && <span className="text-orange-400">{stat.decimal}</span>}
                     <span className="text-orange-400 text-lg ml-0.5">{stat.suffix}</span>
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5 tracking-wide uppercase font-[family-name:var(--font-poppins)]">{stat.label}</p>

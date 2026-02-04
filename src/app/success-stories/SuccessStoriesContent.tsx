@@ -102,7 +102,6 @@ const companyLogos: Record<string, string> = {
   "Bandhan Bank": "/images/companies/bandhan-bank.svg",
   GlobalLogic: "/images/companies/globallogic.svg",
   Wipro: "/images/companies/wipro.svg",
-  Accenture: "/images/companies/accenture.svg",
   Infosys: "/images/companies/infosys.svg",
   IBM: "/images/companies/ibm.svg",
   Capgemini: "/images/companies/capgemini.svg",
