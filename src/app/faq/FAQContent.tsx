@@ -61,7 +61,7 @@ const faqCategories = [
       },
       {
         q: "What kind of salary can I expect?",
-        a: "It depends on the program and your background, but graduates typically land between \u20B96–18 LPA. On average, people see an 85% salary hike after completing the program.",
+        a: "It depends on the program and your background, but graduates typically land between \u20B96–18 LPA. On average, people see an 82.7% salary hike after completing the program.",
       },
     ],
   },
@@ -153,7 +153,7 @@ export default function FAQPage() {
                   <AccordionItem
                     key={i}
                     title={item.q}
-                    defaultOpen={ci === 0 && i === 0}
+                    defaultOpen={false}
                   >
                     {item.a}
                   </AccordionItem>

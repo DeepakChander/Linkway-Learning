@@ -99,7 +99,7 @@ const featureSteps = [
       </svg>
     ),
     title: "100% Placement",
-    desc: "Dedicated career support",
+    desc: "Personalized Path to Employment",
   },
 ];
 
@@ -243,7 +243,7 @@ export default function CertificationDisplay() {
   }, [mx, my]);
 
   const stats = [
-    { value: 5000, suffix: "+", label: "Certificates Issued" },
+    { value: 12000, suffix: "+", label: "Certificates Issued" },
     { value: 92, suffix: "%", label: "Career Growth" },
     { value: 400, suffix: "+", label: "Hiring Partners" },
     { value: 25, suffix: "+", label: "Countries" },
@@ -960,9 +960,9 @@ export default function CertificationDisplay() {
             >
               {[
                 { value: 4.74, suffix: "", label: "Average Rating", decimals: 2 },
-                { value: 18000, suffix: "+", label: "Happy Students", decimals: 0 },
+                { value: 12000, suffix: "+", label: "Happy Students", decimals: 0 },
                 { value: 400, suffix: "+", label: "Hiring Partners", decimals: 0 },
-                { value: 100, suffix: "%", label: "Salary Hike", decimals: 0 },
+                { value: 82.7, suffix: "%", label: "Avg Salary Hike", decimals: 1 },
               ].map((stat, i) => (
                 <div
                   key={i}

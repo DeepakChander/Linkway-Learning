@@ -3,15 +3,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/animation/ScrollReveal";
-import { BorderGlow, CharacterSplit, CrossFlicker } from "@/components/animation";
+import { BorderGlow, CharacterSplit } from "@/components/animation";
 import SpringReveal from "@/components/animation/SpringReveal";
-import ScrollOdometer from "@/components/animation/ScrollOdometer";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { AccordionItem } from "@/components/ui/Accordion";
 import { ThemeProvider } from "@/lib/theme";
-import { Mail, Phone, MapPin, MessageCircle, Clock, Users, Briefcase, CheckCircle, Building2, Calendar } from "lucide-react";
+import { MessageCircle, CheckCircle } from "lucide-react";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -73,37 +72,39 @@ export default function ContactPage() {
     },
   ];
 
-  const stats = [
-    { value: 8200, suffix: "+", label: "Careers Launched", icon: Users },
-    { value: 100, suffix: "%", label: "Placement Rate", icon: CheckCircle },
-    { value: 400, suffix: "+", label: "Hiring Partners", icon: Briefcase },
-    { value: 24, suffix: "hr", label: "Response Time", icon: Clock },
-  ];
 
-  const contactFaqs = [
+  const faqs = [
     {
-      q: "How do I enroll in a program?",
-      a: "Simply fill out the contact form above or reach out via WhatsApp. Our counselor will guide you through the enrollment process, help you choose the right program, and explain the payment options available.",
+      q: "What exactly is Linkway Learning?",
+      a: "Linkway Learning is an industry-driven learning organization that equips learners with in-demand data skills and supports them in securing relevant job opportunities.",
     },
     {
-      q: "Is placement really guaranteed?",
-      a: "Yes, we offer 100% placement assistance. Our dedicated placement team works with 400+ hiring partners and provides personalized support including resume reviews, mock interviews, and direct referrals until you land your desired role.",
+      q: "Why should I choose Linkway Learning?",
+      a: "Linkway Learning offers small class sizes, practical hands-on attack simulations, Microsoft-recognized certification, and 100% placement.",
     },
     {
-      q: "What are the payment options?",
-      a: "We offer flexible payment options including no-cost EMI, part payments, and financing options to make the program affordable for everyone. Our counselor will explain all available options during your consultation.",
+      q: "Are flexible payment or financial options available?",
+      a: "Yes, no-cost EMI and financing options are available to make the program affordable for everyone.",
     },
     {
-      q: "How long do the programs take?",
-      a: "Our programs range from 3 to 6 months depending on the track you choose. Data Analytics and Business Analytics are typically 3-4 months, while Data Science and AI programs run for 5-6 months.",
+      q: "What kind of career support is provided?",
+      a: "100% placement with dedicated career coaching, resume reviews, and interview preparation.",
     },
     {
-      q: "Can I attend classes while working?",
-      a: "Absolutely! All our classes are scheduled on weekends and evenings to accommodate working professionals. Plus, every session is recorded so you never miss anything important.",
+      q: "Will I receive a certificate after completing the program?",
+      a: "You'll receive a Linkway Learning certificate and a Microsoft-recognized certificate after completion.",
     },
     {
-      q: "What happens after I submit this form?",
-      a: "You'll receive an email confirmation immediately. Within 24 hours, one of our counselors will call you to understand your goals, answer questions, and recommend the best program for your career transition.",
+      q: "What is the mode of instruction for the classes?",
+      a: "All classes are 100% live and highly interactive, led by experienced instructors. Batch sizes are intentionally kept small to ensure personalized attention and meaningful interaction. Each session is also recorded for future reference.",
+    },
+    {
+      q: "Do I need prior technical or coding knowledge to enroll?",
+      a: "No prior technical background is required. The program is designed to support beginners as well as professionals from non-technical backgrounds.",
+    },
+    {
+      q: "Is there any support provided beyond the classroom sessions?",
+      a: "Yes, learners receive continuous academic support, including doubt-solving sessions and mentorship throughout the course.",
     },
   ];
 
@@ -281,6 +282,7 @@ export default function ContactPage() {
               <span className="block text-white mb-2">Let's Build</span>
               <span className="block">
                 <span className="contact-hero-title-gradient">Your Future</span>
+                <span className="text-gray-400 font-normal ml-3">Together</span>
                 <motion.span
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -299,9 +301,6 @@ export default function ContactPage() {
                     />
                   </svg>
                 </motion.span>
-              </span>
-              <span className="block text-white mt-2">
-                <span className="text-gray-400 font-normal">Together</span>
               </span>
             </motion.h1>
           </div>
@@ -339,7 +338,7 @@ export default function ContactPage() {
           >
             {[
               {
-                value: "8,200+",
+                value: "12,000+",
                 label: "Students Placed",
                 icon: (
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -351,22 +350,21 @@ export default function ContactPage() {
                 )
               },
               {
-                value: "100%",
-                label: "Placement Rate",
+                value: "400+",
+                label: "Hiring Partners",
                 icon: (
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
                   </svg>
                 )
               },
               {
-                value: "24hr",
-                label: "Response Time",
+                value: "4.9/5",
+                label: "Student Rating",
                 icon: (
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12 6 12 12 16 14"/>
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                   </svg>
                 )
               },
@@ -433,39 +431,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════
-          TRUST INDICATORS STRIP
-          ═══════════════════════════════════════════════════════════ */}
-      <section className="relative py-12 px-6 bg-navy-900 border-y border-white/[0.05]">
-        <div className="absolute inset-0 pointer-events-none" style={{
-          backgroundImage: "radial-gradient(circle, rgba(245,130,32,0.03) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }} />
-
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {stats.map((stat, i) => (
-              <SpringReveal key={i} delay={0.1 * i} distance={30} damping={14}>
-                <div className="group relative rounded-xl p-5 bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] hover:border-orange-500/20 transition-all duration-500 text-center">
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
-
-                  <div className="relative z-10">
-                    <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
-                      <stat.icon className="w-5 h-5 text-orange-400" />
-                    </div>
-                    <div className="text-2xl md:text-3xl font-bold text-white mb-1">
-                      <ScrollOdometer value={stat.value} suffix={stat.suffix} duration={1.5} delay={0.3 + i * 0.15} />
-                    </div>
-                    <p className="text-gray-500 text-xs tracking-wider uppercase">{stat.label}</p>
-                  </div>
-
-                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-500 to-orange-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-xl" />
-                </div>
-              </SpringReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════════════════
           CONTACT FORM SECTION - Split Layout
@@ -724,184 +689,10 @@ export default function ContactPage() {
         </section>
       </ThemeProvider>
 
-      {/* ═══════════════════════════════════════════════════════════
-          DIRECT CONTACT - Enhanced Cards
-          ═══════════════════════════════════════════════════════════ */}
-      <section className="py-20 px-6 bg-navy-900">
-        <div className="max-w-4xl mx-auto">
-          <ScrollReveal>
-            <SectionHeading label="Reach Out" title="Direct Contact" align="center" />
-          </ScrollReveal>
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Mail,
-                title: "Email",
-                value: "hello@linkwaylearning.com",
-                href: "mailto:hello@linkwaylearning.com",
-                color: "from-blue-500/20 to-blue-600/10",
-              },
-              {
-                icon: Phone,
-                title: "Phone",
-                value: "+91-93156-47113",
-                href: "tel:+919315647113",
-                color: "from-green-500/20 to-green-600/10",
-              },
-              {
-                icon: MessageCircle,
-                title: "WhatsApp",
-                value: "Message us",
-                href: "https://wa.me/919315647113",
-                external: true,
-                color: "from-emerald-500/20 to-emerald-600/10",
-              },
-              {
-                icon: MapPin,
-                title: "Office",
-                value: "D-23, Sector-59, Noida",
-                color: "from-orange-500/20 to-orange-600/10",
-              },
-            ].map((contact, i) => (
-              <ScrollReveal key={i} delay={0.1 * i}>
-                <div className="relative group">
-                  <CrossFlicker
-                    position="top-right"
-                    color="orange"
-                    size="sm"
-                    delay={0.2 * i}
-                  />
-                  <div className="h-full rounded-xl p-6 bg-white/[0.03] border border-white/[0.08] hover:border-orange-500/30 backdrop-blur-sm transition-all duration-500 text-center overflow-hidden">
-                    {/* Gradient hover effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${contact.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-                    <div className="relative z-10">
-                      <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 group-hover:scale-110 transition-all duration-300">
-                        <contact.icon className="w-6 h-6 text-orange-400" />
-                      </div>
-                      <h4 className="text-white font-semibold mb-2">{contact.title}</h4>
-                      {contact.href ? (
-                        <a
-                          href={contact.href}
-                          target={contact.external ? "_blank" : undefined}
-                          rel={contact.external ? "noopener noreferrer" : undefined}
-                          className="text-gray-400 hover:text-orange-400 transition-colors text-sm"
-                        >
-                          {contact.value}
-                        </a>
-                      ) : (
-                        <p className="text-gray-400 text-sm">{contact.value}</p>
-                      )}
-                    </div>
-
-                    {/* Bottom accent */}
-                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-500 to-orange-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════════════════
-          OFFICE LOCATION - Light Theme
-          ═══════════════════════════════════════════════════════════ */}
-      <ThemeProvider theme="light">
-        <section className="py-20 px-6" style={{ background: "#f2f1ee" }}>
-          <div className="max-w-4xl mx-auto">
-            <ScrollReveal>
-              <div className="text-center mb-12">
-                <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">
-                  Visit Us
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
-                  Our Office
-                </h2>
-              </div>
-            </ScrollReveal>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Address Card */}
-              <SpringReveal distance={40} damping={14}>
-                <div className="h-full rounded-2xl p-8 bg-white border border-gray-100 shadow-xl shadow-gray-200/50">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-orange-500 flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/25">
-                      <Building2 className="w-7 h-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-navy-900 mb-1">Linkway Learning</h3>
-                      <p className="text-gray-500 text-sm">Head Office</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
-                      <div>
-                        <p className="text-navy-800 font-medium">D-23, Sector-59</p>
-                        <p className="text-gray-500">Noida, Gautam Buddha Nagar</p>
-                        <p className="text-gray-500">Uttar Pradesh - 201301</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-orange-500 shrink-0" />
-                      <a href="tel:+919315647113" className="text-navy-800 hover:text-orange-500 transition-colors">
-                        +91-93156-47113
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-orange-500 shrink-0" />
-                      <a href="mailto:hello@linkwaylearning.com" className="text-navy-800 hover:text-orange-500 transition-colors">
-                        hello@linkwaylearning.com
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </SpringReveal>
-
-              {/* Office Hours Card */}
-              <SpringReveal distance={40} damping={14} delay={0.1}>
-                <div className="h-full rounded-2xl p-8 bg-white border border-gray-100 shadow-xl shadow-gray-200/50">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-navy-800 flex items-center justify-center shrink-0 shadow-lg shadow-navy-800/25">
-                      <Calendar className="w-7 h-7 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-navy-900 mb-1">Office Hours</h3>
-                      <p className="text-gray-500 text-sm">When to reach us</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                      <span className="text-navy-800 font-medium">Monday - Friday</span>
-                      <span className="text-gray-500">10:00 AM - 7:00 PM</span>
-                    </div>
-                    <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                      <span className="text-navy-800 font-medium">Saturday</span>
-                      <span className="text-gray-500">10:00 AM - 5:00 PM</span>
-                    </div>
-                    <div className="flex justify-between items-center py-3">
-                      <span className="text-navy-800 font-medium">Sunday</span>
-                      <span className="text-orange-500 font-medium">Closed</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 p-4 rounded-xl bg-orange-50 border border-orange-100">
-                    <p className="text-sm text-orange-800">
-                      <span className="font-semibold">Note:</span> Classes run on weekends and evenings to accommodate working professionals.
-                    </p>
-                  </div>
-                </div>
-              </SpringReveal>
-            </div>
-          </div>
-        </section>
-      </ThemeProvider>
-
-      {/* ═══════════════════════════════════════════════════════════
-          CONTACT FAQ - Light Theme
+          FAQ - Light Theme
           ═══════════════════════════════════════════════════════════ */}
       <ThemeProvider theme="light">
         <section className="py-20 px-6" style={{ background: "#f2f1ee" }}>
@@ -909,21 +700,21 @@ export default function ContactPage() {
             <ScrollReveal>
               <div className="text-center mb-12">
                 <span className="inline-block text-orange-500 text-xs font-bold tracking-[0.2em] uppercase mb-4 border border-orange-200 bg-orange-50 px-3 py-1.5 rounded-full">
-                  Common Questions
+                  Got Questions?
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-navy-900">
                   Frequently Asked Questions
                 </h2>
                 <p className="mt-4 text-gray-500">
-                  Quick answers about enrollment and what to expect.
+                  Straight answers. No corporate fluff.
                 </p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.1}>
               <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl shadow-gray-200/50 border border-gray-100">
-                {contactFaqs.map((faq, i) => (
-                  <AccordionItem key={i} title={faq.q} defaultOpen={i === 0}>
+                {faqs.map((faq, i) => (
+                  <AccordionItem key={i} title={faq.q} defaultOpen={false}>
                     {faq.a}
                   </AccordionItem>
                 ))}

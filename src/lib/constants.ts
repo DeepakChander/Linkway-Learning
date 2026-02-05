@@ -146,9 +146,9 @@ export const NAV_LINKS: NavLink[] = [
 // -----------------------------------------------------------------------------
 
 export const STATS: Stat[] = [
-  { number: 500, suffix: "+", label: "Careers Transformed" },
+  { number: 12000, suffix: "+", label: "Careers Transformed" },
   { number: 400, suffix: "+", label: "Hiring Partners" },
-  { number: 85, suffix: "%", label: "Average Salary Hike" },
+  { number: 83, suffix: "%", label: "Average Salary Hike" },
   { number: 100, suffix: "%", label: "100% Placement" },
 ] as const satisfies Stat[];
 
@@ -895,9 +895,9 @@ export const INSTRUCTORS: Instructor[] = [
   {
     name: "Shubham",
     experience: "5+ years",
-    title: "Senior Data Scientist, Deloitte",
+    title: "Senior Data Scientist, RSPL Group",
     image: "/images/instructors/shubham.jpeg",
-    bio: "Senior Data Scientist at Deloitte with 5+ years of experience in machine learning and advanced analytics. He specializes in building predictive models and delivering data-driven solutions for consulting clients across industries. With expertise in Python, SQL, and ML algorithms, Shubham brings a strategic approach to solving complex business problems through data science.",
+    bio: "Senior Data Scientist at RSPL Group with 5+ years of experience in machine learning and advanced analytics. He specializes in building predictive models and delivering data-driven solutions for consulting clients across industries. With expertise in Python, SQL, and ML algorithms, Shubham brings a strategic approach to solving complex business problems through data science.",
     specializations: ["Python", "Machine Learning", "SQL", "Advanced Analytics"],
   },
 ];
@@ -962,7 +962,7 @@ export const FAQS: FAQCategory[] = [
       },
       {
         q: "What is the average salary hike after the program?",
-        a: "Our graduates see an average salary hike of 85%. Depending on the course and prior experience, salary ranges are ₹6–12 LPA for Data Analytics, ₹8–18 LPA for Data Science & AI, and ₹7–15 LPA for Business Intelligence roles.",
+        a: "Our graduates see an average salary hike of 82.7%. Depending on the course and prior experience, salary ranges are ₹6–12 LPA for Data Analytics, ₹8–18 LPA for Data Science & AI, and ₹7–15 LPA for Business Intelligence roles.",
       },
     ],
   },

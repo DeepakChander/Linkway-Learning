@@ -619,7 +619,7 @@ export default function CoursePageTemplate({
                 viewport={{ once: true }}
                 transition={{ duration: transitionDuration, delay: i * 0.06, ease }}
               >
-                <AccordionItem title={faq.question} defaultOpen={i === 0}>
+                <AccordionItem title={faq.question} defaultOpen={false}>
                   {faq.answer}
                 </AccordionItem>
               </motion.div>

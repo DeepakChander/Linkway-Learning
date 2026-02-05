@@ -71,7 +71,7 @@ export default function Accordion({ items, className }: AccordionProps) {
   return (
     <div className={cn("divide-y", className)}>
       {items.map((item, i) => (
-        <AccordionItem key={i} title={item.title} defaultOpen={i === 0}>
+        <AccordionItem key={i} title={item.title} defaultOpen={false}>
           {item.content}
         </AccordionItem>
       ))}

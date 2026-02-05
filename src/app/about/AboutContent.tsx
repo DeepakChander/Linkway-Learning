@@ -92,17 +92,17 @@ const instructors = [
   {
     name: "Shubham",
     experience: "5+ years",
-    title: "Senior Data Scientist at Deloitte",
-    bio: "Shubham spends his days at Deloitte building machine learning models that help Fortune 500 clients make smarter decisions. He's the kind of mentor who breaks down complex ML concepts into something you can actually apply — no unnecessary jargon, just real-world problem-solving.",
+    title: "Senior Data Scientist at RSPL Group",
+    bio: "Shubham spends his days at RSPL Group building machine learning models that help clients make smarter decisions. He's the kind of mentor who breaks down complex ML concepts into something you can actually apply — no unnecessary jargon, just real-world problem-solving.",
     tags: ["Python", "Machine Learning", "SQL", "Advanced Analytics"],
     image: "/images/instructors/shubham.jpeg",
   },
 ];
 
 const stats = [
-  { target: 8200, suffix: "+", label: "Careers Launched", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg> },
+  { target: 12000, suffix: "+", label: "Careers Launched", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg> },
   { target: 400, suffix: "+", label: "Hiring Partners", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg> },
-  { target: 85, suffix: "%", label: "Avg Salary Jump", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg> },
+  { target: 83, suffix: "%", label: "Avg Salary Jump", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg> },
   { target: 100, suffix: "%", label: "100% Placement", icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg> },
 ];
 
@@ -111,7 +111,7 @@ const milestones = [
   { year: "2020", title: "Going Online", desc: "Pandemic hit \u2014 we went fully online and reached students across India." },
   { year: "2021", title: "500+ Placed", desc: "Crossed 500 successful placements with top companies hiring our grads." },
   { year: "2022", title: "Industry Mentors", desc: "Brought on mentors from Google, PwC, Cognizant, and Autodesk." },
-  { year: "2023", title: "8,200+ Careers", desc: "Became one of India\u2019s most trusted data career platforms." },
+  { year: "2023", title: "12,000+ Careers", desc: "Became one of India\u2019s most trusted data career platforms." },
   { year: "2026", title: "AI & Beyond", desc: "Launched AI/ML tracks and expanded to full-stack data engineering." },
 ];
 
@@ -286,7 +286,7 @@ export default function AboutPage() {
                 >
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </motion.svg>
-                <span className="font-bold text-orange-400">8,200+</span> Careers Launched
+                <span className="font-bold text-orange-400">12,000+</span> Careers Launched
               </span>
               <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-orange-500/15 bg-orange-500/[0.05] text-white">
                 <motion.svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -388,7 +388,7 @@ export default function AboutPage() {
               </SpringReveal>
               <SpringReveal distance={30} damping={14} delay={0.35}>
                 <p className="text-navy-800/60 text-base md:text-lg leading-relaxed">
-                  So we built Linkway to close that gap. Live classes from industry professionals, projects that mirror real business problems, and a placement team that does not stop until you are hired. Over 8200 people have made the switch through us so far.
+                  So we built Linkway to close that gap. Live classes from industry professionals, projects that mirror real business problems, and a placement team that does not stop until you are hired. Over 12,000 people have made the switch through us so far.
                 </p>
               </SpringReveal>
             </div>
@@ -797,7 +797,7 @@ export default function AboutPage() {
 
               <SpringReveal distance={30} damping={14} delay={0.2}>
                 <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-md mb-5">
-                  8,200+ people didn&apos;t just learn data &mdash; they got hired. Your seat is waiting.
+                  12,000+ people didn&apos;t just learn data &mdash; they got hired. Your seat is waiting.
                 </p>
               </SpringReveal>
 
@@ -829,9 +829,9 @@ export default function AboutPage() {
             {/* Right: Stat cards in a grid */}
             <div className="grid grid-cols-1 gap-3">
               {[
-                { value: "8,200+", label: "Careers Launched", color: "orange", percent: "92%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>, gradient: "from-orange-500 to-orange-400" },
+                { value: "12,000+", label: "Careers Launched", color: "orange", percent: "92%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>, gradient: "from-orange-500 to-orange-400" },
                 { value: "100%", label: "100% Placement", color: "emerald", percent: "100%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>, gradient: "from-emerald-500 to-emerald-400" },
-                { value: "85%", label: "Avg Salary Jump", color: "blue", percent: "85%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>, gradient: "from-blue-500 to-blue-400" },
+                { value: "82.7%", label: "Avg Salary Jump", color: "blue", percent: "83%", icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>, gradient: "from-blue-500 to-blue-400" },
               ].map((card, i) => (
                 <SpringReveal key={i} distance={40} damping={12} delay={0.15 + i * 0.1}>
                   <motion.div

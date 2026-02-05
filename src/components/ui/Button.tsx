@@ -1,9 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
+import Link from "next/link";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
@@ -26,22 +27,32 @@ export default function Button({ variant = "primary", size = "md", className, ch
     lg: "px-8 py-4 text-lg",
   };
 
-  const Component = href ? motion.a : motion.button;
-
-  return (
-    <Component
-      href={href}
-      className={cn(base, variants[variant], sizes[size], className)}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.97 }}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      {...(props as any)}
-    >
+  const buttonContent = (
+    <>
       {/* Orange fill wipe effect for outline variant */}
       {variant === "outline" && (
         <span className="absolute inset-0 bg-orange-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
       )}
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-    </Component>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className={cn(base, variants[variant], sizes[size], className)}>
+        {buttonContent}
+      </Link>
+    );
+  }
+
+  return (
+    <motion.button
+      className={cn(base, variants[variant], sizes[size], className)}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      {...props}
+    >
+      {buttonContent}
+    </motion.button>
   );
 }

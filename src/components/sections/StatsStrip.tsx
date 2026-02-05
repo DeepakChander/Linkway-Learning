@@ -12,9 +12,9 @@ import { TrendingUp, Users, Award, Briefcase } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { target: 8200, suffix: "+", label: "Careers Transformed", icon: Users, progress: 100 },
+  { target: 12000, suffix: "+", label: "Careers Transformed", icon: Users, progress: 100 },
   { target: 400, suffix: "+", label: "Hiring Partners", icon: Briefcase, progress: 85 },
-  { target: 85, suffix: "%", label: "Avg Salary Hike", icon: TrendingUp, progress: 85 },
+  { target: 83, suffix: "%", label: "Avg Salary Hike", icon: TrendingUp, progress: 83 },
   { target: 100, suffix: "%", label: "100% Placement", icon: Award, progress: 100 },
 ];
 

@@ -24,7 +24,7 @@ export default function FAQ() {
           { question: "Are classes live or recorded?", answer: "Live, always. With real instructors you can ask questions to. Every session also gets recorded for rewatching." },
           { question: "How does placement work?", answer: "100% placement." },
           { question: "Which companies hire from Linkway?", answer: "Google, Amazon, TCS, Deloitte, Infosys, Wipro, Flipkart, IBM, Razorpay, Accenture, and 30+ more companies." },
-          { question: "What kind of salary can I expect?", answer: "Graduates typically land between ₹6–18 LPA. On average, people see an 85% salary hike after completing the program." },
+          { question: "What kind of salary can I expect?", answer: "Graduates typically land between ₹6–18 LPA. On average, people see an 82.7% salary hike after completing the program." },
           { question: "Can I pay in installments?", answer: "Yes, 0% interest EMI starting at ₹5,500/month. No hidden charges." },
           { question: "What certifications do I get?", answer: "Two: a Linkway Learning completion certificate and a Microsoft Azure AI Fundamentals credential." },
         ]}

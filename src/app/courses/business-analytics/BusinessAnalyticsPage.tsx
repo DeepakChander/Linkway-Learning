@@ -260,7 +260,7 @@ function DashboardMock({ className }: { className?: string }) {
   ];
   const metrics = [
     { label: "Avg. Salary", value: "₹10 LPA", delta: "+28%" },
-    { label: "Placed", value: "400+", delta: "+85%" },
+    { label: "Placed", value: "400+", delta: "+82.7%" },
     { label: "Hiring Partners", value: "100+", delta: "+42%" },
   ];
   return (
@@ -1302,7 +1302,7 @@ export default function BusinessAnalyticsPage() {
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: BRAND_ORANGE },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Personalized Path to Employment", color: BRAND_ORANGE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹5,500/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "BI Certification", sub: "Power BI + Tableau", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: BRAND_ORANGE },
@@ -2369,7 +2369,7 @@ export default function BusinessAnalyticsPage() {
               <SlideIn direction="right" delay={0.1}>
                 <div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50">
                   <ShieldIcon className="w-5 h-5 shrink-0" style={{ color: BRAND_ORANGE }} />
-                  <div><p className="text-sm text-navy-900 font-semibold">100% Placement</p><p className="text-xs text-gray-500">Dedicated career support</p></div>
+                  <div><p className="text-sm text-navy-900 font-semibold">100% Placement</p><p className="text-xs text-gray-500">Personalized Path to Employment</p></div>
                 </div>
               </SlideIn>
               <SlideIn direction="right" delay={0.2}>

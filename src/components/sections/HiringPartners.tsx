@@ -37,10 +37,19 @@ const companyLogos: Record<string, string> = {
   Infosys: "/images/companies/infosys.svg",
   Wipro: "/images/companies/wipro.svg",
   IBM: "/images/companies/ibm.svg",
+  Accenture: "/images/companies/accenture.svg",
+  Razorpay: "/images/companies/razorpay.svg",
+  Capgemini: "/images/companies/capgemini.svg",
+  Cognizant: "/images/companies/cognizant.svg",
+  EXL: "/images/companies/exl.svg",
+  PwC: "/images/companies/pwc.svg",
+  Autodesk: "/images/companies/autodesk.svg",
+  "Booking.com": "/images/companies/booking.svg",
+  EaseMyTrip: "/images/companies/easemytrip.svg",
 };
 
 const monoLogos = new Set([
-  "Amazon", "Microsoft", "IBM", "Wipro",
+  "Amazon", "Microsoft", "IBM", "Wipro", "Cognizant",
 ]);
 
 const companyRoles: Record<string, string> = {
@@ -72,6 +81,15 @@ const companyRoles: Record<string, string> = {
   Infosys: "Software Engineer",
   Wipro: "Cloud Engineer",
   IBM: "AI Research",
+  Accenture: "Tech Consultant",
+  Razorpay: "Backend Engineer",
+  Capgemini: "Data Architect",
+  Cognizant: "Digital Analyst",
+  EXL: "Analytics Lead",
+  PwC: "Data Consultant",
+  Autodesk: "ML Engineer",
+  "Booking.com": "Data Analyst",
+  EaseMyTrip: "BI Developer",
 };
 
 const row1 = [
@@ -87,6 +105,11 @@ const row2 = [
 const row3 = [
   "Uptime AI", "MUFG", "MiQ", "HUL",
   "Genpact", "Sprinklr", "Bandhan Bank", "GlobalLogic", "Wipro",
+];
+
+const row4 = [
+  "Accenture", "Razorpay", "Capgemini", "Cognizant",
+  "EXL", "PwC", "Autodesk", "Booking.com", "EaseMyTrip",
 ];
 
 function CompanyCard({ name }: { name: string }) {
@@ -251,6 +274,7 @@ export default function HiringPartners() {
           <InfiniteRow items={row1} direction="left" speed={70} className="marquee-row" />
           <InfiniteRow items={row2} direction="right" speed={60} className="marquee-row" />
           <InfiniteRow items={row3} direction="left" speed={65} className="marquee-row" />
+          <InfiniteRow items={row4} direction="right" speed={55} className="marquee-row" />
         </div>
 
         <div className="mt-6 sm:mt-8 text-center px-4">

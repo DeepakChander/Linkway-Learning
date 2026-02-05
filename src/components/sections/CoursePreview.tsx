@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, BarChart3, Brain, LineChart, Clock, Zap, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, BarChart3, Brain, LineChart, Clock, Zap, CheckCircle2, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const toolLogos: Record<string, string> = {
@@ -138,8 +138,8 @@ export default function CoursePreview() {
         {/* Two-column: Left list + Right card */}
         <div className="flex flex-col lg:flex-row bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
 
-          {/* Left: Course list */}
-          <div className="w-full lg:w-[360px] xl:w-[400px] shrink-0 lg:border-r border-gray-100">
+          {/* Left: Course list - Hidden on mobile */}
+          <div className="hidden lg:block w-full lg:w-[360px] xl:w-[400px] shrink-0 lg:border-r border-gray-100">
             {courses.map((course, i) => {
               const isActive = activeIndex === i;
               return (
@@ -329,64 +329,101 @@ export default function CoursePreview() {
             </AnimatePresence>
           </div>
 
-          {/* Mobile card */}
+          {/* Mobile card - Redesigned like reference */}
           <div className="lg:hidden">
+            {/* Navigation arrows */}
+            <div className="flex items-center justify-end gap-2 px-4 py-3 border-t border-gray-100 bg-[#f9f8f5]">
+              <button
+                onClick={() => setActiveIndex((prev) => (prev === 0 ? courses.length - 1 : prev - 1))}
+                className="w-10 h-10 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+                aria-label="Previous course"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setActiveIndex((prev) => (prev === courses.length - 1 ? 0 : prev + 1))}
+                className="w-10 h-10 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+                aria-label="Next course"
+              >
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeCourse.slug}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                className="border-t border-gray-100 relative overflow-hidden"
+                className="relative overflow-hidden"
                 style={{
-                  background: "linear-gradient(135deg, #ffffff 0%, #fff9f2 35%, #fff0e0 70%, #ffe4c8 100%)",
+                  background: "linear-gradient(180deg, #fff9f2 0%, #fff0e0 50%, #ffe4c8 100%)",
                 }}
               >
-                <div className={cn("absolute inset-0 bg-gradient-to-br opacity-40", activeCourse.gradient)} />
-                <div className="relative z-10 px-4 sm:px-6 py-5 sm:py-6">
-                  <div className="flex items-center justify-between mb-3 sm:mb-4">
-                    <div className="flex items-center gap-1.5 text-gray-500">
-                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                      <span className="text-xs sm:text-sm font-medium">{activeCourse.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-orange-200/60 bg-white/70">
-                      <CheckCircle2 className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-orange-500" />
-                      <span className="text-[9px] sm:text-[10px] font-semibold text-orange-600">{activeCourse.badge}</span>
-                    </div>
+                <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", activeCourse.gradient)} />
+                <div className="relative z-10 px-5 py-6">
+                  {/* Duration */}
+                  <div className="flex items-center gap-1.5 text-gray-500 mb-4">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-sm font-medium">{activeCourse.duration} part-time</span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">{activeCourse.name}</h3>
+                  {/* Course title */}
+                  <h3 className="text-[1.75rem] font-bold text-gray-900 leading-tight mb-4">{activeCourse.name}</h3>
 
-                  <div className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-orange-400 text-white mb-3 sm:mb-4">
-                    <Zap className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                    <span className="text-[10px] sm:text-[11px] font-semibold capitalize">{activeCourse.category}</span>
+                  {/* Category badge */}
+                  <div className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-orange-400 text-white mb-3 shadow-sm">
+                    <Zap className="w-3.5 h-3.5" />
+                    <span className="text-xs font-semibold capitalize">{activeCourse.category}</span>
                   </div>
 
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5">{activeCourse.description}</p>
+                  {/* Updated badge */}
+                  <div className="flex items-center gap-1.5 text-gray-600 mb-4">
+                    <Check className="w-4 h-4" />
+                    <span className="text-sm font-medium">Updated in 2025</span>
+                  </div>
 
-                  <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-5 sm:mb-6">
+                  {/* Description */}
+                  <p className="text-gray-700 text-[15px] leading-relaxed mb-6">{activeCourse.description}</p>
+
+                  {/* Tool chips */}
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {activeCourse.tools.map((tool) => (
-                      <span key={tool} className="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg bg-white/80 border border-gray-200/60 text-[10px] sm:text-[11px] text-gray-600 font-medium shadow-sm">
+                      <span key={tool} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 border border-gray-200/80 text-xs text-gray-700 font-medium shadow-sm">
                         {toolLogos[tool] && (
-                          <img src={toolLogos[tool]} alt={tool} width={12} height={12} className="w-2.5 h-2.5 sm:w-3 sm:h-3 object-contain" />
+                          <img src={toolLogos[tool]} alt={tool} width={14} height={14} className="w-3.5 h-3.5 object-contain" />
                         )}
                         {tool}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex justify-end">
-                    <Link href={`/courses/${activeCourse.slug}`}>
-                      <span className="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-gray-900 text-gray-900 text-xs sm:text-sm font-semibold">
-                        Discover program
-                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </span>
-                    </Link>
-                  </div>
+                  {/* CTA Button */}
+                  <Link href={`/courses/${activeCourse.slug}`} className="block">
+                    <span className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors">
+                      Discover program
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </Link>
                 </div>
               </motion.div>
             </AnimatePresence>
+
+            {/* Pagination dots */}
+            <div className="flex items-center justify-center gap-1.5 py-4 bg-[#f9f8f5]">
+              {courses.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-200 cursor-pointer",
+                    activeIndex === i ? "bg-orange-500 w-6" : "bg-gray-300 hover:bg-gray-400"
+                  )}
+                  aria-label={`Go to course ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
         </div>

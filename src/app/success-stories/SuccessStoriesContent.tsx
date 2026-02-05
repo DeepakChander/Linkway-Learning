@@ -25,6 +25,7 @@ import TextScramble from "@/components/animation/TextScramble";
 import { ThemeProvider } from "@/lib/theme";
 import Image from "next/image";
 import { ArrowRight, Star, StarHalf, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { useEnquiryModal } from "@/components/forms/EnquiryModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,9 +60,9 @@ type StatItem = {
 } & ({ target: number; suffix: string } | { value: string });
 
 const stats: StatItem[] = [
-  { target: 8200, suffix: "+", label: "Careers Launched", description: "Professionals placed in top companies", icon: "rocket" },
+  { target: 12000, suffix: "+", label: "Careers Launched", description: "Professionals placed in top companies", icon: "rocket" },
   { target: 400, suffix: "+", label: "Hiring Partners", description: "Companies actively recruiting our graduates", icon: "building" },
-  { target: 85, suffix: "%", label: "Avg Salary Hike", description: "Average increase in compensation", icon: "trending" },
+  { target: 83, suffix: "%", label: "Avg Salary Hike", description: "Average increase in compensation", icon: "trending" },
   { value: "Unlimited", label: "1:1 Doubt Clearing", description: "Personal mentorship until you succeed", icon: "headset" },
 ];
 
@@ -700,7 +701,7 @@ function SuccessStoriesCTA() {
           <div className="relative px-6 md:px-10 lg:px-12 pt-10 md:pt-14 pb-8 flex flex-col justify-center">
             <ScrollReveal>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8 text-white">
-                8200+ learners already{" "}
+                12,000+ learners already{" "}
                 <span className="text-orange-400">wrote their success story</span>
                 {" "}with us. Your turn to join{" "}
                 <span className="text-orange-400">world-class companies.</span>
@@ -738,6 +739,7 @@ function SuccessStoriesCTA() {
    MAIN PAGE
    ═══════════════════════════════════════════════════════════════════ */
 export default function SuccessStoriesPage() {
+  const { openEnquiry } = useEnquiryModal();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -803,7 +805,7 @@ export default function SuccessStoriesPage() {
             >
               <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-xl mb-6">
                 <span className="w-2 h-2 rounded-full bg-orange-500 about-pulse-dot" />
-                <span className="text-sm text-gray-300 font-medium">8200+ careers transformed and counting</span>
+                <span className="text-sm text-gray-300 font-medium">12,000+ careers transformed and counting</span>
               </span>
             </motion.div>
 
@@ -835,8 +837,8 @@ export default function SuccessStoriesPage() {
               className="mt-8 flex items-center justify-center gap-8 md:gap-12 flex-wrap"
             >
               {[
-                { value: "8200+", label: "Placed" },
-                { value: "85%", label: "Salary Jump" },
+                { value: "12,000+", label: "Placed" },
+                { value: "82.7%", label: "Salary Jump" },
                 { value: "400+", label: "Partners" },
               ].map((s, i) => (
                 <div key={s.label} className="text-center">
@@ -862,15 +864,15 @@ export default function SuccessStoriesPage() {
                   <path d="M9 3V15M9 15L4 10M9 15L14 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
-              <a
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl border border-white/[0.08] text-white/50 font-medium text-base hover:bg-white/[0.04] hover:text-white/70 transition-all duration-500"
+              <button
+                onClick={openEnquiry}
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl border border-white/[0.08] text-white/50 font-medium text-base hover:bg-white/[0.04] hover:text-white/70 transition-all duration-500 cursor-pointer"
               >
                 Start Your Journey
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </button>
             </motion.div>
 
           </motion.div>

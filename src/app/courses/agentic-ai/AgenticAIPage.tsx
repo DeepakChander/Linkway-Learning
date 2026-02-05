@@ -723,7 +723,7 @@ export default function AgenticAIPage() {
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: ACCENT_PURPLE },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Personalized Path to Employment", color: ACCENT_PURPLE },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹7,000/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "AI Certifications", sub: "LangChain + OpenAI", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: ACCENT_PURPLE },
@@ -1412,7 +1412,7 @@ export default function AgenticAIPage() {
                   </motion.div>
                   <div>
                     <p className="text-sm text-gray-900 font-semibold">100% Placement</p>
-                    <p className="text-xs text-gray-500">Dedicated career support</p>
+                    <p className="text-xs text-gray-500">Personalized Path to Employment</p>
                   </div>
                 </motion.div>
               </SlideIn>

@@ -680,7 +680,7 @@ export default function InvestmentBankingPage() {
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: ACCENT_GOLD },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Personalized Path to Employment", color: ACCENT_GOLD },
     { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹6,500/mo", color: ACCENT_BLUE },
     { icon: SparklesIcon, label: "CFA Prep Included", sub: "Level 1 exam prep", color: ACCENT_CYAN },
     { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: ACCENT_GOLD },
@@ -1243,7 +1243,7 @@ export default function InvestmentBankingPage() {
             </div>
             <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
               <SlideIn direction="right"><div className="bg-gray-50 rounded-2xl border border-gray-100 p-6"><p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Expected Salary Range</p><p className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_GOLD}, ${ACCENT_BLUE})` }}>₹8–16 LPA</p></div></SlideIn>
-              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_GOLD }} /><div><p className="text-sm text-navy-900 font-semibold">100% Placement</p><p className="text-xs text-gray-500">Dedicated career support</p></div></div></SlideIn>
+              <SlideIn direction="right" delay={0.1}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><ShieldIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_GOLD }} /><div><p className="text-sm text-navy-900 font-semibold">100% Placement</p><p className="text-xs text-gray-500">Personalized Path to Employment</p></div></div></SlideIn>
               <SlideIn direction="right" delay={0.2}><div className="flex items-center gap-3 px-5 py-3.5 rounded-xl border border-gray-200 bg-gray-50"><SparklesIcon className="w-5 h-5 shrink-0" style={{ color: ACCENT_BLUE }} /><div><p className="text-sm text-navy-900 font-semibold">CFA Level 1 Prep Included</p><p className="text-xs text-gray-500">Industry-recognized certification prep</p></div></div></SlideIn>
             </div>
           </div>

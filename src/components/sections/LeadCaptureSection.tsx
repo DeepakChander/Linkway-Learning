@@ -356,7 +356,7 @@ export default function LeadCaptureSection() {
           <div className="relative px-4 sm:px-6 md:px-10 lg:px-12 pt-8 sm:pt-10 md:pt-14 pb-6 sm:pb-8 flex flex-col justify-center">
             <ScrollReveal>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6 sm:mb-8 text-white">
-                Join 8000+ professionals who{" "}
+                Join 12,000+ professionals who{" "}
                 <span className="text-orange-400">transformed their careers</span>
                 {" "}and landed roles at{" "}
                 <span className="text-orange-400">world-class companies.</span>

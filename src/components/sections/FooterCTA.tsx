@@ -357,7 +357,7 @@ export default function FooterCTA() {
           {/* ── Left Side ── */}
           <div className="relative px-6 md:px-10 lg:px-12 pt-10 md:pt-12 pb-0 flex flex-col overflow-hidden">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-2 text-white">
-              Join 8000+ professionals who{" "}
+              Join 12,000+ professionals who{" "}
               <span className="text-orange-400">transformed their careers</span>
               {" "}and landed roles at{" "}
               <span className="text-orange-400">world-class companies.</span>

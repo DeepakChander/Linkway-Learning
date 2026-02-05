@@ -154,6 +154,34 @@ function SectionLabel({ children, center = false, light = false }: { children: R
   );
 }
 
+/* Program Offer Icons — for What Our Program Offers section */
+function ProgramOfferIcon({ type }: { type: string }) {
+  const iconClass = "w-5 h-5 text-orange-500";
+  const icons: Record<string, React.ReactNode> = {
+    mentorship: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>,
+    video: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" /></svg>,
+    live: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>,
+    path: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>,
+    hackathon: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" /></svg>,
+    assessment: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>,
+    career: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>,
+    expert: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>,
+    workshop: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>,
+    placement: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" /></svg>,
+    network: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>,
+    interview: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" /></svg>,
+    material: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>,
+    support: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>,
+    certificate: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" /></svg>,
+    flexible: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+    project: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>,
+    platform: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>,
+    progress: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>,
+    networking: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>,
+  };
+  return icons[type] || icons.mentorship;
+}
+
 /* Stat card — Panorama-inspired */
 function StatCard({ value, suffix, label, icon: Icon, delay = 0, accent = BRAND_ORANGE }: { value: number; suffix: string; label: string; icon: React.FC<{ className?: string; style?: React.CSSProperties }>; delay?: number; accent?: string }) {
   return (
@@ -1535,8 +1563,8 @@ export default function DataAnalyticsPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
-  const [openFaq, setOpenFaq] = useState(0);
-  const [activeTab, setActiveTab] = useState(0);
+  const [openFaq, setOpenFaq] = useState(-1);
+  const [activeTab, setActiveTab] = useState(-1);
 
   /* ── Data ── */
   const personas = [
@@ -1547,52 +1575,111 @@ export default function DataAnalyticsPage() {
   ];
 
   const curriculum = [
-    { phase: "01", title: "Foundations", duration: "Weeks 1–8", color: BRAND_ORANGE, skills: ["Excel", "Tableau", "Power BI", "Python", "R"], topics: [
-      "Excel for Analytics — functions, charts, dashboards, forecasting models",
-      "Tableau & Power BI — interactive dashboards, storyboards, business reports",
-      "Python & R Programming — basics, data structures, functions, libraries",
-    ], code: [
-      { text: "# Excel-style analysis in Python", color: "#8b949e" },
-      { text: "import pandas as pd", color: "#79c0ff" },
-      { text: "", color: "#e6edf3" },
-      { text: 'df = pd.read_csv("sales.csv")', color: "#e6edf3" },
-      { text: "pivot = df.pivot_table(", color: "#e6edf3" },
-      { text: "  values='revenue',", color: "#e6edf3" },
-      { text: "  index='region',", color: "#e6edf3" },
-      { text: "  aggfunc='sum'", color: "#e6edf3" },
-      { text: ")", color: "#e6edf3" },
-      { text: ">>> ₹12.4Cr total revenue", color: "#7ee787" },
-    ]},
-    { phase: "02", title: "Core Analysis", duration: "Weeks 9–16", color: ACCENT_BLUE, skills: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Statistics"], topics: [
-      "Statistics & Hypothesis Testing — descriptive, probability, inferential, ANOVA",
-      "Data Analysis & Visualization — NumPy, Pandas, Matplotlib, Seaborn",
-      "Data Cleaning & Feature Engineering — missing values, outliers, encoding",
-    ], code: [
-      { text: "# Statistical hypothesis test", color: "#8b949e" },
-      { text: "from scipy import stats", color: "#79c0ff" },
-      { text: "", color: "#e6edf3" },
-      { text: "t_stat, p_value = stats.ttest_ind(", color: "#e6edf3" },
-      { text: "  group_a, group_b", color: "#e6edf3" },
-      { text: ")", color: "#e6edf3" },
-      { text: 'print(f"p-value: {p_value:.4f}")', color: "#e6edf3" },
-      { text: ">>> p-value: 0.0023", color: "#7ee787" },
-      { text: ">>> Result: Statistically significant", color: "#7ee787" },
-    ]},
-    { phase: "03", title: "Machine Learning", duration: "Weeks 17–24", color: ACCENT_CYAN, skills: ["Scikit-learn", "PySpark", "MySQL", "ARIMA", "Clustering"], topics: [
-      "Supervised Learning — regression, classification, decision trees, random forests",
-      "Unsupervised Learning — K-means, hierarchical clustering, PCA",
-      "Time Series & Big Data — ARIMA, SARIMA, MySQL, Spark, PySpark",
-    ], code: [
-      { text: "# Train a prediction model", color: "#8b949e" },
-      { text: "from sklearn.ensemble import RandomForestClassifier", color: "#79c0ff" },
-      { text: "", color: "#e6edf3" },
-      { text: "model = RandomForestClassifier(n_estimators=100)", color: "#e6edf3" },
-      { text: "model.fit(X_train, y_train)", color: "#e6edf3" },
-      { text: "score = model.score(X_test, y_test)", color: "#e6edf3" },
-      { text: "", color: "#e6edf3" },
-      { text: 'print(f"Accuracy: {score:.1%}")', color: "#e6edf3" },
-      { text: ">>> Accuracy: 94.2%", color: "#7ee787" },
-    ]},
+    {
+      title: "Python Programming Fundamentals",
+      weeks: 5,
+      projects: 6,
+      description: "Start your data journey with Python - the most in-demand programming language for analytics. No prior coding experience needed. We begin from absolute basics and progressively build your confidence with hands-on exercises every single day.",
+      outcomes: [
+        "Python basics: variables, data types, operators, and control flow",
+        "Functions, loops, and error handling with real-world examples",
+        "Data structures: lists, dictionaries, sets - when to use each",
+        "Introduction to Pandas & NumPy for data manipulation",
+        "File handling: reading CSVs, Excel files, and JSON data",
+        "Git basics: version control for tracking your analysis work",
+      ],
+      tools: ["Python", "Jupyter Notebook", "VS Code", "Pandas", "NumPy", "Git"],
+    },
+    {
+      title: "SQL & Database Essentials",
+      weeks: 4,
+      projects: 5,
+      description: "SQL is the language of data - every analyst uses it daily. Learn to query databases confidently, from simple SELECTs to complex analytical queries. By the end, you'll write queries that extract meaningful insights from millions of rows.",
+      outcomes: [
+        "SQL fundamentals: SELECT, WHERE, GROUP BY, ORDER BY, HAVING",
+        "JOINs mastery: INNER, LEFT, RIGHT, FULL - when and why to use each",
+        "Advanced SQL: subqueries, CTEs, and window functions",
+        "Aggregate functions and data summarization techniques",
+        "Database design basics: tables, keys, and relationships",
+        "Working with cloud databases: BigQuery and PostgreSQL",
+      ],
+      tools: ["PostgreSQL", "Google BigQuery", "MySQL", "DBeaver"],
+    },
+    {
+      title: "Data Visualization & Business Intelligence",
+      weeks: 4,
+      projects: 5,
+      description: "Transform numbers into visual stories that drive decisions. Master the art of creating dashboards that executives actually use. Learn both Tableau and Power BI - the two most sought-after BI tools in the job market.",
+      outcomes: [
+        "Data visualization principles: choosing the right chart for your data",
+        "Tableau: from basics to calculated fields and parameters",
+        "Power BI: data modeling, DAX formulas, and report design",
+        "Dashboard design: layout, color theory, and user experience",
+        "Interactive filters, drill-downs, and dynamic visualizations",
+        "Data storytelling: presenting insights that influence decisions",
+      ],
+      tools: ["Tableau", "Power BI", "Google Data Studio", "Excel Advanced"],
+    },
+    {
+      title: "Statistics & Exploratory Data Analysis",
+      weeks: 3,
+      projects: 4,
+      description: "Build your statistical intuition - the secret weapon of great analysts. Learn to explore datasets systematically, spot patterns, identify anomalies, and make data-driven recommendations with confidence.",
+      outcomes: [
+        "Descriptive statistics: mean, median, mode, standard deviation",
+        "Data distributions: normal, skewed, and when it matters",
+        "Correlation analysis: finding relationships in your data",
+        "Hypothesis testing and A/B testing fundamentals",
+        "EDA techniques: systematic approach to understanding any dataset",
+        "Identifying outliers, missing data, and data quality issues",
+      ],
+      tools: ["Python", "Pandas", "Matplotlib", "Seaborn", "SciPy"],
+    },
+    {
+      title: "Machine Learning for Analysts",
+      weeks: 4,
+      projects: 5,
+      description: "Demystify machine learning and add predictive power to your analytics toolkit. Focus on practical ML applications that analysts use daily: forecasting sales, predicting churn, and segmenting customers. No PhD required - just curiosity.",
+      outcomes: [
+        "ML fundamentals: supervised vs unsupervised learning explained simply",
+        "Linear & logistic regression: predicting numbers and categories",
+        "Decision trees and random forests: interpretable predictions",
+        "Customer segmentation using clustering techniques",
+        "Model evaluation: accuracy, precision, recall - what matters when",
+        "Feature engineering: creating predictive signals from raw data",
+      ],
+      tools: ["Scikit-learn", "XGBoost", "Python", "Jupyter", "Streamlit"],
+    },
+    {
+      title: "GenAI & LLM Applications",
+      weeks: 2,
+      projects: 4,
+      description: "The future of analytics is AI-augmented. Learn to leverage ChatGPT, Claude, and other LLMs to 10x your productivity. Build AI assistants that write SQL, generate reports, and answer data questions in plain English.",
+      outcomes: [
+        "Prompt engineering: getting reliable outputs from AI models",
+        "Using ChatGPT & Claude for data analysis and code generation",
+        "Text-to-SQL: querying databases with natural language",
+        "Automated report generation and insight summarization",
+        "Building simple RAG systems for domain-specific Q&A",
+        "AI ethics and responsible use in business analytics",
+      ],
+      tools: ["ChatGPT", "Claude", "OpenAI API", "LangChain", "Streamlit"],
+    },
+    {
+      title: "Capstone Project",
+      weeks: 2,
+      projects: 1,
+      description: "Put everything together in a comprehensive real-world project. Work on an actual business problem, build an end-to-end analytics solution, and present to industry professionals. Graduate with a portfolio piece that impresses employers.",
+      outcomes: [
+        "Scope and plan a complete analytics project independently",
+        "Build end-to-end pipeline: data collection to final dashboard",
+        "Apply ML models to generate actionable business predictions",
+        "Integrate GenAI to enhance your analytics solution",
+        "Create professional documentation and presentation",
+        "Present findings to industry panel and receive feedback",
+      ],
+      tools: ["All Previous Tools", "GitHub Portfolio", "Notion", "Loom"],
+    },
   ];
 
   const tools = [
@@ -1643,15 +1730,18 @@ export default function DataAnalyticsPage() {
   ];
 
   const faqs = [
-    { question: "Do I need to know coding?", answer: "Nope. We start from the basics — Excel, then SQL, then Python. Everything is taught step by step with exercises, so you're never lost." },
-    { question: "What's the schedule like?", answer: "Both weekday and weekend batches are available. Everything is live with a real instructor, and every session gets recorded in case you miss one." },
-    { question: "How does placement work?", answer: "100% placement with dedicated career support including resume reviews, mock interviews, and direct company referrals." },
-    { question: "Can I pay in EMIs?", answer: "Yes — 0% interest EMI starting at ₹5,500/month. We want cost to be the last thing holding you back." },
-    { question: "What certifications do I get?", answer: "A Linkway Learning completion certificate plus prep for the Microsoft Azure AI Fundamentals certification exam." },
+    { question: "Who is this program designed for?", answer: "Designed for graduates, working professionals, and career changers interested in this booming field. Beginners are welcome." },
+    { question: "How is the program organized?", answer: "A blend of recorded lessons, live mentor-led classes, and hands-on projects in small batches." },
+    { question: "What skills and concepts will I learn?", answer: "Excel, Python, SQL, data visualization, machine learning, deep learning, big data, and MLOps through practical projects." },
+    { question: "What career roles can I pursue after completion?", answer: "You can pursue fast-growing careers such as Data Analyst, BI Analyst, Machine Learning Engineer, and gain the skills needed to be job-ready for leading companies." },
+    { question: "How long is the Data Analytics program at Linkway Learning?", answer: "It is a comprehensive 6-month program designed to take you from basics to advanced industry standards." },
+    { question: "Who will be teaching the course?", answer: "You will learn directly from veteran industry experts with years of hands-on experience in the data analytics field." },
+    { question: "Do I need a technical background to join?", answer: "Not at all. The course is beginner-friendly and starts with the absolute fundamentals, making it accessible to everyone." },
+    { question: "How does Linkway Learning help me get hired?", answer: "As it is a 100% placement program, beyond technical skills, we provide end-to-end career support including resume building, LinkedIn optimization, and mock interviews to make you 100% job-ready." },
   ];
 
   const highlights = [
-    { icon: ShieldIcon, label: "100% Placement", sub: "Dedicated career support", color: BRAND_ORANGE },
+    { icon: ShieldIcon, label: "100% Placement", sub: "Personalized Path to Employment", color: BRAND_ORANGE },
     { icon: HeadsetIcon, label: "Unlimited 1:1 Doubt Clearing", sub: "Personal mentorship", color: ACCENT_BLUE },
     { icon: MicrosoftLogo, label: "Microsoft Certification", sub: "Exam prep included", color: ACCENT_CYAN },
     { icon: VideoIcon, label: "Live Interactive Classes", sub: "Learn from FAANG mentors", color: BRAND_ORANGE },
@@ -1896,6 +1986,114 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
+      {/* ═══════ WHAT OUR PROGRAM OFFERS — Premium feature showcase ═══════ */}
+      <section className="relative py-20 md:py-28 overflow-hidden bg-[#fafbfc]">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0)`, backgroundSize: "32px 32px" }} />
+        {/* Soft gradient overlays */}
+        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-white to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white to-transparent" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16 md:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-600 text-xs font-semibold tracking-wider uppercase mb-6">
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                Program Highlights
+              </span>
+            </motion.div>
+            <motion.h2
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-5"
+              style={{ color: BRAND_NAVY }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              What Our{" "}
+              <span className="relative">
+                <span className="relative z-10 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-transparent">Program</span>
+                <motion.span
+                  className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-orange-500 to-amber-500"
+                  initial={{ scaleX: 0, originX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </span>
+              {" "}Offers?
+            </motion.h2>
+            <motion.p
+              className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Our Data Analytics program equips you with industry-ready skills through advanced tools and expert support.
+            </motion.p>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+            {[
+              { icon: "mentorship", label: "1:1 Doubt Clearing", desc: "Unlimited personal sessions" },
+              { icon: "video", label: "250+ Hours Content", desc: "Self-paced learning" },
+              { icon: "live", label: "400+ Live Hours", desc: "Interactive classes" },
+              { icon: "path", label: "Personalized Paths", desc: "Tailored to your goals" },
+              { icon: "hackathon", label: "Live Hackathons", desc: "Real competition experience" },
+              { icon: "assessment", label: "Regular Assessments", desc: "Track your progress" },
+              { icon: "career", label: "Lifetime Career Support", desc: "We never stop helping" },
+              { icon: "expert", label: "Industry Mentors", desc: "Learn from the best" },
+              { icon: "workshop", label: "Webinars & Workshops", desc: "Extra learning sessions" },
+              { icon: "placement", label: "360° Placement Help", desc: "End-to-end assistance" },
+              { icon: "network", label: "Alumni Network", desc: "12,000+ strong community" },
+              { icon: "interview", label: "Interview Prep", desc: "Mock interviews included" },
+              { icon: "material", label: "Course Materials", desc: "Lifetime access" },
+              { icon: "support", label: "24/7 Support", desc: "Always here for you" },
+              { icon: "certificate", label: "Certifications", desc: "Industry-recognized" },
+              { icon: "flexible", label: "Flexible Schedule", desc: "Learn at your pace" },
+              { icon: "project", label: "Real Projects", desc: "Portfolio-ready work" },
+              { icon: "platform", label: "Learning Platform", desc: "Interactive & modern" },
+              { icon: "progress", label: "Progress Tracking", desc: "Visual dashboards" },
+              { icon: "networking", label: "Networking Events", desc: "Connect with peers" },
+            ].map((feature, i) => (
+              <motion.div
+                key={feature.label}
+                className="group relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: Math.min(i * 0.03, 0.3) }}
+              >
+                <div className="relative h-full p-4 sm:p-5 rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/10 group-hover:-translate-y-1">
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="relative z-10 flex items-start gap-3">
+                    {/* Icon */}
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-orange-100 to-orange-50 border border-orange-200 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:border-orange-300 transition-all duration-300">
+                      <ProgramOfferIcon type={feature.icon} />
+                    </div>
+
+                    {/* Text */}
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-sm sm:text-base mb-0.5 transition-colors duration-300" style={{ color: BRAND_NAVY }}>{feature.label}</h3>
+                      <p className="text-gray-500 text-xs sm:text-sm leading-relaxed group-hover:text-gray-600 transition-colors duration-300">{feature.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ═══════ WHO IS THIS FOR — Interactive spotlight reveal ═══════ */}
       <section className="relative py-24 px-6 bg-[#0a0e18] overflow-hidden">
@@ -2060,454 +2258,125 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM — Immersive Bento Journey ═══════ */}
-      <section className="relative py-24 px-6 overflow-hidden bg-[#070b14]">
-        {/* ── Mesh gradient background ── */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: `
-            radial-gradient(ellipse 70% 50% at 0% 0%, #1e1145 0%, transparent 50%),
-            radial-gradient(ellipse 60% 50% at 100% 100%, #0c1a3a 0%, transparent 50%),
-            radial-gradient(ellipse 50% 40% at 50% 30%, #120e2a 0%, transparent 50%)
-          `
-        }} />
-
-        {/* ── Floating animated orbs ── */}
-        <motion.div
-          className="absolute w-[500px] h-[500px] rounded-full pointer-events-none blur-[120px]"
-          style={{ top: "5%", left: "-10%", background: `radial-gradient(circle, ${BRAND_ORANGE}18, transparent 70%)` }}
-          animate={{ x: [0, 60, 0], y: [0, 40, 0], scale: [1, 1.15, 1] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute w-[450px] h-[450px] rounded-full pointer-events-none blur-[100px]"
-          style={{ bottom: "0%", right: "-8%", background: `radial-gradient(circle, ${ACCENT_BLUE}14, transparent 70%)` }}
-          animate={{ x: [0, -50, 0], y: [0, -35, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        />
-        <motion.div
-          className="absolute w-[350px] h-[350px] rounded-full pointer-events-none blur-[90px]"
-          style={{ top: "40%", left: "40%", background: `radial-gradient(circle, ${ACCENT_CYAN}0c, transparent 70%)` }}
-          animate={{ x: [0, 30, -20, 0], y: [0, -30, 20, 0], scale: [1, 1.1, 0.95, 1] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-        />
-
-        {/* ── Animated aurora streaks ── */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="aurora1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor={BRAND_ORANGE} stopOpacity="0" />
-              <stop offset="30%" stopColor={BRAND_ORANGE} stopOpacity="0.06" />
-              <stop offset="70%" stopColor={ACCENT_BLUE} stopOpacity="0.04" />
-              <stop offset="100%" stopColor={ACCENT_BLUE} stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="aurora2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor={ACCENT_CYAN} stopOpacity="0" />
-              <stop offset="40%" stopColor={ACCENT_CYAN} stopOpacity="0.05" />
-              <stop offset="60%" stopColor={BRAND_ORANGE} stopOpacity="0.03" />
-              <stop offset="100%" stopColor={BRAND_ORANGE} stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            d="M-100,150 C200,50 500,300 800,120 S1200,250 1600,100"
-            fill="none"
-            stroke="url(#aurora1)"
-            strokeWidth="2"
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M-50,350 C300,250 600,450 900,300 S1300,400 1600,320"
-            fill="none"
-            stroke="url(#aurora2)"
-            strokeWidth="1.5"
-            initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 3.5, delay: 0.5, ease: "easeInOut" }}
-          />
-        </svg>
-
-        {/* ── Animated particle dots ── */}
-        {[
-          { x: "12%", y: "18%", size: 3, dur: 6, delay: 0 },
-          { x: "88%", y: "25%", size: 2, dur: 8, delay: 1 },
-          { x: "25%", y: "75%", size: 2.5, dur: 7, delay: 2 },
-          { x: "72%", y: "65%", size: 2, dur: 9, delay: 3 },
-          { x: "50%", y: "15%", size: 1.5, dur: 10, delay: 1.5 },
-          { x: "35%", y: "85%", size: 2, dur: 8, delay: 4 },
-          { x: "80%", y: "80%", size: 3, dur: 7, delay: 2.5 },
-          { x: "15%", y: "45%", size: 1.5, dur: 11, delay: 5 },
-        ].map((p, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full pointer-events-none"
-            style={{ left: p.x, top: p.y, width: p.size, height: p.size, backgroundColor: i % 3 === 0 ? BRAND_ORANGE : i % 3 === 1 ? ACCENT_BLUE : ACCENT_CYAN }}
-            animate={{ opacity: [0, 0.5, 0], y: [0, -20, 0], scale: [0.5, 1, 0.5] }}
-            transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
-          />
-        ))}
-
-        <div className="relative z-10 max-w-6xl mx-auto">
+      {/* ═══════ CURRICULUM — Clean Accordion Style ═══════ */}
+      <section className="relative py-16 md:py-24 px-4 sm:px-6 bg-[#f3f4f6]">
+        <div className="max-w-4xl mx-auto">
           {/* Header */}
           <ScrollReveal>
-            <SectionLabel center light>Curriculum</SectionLabel>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight text-center">
-              Your Learning{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_CYAN})` }}>Journey</span>
+            <SectionLabel center>Curriculum</SectionLabel>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
+              What You&apos;ll{" "}
+              <span className="text-orange-500">Master</span>
             </h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto text-center">24 weeks of intensive, hands-on training. Click each phase to explore.</p>
+            <p className="mt-4 text-gray-600 text-base md:text-lg max-w-2xl mx-auto text-center">
+              Industry-aligned modules designed by FAANG experts to make you job-ready.
+            </p>
           </ScrollReveal>
 
-          {/* ── Horizontal Phase Selector ── */}
-          <div className="mt-14 flex items-center justify-center">
-            <div className="relative flex items-center gap-0 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-1.5">
-              {/* Animated slider background */}
+          {/* Accordion Cards */}
+          <div className="mt-10 md:mt-14 space-y-3">
+            {curriculum.map((mod, i) => (
               <motion.div
-                className="absolute top-1.5 bottom-1.5 rounded-xl"
-                style={{ backgroundColor: curriculum[activeTab >= 0 ? activeTab : 0]?.color || BRAND_ORANGE }}
-                animate={{
-                  left: `${(activeTab >= 0 ? activeTab : 0) * 33.33 + 0.5}%`,
-                  width: "33.33%",
-                  opacity: 0.15,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              />
-              {curriculum.map((mod, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveTab(i)}
-                  className={cn(
-                    "relative z-10 flex items-center gap-2.5 px-5 py-3 rounded-xl transition-all duration-300 cursor-pointer",
-                    activeTab === i ? "text-white" : "text-gray-500 hover:text-gray-300"
-                  )}
-                >
-                  <span
-                    className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono shrink-0 transition-all duration-300"
-                    style={{
-                      backgroundColor: activeTab === i ? mod.color : `${mod.color}15`,
-                      color: activeTab === i ? "#fff" : mod.color,
-                    }}
-                  >
-                    {mod.phase}
-                  </span>
-                  <span className="text-sm font-semibold hidden sm:block">{mod.title}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Progress Rail ── */}
-          <div className="mt-8 max-w-2xl mx-auto">
-            <div className="flex items-center gap-1">
-              {curriculum.map((mod, i) => (
-                <div key={i} className="flex-1 flex items-center gap-1">
-                  <motion.div
-                    className="flex-1 h-1 rounded-full overflow-hidden"
-                    style={{ backgroundColor: `${mod.color}15` }}
-                  >
-                    <motion.div
-                      className="h-full rounded-full"
-                      style={{ backgroundColor: mod.color }}
-                      initial={{ width: "0%" }}
-                      animate={{ width: activeTab >= i ? "100%" : "0%" }}
-                      transition={{ duration: 0.6, delay: activeTab >= i ? i * 0.15 : 0, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                  </motion.div>
-                  {i < curriculum.length - 1 && (
-                    <motion.div
-                      className="w-2 h-2 rounded-full shrink-0 border-2"
-                      style={{
-                        borderColor: activeTab > i ? curriculum[i + 1].color : `${curriculum[i + 1].color}30`,
-                        backgroundColor: activeTab > i ? curriculum[i + 1].color : "transparent",
-                      }}
-                      animate={{ scale: activeTab === i + 1 ? [1, 1.3, 1] : 1 }}
-                      transition={{ duration: 1.5, repeat: activeTab === i + 1 ? Infinity : 0, ease: "easeInOut" }}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="flex justify-between mt-2">
-              {curriculum.map((mod, i) => (
-                <span key={i} className="text-[10px] font-mono" style={{ color: activeTab >= i ? mod.color : `${mod.color}40` }}>
-                  {mod.duration}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Bento Content Area ── */}
-          <AnimatePresence mode="wait">
-            {curriculum.map((mod, i) => activeTab === i && (
-              <motion.div
-                key={mod.phase}
-                className="mt-12"
-                initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.97 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
               >
-                {/* Phase header card */}
-                <div className="flex items-center gap-4 mb-8">
-                  <motion.div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center font-bold text-2xl font-mono text-white relative overflow-hidden"
-                    style={{ backgroundColor: mod.color }}
-                    whileHover={{ scale: 1.05, rotate: -3 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+                  {/* Card Header */}
+                  <div
+                    className="p-5 md:p-6 cursor-pointer select-none"
+                    onClick={() => setActiveTab(activeTab === i ? -1 : i)}
                   >
-                    <motion.div
-                      className="absolute inset-0"
-                      style={{ background: `linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%)` }}
-                      animate={{ x: ["-150%", "150%"] }}
-                      transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
-                    />
-                    <span className="relative">{mod.phase}</span>
-                  </motion.div>
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white">{mod.title}</h3>
-                    <p className="text-sm font-mono mt-1" style={{ color: `${mod.color}90` }}>{mod.duration}</p>
-                  </div>
-                  <div className="hidden md:flex flex-1 justify-end">
-                    <div className="flex flex-wrap gap-2 justify-end">
-                      {mod.skills.map((skill, j) => (
-                        <motion.div
-                          key={skill}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.3, delay: 0.2 + j * 0.06 }}
-                        >
-                          <ToolLogo name={skill} />
-                        </motion.div>
-                      ))}
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg md:text-xl font-bold text-navy-900">{mod.title}</h3>
+                        <div className="flex items-center gap-2 mt-2.5">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                            {mod.weeks} weeks
+                          </span>
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-600 border border-emerald-100">
+                            {mod.projects} {mod.projects === 1 ? "project" : "projects"}
+                          </span>
+                        </div>
+                      </div>
+                      <motion.div
+                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-gray-400 hover:bg-gray-50 transition-colors"
+                        animate={{ rotate: activeTab === i ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      </motion.div>
                     </div>
                   </div>
-                </div>
 
-                {/* Mobile skills */}
-                <div className="flex flex-wrap gap-2 mb-6 md:hidden">
-                  {mod.skills.map((skill, j) => (
-                    <motion.div
-                      key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.2 + j * 0.06 }}
-                    >
-                      <ToolLogo name={skill} />
-                    </motion.div>
-                  ))}
-                </div>
+                  {/* Expandable Content */}
+                  <AnimatePresence>
+                    {activeTab === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 md:px-6 pb-6 border-t border-gray-100">
+                          {/* Description */}
+                          <p className="pt-5 text-gray-600 text-[15px] leading-relaxed">
+                            {mod.description}
+                          </p>
 
-                {/* Bento Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                  {/* Topics — Left large card */}
-                  <motion.div
-                    className="lg:col-span-7 relative group rounded-2xl overflow-hidden"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.15 }}
-                  >
-                    {/* Glow border */}
-                    <div
-                      className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]"
-                      style={{ background: `linear-gradient(135deg, ${mod.color}40, transparent 50%, ${mod.color}20)` }}
-                    />
-                    <div className="relative bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-7 h-full group-hover:bg-white/[0.06] transition-all duration-500">
-                      {/* Header with icon */}
-                      <div className="flex items-center gap-2.5 mb-6">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${mod.color}15` }}>
-                          <GraduationIcon className="w-4 h-4" style={{ color: mod.color }} />
-                        </div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.15em]" style={{ color: mod.color }}>What you&apos;ll learn</p>
-                      </div>
-
-                      <div className="space-y-3">
-                        {mod.topics.map((topic, j) => {
-                          const parts = topic.split(" — ");
-                          return (
-                            <motion.div
-                              key={j}
-                              className="group/topic relative rounded-xl bg-white/[0.02] border border-white/[0.05] p-4 hover:bg-white/[0.05] hover:border-white/[0.1] transition-all duration-300 overflow-hidden"
-                              initial={{ opacity: 0, x: -20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.4, delay: 0.3 + j * 0.12 }}
-                            >
-                              {/* Hover glow */}
-                              <div
-                                className="absolute inset-0 opacity-0 group-hover/topic:opacity-100 transition-opacity duration-500 pointer-events-none"
-                                style={{ background: `radial-gradient(200px circle at 0% 50%, ${mod.color}0a, transparent 60%)` }}
-                              />
-                              <div className="relative flex items-start gap-3.5">
-                                {/* Numbered badge */}
-                                <div
-                                  className="mt-0.5 shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold font-mono border"
-                                  style={{ color: mod.color, borderColor: `${mod.color}30`, backgroundColor: `${mod.color}08` }}
-                                >
-                                  {String(j + 1).padStart(2, "0")}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-[14px] font-semibold text-white/90 group-hover/topic:text-white transition-colors duration-300">
-                                    {parts[0]}
-                                  </p>
-                                  {parts[1] && (
-                                    <p className="text-[13px] text-gray-500 mt-1 leading-relaxed group-hover/topic:text-gray-400 transition-colors duration-300">
-                                      {parts[1]}
-                                    </p>
-                                  )}
-                                </div>
-                                {/* Arrow on hover */}
+                          {/* Learning Outcomes */}
+                          <div className="mt-6">
+                            <h4 className="text-sm font-bold text-navy-900 mb-4">Learning Outcomes</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5">
+                              {mod.outcomes.map((outcome, j) => (
                                 <motion.div
-                                  className="shrink-0 mt-1 opacity-0 group-hover/topic:opacity-100 transition-opacity duration-300"
+                                  key={j}
+                                  className="flex items-start gap-2.5"
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.2, delay: j * 0.03 }}
                                 >
-                                  <ArrowRightIcon className="w-4 h-4" />
+                                  <svg className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                  <span className="text-sm text-gray-700">{outcome}</span>
                                 </motion.div>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </motion.div>
+                              ))}
+                            </div>
+                          </div>
 
-                  {/* Code Preview — Right card */}
-                  <motion.div
-                    className="lg:col-span-5 relative group"
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.25 }}
-                  >
-                    <div
-                      className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]"
-                      style={{ background: `linear-gradient(135deg, transparent 50%, ${mod.color}30, ${mod.color}15)` }}
-                    />
-                    <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] h-full group-hover:border-white/[0.12] transition-colors duration-500">
-                      {/* Editor header */}
-                      <div className="flex items-center justify-between px-4 py-3 bg-[#1a1e2e] border-b border-white/[0.06]">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                          {/* Tools & Technologies */}
+                          <div className="mt-6">
+                            <h4 className="text-sm font-bold text-navy-900 mb-3">Tools & Technologies</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {mod.tools.map((tool, j) => (
+                                <motion.div
+                                  key={j}
+                                  initial={{ opacity: 0, scale: 0.9 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.2, delay: 0.15 + j * 0.03 }}
+                                >
+                                  <ToolLogo name={tool} className="px-3 py-2 [&_img]:w-5 [&_img]:h-5 [&_span:last-child]:text-xs" />
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
-                        <span className="text-[10px] font-mono text-gray-500">phase_{mod.phase}.py</span>
-                        <div className="flex items-center gap-1.5">
-                          <motion.div
-                            className="w-1.5 h-1.5 rounded-full"
-                            style={{ backgroundColor: mod.color }}
-                            animate={{ opacity: [0.3, 1, 0.3] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                          />
-                          <span className="text-[9px] font-mono" style={{ color: `${mod.color}80` }}>LIVE</span>
-                        </div>
-                      </div>
-
-                      {/* Code content with line numbers */}
-                      <div className="bg-[#0d1117] p-5 font-mono text-[12px] leading-[2]">
-                        {mod.code.map((line, j) => (
-                          <motion.div
-                            key={j}
-                            className="flex items-start gap-4 group/line hover:bg-white/[0.02] -mx-5 px-5 transition-colors duration-200"
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: 0.4 + j * 0.05 }}
-                          >
-                            <span className="text-gray-600 select-none w-4 text-right shrink-0 text-[11px]">{j + 1}</span>
-                            <span className="whitespace-pre" style={{ color: line.color }}>{line.text}</span>
-                          </motion.div>
-                        ))}
-                        {/* Blinking cursor */}
-                        <motion.div
-                          className="flex items-center gap-4 mt-0.5"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.9 }}
-                        >
-                          <span className="text-gray-600 select-none w-4 text-right shrink-0 text-[11px]">{mod.code.length + 1}</span>
-                          <motion.span
-                            className="w-[7px] h-[15px] rounded-[1px]"
-                            style={{ backgroundColor: mod.color }}
-                            animate={{ opacity: [1, 0, 1] }}
-                            transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                          />
-                        </motion.div>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Phase stats row */}
-                <div className="grid grid-cols-3 gap-3 mt-4">
-                  {[
-                    { label: "Topics Covered", value: mod.topics.length.toString(), suffix: " modules", icon: <LayersIcon className="w-5 h-5" style={{ color: mod.color }} /> },
-                    { label: "Tools Used", value: mod.skills.length.toString(), suffix: " tools", icon: <svg className="w-5 h-5" style={{ color: mod.color }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" /></svg> },
-                    { label: "Duration", value: mod.duration.split(" ")[1].split("–")[1] || "8", suffix: " weeks", icon: <ClockIcon className="w-5 h-5" style={{ color: mod.color }} /> },
-                  ].map((stat, j) => (
-                    <motion.div
-                      key={j}
-                      className="relative group/stat rounded-xl bg-white/[0.03] border border-white/[0.06] p-4 hover:bg-white/[0.05] transition-all duration-300 overflow-hidden flex items-center gap-3"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.5 + j * 0.08 }}
-                    >
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500 pointer-events-none"
-                        style={{ background: `radial-gradient(120px circle at 50% 50%, ${mod.color}08, transparent 60%)` }}
-                      />
-                      <div className="relative w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${mod.color}12` }}>
-                        {stat.icon}
-                      </div>
-                      <div className="relative">
-                        <p className="text-xl font-bold text-white">{stat.value}<span className="text-sm font-normal text-gray-500">{stat.suffix}</span></p>
-                        <p className="text-[10px] text-gray-500 font-mono uppercase tracking-wider">{stat.label}</p>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             ))}
-          </AnimatePresence>
+          </div>
 
-          {/* Bottom completion badge */}
-          <motion.div
-            className="mt-14 flex items-center justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]">
-              <div className="flex -space-x-1.5">
-                {curriculum.map((mod, j) => (
-                  <motion.div
-                    key={j}
-                    className="w-4 h-4 rounded-full border-2"
-                    style={{ backgroundColor: mod.color, borderColor: DARK_BG }}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + j * 0.1, type: "spring" }}
-                  />
-                ))}
-              </div>
-              <span className="text-xs font-semibold text-gray-400">3 phases</span>
-              <span className="text-xs text-gray-600">·</span>
-              <span className="text-xs font-mono text-gray-500">24 weeks</span>
-              <span className="text-xs text-gray-600">·</span>
-              <motion.span
-                className="text-xs font-bold"
-                style={{ color: BRAND_ORANGE }}
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                Job ready
-              </motion.span>
-            </div>
-          </motion.div>
         </div>
       </section>
-
-      {/* ═══════ MODULES — Interactive Deep-Dive Grid ═══════ */}
-      <ModulesSection openEnquiry={openEnquiry} />
 
       {/* ═══════ TOOLS — Three-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
@@ -2924,7 +2793,7 @@ export default function DataAnalyticsPage() {
               {([
                 { title: "Profile Power-Up", desc: "Stand out with a sharp resume, optimized LinkedIn/GitHub, and a strong personal brand.", color: "#3B82F6", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><circle cx="18" cy="16" r="5.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M7 38c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><circle cx="35" cy="18" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M29 38c0-4.418 2.686-8 6-8s6 3.582 6 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.path d="M32 10l2-2 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1 }} /></svg>) },
                 { title: "Interview Readiness", desc: "Ace every round with 1:1 mock interviews, role-specific training, and actionable feedback.", color: "#8B5CF6", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" strokeWidth="2" /><circle cx="24" cy="18" r="5" stroke="currentColor" strokeWidth="2" /><path d="M16 34c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.path d="M30 14l3 3 5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.2 }} /></svg>) },
-                { title: "Hiring Rounds", desc: "Apply to 200+ hiring partners and clear technical interview rounds with confidence.", color: "#0EA5E9", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="10" y="8" width="28" height="32" rx="3" stroke="currentColor" strokeWidth="2" /><path d="M16 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M16 22h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M16 28h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.rect x="16" y="34" rx="1.5" height="3" fill="currentColor" opacity={0.6} animate={{ width: [8, 16, 8] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} /></svg>) },
+                { title: "Hiring Rounds", desc: "Apply to 400+ hiring partners and clear technical interview rounds with confidence.", color: "#0EA5E9", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="10" y="8" width="28" height="32" rx="3" stroke="currentColor" strokeWidth="2" /><path d="M16 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M16 22h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><path d="M16 28h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.rect x="16" y="34" rx="1.5" height="3" fill="currentColor" opacity={0.6} animate={{ width: [8, 16, 8] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} /></svg>) },
                 { title: "Offer Unlocked!", desc: "Land a high paying job offer from top product-based companies.", color: "#F97316", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><motion.path d="M24 34V14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" animate={{ y: [0, -2, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} /><motion.path d="M17 21l7-7 7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" animate={{ y: [0, -2, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} /><path d="M10 40h28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><motion.circle cx="24" cy="8" r="2.5" fill="currentColor" animate={{ scale: [0.8, 1.3, 0.8], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} /></svg>) },
               ]).map((step, i) => (
                 <motion.div key={step.title} className="flex flex-col items-center text-center group" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-5%" }} transition={{ duration: 0.6, delay: i * 0.18, ease }}>

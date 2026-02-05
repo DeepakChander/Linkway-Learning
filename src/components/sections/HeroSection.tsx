@@ -562,7 +562,7 @@ const metricCards = [
   {
     id: "salary",
     label: "Avg. Salary Hike",
-    value: "85",
+    value: "82.7",
     suffix: "%",
     icon: (
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" /><polyline points="16 7 22 7 22 13" /></svg>
@@ -724,20 +724,20 @@ export default function HeroSection() {
         ref={contentRef}
         className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-20 xs:pt-22 sm:pt-24 md:pt-32 lg:pt-40 pb-8 sm:pb-12 md:pb-20"
       >
-        {/* Mobile Hero Visual - Shows above text on mobile */}
-        <div className="lg:hidden mb-6 sm:mb-8">
+        {/* Mobile Hero Visual - Hidden on mobile, only shows on tablet */}
+        <div className="hidden sm:block lg:hidden mb-6 sm:mb-8">
           <MobileHeroVisual />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           {/* ── Left Column: Text ── */}
-          <div className="lg:col-span-7 xl:col-span-6 text-center lg:text-left">
+          <div className="lg:col-span-7 xl:col-span-6 text-left sm:text-center lg:text-left">
             {/* Headline with character-level animation */}
-            <div className="min-h-[80px] xs:min-h-[90px] sm:min-h-[100px] md:min-h-[140px] lg:min-h-[180px] mb-3 sm:mb-4 md:mb-6">
+            <div className="min-h-[100px] xs:min-h-[110px] sm:min-h-[100px] md:min-h-[140px] lg:min-h-[180px] mb-3 sm:mb-4 md:mb-6">
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={headlineIndex}
-                  className="text-[1.75rem] xs:text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]"
+                  className="text-[2.25rem] xs:text-[2.5rem] sm:text-[2.5rem] md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]"
                   initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
@@ -751,7 +751,7 @@ export default function HeroSection() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xs xs:text-sm sm:text-base md:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-2 sm:mb-3"
+              className="text-sm xs:text-base sm:text-base md:text-lg text-gray-400 max-w-xl mx-0 sm:mx-auto lg:mx-0 leading-relaxed mb-2 sm:mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
@@ -763,12 +763,12 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.p
-              className="text-[11px] xs:text-xs sm:text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-4 sm:mb-6 md:mb-8 font-[family-name:var(--font-poppins)]"
+              className="text-xs xs:text-sm sm:text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-4 sm:mb-6 md:mb-8 font-[family-name:var(--font-poppins)]"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              {"8,200+ careers transformed. Yours is next.".split(" ").map((word, i) => (
+              {"12,000+ careers transformed. Yours is next.".split(" ").map((word, i) => (
                 <motion.span
                   key={i}
                   className="inline-block mr-[0.3em]"
@@ -785,44 +785,44 @@ export default function HeroSection() {
               ))}
             </motion.p>
 
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-start sm:justify-center lg:justify-start">
               <StatusPill />
             </div>
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row items-stretch sm:items-center lg:items-start justify-center lg:justify-start gap-2.5 xs:gap-3 sm:gap-4 mb-5 sm:mb-6 md:mb-8"
+              className="grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center lg:items-start justify-start sm:justify-center lg:justify-start gap-2.5 xs:gap-3 sm:gap-4 mb-5 sm:mb-6 md:mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
             >
               <BorderGlow glowColor="orange" glowIntensity="medium">
-                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center text-sm sm:text-base">
+                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6">
                   Explore Courses
-                  <svg className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-3 h-3 xs:w-4 xs:h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Button>
               </BorderGlow>
-              <Button variant="outline" size="lg" onClick={openEnquiry} className="w-full sm:w-auto justify-center text-sm sm:text-base">
+              <Button variant="outline" size="lg" onClick={openEnquiry} className="w-full sm:w-auto justify-center text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6">
                 Book Free Counselling
               </Button>
             </motion.div>
 
             {/* Trust Stats */}
             <motion.div
-              className="flex items-center justify-center lg:justify-start gap-4 xs:gap-6 sm:gap-8 md:gap-10"
+              className="flex items-center justify-start sm:justify-center lg:justify-start gap-4 xs:gap-6 sm:gap-8 md:gap-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.9 }}
             >
               {[
-                { val: 8200, suffix: "+", label: "Careers Launched" },
+                { val: 12000, suffix: "+", label: "Careers Launched" },
                 { val: 400, suffix: "+", label: "Hiring Partners" },
                 { val: 100, suffix: "%", label: "Placement" },
               ].map((stat, i) => (
-                <div key={i} className="text-center lg:text-left group">
-                  <div className="flex items-baseline justify-center lg:justify-start text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
+                <div key={i} className="text-left sm:text-center lg:text-left group">
+                  <div className="flex items-baseline justify-start sm:justify-center lg:justify-start text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
                     <ScrollOdometer value={stat.val} duration={2} suffix="" className="text-orange-400" />
                     <span className="text-orange-400 text-xs sm:text-sm md:text-lg ml-0.5">{stat.suffix}</span>
                   </div>
