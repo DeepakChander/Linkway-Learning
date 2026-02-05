@@ -11,7 +11,6 @@ interface MarqueeProps {
   className?: string;
   gap?: number;
   fadeEdges?: boolean;
-  duplicateCount?: number;
 }
 
 /**
@@ -33,12 +32,8 @@ export default function Marquee({
   className = "",
   gap = 8,
   fadeEdges = false,
-  duplicateCount = 3,
 }: MarqueeProps) {
-  const animDirection = direction === "left" ? "normal" : "reverse";
   const effectiveSpeed = speed / speedMultiplier;
-
-  const duplicates = Array.from({ length: duplicateCount }, (_, i) => i);
 
   return (
     <div
@@ -54,23 +49,36 @@ export default function Marquee({
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-navy-900 to-transparent z-10 pointer-events-none" />
       )}
 
-      {duplicates.map((i) => (
-        <div
-          key={i}
-          className={cn(
-            "flex shrink-0 items-center",
-            pauseOnHover && "group-hover:[animation-play-state:paused]"
-          )}
-          style={{
-            animation: `marquee ${effectiveSpeed}s linear infinite ${animDirection}`,
-            gap: `${gap * 4}px`,
-            paddingRight: `${gap * 4}px`,
-            willChange: 'transform',
-          }}
-        >
-          {children}
-        </div>
-      ))}
+      {/* Animated track - contains 2 copies for seamless loop */}
+      <div
+        className={cn(
+          "flex shrink-0 items-center",
+          direction === "left" ? "animate-marquee" : "animate-marquee-reverse",
+          pauseOnHover && "group-hover:[animation-play-state:paused]"
+        )}
+        style={{
+          animationDuration: `${effectiveSpeed}s`,
+          gap: `${gap * 4}px`,
+          paddingRight: `${gap * 4}px`,
+        }}
+      >
+        {children}
+      </div>
+      <div
+        className={cn(
+          "flex shrink-0 items-center",
+          direction === "left" ? "animate-marquee" : "animate-marquee-reverse",
+          pauseOnHover && "group-hover:[animation-play-state:paused]"
+        )}
+        style={{
+          animationDuration: `${effectiveSpeed}s`,
+          gap: `${gap * 4}px`,
+          paddingRight: `${gap * 4}px`,
+        }}
+        aria-hidden="true"
+      >
+        {children}
+      </div>
 
       {/* Right fade edge */}
       {fadeEdges && (

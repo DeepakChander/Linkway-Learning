@@ -65,6 +65,7 @@
   --animate-scale-in: scale-in 0.4s ease-out both;
   --animate-float: float 6s ease-in-out infinite;
   --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 30s linear infinite;
   --animate-shimmer: shimmer 2s linear infinite;
   --animate-gradient-shift: gradient-shift 8s ease infinite;
   --animate-char-reveal: char-reveal 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -127,7 +128,17 @@
     }
 
     to {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
     }
   }
 
