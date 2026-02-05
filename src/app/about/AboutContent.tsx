@@ -89,6 +89,14 @@ const instructors = [
     tags: ["Data Analytics", "Big Data", "Google"],
     image: "/images/instructors/anand-tripathi.jpeg",
   },
+  {
+    name: "Shubham",
+    experience: "5+ years",
+    title: "Senior Data Scientist at Deloitte",
+    bio: "Shubham spends his days at Deloitte building machine learning models that help Fortune 500 clients make smarter decisions. He's the kind of mentor who breaks down complex ML concepts into something you can actually apply — no unnecessary jargon, just real-world problem-solving.",
+    tags: ["Python", "Machine Learning", "SQL", "Advanced Analytics"],
+    image: "/images/instructors/shubham.jpeg",
+  },
 ];
 
 const stats = [

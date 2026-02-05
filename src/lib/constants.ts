@@ -892,6 +892,14 @@ export const INSTRUCTORS: Instructor[] = [
     bio: "Data Analyst at Google with hands-on experience in analyzing data to support product and business decisions. Skilled in working with large datasets, deriving actionable insights, and collaborating with cross-functional teams. Known for strong analytical thinking and a structured, problem-solving approach.",
     specializations: ["Data Analytics", "Big Data", "Product Analytics"],
   },
+  {
+    name: "Shubham",
+    experience: "5+ years",
+    title: "Senior Data Scientist, Deloitte",
+    image: "/images/instructors/shubham.jpeg",
+    bio: "Senior Data Scientist at Deloitte with 5+ years of experience in machine learning and advanced analytics. He specializes in building predictive models and delivering data-driven solutions for consulting clients across industries. With expertise in Python, SQL, and ML algorithms, Shubham brings a strategic approach to solving complex business problems through data science.",
+    specializations: ["Python", "Machine Learning", "SQL", "Advanced Analytics"],
+  },
 ];
 
 // -----------------------------------------------------------------------------
