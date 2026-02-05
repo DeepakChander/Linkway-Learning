@@ -192,7 +192,7 @@ export default function CoursePageTemplate({
         {/* Noise overlay for all */}
         <div className="noise-overlay absolute inset-0 pointer-events-none" />
 
-        <div className={cn("relative z-10 max-w-5xl mx-auto px-6 text-center py-32", v === "redbull" && "rb-hero-content will-change-transform")}>
+        <div className={cn("relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center py-20 sm:py-24 md:py-32", v === "redbull" && "rb-hero-content will-change-transform")}>
           <div className="flex items-center justify-center gap-3 mb-8">
             {/* Active Theory: Dot flash indicator next to badges */}
             {v === "activetheory" && <DotFlash className="mr-2" />}
@@ -217,12 +217,12 @@ export default function CoursePageTemplate({
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, ease }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight font-mono">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight font-mono">
                 <TerminalText>{name}</TerminalText>
               </h1>
             </motion.div>
           ) : (
-            <KineticText text={name} as="h1" className="text-5xl md:text-7xl font-bold text-white leading-tight" />
+            <KineticText text={name} as="h1" className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight" />
           )}
 
           <motion.p

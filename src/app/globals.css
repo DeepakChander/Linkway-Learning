@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* ── Custom Breakpoints ── */
+  --breakpoint-xs: 384px;
+
   /* ── Brand Colors: Navy (from Linkway logo wordmark) ── */
   --color-navy-900: #0D1B2A;
   --color-navy-800: #1B3A5C;

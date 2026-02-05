@@ -462,6 +462,100 @@ function DataOrbitVisual({ mouseX, mouseY }: { mouseX: MotionValue<number>; mous
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE HERO VISUAL - Simplified version for mobile devices
+   ═══════════════════════════════════════════════════════════════════════════ */
+function MobileHeroVisual() {
+  return (
+    <motion.div
+      className="relative w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[400px] mx-auto aspect-square"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+    >
+      {/* Outer ring */}
+      <motion.div
+        className="absolute inset-0 rounded-full border border-white/[0.06]"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Middle ring */}
+      <motion.div
+        className="absolute inset-[15%] rounded-full border border-white/[0.08]"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Inner ring with orange accent */}
+      <motion.div
+        className="absolute inset-[30%] rounded-full border border-orange-500/20"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Center image container */}
+      <div className="absolute inset-[20%] rounded-full overflow-hidden border border-orange-500/20">
+        <div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(245,137,42,0.08) 0%, rgba(13,27,42,0.9) 70%)",
+          }}
+        />
+        <img
+          src="/hero-students.png"
+          alt="Linkway Learning Students"
+          className="w-full h-full object-cover object-top scale-110"
+        />
+      </div>
+
+      {/* Floating tech icons - simplified for mobile */}
+      {[
+        { deg: 0, label: "Python", color: "#366A96" },
+        { deg: 90, label: "SQL", color: "#00BCF2" },
+        { deg: 180, label: "Tableau", color: "#E97627" },
+        { deg: 270, label: "Power BI", color: "#F2C811" },
+      ].map((item) => (
+        <motion.div
+          key={item.deg}
+          className="absolute w-8 h-8 xs:w-9 xs:h-9 rounded-full bg-[#0D1B2A]/90 backdrop-blur-sm border border-white/[0.1] flex items-center justify-center"
+          style={{
+            top: "50%",
+            left: "50%",
+            transform: `rotate(${item.deg}deg) translateX(calc(50% + 4rem)) translateY(-50%)`,
+          }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: item.deg / 100 }}
+        >
+          <span
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: item.color, boxShadow: `0 0 8px ${item.color}` }}
+          />
+        </motion.div>
+      ))}
+
+      {/* Floating course labels - mobile optimized */}
+      <motion.div
+        className="absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg backdrop-blur-md bg-white/[0.05] border border-white/[0.08] text-[10px] text-gray-300 font-mono"
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5" />
+        Data Science
+      </motion.div>
+
+      <motion.div
+        className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg backdrop-blur-md bg-white/[0.05] border border-white/[0.08] text-[10px] text-gray-300 font-mono"
+        animate={{ y: [0, 4, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-orange-400 mr-1.5" />
+        AI / ML
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    FLOATING METRIC CARDS (right side)
    ═══════════════════════════════════════════════════════════════════════════ */
 const metricCards = [
@@ -628,31 +722,36 @@ export default function HeroSection() {
       {/* ── Content ── */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-28 sm:pt-32 md:pt-44 pb-12 sm:pb-16 md:pb-24"
+        className="relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-20 pt-20 xs:pt-22 sm:pt-24 md:pt-32 lg:pt-40 pb-8 sm:pb-12 md:pb-20"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* Mobile Hero Visual - Shows above text on mobile */}
+        <div className="lg:hidden mb-6 sm:mb-8">
+          <MobileHeroVisual />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           {/* ── Left Column: Text ── */}
-          <div className="lg:col-span-7 xl:col-span-6">
+          <div className="lg:col-span-7 xl:col-span-6 text-center lg:text-left">
             {/* Headline with character-level animation */}
-            <div className="min-h-[100px] sm:min-h-[120px] md:min-h-[180px] lg:min-h-[200px] mb-4 sm:mb-6">
+            <div className="min-h-[80px] xs:min-h-[90px] sm:min-h-[100px] md:min-h-[140px] lg:min-h-[180px] mb-3 sm:mb-4 md:mb-6">
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={headlineIndex}
-                  className="text-[2rem] sm:text-[2.5rem] md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08]"
+                  className="text-[1.75rem] xs:text-[2rem] sm:text-[2.5rem] md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]"
                   initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -20, filter: "blur(6px)" }}
                   transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 >
                   <span className="text-white block">{accent}</span>
-                  <span className="hero-gradient-text block mt-1">{main}</span>
+                  <span className="hero-gradient-text block mt-0.5 sm:mt-1">{main}</span>
                 </motion.h1>
               </AnimatePresence>
             </div>
 
             {/* Subtitle */}
             <motion.p
-              className="text-sm sm:text-base md:text-lg text-gray-400 max-w-xl leading-relaxed mb-2 sm:mb-3"
+              className="text-xs xs:text-sm sm:text-base md:text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-2 sm:mb-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
@@ -664,7 +763,7 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.p
-              className="text-xs sm:text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-6 sm:mb-10 font-[family-name:var(--font-poppins)]"
+              className="text-[11px] xs:text-xs sm:text-sm md:text-base text-orange-400/80 font-medium tracking-wide mb-4 sm:mb-6 md:mb-8 font-[family-name:var(--font-poppins)]"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -686,31 +785,33 @@ export default function HeroSection() {
               ))}
             </motion.p>
 
-            <StatusPill />
+            <div className="flex justify-center lg:justify-start">
+              <StatusPill />
+            </div>
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 mb-6 sm:mb-8"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center lg:items-start justify-center lg:justify-start gap-2.5 xs:gap-3 sm:gap-4 mb-5 sm:mb-6 md:mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
             >
               <BorderGlow glowColor="orange" glowIntensity="medium">
-                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center">
+                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center text-sm sm:text-base">
                   Explore Courses
-                  <svg className="w-4 sm:w-5 h-4 sm:h-5 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Button>
               </BorderGlow>
-              <Button variant="outline" size="lg" onClick={openEnquiry} className="w-full sm:w-auto justify-center">
+              <Button variant="outline" size="lg" onClick={openEnquiry} className="w-full sm:w-auto justify-center text-sm sm:text-base">
                 Book Free Counselling
               </Button>
             </motion.div>
 
             {/* Trust Stats */}
             <motion.div
-              className="flex items-center justify-between sm:justify-start gap-4 sm:gap-6 md:gap-10"
+              className="flex items-center justify-center lg:justify-start gap-4 xs:gap-6 sm:gap-8 md:gap-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.9 }}
@@ -720,12 +821,12 @@ export default function HeroSection() {
                 { val: 400, suffix: "+", label: "Hiring Partners" },
                 { val: 100, suffix: "%", label: "Placement" },
               ].map((stat, i) => (
-                <div key={i} className="text-left group">
-                  <div className="flex items-baseline text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
+                <div key={i} className="text-center lg:text-left group">
+                  <div className="flex items-baseline justify-center lg:justify-start text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-orange-400 font-[family-name:var(--font-poppins)] tabular-nums transition-all duration-300 group-hover:text-orange-300">
                     <ScrollOdometer value={stat.val} duration={2} suffix="" className="text-orange-400" />
-                    <span className="text-orange-400 text-sm sm:text-lg ml-0.5">{stat.suffix}</span>
+                    <span className="text-orange-400 text-xs sm:text-sm md:text-lg ml-0.5">{stat.suffix}</span>
                   </div>
-                  <p className="text-[10px] sm:text-xs text-gray-500 mt-0.5 tracking-wide uppercase font-[family-name:var(--font-poppins)]">{stat.label}</p>
+                  <p className="text-[9px] xs:text-[10px] sm:text-xs text-gray-500 mt-0.5 tracking-wide uppercase font-[family-name:var(--font-poppins)]">{stat.label}</p>
                 </div>
               ))}
             </motion.div>
