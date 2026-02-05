@@ -20,9 +20,9 @@ const courses = [
     shortName: "DA",
     duration: "6 Months",
     level: "Beginner to Advanced",
-    tagline: "Go from spreadsheets to strategic thinking — fast.",
+    tagline: "Go from spreadsheets to strategic thinking - fast.",
     description:
-      "Master Excel, SQL, Python, Tableau, and Power BI by building real analytics projects. Not toy datasets — actual business problems with 100% placement.",
+      "Master Excel, SQL, Python, Tableau, and Power BI by building real analytics projects. Not toy datasets - actual business problems with 100% placement.",
     color: "#4F46E5",
     gradient: "from-indigo-600 via-blue-600 to-cyan-500",
     lightGradient: "from-indigo-50 to-blue-50",
@@ -79,7 +79,7 @@ const courses = [
     level: "Zero to Expert",
     tagline: "From your first Python script to production ML models.",
     description:
-      "The full journey — Python, neural networks, NLP, generative AI, and deployment. Seven modules that take you from zero to genuinely job-ready in data science.",
+      "The full journey - Python, neural networks, NLP, generative AI, and deployment. Seven modules that take you from zero to genuinely job-ready in data science.",
     color: "#7C3AED",
     gradient: "from-violet-600 via-purple-600 to-fuchsia-500",
     lightGradient: "from-violet-50 to-purple-50",
@@ -111,7 +111,7 @@ const courses = [
     level: "Intermediate to Advanced",
     tagline: "Build autonomous AI agents that think and execute.",
     description:
-      "Learn to design, build, and deploy AI agents. From prompt engineering to agentic workflows — this is the future of AI, and you'll be building it.",
+      "Learn to design, build, and deploy AI agents. From prompt engineering to agentic workflows - this is the future of AI, and you'll be building it.",
     color: "#DB2777",
     gradient: "from-pink-600 via-rose-500 to-orange-400",
     lightGradient: "from-pink-50 to-rose-50",
@@ -211,7 +211,7 @@ function RotatingText() {
 
   return (
     <span className="relative inline-grid overflow-hidden" style={{ height: "1.2em" }}>
-      {/* Invisible sizer — takes the width of the longest word */}
+      {/* Invisible sizer - takes the width of the longest word */}
       {rotatingWords.map((w) => (
         <span key={w} className="invisible col-start-1 row-start-1 whitespace-nowrap">{w}</span>
       ))}
@@ -549,7 +549,7 @@ export default function CoursesOverview() {
                   className="text-gray-400 text-lg md:text-xl max-w-xl mx-auto lg:mx-0 mt-6 leading-relaxed"
                 >
                   5 industry-designed programs. Real projects from day one.
-                  <span className="text-white font-semibold"> 100% placement support</span> — because we only succeed when you do.
+                  <span className="text-white font-semibold"> 100% placement support</span> - because we only succeed when you do.
                 </motion.p>
 
                 {/* Trust indicators inline */}
@@ -640,149 +640,151 @@ export default function CoursesOverview() {
                       className="relative z-10 w-full h-auto object-contain"
                     />
 
-                    {/* Floating course cards around the image - positioned away from face */}
+                    {/* Floating course badges - clean minimal style */}
                     {/* Top left - Data Analytics */}
                     <motion.div
-                      className="absolute -top-4 -left-4 z-20"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 0.6 }}
+                      className="absolute -top-2 -left-4 z-20"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.5 }}
                     >
                       <motion.div
-                        className="px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl shadow-black/20"
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#1e293b]/90 backdrop-blur-sm border border-white/10"
                         animate={{ y: [0, -6, 0] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-lg bg-indigo-500/30 flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-indigo-400" stroke="currentColor" strokeWidth="1.5">
-                              <path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M7 16l4-8 4 4 5-9" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </div>
-                          <span className="text-xs font-bold text-white">Data Analytics</span>
+                        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#818cf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M7 16l4-8 4 4 5-9" />
+                          </svg>
                         </div>
+                        <span className="text-xs font-semibold text-white">Data Analytics</span>
                       </motion.div>
                     </motion.div>
 
                     {/* Top right - Business Analytics */}
                     <motion.div
-                      className="absolute -top-2 -right-2 z-20"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 0.7 }}
+                      className="absolute top-2 -right-2 z-20"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.6 }}
                     >
                       <motion.div
-                        className="px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl shadow-black/20"
-                        animate={{ y: [0, 5, 0], x: [0, 3, 0] }}
-                        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#1e293b]/90 backdrop-blur-sm border border-white/10"
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-lg bg-emerald-500/30 flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-emerald-400" stroke="currentColor" strokeWidth="1.5">
-                              <path d="M21 21H3V3" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M7 17V13M11 17V9M15 17V5M19 17V11" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </div>
-                          <span className="text-xs font-bold text-white">Business Analytics</span>
+                        <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 21H3V3" />
+                            <path d="M7 17V13M11 17V9M15 17V5M19 17V11" />
+                          </svg>
                         </div>
+                        <span className="text-xs font-semibold text-white">Business Analytics</span>
                       </motion.div>
                     </motion.div>
 
-                    {/* Bottom left - Data Science */}
+                    {/* Left middle - Data Science */}
                     <motion.div
-                      className="absolute bottom-[35%] -left-8 z-20"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 0.8 }}
+                      className="absolute top-[35%] -left-6 z-20"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.7 }}
                     >
                       <motion.div
-                        className="px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl shadow-black/20"
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#1e293b]/90 backdrop-blur-sm border border-white/10"
                         animate={{ y: [0, -5, 0], x: [0, -3, 0] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-lg bg-violet-500/30 flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-violet-400" stroke="currentColor" strokeWidth="1.5">
-                              <circle cx="12" cy="12" r="3" />
-                              <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.92M8.24 9.92A4 4 0 0 1 12 2" />
-                              <path d="M12 15v7M8 18h8" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </div>
-                          <span className="text-xs font-bold text-white">Data Science & AI</span>
+                        <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                          </svg>
                         </div>
+                        <span className="text-xs font-semibold text-white">Data Science & AI</span>
                       </motion.div>
                     </motion.div>
 
-                    {/* Bottom right - Agentic AI */}
+                    {/* Right bottom - Agentic AI */}
                     <motion.div
-                      className="absolute bottom-[20%] -right-6 z-20"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 0.9 }}
+                      className="absolute bottom-[25%] -right-4 z-20"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.8 }}
                     >
                       <motion.div
-                        className="px-3 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl shadow-black/20"
+                        className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#1e293b]/90 backdrop-blur-sm border border-white/10"
                         animate={{ y: [0, 6, 0] }}
-                        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                        transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-9 h-9 rounded-lg bg-pink-500/30 flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-pink-400" stroke="currentColor" strokeWidth="1.5">
-                              <path d="M12 2L2 7l10 5 10-5-10-5z" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          </div>
-                          <span className="text-xs font-bold text-white">Agentic AI</span>
+                        <div className="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#f472b6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                          </svg>
                         </div>
+                        <span className="text-xs font-semibold text-white">Agentic AI</span>
                       </motion.div>
                     </motion.div>
 
-                    {/* Floating accent icons - positioned at edges */}
+                    {/* Small floating accent icons */}
                     <motion.div
-                      className="absolute top-[15%] -right-6 w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500/30 to-emerald-600/20 border border-emerald-400/30 flex items-center justify-center shadow-lg shadow-emerald-500/20 backdrop-blur-sm z-20"
-                      animate={{ y: [0, -8, 0], rotate: [0, 5, 0] }}
+                      className="absolute top-[15%] -right-1 z-20 w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/20 flex items-center justify-center"
+                      animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <TrendingUp className="w-5 h-5 text-emerald-400" />
+                      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#34d399" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M23 6l-9.5 9.5-5-5L1 18" />
+                        <path d="M17 6h6v6" />
+                      </svg>
                     </motion.div>
 
                     <motion.div
-                      className="absolute bottom-[55%] -left-5 w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500/30 to-amber-600/20 border border-amber-400/30 flex items-center justify-center shadow-lg shadow-amber-500/20 backdrop-blur-sm z-20"
-                      animate={{ y: [0, 8, 0], rotate: [0, -5, 0] }}
+                      className="absolute bottom-[50%] -left-2 z-20 w-9 h-9 rounded-lg bg-orange-500/15 border border-orange-500/20 flex items-center justify-center"
+                      animate={{ y: [0, 8, 0] }}
                       transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                     >
-                      <Award className="w-4 h-4 text-amber-400" />
+                      <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#fb923c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="8" r="6" />
+                        <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+                      </svg>
                     </motion.div>
 
                     <motion.div
-                      className="absolute top-[40%] -right-4 w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500/30 to-blue-600/20 border border-blue-400/30 flex items-center justify-center shadow-md shadow-blue-500/20 backdrop-blur-sm z-20"
-                      animate={{ y: [0, -6, 0], x: [0, 4, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+                      className="absolute top-[45%] -right-1 z-20 w-8 h-8 rounded-lg bg-blue-500/15 border border-blue-500/20 flex items-center justify-center"
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
                     >
-                      <Sparkles className="w-4 h-4 text-blue-400" />
+                      <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                      </svg>
                     </motion.div>
 
                     {/* Stats badge - bottom */}
                     <motion.div
-                      className="absolute -bottom-4 left-1/2 -translate-x-1/2 z-20"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 1 }}
+                      className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.9 }}
                     >
                       <motion.div
-                        className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500/20 to-amber-500/20 backdrop-blur-md border border-orange-400/30 shadow-xl shadow-orange-500/10"
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-gradient-to-r from-orange-500/10 to-amber-500/10 backdrop-blur-sm border border-orange-500/20"
                         animate={{ y: [0, -4, 0] }}
-                        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
                       >
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-orange-500/30 flex items-center justify-center">
-                            <Users className="w-4 h-4 text-orange-400" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-bold text-white">12,000+</div>
-                            <div className="text-[10px] text-gray-400">Careers Transformed</div>
-                          </div>
+                        <div className="w-9 h-9 rounded-lg bg-orange-500/20 flex items-center justify-center">
+                          <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="#fb923c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-white">12,000+</div>
+                          <div className="text-[10px] text-gray-400">Careers Transformed</div>
                         </div>
                       </motion.div>
                     </motion.div>
@@ -901,7 +903,7 @@ export default function CoursesOverview() {
                 </ScrollReveal>
               ))}
 
-              {/* CTA Card — "Not Sure?" */}
+              {/* CTA Card - "Not Sure?" */}
               <ScrollReveal delay={0.3}>
                 <motion.div
                   className="group relative h-full rounded-xl bg-navy-900 overflow-hidden border border-navy-700/50 p-4"

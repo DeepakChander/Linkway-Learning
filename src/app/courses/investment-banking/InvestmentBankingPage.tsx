@@ -192,11 +192,11 @@ function TrendingIcon({ className, style }: { className?: string; style?: React.
 
 const learnerTestimonials = [
   { name: "Rohan Kapoor", from: "Commerce Graduate", to: "IB Analyst", company: "JP Morgan", exp: "1 yr exp.", accentFrom: "#F59E0B", accentTo: "#f59e0b", gradientBg: "linear-gradient(135deg, #fefce8, #fef9c3 40%, #ffffff)", desc: "The financial modeling training was incredibly rigorous. I went from zero Excel skills to building full DCF models. The placement team connected me directly with JP Morgan recruiters." },
-  { name: "Simran Kaur", from: "CA Inter", to: "Analyst", company: "Goldman Sachs", exp: "1.5 yrs exp.", accentFrom: "#3B82F6", accentTo: "#60a5fa", gradientBg: "linear-gradient(135deg, #eff6ff, #dbeafe 40%, #ffffff)", desc: "Coming from a CA background, this program filled every gap — LBO modeling, M&A analysis, pitch books. The case studies were based on real Indian deals which made all the difference." },
+  { name: "Simran Kaur", from: "CA Inter", to: "Analyst", company: "Goldman Sachs", exp: "1.5 yrs exp.", accentFrom: "#3B82F6", accentTo: "#60a5fa", gradientBg: "linear-gradient(135deg, #eff6ff, #dbeafe 40%, #ffffff)", desc: "Coming from a CA background, this program filled every gap - LBO modeling, M&A analysis, pitch books. The case studies were based on real Indian deals which made all the difference." },
   { name: "Aryan Joshi", from: "Engineering", to: "PE Associate", company: "KKR", exp: "2 yrs exp.", accentFrom: "#06B6D4", accentTo: "#22d3ee", gradientBg: "linear-gradient(135deg, #ecfeff, #cffafe 40%, #ffffff)", desc: "I switched from software engineering to private equity. The LBO and deal structuring modules gave me exactly the technical skills PE firms look for. Landed my dream role within 2 months." },
   { name: "Nisha Reddy", from: "MBA Finance", to: "M&A Analyst", company: "Kotak IB", exp: "2 yrs exp.", accentFrom: "#F59E0B", accentTo: "#fbbf24", gradientBg: "linear-gradient(135deg, #fff7ed, #fed7aa 40%, #ffffff)", desc: "Even with an MBA, I lacked hands-on modeling skills. This program's project-based approach changed everything. Built 5 real models and used them in my Kotak interview." },
   { name: "Vikram Singh", from: "BBA Student", to: "Equity Research", company: "IIFL", exp: "1 yr exp.", accentFrom: "#10b981", accentTo: "#34d399", gradientBg: "linear-gradient(135deg, #ecfdf5, #d1fae5 40%, #ffffff)", desc: "Started as a BBA student with no finance experience. The step-by-step curriculum from accounting basics to advanced valuation was perfect. Now analyzing stocks professionally at IIFL." },
-  { name: "Priya Mehta", from: "CFA L1", to: "Credit Analyst", company: "ICICI Bank", exp: "1.5 yrs exp.", accentFrom: "#f43f5e", accentTo: "#fb7185", gradientBg: "linear-gradient(135deg, #fff1f2, #fecdd3 40%, #ffffff)", desc: "The program complemented my CFA prep perfectly. Real-world modeling skills plus certification prep — I got placed at ICICI before even completing the full program." },
+  { name: "Priya Mehta", from: "CFA L1", to: "Credit Analyst", company: "ICICI Bank", exp: "1.5 yrs exp.", accentFrom: "#f43f5e", accentTo: "#fb7185", gradientBg: "linear-gradient(135deg, #fff1f2, #fecdd3 40%, #ffffff)", desc: "The program complemented my CFA prep perfectly. Real-world modeling skills plus certification prep - I got placed at ICICI before even completing the full program." },
 ];
 
 function TestimonialCard3D({ t, index }: { t: typeof learnerTestimonials[number]; index: number }) {
@@ -480,12 +480,12 @@ function DealValuationDashboard({ className }: { className?: string }) {
 /* ── Module Data & Components ── */
 
 const MODULE_DATA = [
-  { title: "Financial Foundations", color: "#059669", iconImg: "/images/tools/excel.png", topics: ["Accounting fundamentals — P&L, balance sheet, cash flow", "Financial ratios — liquidity, profitability, leverage", "Corporate finance — time value of money, NPV, IRR", "Capital structure & cost of capital", "Financial statement analysis & benchmarking", "Excel for finance — advanced formulas & shortcuts"] },
-  { title: "Valuation Methods", color: "#3b82f6", iconImg: "/images/tools/excel.png", topics: ["DCF modeling — free cash flow projection", "WACC calculation & terminal value", "Comparable company analysis — selecting peers", "Valuation multiples — EV/EBITDA, P/E, EV/Revenue", "Precedent transaction analysis", "Sum-of-the-parts & football field valuation"] },
-  { title: "M&A & Deal Structuring", color: "#d97706", iconImg: "/images/tools/excel.png", topics: ["M&A process — origination to closing", "Due diligence frameworks & checklists", "Merger model — accretion/dilution analysis", "Deal structuring — stock vs cash, earnouts", "Synergy analysis & pro forma financials", "Regulatory & compliance considerations"] },
-  { title: "LBO Modeling", color: "#7c3aed", iconImg: "/images/tools/excel.png", topics: ["LBO fundamentals — structure & rationale", "Debt schedules — term loans, bonds, mezz", "Operating model & cash flow waterfall", "Returns analysis — IRR, MOIC, cash yield", "Sensitivity analysis & scenario planning", "Exit strategies — IPO, strategic sale, recap"] },
-  { title: "Sector Analysis", color: "#db2777", iconImg: "/images/tools/power-bi.png", topics: ["Technology sector — SaaS metrics, unit economics", "Healthcare & pharma — pipeline valuation", "Financial services — bank valuation methods", "Consumer & retail — comparable metrics", "Energy & infrastructure — project finance", "Cross-sector deal case studies"] },
-  { title: "Career Preparation", color: "#0891b2", iconImg: "/images/tools/excel.png", topics: ["Pitch book creation — company profiles, recommendations", "Technical interview prep — valuation questions", "Behavioral interview prep — fit questions, deal walk-throughs", "Market sizing & brain teasers", "Networking strategy & informational interviews", "Capstone project — full deal analysis & presentation"] },
+  { title: "Financial Foundations", color: "#059669", iconImg: "/images/tools/excel.png", topics: ["Accounting fundamentals - P&L, balance sheet, cash flow", "Financial ratios - liquidity, profitability, leverage", "Corporate finance - time value of money, NPV, IRR", "Capital structure & cost of capital", "Financial statement analysis & benchmarking", "Excel for finance - advanced formulas & shortcuts"] },
+  { title: "Valuation Methods", color: "#3b82f6", iconImg: "/images/tools/excel.png", topics: ["DCF modeling - free cash flow projection", "WACC calculation & terminal value", "Comparable company analysis - selecting peers", "Valuation multiples - EV/EBITDA, P/E, EV/Revenue", "Precedent transaction analysis", "Sum-of-the-parts & football field valuation"] },
+  { title: "M&A & Deal Structuring", color: "#d97706", iconImg: "/images/tools/excel.png", topics: ["M&A process - origination to closing", "Due diligence frameworks & checklists", "Merger model - accretion/dilution analysis", "Deal structuring - stock vs cash, earnouts", "Synergy analysis & pro forma financials", "Regulatory & compliance considerations"] },
+  { title: "LBO Modeling", color: "#7c3aed", iconImg: "/images/tools/excel.png", topics: ["LBO fundamentals - structure & rationale", "Debt schedules - term loans, bonds, mezz", "Operating model & cash flow waterfall", "Returns analysis - IRR, MOIC, cash yield", "Sensitivity analysis & scenario planning", "Exit strategies - IPO, strategic sale, recap"] },
+  { title: "Sector Analysis", color: "#db2777", iconImg: "/images/tools/power-bi.png", topics: ["Technology sector - SaaS metrics, unit economics", "Healthcare & pharma - pipeline valuation", "Financial services - bank valuation methods", "Consumer & retail - comparable metrics", "Energy & infrastructure - project finance", "Cross-sector deal case studies"] },
+  { title: "Career Preparation", color: "#0891b2", iconImg: "/images/tools/excel.png", topics: ["Pitch book creation - company profiles, recommendations", "Technical interview prep - valuation questions", "Behavioral interview prep - fit questions, deal walk-throughs", "Market sizing & brain teasers", "Networking strategy & informational interviews", "Capstone project - full deal analysis & presentation"] },
 ];
 
 function ModuleCard({ mod, index }: { mod: typeof MODULE_DATA[number]; index: number }) {
@@ -569,19 +569,19 @@ export default function InvestmentBankingPage() {
 
   const personas = [
     { icon: GraduationIcon, title: "Finance Graduates", desc: "You studied finance but college didn't teach you how to build a real DCF model or structure a deal. This will.", color: ACCENT_GOLD },
-    { icon: RocketIcon, title: "Career Switchers", desc: "Coming from engineering, consulting, or operations? IB firms love diverse backgrounds — you just need the technical finance skills.", color: ACCENT_BLUE },
+    { icon: RocketIcon, title: "Career Switchers", desc: "Coming from engineering, consulting, or operations? IB firms love diverse backgrounds - you just need the technical finance skills.", color: ACCENT_BLUE },
     { icon: BriefcaseIcon, title: "CA/CFA Aspirants", desc: "Complement your accounting or CFA prep with hands-on modeling and valuation skills that make you immediately employable.", color: ACCENT_CYAN },
     { icon: UserIcon, title: "Working Professionals", desc: "Already in finance but want to move to the buy-side or advisory? Level up your modeling and deal skills.", color: ACCENT_GOLD },
   ];
 
   const curriculum = [
     { phase: "01", title: "Financial Foundations", duration: "Weeks 1–5", color: ACCENT_GOLD, skills: ["Accounting", "Excel", "Corporate Finance", "Ratios"], topics: [
-      "Accounting fundamentals — P&L, balance sheet, cash flow statement, financial ratios",
-      "Excel for finance — advanced formulas, financial functions, keyboard shortcuts, modeling best practices",
-      "Corporate finance essentials — time value of money, cost of capital, capital structure",
-      "Financial statement analysis — ratio analysis, trend analysis, peer benchmarking",
+      "Accounting fundamentals - P&L, balance sheet, cash flow statement, financial ratios",
+      "Excel for finance - advanced formulas, financial functions, keyboard shortcuts, modeling best practices",
+      "Corporate finance essentials - time value of money, cost of capital, capital structure",
+      "Financial statement analysis - ratio analysis, trend analysis, peer benchmarking",
     ], code: [
-      { text: "// DCF Model — Excel Formula", color: "#8b949e" },
+      { text: "// DCF Model - Excel Formula", color: "#8b949e" },
       { text: "= NPV(WACC, FCF_Year1:FCF_Year5)", color: "#e6edf3" },
       { text: "  + Terminal_Value / (1+WACC)^5", color: "#e6edf3" },
       { text: "", color: "#e6edf3" },
@@ -592,10 +592,10 @@ export default function InvestmentBankingPage() {
       { text: ">>> Equity Value/Share: ₹1,247", color: "#7ee787" },
     ]},
     { phase: "02", title: "Valuation & Financial Modeling", duration: "Weeks 6–11", color: ACCENT_BLUE, skills: ["DCF", "Comps", "LBO", "Sensitivity"], topics: [
-      "DCF modeling — free cash flow projection, WACC calculation, terminal value, sensitivity analysis",
-      "Comparable company analysis — selecting comps, normalizing financials, valuation multiples",
-      "Precedent transactions — deal sourcing, premium analysis, synergy valuation",
-      "LBO modeling — deal structure, debt schedules, returns analysis, exit scenarios",
+      "DCF modeling - free cash flow projection, WACC calculation, terminal value, sensitivity analysis",
+      "Comparable company analysis - selecting comps, normalizing financials, valuation multiples",
+      "Precedent transactions - deal sourcing, premium analysis, synergy valuation",
+      "LBO modeling - deal structure, debt schedules, returns analysis, exit scenarios",
     ], code: [
       { text: "// LBO Returns Analysis", color: "#8b949e" },
       { text: "Entry EV/EBITDA    = 8.0x", color: "#e6edf3" },
@@ -607,10 +607,10 @@ export default function InvestmentBankingPage() {
       { text: ">>> MOIC: 2.8x", color: "#7ee787" },
     ]},
     { phase: "03", title: "M&A and Deal Structuring", duration: "Weeks 12–17", color: ACCENT_CYAN, skills: ["M&A", "Merger Model", "Due Diligence", "PE"], topics: [
-      "M&A process — deal origination, due diligence, negotiation, closing",
-      "Merger models — accretion/dilution analysis, pro forma financials, synergy modeling",
-      "Deal structuring — stock vs cash, earnouts, contingent consideration",
-      "Private equity fundamentals — fund structure, portfolio management, value creation",
+      "M&A process - deal origination, due diligence, negotiation, closing",
+      "Merger models - accretion/dilution analysis, pro forma financials, synergy modeling",
+      "Deal structuring - stock vs cash, earnouts, contingent consideration",
+      "Private equity fundamentals - fund structure, portfolio management, value creation",
     ], code: [
       { text: "// Merger Accretion/Dilution", color: "#8b949e" },
       { text: "Acquirer EPS (pre)  = ₹42.50", color: "#e6edf3" },
@@ -621,12 +621,12 @@ export default function InvestmentBankingPage() {
       { text: ">>> Breakeven synergies: ₹85 Cr", color: "#7ee787" },
     ]},
     { phase: "04", title: "Sector Analysis & Data Skills", duration: "Weeks 18–27", color: ACCENT_GOLD, skills: ["Sector Analysis", "SQL", "Python", "Power BI"], topics: [
-      "Technology sector — SaaS metrics, unit economics, growth vs profitability analysis",
-      "Healthcare & pharma — pipeline valuation, regulatory analysis, DCF adjustments",
-      "SQL for financial data — querying financial databases, building data pipelines",
-      "Python for finance — quantitative analysis, portfolio optimization, risk modeling",
+      "Technology sector - SaaS metrics, unit economics, growth vs profitability analysis",
+      "Healthcare & pharma - pipeline valuation, regulatory analysis, DCF adjustments",
+      "SQL for financial data - querying financial databases, building data pipelines",
+      "Python for finance - quantitative analysis, portfolio optimization, risk modeling",
     ], code: [
-      { text: "# Python — Portfolio risk analysis", color: "#8b949e" },
+      { text: "# Python - Portfolio risk analysis", color: "#8b949e" },
       { text: "import numpy as np", color: "#79c0ff" },
       { text: "", color: "#e6edf3" },
       { text: "returns = portfolio.pct_change()", color: "#e6edf3" },
@@ -637,12 +637,12 @@ export default function InvestmentBankingPage() {
       { text: ">>> Sharpe Ratio: 1.84", color: "#7ee787" },
     ]},
     { phase: "05", title: "Career Preparation", duration: "Weeks 28–36", color: BRAND_ORANGE, skills: ["Pitch Books", "Interviews", "Networking", "Capstone"], topics: [
-      "Pitch book creation — company profiles, market overviews, deal recommendations",
-      "Technical interview prep — valuation questions, brain teasers, market sizing",
-      "Behavioral interview prep — fit questions, deal walk-throughs, why IB",
-      "Capstone project — full deal analysis and pitch presentation",
+      "Pitch book creation - company profiles, market overviews, deal recommendations",
+      "Technical interview prep - valuation questions, brain teasers, market sizing",
+      "Behavioral interview prep - fit questions, deal walk-throughs, why IB",
+      "Capstone project - full deal analysis and pitch presentation",
     ], code: [
-      { text: "// Pitch Book — Deal Summary", color: "#8b949e" },
+      { text: "// Pitch Book - Deal Summary", color: "#8b949e" },
       { text: "Transaction: Strategic Acquisition", color: "#e6edf3" },
       { text: "Target: TechCorp India Ltd.", color: "#e6edf3" },
       { text: "EV: ₹2,400 Cr | 12.5x EBITDA", color: "#e6edf3" },
@@ -657,7 +657,7 @@ export default function InvestmentBankingPage() {
 
   const projects = [
     { title: "Full DCF Valuation Model", desc: "Build a comprehensive DCF model for a publicly traded company with scenario analysis, sensitivity tables, and football field valuation.", tags: ["Excel", "DCF", "Valuation"], color: ACCENT_GOLD, complexity: 4, outcome: "Production-grade DCF model used in actual interview", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6"><path d="M12 2v20M2 12h20" strokeLinecap="round" /><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>) },
-    { title: "M&A Deal Analysis", desc: "Analyze a real M&A transaction — build merger model, assess accretion/dilution, and present strategic rationale.", tags: ["M&A", "Excel", "Finance"], color: ACCENT_BLUE, complexity: 3, outcome: "Complete merger model with synergy analysis", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6"><circle cx="8" cy="12" r="5" /><circle cx="16" cy="12" r="5" /></svg>) },
+    { title: "M&A Deal Analysis", desc: "Analyze a real M&A transaction - build merger model, assess accretion/dilution, and present strategic rationale.", tags: ["M&A", "Excel", "Finance"], color: ACCENT_BLUE, complexity: 3, outcome: "Complete merger model with synergy analysis", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6"><circle cx="8" cy="12" r="5" /><circle cx="16" cy="12" r="5" /></svg>) },
     { title: "LBO Model", desc: "Structure and model a leveraged buyout with multiple debt tranches, management rollover, and exit analysis.", tags: ["LBO", "PE", "Excel"], color: ACCENT_CYAN, complexity: 4, outcome: "Multi-tranche LBO with IRR sensitivity", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6"><path d="M2 20h20M6 20V8l4-4v16M14 20V10l4-4v14" strokeLinecap="round" strokeLinejoin="round" /></svg>) },
     { title: "Investment Pitch Book", desc: "Create a full pitch book recommending a strategic transaction to a client, including valuation, deal structure, and risk analysis.", tags: ["Pitch Book", "PowerPoint", "Research"], color: ACCENT_GOLD, complexity: 3, outcome: "42-page pitch book presentation", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 3v18" strokeLinecap="round" /></svg>) },
   ];
@@ -781,7 +781,7 @@ export default function InvestmentBankingPage() {
         </div>
       </section>
 
-      {/* ═══════ WHO IS THIS FOR — Interactive spotlight reveal ═══════ */}
+      {/* ═══════ WHO IS THIS FOR - Interactive spotlight reveal ═══════ */}
       <section className="relative py-24 px-6 bg-[#0a0e18] overflow-hidden">
         {/* Animated background grid */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
@@ -927,7 +927,7 @@ export default function InvestmentBankingPage() {
               { icon: UserIcon, title: "Real-World Interviews", desc: "On demand mock interviews with actual finance company hiring managers to prepare you for the toughest questions.", color: ACCENT_BLUE },
               { icon: LayersIcon, title: "Industry Vetted Curriculum", desc: "Targeted training for Financial Modeling, Valuation, and M&A at the standards expected by top investment banks.", color: ACCENT_CYAN },
               { icon: GraduationIcon, title: "Expert Mentors & Instructorship", desc: "Get trained by industry experts from top investment banks globally, tailored to your career goals.", color: ACCENT_GOLD },
-              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation — we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
+              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation - we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
               { icon: ShieldIcon, title: "Small Batches, Better Learning", desc: "Learn in a limited batch size for focused preparation & understanding with personalised attention.", color: ACCENT_CYAN },
             ].map((item, i) => (
               <SlideIn key={i} direction="up" delay={i * 0.08}>
@@ -944,7 +944,7 @@ export default function InvestmentBankingPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM — Immersive Bento Journey ═══════ */}
+      {/* ═══════ CURRICULUM - Immersive Bento Journey ═══════ */}
       <section className="relative py-24 px-6 overflow-hidden bg-[#070b14]">
         {/* ── Mesh gradient background ── */}
         <div className="absolute inset-0 pointer-events-none" style={{
@@ -1063,7 +1063,7 @@ export default function InvestmentBankingPage() {
 
                 {/* Bento Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                  {/* Topics — Left large card */}
+                  {/* Topics - Left large card */}
                   <motion.div className="lg:col-span-7 relative group rounded-2xl overflow-hidden" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
                     <div className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]" style={{ background: `linear-gradient(135deg, ${mod.color}40, transparent 50%, ${mod.color}20)` }} />
                     <div className="relative bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-7 h-full group-hover:bg-white/[0.06] transition-all duration-500">
@@ -1086,7 +1086,7 @@ export default function InvestmentBankingPage() {
                     </div>
                   </motion.div>
 
-                  {/* Code Preview — Right card */}
+                  {/* Code Preview - Right card */}
                   <motion.div className="lg:col-span-5 relative group" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.25 }}>
                     <div className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]" style={{ background: `linear-gradient(135deg, transparent 50%, ${mod.color}30, ${mod.color}15)` }} />
                     <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] h-full group-hover:border-white/[0.12] transition-colors duration-500">
@@ -1134,7 +1134,7 @@ export default function InvestmentBankingPage() {
 
       <ModulesSection openEnquiry={openEnquiry} />
 
-      {/* ═══════ TOOLS — Two-row marquee ═══════ */}
+      {/* ═══════ TOOLS - Two-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
         <Divider />
         <div className="max-w-6xl mx-auto pt-12">
@@ -1168,7 +1168,7 @@ export default function InvestmentBankingPage() {
         <div className="mt-4"><Divider /></div>
       </section>
 
-      {/* ═══════ PROJECTS — Compact premium grid ═══════ */}
+      {/* ═══════ PROJECTS - Compact premium grid ═══════ */}
       <section className="relative py-16 px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
         {/* Circuit board traces background */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -1260,7 +1260,7 @@ export default function InvestmentBankingPage() {
         </div>
       </section>
 
-      {/* ═══════ TESTIMONIALS — Premium carousel with floating orbs ═══════ */}
+      {/* ═══════ TESTIMONIALS - Premium carousel with floating orbs ═══════ */}
       <section className="relative py-24 px-6 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #f1f5f9 50%, #f9fafb 100%)' }}>
         <motion.div className="absolute top-20 left-[10%] w-72 h-72 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: `${ACCENT_GOLD}08` }} animate={{ x: [0, 40, 0], y: [0, -20, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="absolute bottom-20 right-[10%] w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `${ACCENT_BLUE}06` }} animate={{ x: [0, -30, 0], y: [0, 25, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
@@ -1279,7 +1279,7 @@ export default function InvestmentBankingPage() {
         <TestimonialCarousel />
       </section>
 
-      {/* ═══════ CAREER GROWTH ROADMAP — Animated SVG path ═══════ */}
+      {/* ═══════ CAREER GROWTH ROADMAP - Animated SVG path ═══════ */}
       <section className="relative py-24 px-6 bg-white overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none" style={{ background: `radial-gradient(ellipse, ${ACCENT_BLUE}05, transparent 70%)` }} />
         <div className="max-w-6xl mx-auto relative z-10">
@@ -1328,7 +1328,7 @@ export default function InvestmentBankingPage() {
 
       <WaveDivider from="#ffffff" to="#f9fafb" />
 
-      {/* ═══════ FINAL CTA — Join 8000+ professionals ═══════ */}
+      {/* ═══════ FINAL CTA - Join 8000+ professionals ═══════ */}
       <FooterCTA />
     </div>
     </ThemeProvider>

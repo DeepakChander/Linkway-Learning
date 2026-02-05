@@ -3,12 +3,12 @@ import FAQPage from "./FAQContent";
 import { FAQJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "FAQ — Frequently Asked Questions",
+  title: "FAQ - Frequently Asked Questions",
   description:
     "Frequently asked questions about Linkway Learning's programs, 100% placement, pricing, certification, and more. Get all your answers here.",
   alternates: { canonical: "https://linkwaylearning.com/faq" },
   openGraph: {
-    title: "FAQ — Linkway Learning",
+    title: "FAQ - Linkway Learning",
     description: "Get answers about programs, placement, pricing and certification.",
     url: "https://linkwaylearning.com/faq",
   },

@@ -483,7 +483,7 @@ function HorizontalStats() {
   );
 }
 
-/* ── Brand Logos (inline JSX — same as home page) ── */
+/* ── Brand Logos (inline JSX - same as home page) ── */
 function GoogleLogo() {
   return (
     <span className="text-xl font-semibold tracking-tight" style={{ fontFamily: "Product Sans, Arial, sans-serif" }}>
@@ -723,7 +723,7 @@ function SuccessStoriesCTA() {
             </ScrollReveal>
           </div>
 
-          {/* Right Side — Form */}
+          {/* Right Side - Form */}
           <div className="px-6 md:px-10 lg:px-12 py-10 md:py-14 flex items-start lg:items-center justify-center bg-[#0D1B2A]">
             <div className="w-full max-w-md">
               <SSLeadForm />
@@ -756,7 +756,7 @@ export default function SuccessStoriesPage() {
       <div className="ss2-page">
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 1 — HERO (Cinematic with floating cards)          ║
+            ║  SECTION 1 - HERO (Cinematic with floating cards)          ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section
           ref={heroRef}
@@ -879,7 +879,7 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 3 — ALL STORIES (Bento Grid)                       ║
+            ║  SECTION 3 - ALL STORIES (Bento Grid)                       ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section id="stories" className="relative overflow-hidden bg-[#f2f1ee]">
           {/* Header */}
@@ -907,7 +907,7 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 4 — IMPACT NUMBERS                                 ║
+            ║  SECTION 4 - IMPACT NUMBERS                                 ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section className="relative py-16 md:py-20 bg-[#0D1B2A] overflow-hidden">
           <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -933,7 +933,7 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 5 — YOUR JOURNEY (Step-by-step visualization)     ║
+            ║  SECTION 5 - YOUR JOURNEY (Step-by-step visualization)     ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section className="relative py-16 md:py-20 bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -969,7 +969,7 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 6 — HIRING PARTNERS (Dark theme with glow)        ║
+            ║  SECTION 6 - HIRING PARTNERS (Dark theme with glow)        ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <section className="relative py-16 md:py-20 bg-[#050a14] overflow-hidden">
           <div className="absolute inset-0 ss-stripe-gradient opacity-15" />
@@ -1017,7 +1017,7 @@ export default function SuccessStoriesPage() {
         </section>
 
         {/* ╔══════════════════════════════════════════════════════════════╗
-            ║  SECTION 7 — CTA (Lead Capture — same style as home page)  ║
+            ║  SECTION 7 - CTA (Lead Capture - same style as home page)  ║
             ╚══════════════════════════════════════════════════════════════╝ */}
         <SuccessStoriesCTA />
       </div>

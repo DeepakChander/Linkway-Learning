@@ -169,7 +169,7 @@ export default function MentorsSection() {
                     <SectionHeading
                         label="Learn From The Best"
                         title="Meet Your Mentors"
-                        description="Industry veterans from top companies who don't just teach theory — they share real-world playbooks from the trenches."
+                        description="Industry veterans from top companies who don't just teach theory - they share real-world playbooks from the trenches."
                         align="center"
                     />
                 </div>

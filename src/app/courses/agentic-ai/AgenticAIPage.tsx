@@ -194,10 +194,10 @@ function CodeIcon({ className, style }: { className?: string; style?: React.CSSP
 const learnerTestimonials = [
   { name: "Harsh Vardhan", from: "Backend Dev", to: "AI Engineer", company: "Microsoft", exp: "2 yrs exp.", accentFrom: "#8b5cf6", accentTo: "#a78bfa", gradientBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe 40%, #ffffff)", desc: "I knew Python, but building autonomous agents was another world. Linkway bridged that gap. Now I'm designing multi-agent systems at Microsoft." },
   { name: "Sneha Kulkarni", from: "Product Manager", to: "AI Product Lead", company: "Swiggy", exp: "1.5 yrs exp.", accentFrom: "#f97316", accentTo: "#fb923c", gradientBg: "linear-gradient(135deg, #fff7ed, #fed7aa 40%, #ffffff)", desc: "As a PM, I needed to understand what AI agents could actually do. This program gave me hands-on experience building them. Swiggy promoted me to lead their AI product team." },
-  { name: "Rahul Menon", from: "QA Engineer", to: "Prompt Engineer", company: "Google", exp: "2 yrs exp.", accentFrom: "#10b981", accentTo: "#34d399", gradientBg: "linear-gradient(135deg, #ecfdf5, #d1fae5 40%, #ffffff)", desc: "Testing software taught me to think systematically. Linkway taught me to apply that to prompting LLMs. Google hired me as a prompt engineer — still feels surreal." },
+  { name: "Rahul Menon", from: "QA Engineer", to: "Prompt Engineer", company: "Google", exp: "2 yrs exp.", accentFrom: "#10b981", accentTo: "#34d399", gradientBg: "linear-gradient(135deg, #ecfdf5, #d1fae5 40%, #ffffff)", desc: "Testing software taught me to think systematically. Linkway taught me to apply that to prompting LLMs. Google hired me as a prompt engineer - still feels surreal." },
   { name: "Divya Sharma", from: "Content Writer", to: "AI Solutions Architect", company: "Infosys", exp: "1 yr exp.", accentFrom: "#0ea5e9", accentTo: "#38bdf8", gradientBg: "linear-gradient(135deg, #f0f9ff, #bae6fd 40%, #ffffff)", desc: "Writing taught me to communicate clearly. Linkway taught me to communicate with LLMs. Now I architect AI agent solutions at Infosys." },
   { name: "Akash Patel", from: "Data Analyst", to: "LLM Developer", company: "Zoho", exp: "2.5 yrs exp.", accentFrom: "#eab308", accentTo: "#facc15", gradientBg: "linear-gradient(135deg, #fefce8, #fef9c3 40%, #ffffff)", desc: "Data analysis was my comfort zone. Linkway pushed me into LangChain, RAG, and fine-tuning. Zoho hired me to build their internal AI tools." },
-  { name: "Tanvi Reddy", from: "CS Graduate", to: "AI Agent Developer", company: "Razorpay", exp: "1 yr exp.", accentFrom: "#f43f5e", accentTo: "#fb7185", gradientBg: "linear-gradient(135deg, #fff1f2, #fecdd3 40%, #ffffff)", desc: "Fresh grad with no industry experience. The projects at Linkway — building RAG pipelines, multi-agent orchestrators — got me hired at Razorpay on day one." },
+  { name: "Tanvi Reddy", from: "CS Graduate", to: "AI Agent Developer", company: "Razorpay", exp: "1 yr exp.", accentFrom: "#f43f5e", accentTo: "#fb7185", gradientBg: "linear-gradient(135deg, #fff1f2, #fecdd3 40%, #ffffff)", desc: "Fresh grad with no industry experience. The projects at Linkway - building RAG pipelines, multi-agent orchestrators - got me hired at Razorpay on day one." },
 ];
 
 /* IMAGE PROMPT: Agentic AI hero images featuring:
@@ -519,12 +519,12 @@ function AgentOrchestrationDashboard() {
 /* ── Modules Bento-Grid ── */
 
 const MODULE_DATA = [
-  { title: "Python & AI Foundations", color: "#059669", icon: "/images/tools/python.png", topics: ["Python advanced — decorators, generators, async/await", "Object-oriented design patterns", "API design with FastAPI & Flask", "Working with LLM APIs — OpenAI, Anthropic", "JSON parsing, error handling & retry logic", "Environment setup — Docker, virtual environments"] },
-  { title: "LLM Engineering", color: "#3b82f6", icon: "/images/tools/python.png", topics: ["Transformer architecture deep dive", "Prompt engineering — chain-of-thought, few-shot", "Fine-tuning strategies — LoRA, QLoRA, PEFT", "Token management & context window optimization", "Embedding models & vector databases", "Evaluation frameworks — BLEU, ROUGE, human eval"] },
-  { title: "RAG Systems", color: "#d97706", icon: "/images/tools/python.png", topics: ["Document loaders & text chunking strategies", "Vector stores — Pinecone, Weaviate, ChromaDB", "Retrieval strategies — hybrid, re-ranking, MMR", "RAG pipeline architecture & optimization", "Multi-modal RAG — images, tables, PDFs", "Production RAG — caching, monitoring, evaluation"] },
-  { title: "Agent Frameworks", color: "#7c3aed", icon: "/images/tools/langchain.png", topics: ["LangChain — chains, agents, tools, memory", "LangGraph — stateful multi-step workflows", "CrewAI — multi-agent collaboration", "AutoGen — conversational agent systems", "Custom tool creation & function calling", "Agent evaluation & debugging"] },
+  { title: "Python & AI Foundations", color: "#059669", icon: "/images/tools/python.png", topics: ["Python advanced - decorators, generators, async/await", "Object-oriented design patterns", "API design with FastAPI & Flask", "Working with LLM APIs - OpenAI, Anthropic", "JSON parsing, error handling & retry logic", "Environment setup - Docker, virtual environments"] },
+  { title: "LLM Engineering", color: "#3b82f6", icon: "/images/tools/python.png", topics: ["Transformer architecture deep dive", "Prompt engineering - chain-of-thought, few-shot", "Fine-tuning strategies - LoRA, QLoRA, PEFT", "Token management & context window optimization", "Embedding models & vector databases", "Evaluation frameworks - BLEU, ROUGE, human eval"] },
+  { title: "RAG Systems", color: "#d97706", icon: "/images/tools/python.png", topics: ["Document loaders & text chunking strategies", "Vector stores - Pinecone, Weaviate, ChromaDB", "Retrieval strategies - hybrid, re-ranking, MMR", "RAG pipeline architecture & optimization", "Multi-modal RAG - images, tables, PDFs", "Production RAG - caching, monitoring, evaluation"] },
+  { title: "Agent Frameworks", color: "#7c3aed", icon: "/images/tools/langchain.png", topics: ["LangChain - chains, agents, tools, memory", "LangGraph - stateful multi-step workflows", "CrewAI - multi-agent collaboration", "AutoGen - conversational agent systems", "Custom tool creation & function calling", "Agent evaluation & debugging"] },
   { title: "Multi-Agent Systems", color: "#db2777", icon: "/images/tools/python.png", topics: ["Agent communication protocols", "Task decomposition & orchestration", "Hierarchical agent architectures", "Shared memory & state management", "Conflict resolution & consensus", "Multi-agent debugging & observability"] },
-  { title: "Production & Deployment", color: "#0891b2", icon: "/images/tools/docker.png", topics: ["Agent deployment with Docker & Kubernetes", "API gateway & rate limiting", "Monitoring — LangSmith, Weights & Biases", "Cost optimization & token budgeting", "Security — prompt injection defense, guardrails", "CI/CD for AI applications"] },
+  { title: "Production & Deployment", color: "#0891b2", icon: "/images/tools/docker.png", topics: ["Agent deployment with Docker & Kubernetes", "API gateway & rate limiting", "Monitoring - LangSmith, Weights & Biases", "Cost optimization & token budgeting", "Security - prompt injection defense, guardrails", "CI/CD for AI applications"] },
 ];
 
 function ModuleCard({ mod, index }: { mod: typeof MODULE_DATA[number]; index: number }) {
@@ -615,10 +615,10 @@ export default function AgenticAIPage() {
 
   const curriculum = [
     { phase: "01", title: "Prompt Engineering Foundations", duration: "Weeks 1–4", color: ACCENT_PURPLE, skills: ["Prompt Design", "OpenAI API", "Few-shot", "CoT"], topics: [
-      "Prompt design principles — zero-shot, few-shot, chain-of-thought, role-based prompting",
-      "LLM fundamentals — tokens, temperature, context windows, model selection",
-      "OpenAI API mastery — completions, chat, embeddings, function calling",
-      "Prompt optimization — iterative refinement, evaluation metrics, A/B testing prompts",
+      "Prompt design principles - zero-shot, few-shot, chain-of-thought, role-based prompting",
+      "LLM fundamentals - tokens, temperature, context windows, model selection",
+      "OpenAI API mastery - completions, chat, embeddings, function calling",
+      "Prompt optimization - iterative refinement, evaluation metrics, A/B testing prompts",
     ], code: [
       { text: "# Chain-of-thought prompting", color: "#8b949e" },
       { text: "from openai import OpenAI", color: "#79c0ff" },
@@ -632,10 +632,10 @@ export default function AgenticAIPage() {
       { text: ">>> Reasoning: 3 steps identified", color: "#7ee787" },
     ]},
     { phase: "02", title: "Building with LangChain", duration: "Weeks 5–9", color: ACCENT_BLUE, skills: ["LangChain", "RAG", "Vector DB", "Memory"], topics: [
-      "LangChain fundamentals — chains, agents, memory, callbacks",
-      "RAG systems — retrieval augmented generation, vector databases, document loaders",
-      "Tool usage — building custom tools, API integration, web browsing agents",
-      "Memory systems — conversation memory, entity memory, summary memory",
+      "LangChain fundamentals - chains, agents, memory, callbacks",
+      "RAG systems - retrieval augmented generation, vector databases, document loaders",
+      "Tool usage - building custom tools, API integration, web browsing agents",
+      "Memory systems - conversation memory, entity memory, summary memory",
     ], code: [
       { text: "# RAG with LangChain", color: "#8b949e" },
       { text: "from langchain.vectorstores import Chroma", color: "#79c0ff" },
@@ -647,10 +647,10 @@ export default function AgenticAIPage() {
       { text: '>>> Answer found in 3 documents (0.94 confidence)', color: "#7ee787" },
     ]},
     { phase: "03", title: "Agentic AI Architecture", duration: "Weeks 10–14", color: ACCENT_CYAN, skills: ["ReAct", "Multi-Agent", "Guardrails", "Orchestration"], topics: [
-      "Agent design patterns — ReAct, Plan-and-Execute, Tree of Thought",
-      "Multi-agent systems — orchestration, delegation, agent communication",
-      "Autonomous workflows — task decomposition, self-correction, goal-driven agents",
-      "Safety and guardrails — output validation, content filtering, rate limiting",
+      "Agent design patterns - ReAct, Plan-and-Execute, Tree of Thought",
+      "Multi-agent systems - orchestration, delegation, agent communication",
+      "Autonomous workflows - task decomposition, self-correction, goal-driven agents",
+      "Safety and guardrails - output validation, content filtering, rate limiting",
     ], code: [
       { text: "# Multi-agent orchestration", color: "#8b949e" },
       { text: "from langchain.agents import AgentExecutor", color: "#79c0ff" },
@@ -663,10 +663,10 @@ export default function AgenticAIPage() {
       { text: ">>> Writer generated 1,200-word report", color: "#7ee787" },
     ]},
     { phase: "04", title: "Advanced Applications", duration: "Weeks 15–19", color: ACCENT_PURPLE, skills: ["Code Gen", "Data Agents", "Support Bots", "Research"], topics: [
-      "Code generation agents — automated coding, testing, and debugging workflows",
-      "Data analysis agents — autonomous data exploration, visualization, and reporting",
-      "Customer support agents — multi-turn conversations, escalation, knowledge base integration",
-      "Research agents — web search, document synthesis, fact-checking workflows",
+      "Code generation agents - automated coding, testing, and debugging workflows",
+      "Data analysis agents - autonomous data exploration, visualization, and reporting",
+      "Customer support agents - multi-turn conversations, escalation, knowledge base integration",
+      "Research agents - web search, document synthesis, fact-checking workflows",
     ], code: [
       { text: "# Autonomous coding agent", color: "#8b949e" },
       { text: "agent = CodeAgent(llm=gpt4, tools=[", color: "#e6edf3" },
@@ -679,10 +679,10 @@ export default function AgenticAIPage() {
       { text: ">>> Fix applied | All 23 tests passing ✓", color: "#7ee787" },
     ]},
     { phase: "05", title: "Production Deployment", duration: "Weeks 20–24", color: BRAND_ORANGE, skills: ["Docker", "LangSmith", "Monitoring", "Capstone"], topics: [
-      "Deployment strategies — Docker, cloud hosting, serverless architectures",
-      "Monitoring and observability — LangSmith, logging, performance tracking",
-      "Cost optimization — token management, caching, model routing",
-      "Capstone project — end-to-end agentic AI system for a real business problem",
+      "Deployment strategies - Docker, cloud hosting, serverless architectures",
+      "Monitoring and observability - LangSmith, logging, performance tracking",
+      "Cost optimization - token management, caching, model routing",
+      "Capstone project - end-to-end agentic AI system for a real business problem",
     ], code: [
       { text: "# Deploy agent with monitoring", color: "#8b949e" },
       { text: "from langsmith import Client", color: "#79c0ff" },
@@ -715,10 +715,10 @@ export default function AgenticAIPage() {
   ];
 
   const faqs = [
-    { question: "Do I need prior AI experience?", answer: "You should be comfortable with Python programming. Some exposure to ML concepts helps but isn't required — we cover the AI fundamentals you need." },
-    { question: "What makes this different from a generic AI course?", answer: "This is entirely focused on building autonomous AI agents — not just using APIs. You'll learn architecture patterns, multi-agent orchestration, and production deployment that most courses don't cover." },
+    { question: "Do I need prior AI experience?", answer: "You should be comfortable with Python programming. Some exposure to ML concepts helps but isn't required - we cover the AI fundamentals you need." },
+    { question: "What makes this different from a generic AI course?", answer: "This is entirely focused on building autonomous AI agents - not just using APIs. You'll learn architecture patterns, multi-agent orchestration, and production deployment that most courses don't cover." },
     { question: "Will I build real projects?", answer: "Absolutely. Every module includes hands-on projects, and the capstone is a full production-grade agentic AI system you can showcase to employers." },
-    { question: "How current is the curriculum?", answer: "We update the curriculum monthly. You'll learn the latest tools and frameworks — LangChain, OpenAI function calling, multi-agent patterns — as the field evolves." },
+    { question: "How current is the curriculum?", answer: "We update the curriculum monthly. You'll learn the latest tools and frameworks - LangChain, OpenAI function calling, multi-agent patterns - as the field evolves." },
     { question: "What career support is provided?", answer: "Portfolio reviews, mock technical interviews, LinkedIn optimization, and direct introductions to companies hiring AI engineers. We work with you until you land the right role." },
   ];
 
@@ -824,7 +824,7 @@ export default function AgenticAIPage() {
         </div>
       </section>
 
-      {/* ═══════ WHO IS THIS FOR — Interactive spotlight reveal ═══════ */}
+      {/* ═══════ WHO IS THIS FOR - Interactive spotlight reveal ═══════ */}
       <section className="relative py-24 px-6 bg-[#0a0e18] overflow-hidden">
         {/* Animated background grid */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
@@ -970,7 +970,7 @@ export default function AgenticAIPage() {
               { icon: UserIcon, title: "Real-World Interviews", desc: "On demand mock interviews with actual tech company hiring managers to prepare you for the toughest questions.", color: ACCENT_BLUE },
               { icon: LayersIcon, title: "Industry Vetted Curriculum", desc: "Targeted training for Agentic AI, Multi-Agent Systems, and LLM applications at the standards expected by top tech giants.", color: ACCENT_CYAN || "#06B6D4" },
               { icon: GraduationIcon, title: "Expert Mentors & Instructorship", desc: "Get trained by industry experts from top tech companies globally, tailored to your career goals.", color: ACCENT_PURPLE },
-              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation — we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
+              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation - we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
               { icon: ShieldIcon, title: "Small Batches, Better Learning", desc: "Learn in a limited batch size for focused preparation & understanding with personalised attention.", color: ACCENT_CYAN || "#06B6D4" },
             ].map((item, i) => (
               <SlideIn key={i} direction="up" delay={i * 0.08}>
@@ -987,7 +987,7 @@ export default function AgenticAIPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM — Immersive Bento Journey ═══════ */}
+      {/* ═══════ CURRICULUM - Immersive Bento Journey ═══════ */}
       <section className="relative py-24 px-6 overflow-hidden bg-[#070b14]">
         {/* ── Mesh gradient background ── */}
         <div className="absolute inset-0 pointer-events-none" style={{
@@ -1106,7 +1106,7 @@ export default function AgenticAIPage() {
 
                 {/* Bento Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                  {/* Topics — Left large card */}
+                  {/* Topics - Left large card */}
                   <motion.div className="lg:col-span-7 relative group rounded-2xl overflow-hidden" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
                     <div className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]" style={{ background: `linear-gradient(135deg, ${mod.color}40, transparent 50%, ${mod.color}20)` }} />
                     <div className="relative bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] rounded-2xl p-7 h-full group-hover:bg-white/[0.06] transition-all duration-500">
@@ -1129,7 +1129,7 @@ export default function AgenticAIPage() {
                     </div>
                   </motion.div>
 
-                  {/* Code Preview — Right card */}
+                  {/* Code Preview - Right card */}
                   <motion.div className="lg:col-span-5 relative group" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.25 }}>
                     <div className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[1px]" style={{ background: `linear-gradient(135deg, transparent 50%, ${mod.color}30, ${mod.color}15)` }} />
                     <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] h-full group-hover:border-white/[0.12] transition-colors duration-500">
@@ -1177,7 +1177,7 @@ export default function AgenticAIPage() {
 
       <ModulesSection openEnquiry={openEnquiry} />
 
-      {/* ═══════ TOOLS — Two-row marquee ═══════ */}
+      {/* ═══════ TOOLS - Two-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
         <Divider />
         <div className="max-w-6xl mx-auto pt-12">
@@ -1211,9 +1211,9 @@ export default function AgenticAIPage() {
         <div className="mt-4"><Divider /></div>
       </section>
 
-      {/* ═══════ PROJECTS — Compact premium grid ═══════ */}
+      {/* ═══════ PROJECTS - Compact premium grid ═══════ */}
       <section className="relative py-16 px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
-        {/* ── 1. AURORA SILK RIBBONS — flowing morphing gradient paths ── */}
+        {/* ── 1. AURORA SILK RIBBONS - flowing morphing gradient paths ── */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ribbonA" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1237,13 +1237,13 @@ export default function AgenticAIPage() {
             </linearGradient>
             <filter id="ribbonGlow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
           </defs>
-          {/* Ribbon 1 — top flowing silk */}
+          {/* Ribbon 1 - top flowing silk */}
           <motion.path d="M-100,120 C150,40 350,200 600,80 S950,180 1200,60 1500,140" fill="none" stroke="url(#ribbonA)" strokeWidth="2" filter="url(#ribbonGlow)" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 2.5, ease: "easeInOut" }} />
           <motion.path d="M-100,125 C160,50 340,210 610,90 S940,190 1210,70 1500,150" fill="none" stroke="url(#ribbonA)" strokeWidth="1" opacity="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2.8, delay: 0.2, ease: "easeInOut" }} />
-          {/* Ribbon 2 — middle flowing silk */}
+          {/* Ribbon 2 - middle flowing silk */}
           <motion.path d="M-50,320 C200,250 450,400 700,280 S1050,380 1300,300 1600,350" fill="none" stroke="url(#ribbonB)" strokeWidth="2" filter="url(#ribbonGlow)" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 3, delay: 0.4, ease: "easeInOut" }} />
           <motion.path d="M-50,326 C210,258 440,408 710,288 S1040,388 1310,308 1600,358" fill="none" stroke="url(#ribbonB)" strokeWidth="0.8" opacity="0.4" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 3.2, delay: 0.6, ease: "easeInOut" }} />
-          {/* Ribbon 3 — bottom flowing silk */}
+          {/* Ribbon 3 - bottom flowing silk */}
           <motion.path d="M-80,500 C180,440 400,550 680,460 S1000,530 1250,480 1600,520" fill="none" stroke="url(#ribbonC)" strokeWidth="1.5" filter="url(#ribbonGlow)" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 3.5, delay: 0.8, ease: "easeInOut" }} />
           {/* Glowing orbs traveling along ribbons */}
           <motion.circle r="4" fill={ACCENT_PURPLE} opacity="0.6" filter="url(#ribbonGlow)" animate={{ cx: [-100, 150, 600, 1200, 1500], cy: [120, 40, 80, 60, 140] }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} />
@@ -1251,7 +1251,7 @@ export default function AgenticAIPage() {
           <motion.circle r="3.5" fill={ACCENT_CYAN} opacity="0.4" filter="url(#ribbonGlow)" animate={{ cx: [-80, 180, 680, 1250, 1600], cy: [500, 440, 460, 480, 520] }} transition={{ duration: 12, repeat: Infinity, ease: "linear", delay: 4 }} />
         </svg>
 
-        {/* ── 2. RISING DATA PARTICLES — code symbols floating up like embers ── */}
+        {/* ── 2. RISING DATA PARTICLES - code symbols floating up like embers ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[
             { char: "{ }", x: "8%", delay: 0, dur: 12, size: 11 },
@@ -1329,7 +1329,7 @@ export default function AgenticAIPage() {
           </ScrollReveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-14">
-            {/* Roles — 3 columns */}
+            {/* Roles - 3 columns */}
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {roles.map((role, i) => (
                 <SlideIn key={i} direction="up" delay={i * 0.08}>
@@ -1369,7 +1369,7 @@ export default function AgenticAIPage() {
               ))}
             </div>
 
-            {/* Right side — salary + guarantees */}
+            {/* Right side - salary + guarantees */}
             <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
               <SlideIn direction="right">
                 <motion.div
@@ -1452,7 +1452,7 @@ export default function AgenticAIPage() {
         </div>
       </section>
 
-      {/* ═══════ TESTIMONIALS — Premium carousel with floating orbs ═══════ */}
+      {/* ═══════ TESTIMONIALS - Premium carousel with floating orbs ═══════ */}
       <section className="relative py-24 px-6 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #f1f5f9 50%, #f9fafb 100%)' }}>
         <motion.div className="absolute top-20 left-[10%] w-72 h-72 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: `${ACCENT_PURPLE}08` }} animate={{ x: [0, 40, 0], y: [0, -20, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="absolute bottom-20 right-[10%] w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `${ACCENT_BLUE}06` }} animate={{ x: [0, -30, 0], y: [0, 25, 0] }} transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }} />
@@ -1471,7 +1471,7 @@ export default function AgenticAIPage() {
         <TestimonialCarousel />
       </section>
 
-      {/* ═══════ CAREER GROWTH ROADMAP — Animated SVG path ═══════ */}
+      {/* ═══════ CAREER GROWTH ROADMAP - Animated SVG path ═══════ */}
       <section className="relative py-24 px-6 bg-white overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none" style={{ background: `radial-gradient(ellipse, ${ACCENT_BLUE}05, transparent 70%)` }} />
         <div className="max-w-6xl mx-auto relative z-10">
@@ -1520,7 +1520,7 @@ export default function AgenticAIPage() {
 
       <WaveDivider from="#ffffff" to="#f9fafb" />
 
-      {/* ═══════ FINAL CTA — Join 8000+ professionals ═══════ */}
+      {/* ═══════ FINAL CTA - Join 8000+ professionals ═══════ */}
       <FooterCTA />
     </div>
     </ThemeProvider>

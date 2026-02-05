@@ -17,7 +17,7 @@ import FooterCTA from "@/components/sections/FooterCTA";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════
-   COLOR SYSTEM — Linkway brand
+   COLOR SYSTEM - Linkway brand
    ═══════════════════════════════════════════════════════ */
 
 const BRAND_ORANGE = "#F58220";
@@ -33,7 +33,7 @@ const ease: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
    UTILITY COMPONENTS
    ═══════════════════════════════════════════════════════ */
 
-/* Typing animation — inspired by Codecademy */
+/* Typing animation - inspired by Codecademy */
 function TypeWriter({ words, className }: { words: string[]; className?: string }) {
   const [wordIdx, setWordIdx] = useState(0);
   const [text, setText] = useState("");
@@ -93,7 +93,7 @@ function Magnetic({ children, className }: { children: React.ReactNode; classNam
   );
 }
 
-/* Slide-in from direction — Panorama-inspired */
+/* Slide-in from direction - Panorama-inspired */
 function SlideIn({ children, direction = "up", delay = 0, className }: { children: React.ReactNode; direction?: "up" | "down" | "left" | "right"; delay?: number; className?: string }) {
   const offsets = { up: { y: 40 }, down: { y: -40 }, left: { x: -50 }, right: { x: 50 } };
   return (
@@ -154,7 +154,7 @@ function SectionLabel({ children, center = false, light = false }: { children: R
   );
 }
 
-/* Stat card — Panorama-inspired */
+/* Stat card - Panorama-inspired */
 function StatCard({ value, suffix, label, icon: Icon, delay = 0, accent = BRAND_ORANGE }: { value: number; suffix: string; label: string; icon: React.FC<{ className?: string; style?: React.CSSProperties }>; delay?: number; accent?: string }) {
   return (
     <SlideIn direction="up" delay={delay}>
@@ -189,10 +189,10 @@ function Divider({ className }: { className?: string }) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   TESTIMONIAL CAROUSEL — Premium 3D tilt glassmorphism
+   TESTIMONIAL CAROUSEL - Premium 3D tilt glassmorphism
    ═══════════════════════════════════════════════════════ */
 const learnerTestimonials = [
-  { name: "Aditya Srivastava", from: "Full-Stack Dev", to: "Data Scientist", company: "Globussoft", exp: "3 yrs exp.", accentFrom: "#8b5cf6", accentTo: "#a78bfa", gradientBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe 40%, #ffffff)", desc: "I could code, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works." },
+  { name: "Aditya Srivastava", from: "Full-Stack Dev", to: "Data Scientist", company: "Globussoft", exp: "3 yrs exp.", accentFrom: "#8b5cf6", accentTo: "#a78bfa", gradientBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe 40%, #ffffff)", desc: "I could code, but I didn't know ML. Linkway filled that gap with real projects - computer vision, forecasting, the works." },
   { name: "Priya Mehta", from: "Graphic Designer", to: "Data Scientist", company: "Meesho", exp: "2 yrs exp.", accentFrom: "#f97316", accentTo: "#fb923c", gradientBg: "linear-gradient(135deg, #fff7ed, #fed7aa 40%, #ffffff)", desc: "From design to data, Linkway taught me how to think analytically. I learned Python, ML, and dashboarding. My fashion image classification project clicked with Meesho." },
   { name: "Sameer Joshi", from: "Mechanical Eng.", to: "ML Engineer", company: "TCS Research", exp: "2 yrs exp.", accentFrom: "#10b981", accentTo: "#34d399", gradientBg: "linear-gradient(135deg, #ecfdf5, #d1fae5 40%, #ffffff)", desc: "Engineering taught me problem-solving. Linkway taught me to solve problems with neural networks. Now I'm building predictive maintenance models at TCS." },
   { name: "Neha Gupta", from: "BCA Graduate", to: "AI Engineer", company: "Fractal Analytics", exp: "1.5 yrs exp.", accentFrom: "#0ea5e9", accentTo: "#38bdf8", gradientBg: "linear-gradient(135deg, #f0f9ff, #bae6fd 40%, #ffffff)", desc: "Fresh out of BCA, I had no idea what ML actually was. 12 months later, I'm deploying NLP models in production at Fractal. The projects made all the difference." },
@@ -314,7 +314,7 @@ function TestimonialCarousel() {
   );
 }
 
-/* SVG wave section divider — Clever-inspired */
+/* SVG wave section divider - Clever-inspired */
 function WaveDivider({ flip = false, from = "#f9fafb", to = "#ffffff" }: { flip?: boolean; from?: string; to?: string }) {
   return (
     <div className={cn("w-full overflow-hidden leading-[0]", flip && "rotate-180")} style={{ backgroundColor: from }}>
@@ -325,7 +325,7 @@ function WaveDivider({ flip = false, from = "#f9fafb", to = "#ffffff" }: { flip?
   );
 }
 
-/* Journey Phase Card — interactive expandable card with code preview */
+/* Journey Phase Card - interactive expandable card with code preview */
 function JourneyPhaseCard({ mod, index, isOpen, onToggle, codeLines }: {
   mod: { phase: string; title: string; duration: string; color: string; topics: string[]; skills: string[] };
   index: number;
@@ -809,7 +809,7 @@ function DashboardPreview() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   MODULES — Bento-Grid Glassmorphism (Light Theme)
+   MODULES - Bento-Grid Glassmorphism (Light Theme)
    ═══════════════════════════════════════════════════════ */
 
 const MODULE_DATA = [
@@ -823,9 +823,9 @@ const MODULE_DATA = [
     color: "#059669",
     lightBg: "#ecfdf5",
     topics: [
-      "Python fundamentals — variables, loops, functions, OOP",
+      "Python fundamentals - variables, loops, functions, OOP",
       "NumPy arrays & vectorized operations",
-      "Pandas DataFrames — cleaning, merging, grouping",
+      "Pandas DataFrames - cleaning, merging, grouping",
       "File I/O, error handling & modules",
       "List comprehensions & generators",
       "Working with APIs & JSON data",
@@ -844,9 +844,9 @@ const MODULE_DATA = [
     topics: [
       "Descriptive statistics & data distributions",
       "Probability theory & Bayes theorem",
-      "Hypothesis testing — t-test, chi-square, ANOVA",
-      "Linear algebra — matrices, eigenvalues, SVD",
-      "Calculus — gradients, partial derivatives",
+      "Hypothesis testing - t-test, chi-square, ANOVA",
+      "Linear algebra - matrices, eigenvalues, SVD",
+      "Calculus - gradients, partial derivatives",
       "Statistical modeling & inference",
     ],
     icon: (<img src="/images/tools/python.png" alt="Statistics" className="w-7 h-7 object-contain drop-shadow-sm" />),
@@ -861,10 +861,10 @@ const MODULE_DATA = [
     color: "#d97706",
     lightBg: "#fffbeb",
     topics: [
-      "Supervised Learning — linear & logistic regression",
+      "Supervised Learning - linear & logistic regression",
       "Decision Trees, Random Forests & XGBoost",
-      "Unsupervised Learning — K-Means, DBSCAN, PCA",
-      "Model evaluation — cross-validation, ROC curves",
+      "Unsupervised Learning - K-Means, DBSCAN, PCA",
+      "Model evaluation - cross-validation, ROC curves",
       "Feature engineering & selection",
       "Ensemble methods & model stacking",
     ],
@@ -880,11 +880,11 @@ const MODULE_DATA = [
     color: "#7c3aed",
     lightBg: "#f5f3ff",
     topics: [
-      "Neural network fundamentals — perceptrons to DNNs",
-      "CNNs — image classification & object detection",
-      "RNNs & LSTMs — sequence modeling",
+      "Neural network fundamentals - perceptrons to DNNs",
+      "CNNs - image classification & object detection",
+      "RNNs & LSTMs - sequence modeling",
       "Transfer learning with pre-trained models",
-      "Model optimization — batch norm, dropout, learning rate",
+      "Model optimization - batch norm, dropout, learning rate",
       "PyTorch & TensorFlow implementation",
     ],
     icon: (<img src="/images/tools/tensorflow.png" alt="Deep Learning" className="w-7 h-7 object-contain drop-shadow-sm" />),
@@ -899,10 +899,10 @@ const MODULE_DATA = [
     color: "#db2777",
     lightBg: "#fdf2f8",
     topics: [
-      "Text preprocessing — tokenization, stemming, TF-IDF",
-      "Word embeddings — Word2Vec, GloVe, FastText",
-      "Transformer architecture — attention mechanism",
-      "LLMs — GPT, BERT, fine-tuning strategies",
+      "Text preprocessing - tokenization, stemming, TF-IDF",
+      "Word embeddings - Word2Vec, GloVe, FastText",
+      "Transformer architecture - attention mechanism",
+      "LLMs - GPT, BERT, fine-tuning strategies",
       "Prompt engineering & RAG systems",
       "LangChain for AI applications",
     ],
@@ -921,7 +921,7 @@ const MODULE_DATA = [
       "ML pipeline design & automation",
       "Model versioning with MLflow & DVC",
       "Docker containerization for ML",
-      "Cloud deployment — AWS SageMaker, GCP Vertex AI",
+      "Cloud deployment - AWS SageMaker, GCP Vertex AI",
       "CI/CD for ML pipelines",
       "Monitoring, A/B testing & model drift",
     ],
@@ -1015,7 +1015,7 @@ function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; ind
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <div className="space-y-2">
                     {mod.topics.map((topic, tIdx) => {
-                      const parts = topic.split(" — ");
+                      const parts = topic.split(" - ");
                       return (
                         <motion.div
                           key={tIdx}
@@ -1199,7 +1199,7 @@ function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
               </span>
             </h2>
             <p className="mt-5 text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-              Each module builds on the last — from Python basics to production AI. Click any module to explore what&apos;s inside.
+              Each module builds on the last - from Python basics to production AI. Click any module to explore what&apos;s inside.
             </p>
           </div>
         </ScrollReveal>
@@ -1270,16 +1270,16 @@ export default function DataScienceAIPage() {
   const personas = [
     { icon: RocketIcon, title: "Future Data Scientists", desc: "You know data is where the world is heading. This program takes you from the fundamentals all the way to building production AI systems.", color: BRAND_ORANGE },
     { icon: BriefcaseIcon, title: "Developers Who Want AI Skills", desc: "You can already code. Now add ML, deep learning, and MLOps to your toolkit and become the person companies fight to hire.", color: ACCENT_BLUE },
-    { icon: UserIcon, title: "Career Changers", desc: "Doesn't matter what you did before. This 12-month program teaches everything from scratch — no prior ML experience needed.", color: ACCENT_CYAN },
+    { icon: UserIcon, title: "Career Changers", desc: "Doesn't matter what you did before. This 12-month program teaches everything from scratch - no prior ML experience needed.", color: ACCENT_CYAN },
     { icon: GraduationIcon, title: "AI Enthusiasts", desc: "If you're fascinated by neural networks, NLP, and generative AI, this is where you go from reading about it to actually building it.", color: BRAND_ORANGE },
   ];
 
   const curriculum = [
     { phase: "01", title: "Foundations", duration: "Weeks 1–10", color: BRAND_ORANGE, skills: ["Python", "NumPy", "Pandas", "Statistics", "Visualization"], topics: [
-      "Python fundamentals — variables, loops, functions, OOP",
-      "NumPy & Pandas — data manipulation at scale",
-      "Statistics & probability — distributions, hypothesis testing",
-      "Data visualization — Matplotlib, Seaborn, Plotly",
+      "Python fundamentals - variables, loops, functions, OOP",
+      "NumPy & Pandas - data manipulation at scale",
+      "Statistics & probability - distributions, hypothesis testing",
+      "Data visualization - Matplotlib, Seaborn, Plotly",
     ], code: [
       { text: "# Statistical analysis in Python", color: "#8b949e" },
       { text: "import numpy as np", color: "#79c0ff" },
@@ -1291,9 +1291,9 @@ export default function DataScienceAIPage() {
       { text: ">>> 95% CI: (99.1, 101.8)", color: "#7ee787" },
     ]},
     { phase: "02", title: "Machine Learning", duration: "Weeks 11–18", color: ACCENT_BLUE, skills: ["Scikit-learn", "XGBoost", "SHAP", "Feature Engineering"], topics: [
-      "Supervised learning — regression, classification, trees",
-      "Unsupervised learning — clustering, dimensionality reduction",
-      "Model evaluation — cross-validation, hyperparameter tuning",
+      "Supervised learning - regression, classification, trees",
+      "Unsupervised learning - clustering, dimensionality reduction",
+      "Model evaluation - cross-validation, hyperparameter tuning",
       "Feature engineering & explainability with SHAP",
     ], code: [
       { text: "# XGBoost with SHAP explainability", color: "#8b949e" },
@@ -1307,10 +1307,10 @@ export default function DataScienceAIPage() {
       { text: ">>> Accuracy: 96.3% | AUC: 0.98", color: "#7ee787" },
     ]},
     { phase: "03", title: "Deep Learning & NLP", duration: "Weeks 19–28", color: ACCENT_CYAN, skills: ["TensorFlow", "PyTorch", "BERT", "GPT", "LangChain"], topics: [
-      "Neural networks — CNNs, RNNs, LSTMs, Transformers",
-      "NLP — tokenization, embeddings, BERT, GPT fine-tuning",
-      "Computer vision — image classification, object detection",
-      "Generative AI — prompt engineering, RAG, LangChain",
+      "Neural networks - CNNs, RNNs, LSTMs, Transformers",
+      "NLP - tokenization, embeddings, BERT, GPT fine-tuning",
+      "Computer vision - image classification, object detection",
+      "Generative AI - prompt engineering, RAG, LangChain",
     ], code: [
       { text: "# BERT sentiment analysis", color: "#8b949e" },
       { text: "from transformers import pipeline", color: "#79c0ff" },
@@ -1342,9 +1342,9 @@ export default function DataScienceAIPage() {
 
   const faqs = [
     { question: "Can a complete beginner do this?", answer: "Yes. Module 1 starts with Python basics. No prior ML or programming experience needed. By month 3, you'll be building real ML models." },
-    { question: "How is this different from Data Analytics?", answer: "Data Analytics focuses on visualization and reporting. This goes way deeper — deep learning, NLP, generative AI, MLOps, cloud deployment. It's for people who want to build AI, not just look at dashboards." },
+    { question: "How is this different from Data Analytics?", answer: "Data Analytics focuses on visualization and reporting. This goes way deeper - deep learning, NLP, generative AI, MLOps, cloud deployment. It's for people who want to build AI, not just look at dashboards." },
     { question: "What's the capstone project like?", answer: "You build a full ML system end-to-end: define the problem, collect data, train models, deploy a production API, and set up monitoring. Past students have built fraud detectors, medical image classifiers, and chatbots." },
-    { question: "Do you cover generative AI?", answer: "Yes — GANs, LLMs, prompt engineering, fine-tuning with HuggingFace. You'll build actual generative AI applications, not just talk about them." },
+    { question: "Do you cover generative AI?", answer: "Yes - GANs, LLMs, prompt engineering, fine-tuning with HuggingFace. You'll build actual generative AI applications, not just talk about them." },
     { question: "What about placement support?", answer: "100% placement." },
   ];
 
@@ -1359,7 +1359,7 @@ export default function DataScienceAIPage() {
     <ThemeProvider theme="light">
     <div className="min-h-screen bg-white text-navy-900 selection:bg-orange-500/20 overflow-x-hidden">
 
-      {/* ═══════ HERO — Dark section ═══════ */}
+      {/* ═══════ HERO - Dark section ═══════ */}
       <section ref={heroRef} className="relative min-h-[88vh] flex items-center overflow-hidden" style={{ backgroundColor: DARK_BG }}>
         {/* Decorative gradient orbs */}
         <div className="absolute inset-0" style={{
@@ -1536,7 +1536,7 @@ export default function DataScienceAIPage() {
         </div>
       </section>
 
-      {/* ═══════ WHO IS THIS FOR — Interactive spotlight reveal ═══════ */}
+      {/* ═══════ WHO IS THIS FOR - Interactive spotlight reveal ═══════ */}
       <section className="relative py-24 px-6 bg-[#0a0e18] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
         <motion.div className="absolute top-20 -left-32 w-[400px] h-[400px] rounded-full blur-[120px]" style={{ background: `radial-gradient(circle, ${BRAND_ORANGE}30, transparent 70%)` }} animate={{ x: [0, 40, 0], y: [0, -30, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
@@ -1609,7 +1609,7 @@ export default function DataScienceAIPage() {
               { icon: UserIcon, title: "Real-World Interviews", desc: "On demand mock interviews with actual tech company hiring managers to prepare you for the toughest questions.", color: ACCENT_BLUE },
               { icon: LayersIcon, title: "Industry Vetted Curriculum", desc: "Targeted training for Data Science, Machine Learning, and AI at the standards expected by top tech giants.", color: ACCENT_CYAN },
               { icon: GraduationIcon, title: "Expert Mentors & Instructorship", desc: "Get trained by industry experts from top tech companies globally, tailored to your career goals.", color: BRAND_ORANGE },
-              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation — we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
+              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation - we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
               { icon: ShieldIcon, title: "Small Batches, Better Learning", desc: "Learn in a limited batch size for focused preparation & understanding with personalised attention.", color: ACCENT_CYAN },
             ].map((item, i) => (
               <SlideIn key={i} direction="up" delay={i * 0.08}>
@@ -1626,7 +1626,7 @@ export default function DataScienceAIPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM — Timeline with JourneyPhaseCard ═══════ */}
+      {/* ═══════ CURRICULUM - Timeline with JourneyPhaseCard ═══════ */}
       <section className="relative py-16 px-6 bg-white overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
@@ -1636,7 +1636,7 @@ export default function DataScienceAIPage() {
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_CYAN})` }}>Journey</span>
             </h2>
             <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto text-center">
-              12 months of intensive training — from Python basics to production AI. Click each phase to explore.
+              12 months of intensive training - from Python basics to production AI. Click each phase to explore.
             </p>
           </ScrollReveal>
 
@@ -1675,7 +1675,7 @@ export default function DataScienceAIPage() {
       {/* ═══════ MODULES ═══════ */}
       <ModulesSection openEnquiry={openEnquiry} />
 
-      {/* ═══════ TOOLS — Two-row marquee ═══════ */}
+      {/* ═══════ TOOLS - Two-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
         <Divider />
         <div className="max-w-6xl mx-auto pt-12">
@@ -1939,7 +1939,7 @@ export default function DataScienceAIPage() {
         </div>
       </section>
 
-      {/* ═══════ FINAL CTA — Join 8000+ professionals ═══════ */}
+      {/* ═══════ FINAL CTA - Join 8000+ professionals ═══════ */}
       <FooterCTA />
     </div>
     </ThemeProvider>

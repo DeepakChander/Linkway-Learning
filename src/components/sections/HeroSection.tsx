@@ -265,7 +265,7 @@ function StatusPill() {
         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
       </span>
       <span className="text-[11px] sm:text-[13px] text-gray-300 font-medium tracking-wide">
-        Enrollments Open — <span className="text-orange-400 font-semibold">Limited Seats</span>
+        Enrollments Open - <span className="text-orange-400 font-semibold">Limited Seats</span>
       </span>
     </motion.div>
   );

@@ -27,7 +27,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL("https://linkwaylearning.com"),
   title: {
-    default: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
+    default: "Linkway Learning - India's #1 Data Analytics & AI Training Institute",
     template: "%s | Linkway Learning",
   },
   description:
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     canonical: "https://linkwaylearning.com",
   },
   openGraph: {
-    title: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
+    title: "Linkway Learning - India's #1 Data Analytics & AI Training Institute",
     description:
       "100% placement. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
     type: "website",
@@ -80,13 +80,13 @@ export const metadata: Metadata = {
         url: "/images/og/og-default.png",
         width: 1200,
         height: 630,
-        alt: "Linkway Learning — India's leading Data Analytics and AI Training Institute",
+        alt: "Linkway Learning - India's leading Data Analytics and AI Training Institute",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
+    title: "Linkway Learning - India's #1 Data Analytics & AI Training Institute",
     description:
       "100% placement. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
     images: ["/images/og/og-default.png"],

@@ -17,7 +17,7 @@ import FooterCTA from "@/components/sections/FooterCTA";
 gsap.registerPlugin(ScrollTrigger);
 
 /* ═══════════════════════════════════════════════════════
-   COLOR SYSTEM — Linkway brand
+   COLOR SYSTEM - Linkway brand
    ═══════════════════════════════════════════════════════ */
 
 const BRAND_ORANGE = "#F58220";
@@ -33,7 +33,7 @@ const ease: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
    UTILITY COMPONENTS
    ═══════════════════════════════════════════════════════ */
 
-/* Typing animation — inspired by Codecademy */
+/* Typing animation - inspired by Codecademy */
 function TypeWriter({ words, className }: { words: string[]; className?: string }) {
   const [wordIdx, setWordIdx] = useState(0);
   const [text, setText] = useState("");
@@ -93,7 +93,7 @@ function Magnetic({ children, className }: { children: React.ReactNode; classNam
   );
 }
 
-/* Slide-in from direction — Panorama-inspired */
+/* Slide-in from direction - Panorama-inspired */
 function SlideIn({ children, direction = "up", delay = 0, className }: { children: React.ReactNode; direction?: "up" | "down" | "left" | "right"; delay?: number; className?: string }) {
   const offsets = { up: { y: 40 }, down: { y: -40 }, left: { x: -50 }, right: { x: 50 } };
   return (
@@ -154,7 +154,7 @@ function SectionLabel({ children, center = false, light = false }: { children: R
   );
 }
 
-/* Program Offer Icons — for What Our Program Offers section */
+/* Program Offer Icons - for What Our Program Offers section */
 function ProgramOfferIcon({ type }: { type: string }) {
   const iconClass = "w-5 h-5 text-orange-500";
   const icons: Record<string, React.ReactNode> = {
@@ -182,7 +182,7 @@ function ProgramOfferIcon({ type }: { type: string }) {
   return icons[type] || icons.mentorship;
 }
 
-/* Stat card — Panorama-inspired */
+/* Stat card - Panorama-inspired */
 function StatCard({ value, suffix, label, icon: Icon, delay = 0, accent = BRAND_ORANGE }: { value: number; suffix: string; label: string; icon: React.FC<{ className?: string; style?: React.CSSProperties }>; delay?: number; accent?: string }) {
   return (
     <SlideIn direction="up" delay={delay}>
@@ -217,14 +217,14 @@ function Divider({ className }: { className?: string }) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   TESTIMONIAL CAROUSEL — Premium 3D tilt glassmorphism
+   TESTIMONIAL CAROUSEL - Premium 3D tilt glassmorphism
    ═══════════════════════════════════════════════════════ */
 const learnerTestimonials = [
   { name: "Rehan Siddiqui", from: "Non-Tech", to: "Data Analyst", company: "Amazon", exp: "1.5 yrs exp.", accentFrom: "#10b981", accentTo: "#34d399", gradientBg: "linear-gradient(135deg, #ecfdf5, #d1fae5 40%, #ffffff)", desc: "I had zero tech background. Linkway taught me Tableau, Power BI, and how to actually think with data. Now I'm at Amazon solving real business problems every day." },
   { name: "Junaid Khan", from: "Banking Ops", to: "Business Analyst", company: "Razorpay", exp: "2 yrs exp.", accentFrom: "#eab308", accentTo: "#facc15", gradientBg: "linear-gradient(135deg, #fefce8, #fef9c3 40%, #ffffff)", desc: "I was stuck in banking ops with no clear growth path. Six months later, I'm a business analyst at Razorpay working on things that actually excite me." },
   { name: "Shivani Rawat", from: "Operations", to: "Business Analyst", company: "Booking.com", exp: "2 yrs exp.", accentFrom: "#0ea5e9", accentTo: "#38bdf8", gradientBg: "linear-gradient(135deg, #f0f9ff, #bae6fd 40%, #ffffff)", desc: "Operations felt like a dead end. The program gave me the technical skills I was missing, and now I'm doing requirement analysis at Booking.com." },
   { name: "Vansh Pathak", from: "Accounting", to: "Reporting Analyst", company: "Accenture", exp: "1 yr exp.", accentFrom: "#f43f5e", accentTo: "#fb7185", gradientBg: "linear-gradient(135deg, #fff1f2, #fecdd3 40%, #ffffff)", desc: "Went from crunching numbers in spreadsheets to building actual reports with SQL at Accenture. The mentors made the jump doable." },
-  { name: "Aditya Srivastava", from: "Full-Stack Dev", to: "Data Scientist", company: "Globussoft", exp: "3 yrs exp.", accentFrom: "#8b5cf6", accentTo: "#a78bfa", gradientBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe 40%, #ffffff)", desc: "I could code, but I didn't know ML. Linkway filled that gap with real projects — computer vision, forecasting, the works." },
+  { name: "Aditya Srivastava", from: "Full-Stack Dev", to: "Data Scientist", company: "Globussoft", exp: "3 yrs exp.", accentFrom: "#8b5cf6", accentTo: "#a78bfa", gradientBg: "linear-gradient(135deg, #f5f3ff, #ddd6fe 40%, #ffffff)", desc: "I could code, but I didn't know ML. Linkway filled that gap with real projects - computer vision, forecasting, the works." },
   { name: "Priya Mehta", from: "Graphic Designer", to: "Data Scientist", company: "Meesho", exp: "2 yrs exp.", accentFrom: "#f97316", accentTo: "#fb923c", gradientBg: "linear-gradient(135deg, #fff7ed, #fed7aa 40%, #ffffff)", desc: "From design to data, Linkway taught me how to think analytically. I learned Python, ML, and dashboarding. My fashion image classification project clicked with Meesho." },
   { name: "Priya Sharma", from: "HR Executive", to: "People Analytics", company: "Infosys", exp: "3 yrs exp.", accentFrom: "#ec4899", accentTo: "#f472b6", gradientBg: "linear-gradient(135deg, #fdf2f8, #fce7f3 40%, #ffffff)", desc: "HR felt repetitive after 3 years. Learned Python and started automating reports. Now I build dashboards that actually help hiring decisions at Infosys." },
   { name: "Rohit Verma", from: "Mech Engineer", to: "Data Engineer", company: "TCS", exp: "2.5 yrs exp.", accentFrom: "#14b8a6", accentTo: "#2dd4bf", gradientBg: "linear-gradient(135deg, #f0fdfa, #ccfbf1 40%, #ffffff)", desc: "Mechanical engineering wasn't for me. Picked up SQL, learned ETL pipelines here. Cracked TCS interview on my third attempt. Worth every rupee." },
@@ -345,7 +345,7 @@ function TestimonialCarousel() {
   );
 }
 
-/* SVG wave section divider — Clever-inspired */
+/* SVG wave section divider - Clever-inspired */
 function WaveDivider({ flip = false, from = "#f9fafb", to = "#ffffff" }: { flip?: boolean; from?: string; to?: string }) {
   return (
     <div className={cn("w-full overflow-hidden leading-[0]", flip && "rotate-180")} style={{ backgroundColor: from }}>
@@ -423,7 +423,7 @@ function ProjectCarousel({ projects }: { projects: { title: string; domain: stri
   );
 }
 
-/* Journey Phase Card — interactive expandable card with code preview */
+/* Journey Phase Card - interactive expandable card with code preview */
 function JourneyPhaseCard({ mod, index, isOpen, onToggle, codeLines }: {
   mod: { phase: string; title: string; duration: string; color: string; topics: string[]; skills: string[] };
   index: number;
@@ -493,7 +493,7 @@ function JourneyPhaseCard({ mod, index, isOpen, onToggle, codeLines }: {
           </motion.div>
         </div>
 
-        {/* Skill tags — always visible */}
+        {/* Skill tags - always visible */}
         <div className="px-6 pb-4 flex flex-wrap gap-1.5">
           {mod.skills.map((skill, j) => (
             <motion.span
@@ -746,7 +746,7 @@ function DashboardPreview() {
 
         {/* Charts Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Bar Chart — 2 cols */}
+          {/* Bar Chart - 2 cols */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -936,7 +936,7 @@ function HeroImageCarousel({ className }: { className?: string }) {
 }
 
 
-/* Infinite scrolling tool marquee — modern touch */
+/* Infinite scrolling tool marquee - modern touch */
 function ToolMarquee({ tools }: { tools: string[] }) {
   const doubled = [...tools, ...tools];
   return (
@@ -1017,7 +1017,7 @@ function VideoIcon({ className, style }: { className?: string; style?: React.CSS
 }
 
 /* ═══════════════════════════════════════════════════════
-   MODULES — Bento-Grid Glassmorphism (Light Theme)
+   MODULES - Bento-Grid Glassmorphism (Light Theme)
    Inspired by: Apple bento, Stripe gradients, Duolingo
    path, Coursera clean layout, Aceternity hover effects
    ═══════════════════════════════════════════════════════ */
@@ -1033,11 +1033,11 @@ const MODULE_DATA = [
     color: "#059669",
     lightBg: "#ecfdf5",
     topics: [
-      "Advanced formulas — VLOOKUP, INDEX-MATCH, array formulas",
+      "Advanced formulas - VLOOKUP, INDEX-MATCH, array formulas",
       "PivotTables & PivotCharts for dynamic reporting",
       "Conditional formatting & data validation at scale",
       "Forecasting models, What-If analysis & Goal Seek",
-      "Dashboard design — sparklines, slicers, KPI tiles",
+      "Dashboard design - sparklines, slicers, KPI tiles",
       "Power Query for automated data transformation",
     ],
     icon: (<img src="/images/tools/excel.png" alt="Excel" className="w-7 h-7 object-contain drop-shadow-sm" />),
@@ -1071,7 +1071,7 @@ const MODULE_DATA = [
     color: "#d97706",
     lightBg: "#fffbeb",
     topics: [
-      "Power BI Desktop — data modeling & DAX formulas",
+      "Power BI Desktop - data modeling & DAX formulas",
       "Building multi-page interactive reports",
       "Power Query M language for ETL pipelines",
       "Row-level security & workspace governance",
@@ -1090,11 +1090,11 @@ const MODULE_DATA = [
     color: "#7c3aed",
     lightBg: "#f5f3ff",
     topics: [
-      "Python fundamentals — variables, loops, functions, OOP",
+      "Python fundamentals - variables, loops, functions, OOP",
       "NumPy arrays & vectorized operations",
-      "Pandas DataFrames — cleaning, merging, grouping",
+      "Pandas DataFrames - cleaning, merging, grouping",
       "Matplotlib & Seaborn for publication-quality plots",
-      "Statistics — descriptive, probability, hypothesis testing",
+      "Statistics - descriptive, probability, hypothesis testing",
       "Data cleaning, preparation & feature engineering",
     ],
     icon: (<img src="/images/tools/python.png" alt="Python" className="w-7 h-7 object-contain drop-shadow-sm" />),
@@ -1109,12 +1109,12 @@ const MODULE_DATA = [
     color: "#db2777",
     lightBg: "#fdf2f8",
     topics: [
-      "Supervised Learning — linear & logistic regression",
+      "Supervised Learning - linear & logistic regression",
       "Decision Trees, Random Forests & Gradient Boosting",
-      "Unsupervised Learning — K-Means, DBSCAN, PCA",
-      "Model evaluation — cross-validation, ROC, confusion matrix",
-      "Time Series forecasting — ARIMA, SARIMA, Prophet",
-      "Recommender Systems — collaborative & content-based",
+      "Unsupervised Learning - K-Means, DBSCAN, PCA",
+      "Model evaluation - cross-validation, ROC, confusion matrix",
+      "Time Series forecasting - ARIMA, SARIMA, Prophet",
+      "Recommender Systems - collaborative & content-based",
     ],
     icon: (<img src="/images/tools/scikit-learn.png" alt="Machine Learning" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -1128,18 +1128,18 @@ const MODULE_DATA = [
     color: "#0891b2",
     lightBg: "#ecfeff",
     topics: [
-      "SQL fundamentals — SELECT, JOINs, subqueries, CTEs",
+      "SQL fundamentals - SELECT, JOINs, subqueries, CTEs",
       "MySQL database design & normalization",
       "Window functions, stored procedures & optimization",
       "Integrating SQL queries in Python (SQLAlchemy)",
       "Introduction to Apache Spark & PySpark",
-      "Big Data ecosystem — Hadoop, distributed computing",
+      "Big Data ecosystem - Hadoop, distributed computing",
     ],
     icon: (<img src="/images/tools/sql.png" alt="SQL" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
 ];
 
-/* ── Module Card — Option 1: Refined Original ── */
+/* ── Module Card - Option 1: Refined Original ── */
 function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; index: number; onEnquiry: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -1236,7 +1236,7 @@ function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; ind
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <div className="space-y-2">
                     {mod.topics.map((topic, tIdx) => {
-                      const parts = topic.split(" — ");
+                      const parts = topic.split(" - ");
                       return (
                         <motion.div
                           key={tIdx}
@@ -1422,7 +1422,7 @@ function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
               </span>
             </h2>
             <p className="mt-5 text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-              Each module builds on the last — from spreadsheets to machine learning. Click any module to explore what&apos;s inside.
+              Each module builds on the last - from spreadsheets to machine learning. Click any module to explore what&apos;s inside.
             </p>
           </div>
         </ScrollReveal>
@@ -1434,7 +1434,7 @@ function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
           ))}
         </div>
 
-        {/* ── Bottom Stats Cards — Modern Dashboard Style ── */}
+        {/* ── Bottom Stats Cards - Modern Dashboard Style ── */}
         <motion.div
           className="mt-16"
           initial={{ opacity: 0, y: 30 }}
@@ -1751,7 +1751,7 @@ export default function DataAnalyticsPage() {
     <ThemeProvider theme="light">
     <div className="min-h-screen bg-white text-navy-900 selection:bg-orange-500/20 overflow-x-hidden">
 
-      {/* ═══════ HERO — Dark section ═══════ */}
+      {/* ═══════ HERO - Dark section ═══════ */}
       <section ref={heroRef} className="relative min-h-[88vh] flex items-center overflow-hidden" style={{ backgroundColor: DARK_BG }}>
         {/* Decorative gradient orbs */}
         <div className="absolute inset-0" style={{
@@ -1916,7 +1916,7 @@ export default function DataAnalyticsPage() {
                 </span>
               </motion.h1>
 
-              {/* Typing animation — Codecademy-inspired */}
+              {/* Typing animation - Codecademy-inspired */}
               <motion.div
                 className="mt-5 h-8 flex items-center gap-2"
                 initial={{ opacity: 0 }}
@@ -1964,7 +1964,7 @@ export default function DataAnalyticsPage() {
         </div>
       </div>
 
-      {/* ═══════ HIGHLIGHTS BAR — Cambly-inspired alternating colored strip ═══════ */}
+      {/* ═══════ HIGHLIGHTS BAR - Cambly-inspired alternating colored strip ═══════ */}
       <section className="relative py-5 px-6" style={{ backgroundColor: BRAND_NAVY }}>
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
           {highlights.map((h, i) => (
@@ -1986,7 +1986,7 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ WHAT OUR PROGRAM OFFERS — Premium feature showcase ═══════ */}
+      {/* ═══════ WHAT OUR PROGRAM OFFERS - Premium feature showcase ═══════ */}
       <section className="relative py-20 md:py-28 overflow-hidden bg-[#fafbfc]">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0)`, backgroundSize: "32px 32px" }} />
@@ -2095,7 +2095,7 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ WHO IS THIS FOR — Interactive spotlight reveal ═══════ */}
+      {/* ═══════ WHO IS THIS FOR - Interactive spotlight reveal ═══════ */}
       <section className="relative py-24 px-6 bg-[#0a0e18] overflow-hidden">
         {/* Animated background grid */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
@@ -2241,7 +2241,7 @@ export default function DataAnalyticsPage() {
               { icon: UserIcon, title: "Real-World Interviews", desc: "On demand mock interviews with actual tech company hiring managers to prepare you for the toughest questions.", color: ACCENT_BLUE },
               { icon: LayersIcon, title: "Industry Vetted Curriculum", desc: "Targeted training for Data Analysis, Statistics, and AI models at the standards expected by top tech giants.", color: ACCENT_CYAN },
               { icon: GraduationIcon, title: "Expert Mentors & Instructorship", desc: "Get trained by industry experts from top tech companies globally, tailored to your career goals.", color: BRAND_ORANGE },
-              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation — we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
+              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation - we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
               { icon: ShieldIcon, title: "Small Batches, Better Learning", desc: "Learn in a limited batch size for focused preparation & understanding with personalised attention.", color: ACCENT_CYAN },
             ].map((item, i) => (
               <SlideIn key={i} direction="up" delay={i * 0.08}>
@@ -2258,7 +2258,7 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM — Clean Accordion Style ═══════ */}
+      {/* ═══════ CURRICULUM - Clean Accordion Style ═══════ */}
       <section className="relative py-16 md:py-24 px-4 sm:px-6 bg-[#f3f4f6]">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -2378,7 +2378,7 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ TOOLS — Three-row marquee ═══════ */}
+      {/* ═══════ TOOLS - Three-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -2410,9 +2410,9 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ PROJECTS — Compact premium grid ═══════ */}
+      {/* ═══════ PROJECTS - Compact premium grid ═══════ */}
       <section className="relative py-16 px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
-        {/* ── 1. AURORA SILK RIBBONS — flowing morphing gradient paths ── */}
+        {/* ── 1. AURORA SILK RIBBONS - flowing morphing gradient paths ── */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ribbonA" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -2439,7 +2439,7 @@ export default function DataAnalyticsPage() {
               <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
           </defs>
-          {/* Ribbon 1 — top flowing silk */}
+          {/* Ribbon 1 - top flowing silk */}
           <motion.path
             d="M-100,120 C150,40 350,200 600,80 S950,180 1200,60 1500,140"
             fill="none" stroke="url(#ribbonA)" strokeWidth="2" filter="url(#ribbonGlow)"
@@ -2456,7 +2456,7 @@ export default function DataAnalyticsPage() {
             viewport={{ once: true }}
             transition={{ duration: 2.8, delay: 0.2, ease: "easeInOut" }}
           />
-          {/* Ribbon 2 — middle flowing silk */}
+          {/* Ribbon 2 - middle flowing silk */}
           <motion.path
             d="M-50,320 C200,250 450,400 700,280 S1050,380 1300,300 1600,350"
             fill="none" stroke="url(#ribbonB)" strokeWidth="2" filter="url(#ribbonGlow)"
@@ -2473,7 +2473,7 @@ export default function DataAnalyticsPage() {
             viewport={{ once: true }}
             transition={{ duration: 3.2, delay: 0.6, ease: "easeInOut" }}
           />
-          {/* Ribbon 3 — bottom flowing silk */}
+          {/* Ribbon 3 - bottom flowing silk */}
           <motion.path
             d="M-80,500 C180,440 400,550 680,460 S1000,530 1250,480 1600,520"
             fill="none" stroke="url(#ribbonC)" strokeWidth="1.5" filter="url(#ribbonGlow)"
@@ -2498,7 +2498,7 @@ export default function DataAnalyticsPage() {
           />
         </svg>
 
-        {/* ── 2. RISING DATA PARTICLES — code symbols floating up like embers ── */}
+        {/* ── 2. RISING DATA PARTICLES - code symbols floating up like embers ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[
             { char: "{ }", x: "8%", delay: 0, dur: 12, size: 11 },
@@ -2545,9 +2545,9 @@ export default function DataAnalyticsPage() {
           ))}
         </div>
 
-        {/* ── 3. WIREFRAME GEOMETRIC SHAPES — 3D-perspective rotating ── */}
+        {/* ── 3. WIREFRAME GEOMETRIC SHAPES - 3D-perspective rotating ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Rotating diamond/rhombus — top right */}
+          {/* Rotating diamond/rhombus - top right */}
           <motion.div
             className="absolute"
             style={{ top: "8%", right: "12%", width: 60, height: 60 }}
@@ -2578,7 +2578,7 @@ export default function DataAnalyticsPage() {
             </svg>
           </motion.div>
 
-          {/* Rotating hexagon — bottom left */}
+          {/* Rotating hexagon - bottom left */}
           <motion.div
             className="absolute"
             style={{ bottom: "12%", left: "8%", width: 80, height: 80 }}
@@ -2612,7 +2612,7 @@ export default function DataAnalyticsPage() {
             </svg>
           </motion.div>
 
-          {/* Rotating cube wireframe — center right */}
+          {/* Rotating cube wireframe - center right */}
           <motion.div
             className="absolute"
             style={{ top: "40%", right: "5%", width: 50, height: 50 }}
@@ -2631,7 +2631,7 @@ export default function DataAnalyticsPage() {
             </svg>
           </motion.div>
 
-          {/* Small rotating triangle — top left */}
+          {/* Small rotating triangle - top left */}
           <motion.div
             className="absolute"
             style={{ top: "18%", left: "5%", width: 40, height: 40 }}
@@ -2652,7 +2652,7 @@ export default function DataAnalyticsPage() {
             </svg>
           </motion.div>
 
-          {/* Pulsing concentric circles — bottom right */}
+          {/* Pulsing concentric circles - bottom right */}
           <div className="absolute" style={{ bottom: "20%", right: "18%", width: 70, height: 70 }}>
             <svg viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
               {[28, 22, 16, 10].map((r, i) => (
@@ -2671,7 +2671,7 @@ export default function DataAnalyticsPage() {
           </div>
         </div>
 
-        {/* ── 4. MORPHING GRADIENT BLOBS — organic breathing shapes ── */}
+        {/* ── 4. MORPHING GRADIENT BLOBS - organic breathing shapes ── */}
         <motion.div
           className="absolute w-[450px] h-[450px] pointer-events-none opacity-[0.07]"
           style={{
@@ -2743,7 +2743,7 @@ export default function DataAnalyticsPage() {
       </section>
 
       
-      {/* ═══════ TESTIMONIALS — Premium carousel with floating orbs ═══════ */}
+      {/* ═══════ TESTIMONIALS - Premium carousel with floating orbs ═══════ */}
       <section className="relative py-14 px-6 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #f1f5f9 50%, #f9fafb 100%)' }}>
         {/* Animated floating orbs */}
         <motion.div className="absolute top-20 left-[10%] w-72 h-72 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: `${BRAND_ORANGE}08` }} animate={{ x: [0, 40, 0], y: [0, -20, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }} />
@@ -2765,7 +2765,7 @@ export default function DataAnalyticsPage() {
         <TestimonialCarousel />
       </section>
 
-            {/* ═══════ CAREER GROWTH ROADMAP — Animated SVG path ═══════ */}
+            {/* ═══════ CAREER GROWTH ROADMAP - Animated SVG path ═══════ */}
       <section className="relative py-24 px-6 bg-white overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none" style={{ background: `radial-gradient(ellipse, ${ACCENT_BLUE}05, transparent 70%)` }} />
         <div className="max-w-6xl mx-auto relative z-10">
@@ -2834,7 +2834,7 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ FINAL CTA — Join 8000+ professionals ═══════ */}
+      {/* ═══════ FINAL CTA - Join 8000+ professionals ═══════ */}
       <FooterCTA />
     </div>
     </ThemeProvider>

@@ -99,7 +99,7 @@ export default function PrivacyPage() {
             <div className="rounded-lg border border-white/10 p-5 space-y-2">
               <h4 className="text-white font-semibold">
                 Registration Data{" "}
-                <span className="text-gray-500 font-normal">— Users</span>
+                <span className="text-gray-500 font-normal">- Users</span>
               </h4>
               <p>
                 Personal data we need to collect to create your Linkway
@@ -119,7 +119,7 @@ export default function PrivacyPage() {
             <div className="rounded-lg border border-white/10 p-5 space-y-2">
               <h4 className="text-white font-semibold">
                 Student Data{" "}
-                <span className="text-gray-500 font-normal">— Students</span>
+                <span className="text-gray-500 font-normal">- Students</span>
               </h4>
               <p>
                 If you participate in a Linkway Learning course, we may
@@ -142,7 +142,7 @@ export default function PrivacyPage() {
               <h4 className="text-white font-semibold">
                 Other Data{" "}
                 <span className="text-gray-500 font-normal">
-                  — Users, Students, Website Visitors, Event Participants
+                  - Users, Students, Website Visitors, Event Participants
                 </span>
               </h4>
               <p>
@@ -158,7 +158,7 @@ export default function PrivacyPage() {
               <h4 className="text-white font-semibold">
                 Cookie Data{" "}
                 <span className="text-gray-500 font-normal">
-                  — Users, Students, Website Visitors
+                  - Users, Students, Website Visitors
                 </span>
               </h4>
               <p>
@@ -172,7 +172,7 @@ export default function PrivacyPage() {
             <div className="rounded-lg border border-white/10 p-5 space-y-2">
               <h4 className="text-white font-semibold">
                 Tutor Data{" "}
-                <span className="text-gray-500 font-normal">— Tutors</span>
+                <span className="text-gray-500 font-normal">- Tutors</span>
               </h4>
               <p>
                 Information about tutors participating in educational courses:
@@ -190,7 +190,7 @@ export default function PrivacyPage() {
               <h4 className="text-white font-semibold">
                 Graduating Student Data{" "}
                 <span className="text-gray-500 font-normal">
-                  — Graduating Students
+                  - Graduating Students
                 </span>
               </h4>
               <p>

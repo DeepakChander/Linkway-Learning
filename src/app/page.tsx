@@ -10,7 +10,7 @@ import HomeFAQ from "@/components/sections/HomeFAQ";
 import FooterCTA from "@/components/sections/FooterCTA";
 
 export const metadata: Metadata = {
-  title: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
+  title: "Linkway Learning - India's #1 Data Analytics & AI Training Institute",
   description:
     "Launch your data career with Linkway Learning. Industry-driven programs in Data Analytics, Data Science, AI, Business Analytics & Investment Banking. 100% placement. Mentors from Google, Amazon & Microsoft.",
   keywords: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     canonical: "https://linkwaylearning.com",
   },
   openGraph: {
-    title: "Linkway Learning — India's #1 Data Analytics & AI Training Institute",
+    title: "Linkway Learning - India's #1 Data Analytics & AI Training Institute",
     description:
       "100% placement. Mentors from Google, Amazon & Microsoft. Launch your data career today.",
     url: "https://linkwaylearning.com",

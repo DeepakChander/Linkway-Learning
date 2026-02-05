@@ -547,7 +547,7 @@ function BIDashboardPreview() {
         </div>
         {/* Charts Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Sales Funnel — 2 cols */}
+          {/* Sales Funnel - 2 cols */}
           <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.4 }} className="md:col-span-2 rounded-xl bg-white/[0.03] border border-white/[0.06] p-4">
             <div className="flex items-center justify-between mb-4">
               <p className="text-xs font-medium text-gray-400">Sales Funnel</p>
@@ -620,12 +620,12 @@ const MODULE_DATA = [
     color: "#059669",
     lightBg: "#ecfdf5",
     topics: [
-      "Advanced formulas — VLOOKUP, INDEX-MATCH, array formulas",
-      "PivotTables & PivotCharts — dynamic reporting & analysis",
-      "Conditional formatting & data validation — at scale",
-      "What-If analysis — Goal Seek & Scenario Manager",
-      "Dashboard design — sparklines, slicers, KPI tiles",
-      "Power Query — automated ETL & data transformation",
+      "Advanced formulas - VLOOKUP, INDEX-MATCH, array formulas",
+      "PivotTables & PivotCharts - dynamic reporting & analysis",
+      "Conditional formatting & data validation - at scale",
+      "What-If analysis - Goal Seek & Scenario Manager",
+      "Dashboard design - sparklines, slicers, KPI tiles",
+      "Power Query - automated ETL & data transformation",
     ],
     icon: (<img src="/images/tools/excel.png" alt="Excel" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -639,12 +639,12 @@ const MODULE_DATA = [
     color: "#3b82f6",
     lightBg: "#eff6ff",
     topics: [
-      "SQL fundamentals — SELECT, JOINs, CTEs",
-      "Database design — normalization & ER modeling",
-      "Window functions — stored procedures & optimization",
-      "Complex subqueries — performance tuning techniques",
-      "Data warehousing — concepts & architecture",
-      "SQL for business reporting — actionable insights",
+      "SQL fundamentals - SELECT, JOINs, CTEs",
+      "Database design - normalization & ER modeling",
+      "Window functions - stored procedures & optimization",
+      "Complex subqueries - performance tuning techniques",
+      "Data warehousing - concepts & architecture",
+      "SQL for business reporting - actionable insights",
     ],
     icon: (<img src="/images/tools/sql.png" alt="SQL" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -658,12 +658,12 @@ const MODULE_DATA = [
     color: "#d97706",
     lightBg: "#fffbeb",
     topics: [
-      "Power BI Desktop — data modeling & DAX formulas",
+      "Power BI Desktop - data modeling & DAX formulas",
       "Building multi-page interactive reports",
-      "Power Query M language — ETL pipelines",
-      "Row-level security — workspace governance",
-      "Dataflows — incremental refresh & performance tuning",
-      "Publishing & sharing — via Power BI Service",
+      "Power Query M language - ETL pipelines",
+      "Row-level security - workspace governance",
+      "Dataflows - incremental refresh & performance tuning",
+      "Publishing & sharing - via Power BI Service",
     ],
     icon: (<img src="/images/tools/power-bi.png" alt="Power BI" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -677,12 +677,12 @@ const MODULE_DATA = [
     color: "#7c3aed",
     lightBg: "#f5f3ff",
     topics: [
-      "Connecting to data sources — live & extract",
-      "Interactive dashboards — storyboards & navigation",
-      "Calculated fields — LOD expressions & table calcs",
-      "Geospatial mapping — custom geocoding",
-      "Publishing to Tableau Server — Tableau Public",
-      "Visual design — best practices & storytelling",
+      "Connecting to data sources - live & extract",
+      "Interactive dashboards - storyboards & navigation",
+      "Calculated fields - LOD expressions & table calcs",
+      "Geospatial mapping - custom geocoding",
+      "Publishing to Tableau Server - Tableau Public",
+      "Visual design - best practices & storytelling",
     ],
     icon: (<img src="/images/tools/tableau.png" alt="Tableau" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -696,12 +696,12 @@ const MODULE_DATA = [
     color: "#db2777",
     lightBg: "#fdf2f8",
     topics: [
-      "Descriptive statistics — distributions & central tendency",
-      "Probability theory — Bayes theorem & applications",
-      "Hypothesis testing — A/B testing & significance",
-      "Regression analysis — linear & logistic models",
-      "Time series analysis — trends & seasonality",
-      "Business forecasting — methods & best practices",
+      "Descriptive statistics - distributions & central tendency",
+      "Probability theory - Bayes theorem & applications",
+      "Hypothesis testing - A/B testing & significance",
+      "Regression analysis - linear & logistic models",
+      "Time series analysis - trends & seasonality",
+      "Business forecasting - methods & best practices",
     ],
     icon: (<img src="/images/tools/python.png" alt="Statistics" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -715,12 +715,12 @@ const MODULE_DATA = [
     color: "#0891b2",
     lightBg: "#ecfeff",
     topics: [
-      "Python fundamentals — variables, loops, functions, OOP",
-      "NumPy & Pandas — data manipulation at scale",
-      "Matplotlib & Seaborn — publication-quality visualizations",
-      "Statistical analysis — SciPy for inference & testing",
-      "Web scraping — BeautifulSoup & automation",
-      "Automation & reporting — scripts & scheduled jobs",
+      "Python fundamentals - variables, loops, functions, OOP",
+      "NumPy & Pandas - data manipulation at scale",
+      "Matplotlib & Seaborn - publication-quality visualizations",
+      "Statistical analysis - SciPy for inference & testing",
+      "Web scraping - BeautifulSoup & automation",
+      "Automation & reporting - scripts & scheduled jobs",
     ],
     icon: (<img src="/images/tools/python.png" alt="Python" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -764,7 +764,7 @@ function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; ind
         }}
       />
 
-      {/* Card body — glassmorphism */}
+      {/* Card body - glassmorphism */}
       <div
         className="relative z-10 rounded-3xl border border-white/60 overflow-hidden cursor-pointer transition-all duration-500"
         style={{
@@ -845,7 +845,7 @@ function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; ind
             </span>
           </div>
 
-          {/* Expandable topics — Accordion */}
+          {/* Expandable topics - Accordion */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -858,7 +858,7 @@ function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; ind
                 <div className="mt-5 pt-5 border-t border-gray-100">
                   <div className="grid gap-2">
                     {mod.topics.map((topic, tIdx) => {
-                      const parts = topic.split(" — ");
+                      const parts = topic.split(" - ");
                       return (
                         <motion.div
                           key={tIdx}
@@ -1068,7 +1068,7 @@ function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
               </span>
             </h2>
             <p className="mt-5 text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-              Each module builds on the last — from spreadsheets to Python analytics. Click any module to explore what&apos;s inside.
+              Each module builds on the last - from spreadsheets to Python analytics. Click any module to explore what&apos;s inside.
             </p>
           </div>
         </ScrollReveal>
@@ -1146,10 +1146,10 @@ export default function BusinessAnalyticsPage() {
 
   const curriculum = [
     { phase: "01", title: "Data Foundations for Business", duration: "Weeks 1–6", color: BRAND_ORANGE, skills: ["Excel", "Power BI", "Python", "KPI Design"], topics: [
-      "Excel power-user mastery — advanced formulas, pivot tables, macros, business modeling",
-      "Business dashboards — designing KPI frameworks, executive scorecards, real-time reporting",
-      "Python for business automation — data extraction, report generation, email automation",
-      "KPI design & metrics strategy — defining, measuring, and tracking business outcomes",
+      "Excel power-user mastery - advanced formulas, pivot tables, macros, business modeling",
+      "Business dashboards - designing KPI frameworks, executive scorecards, real-time reporting",
+      "Python for business automation - data extraction, report generation, email automation",
+      "KPI design & metrics strategy - defining, measuring, and tracking business outcomes",
     ], code: [
       { text: "# Revenue KPI dashboard in Python", color: "#8b949e" },
       { text: "import pandas as pd", color: "#79c0ff" },
@@ -1161,10 +1161,10 @@ export default function BusinessAnalyticsPage() {
       { text: ">>> Marketing: +18.4% | Sales: +24.1%", color: "#7ee787" },
     ]},
     { phase: "02", title: "Business Data Management", duration: "Weeks 7–11", color: ACCENT_BLUE, skills: ["CRM", "EDA", "Data Quality", "Reporting"], topics: [
-      "CRM data cleaning — standardizing customer records, deduplication, data quality audits",
-      "Market trend EDA — exploratory analysis of industry data, competitor benchmarking",
-      "Automated reporting pipelines — scheduled reports, alert systems, stakeholder dashboards",
-      "Data governance basics — data cataloging, quality standards, access policies",
+      "CRM data cleaning - standardizing customer records, deduplication, data quality audits",
+      "Market trend EDA - exploratory analysis of industry data, competitor benchmarking",
+      "Automated reporting pipelines - scheduled reports, alert systems, stakeholder dashboards",
+      "Data governance basics - data cataloging, quality standards, access policies",
     ], code: [
       { text: "# CRM data quality audit", color: "#8b949e" },
       { text: "duplicates = df.duplicated(subset='email')", color: "#e6edf3" },
@@ -1175,10 +1175,10 @@ export default function BusinessAnalyticsPage() {
       { text: ">>> Missing values cleaned: 1,204", color: "#7ee787" },
     ]},
     { phase: "03", title: "Predictive Business Analytics", duration: "Weeks 12–17", color: ACCENT_CYAN, skills: ["Forecasting", "Churn", "A/B Testing", "ROI"], topics: [
-      "Sales forecasting — time series models, seasonal adjustment, pipeline prediction",
-      "Customer churn prediction — logistic regression, survival analysis, retention modeling",
-      "Market segmentation — RFM analysis, clustering, persona development",
-      "A/B testing & experimentation — statistical significance, test design, ROI measurement",
+      "Sales forecasting - time series models, seasonal adjustment, pipeline prediction",
+      "Customer churn prediction - logistic regression, survival analysis, retention modeling",
+      "Market segmentation - RFM analysis, clustering, persona development",
+      "A/B testing & experimentation - statistical significance, test design, ROI measurement",
     ], code: [
       { text: "# Churn prediction model", color: "#8b949e" },
       { text: "from sklearn.linear_model import LogisticRegression", color: "#79c0ff" },
@@ -1189,10 +1189,10 @@ export default function BusinessAnalyticsPage() {
       { text: ">>> Churn risk accuracy: 88.7%", color: "#7ee787" },
     ]},
     { phase: "04", title: "AI for Business Leaders", duration: "Weeks 18–24", color: BRAND_ORANGE, skills: ["Neural Networks", "Gen AI", "Ethics", "Cloud BI"], topics: [
-      "Neural networks — conceptual understanding for non-engineers, business applications",
-      "AI in marketing & operations — recommendation engines, demand forecasting, process automation",
-      "Generative AI for business — ChatGPT integration, content automation, AI-powered workflows",
-      "Cloud BI platforms — AWS QuickSight, Power BI Service, Google Looker Studio",
+      "Neural networks - conceptual understanding for non-engineers, business applications",
+      "AI in marketing & operations - recommendation engines, demand forecasting, process automation",
+      "Generative AI for business - ChatGPT integration, content automation, AI-powered workflows",
+      "Cloud BI platforms - AWS QuickSight, Power BI Service, Google Looker Studio",
     ], code: [
       { text: "# AI-powered demand forecast", color: "#8b949e" },
       { text: "from prophet import Prophet", color: "#79c0ff" },
@@ -1294,7 +1294,7 @@ export default function BusinessAnalyticsPage() {
   ];
 
   const faqs = [
-    { question: "Do I need a technical background?", answer: "Not at all. This was built for business people. You'll learn SQL and Python, but always in a business context — think querying sales data or automating reports, not writing backend systems." },
+    { question: "Do I need a technical background?", answer: "Not at all. This was built for business people. You'll learn SQL and Python, but always in a business context - think querying sales data or automating reports, not writing backend systems." },
     { question: "How is this different from an MBA analytics elective?", answer: "An MBA elective scratches the surface. This is months of building real dashboards, working with real datasets, and mastering production-grade BI tools. You'll graduate with a portfolio, not just theory." },
     { question: "Can I do this while working full-time?", answer: "That's exactly who it's designed for. Evening and weekend sessions, recorded classes, flexible deadlines. Most of our learners work full-time throughout the program." },
     { question: "What tools will I actually know?", answer: "Power BI, Tableau, Looker, advanced Excel, SQL, and Python for analytics. Plus cloud BI platforms like AWS QuickSight and Google Looker Studio." },
@@ -1373,7 +1373,7 @@ export default function BusinessAnalyticsPage() {
                 <TypeWriter words={["Power BI & Tableau", "SQL & Python", "Predictive Analytics", "AI for Business", "Data Storytelling"]} className="text-base font-mono font-semibold text-white" />
               </motion.div>
               <motion.p className="mt-5 text-base md:text-lg text-gray-400 leading-relaxed max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
-                You don&apos;t need a CS degree to lead with data. BI tools, predictive analytics, and AI-powered decision-making — all designed for business leaders.
+                You don&apos;t need a CS degree to lead with data. BI tools, predictive analytics, and AI-powered decision-making - all designed for business leaders.
               </motion.p>
               <motion.div className="mt-8 flex flex-wrap items-center gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}>
                 <Magnetic><motion.button onClick={openEnquiry} className="group relative px-7 py-3.5 rounded-xl font-semibold text-sm overflow-hidden cursor-pointer" style={{ backgroundColor: BRAND_ORANGE }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}><span className="relative z-10 flex items-center gap-2 text-white">Start Learning <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></span></motion.button></Magnetic>
@@ -1417,7 +1417,7 @@ export default function BusinessAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ WHO IS THIS FOR — Interactive spotlight reveal ═══════ */}
+      {/* ═══════ WHO IS THIS FOR - Interactive spotlight reveal ═══════ */}
       <section className="relative py-24 px-6 bg-[#0a0e18] overflow-hidden">
         {/* Animated background grid */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
@@ -1563,7 +1563,7 @@ export default function BusinessAnalyticsPage() {
               { icon: UserIcon, title: "Real-World Interviews", desc: "On demand mock interviews with actual tech company hiring managers to prepare you for the toughest questions.", color: ACCENT_BLUE },
               { icon: LayersIcon, title: "Industry Vetted Curriculum", desc: "Targeted training for Business Analytics, Strategy, and AI models at the standards expected by top companies.", color: ACCENT_CYAN },
               { icon: GraduationIcon, title: "Expert Mentors & Instructorship", desc: "Get trained by industry experts from top tech companies globally, tailored to your career goals.", color: ACCENT_PURPLE },
-              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation — we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
+              { icon: TargetIcon, title: "360° Career Support", desc: "From technical skills to salary negotiation - we guide you every step, with 400+ recruiter connections.", color: ACCENT_BLUE },
               { icon: ShieldIcon, title: "Small Batches, Better Learning", desc: "Learn in a limited batch size for focused preparation & understanding with personalised attention.", color: ACCENT_CYAN },
             ].map((item, i) => (
               <SlideIn key={i} direction="up" delay={i * 0.08}>
@@ -1580,7 +1580,7 @@ export default function BusinessAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM — Immersive Bento Journey ═══════ */}
+      {/* ═══════ CURRICULUM - Immersive Bento Journey ═══════ */}
       <section className="relative py-24 px-6 overflow-hidden bg-[#070b14]">
         {/* ── Mesh gradient background ── */}
         <div className="absolute inset-0 pointer-events-none" style={{
@@ -1821,7 +1821,7 @@ export default function BusinessAnalyticsPage() {
 
                 {/* Bento Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                  {/* Topics — Left large card */}
+                  {/* Topics - Left large card */}
                   <motion.div
                     className="lg:col-span-7 relative group rounded-2xl overflow-hidden"
                     initial={{ opacity: 0, x: -30 }}
@@ -1844,7 +1844,7 @@ export default function BusinessAnalyticsPage() {
 
                       <div className="space-y-3">
                         {mod.topics.map((topic, j) => {
-                          const parts = topic.split(" — ");
+                          const parts = topic.split(" - ");
                           return (
                             <motion.div
                               key={j}
@@ -1890,7 +1890,7 @@ export default function BusinessAnalyticsPage() {
                     </div>
                   </motion.div>
 
-                  {/* Code Preview — Right card */}
+                  {/* Code Preview - Right card */}
                   <motion.div
                     className="lg:col-span-5 relative group"
                     initial={{ opacity: 0, x: 30 }}
@@ -2028,7 +2028,7 @@ export default function BusinessAnalyticsPage() {
 
       <ModulesSection openEnquiry={openEnquiry} />
 
-      {/* ═══════ TOOLS — Two-row marquee ═══════ */}
+      {/* ═══════ TOOLS - Two-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
         <Divider />
         <div className="max-w-6xl mx-auto pt-12">
@@ -2062,9 +2062,9 @@ export default function BusinessAnalyticsPage() {
         <div className="mt-4"><Divider /></div>
       </section>
 
-      {/* ═══════ PROJECTS — Compact premium grid ═══════ */}
+      {/* ═══════ PROJECTS - Compact premium grid ═══════ */}
       <section className="relative py-16 px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
-        {/* ── 1. AURORA SILK RIBBONS — flowing morphing gradient paths ── */}
+        {/* ── 1. AURORA SILK RIBBONS - flowing morphing gradient paths ── */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ribbonA" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -2091,7 +2091,7 @@ export default function BusinessAnalyticsPage() {
               <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
             </filter>
           </defs>
-          {/* Ribbon 1 — top flowing silk */}
+          {/* Ribbon 1 - top flowing silk */}
           <motion.path
             d="M-100,120 C150,40 350,200 600,80 S950,180 1200,60 1500,140"
             fill="none" stroke="url(#ribbonA)" strokeWidth="2" filter="url(#ribbonGlow)"
@@ -2108,7 +2108,7 @@ export default function BusinessAnalyticsPage() {
             viewport={{ once: true }}
             transition={{ duration: 2.8, delay: 0.2, ease: "easeInOut" }}
           />
-          {/* Ribbon 2 — middle flowing silk */}
+          {/* Ribbon 2 - middle flowing silk */}
           <motion.path
             d="M-50,320 C200,250 450,400 700,280 S1050,380 1300,300 1600,350"
             fill="none" stroke="url(#ribbonB)" strokeWidth="2" filter="url(#ribbonGlow)"
@@ -2125,7 +2125,7 @@ export default function BusinessAnalyticsPage() {
             viewport={{ once: true }}
             transition={{ duration: 3.2, delay: 0.6, ease: "easeInOut" }}
           />
-          {/* Ribbon 3 — bottom flowing silk */}
+          {/* Ribbon 3 - bottom flowing silk */}
           <motion.path
             d="M-80,500 C180,440 400,550 680,460 S1000,530 1250,480 1600,520"
             fill="none" stroke="url(#ribbonC)" strokeWidth="1.5" filter="url(#ribbonGlow)"
@@ -2150,7 +2150,7 @@ export default function BusinessAnalyticsPage() {
           />
         </svg>
 
-        {/* ── 2. RISING DATA PARTICLES — business symbols floating up like embers ── */}
+        {/* ── 2. RISING DATA PARTICLES - business symbols floating up like embers ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[
             { char: "KPI", x: "8%", delay: 0, dur: 12, size: 11 },
@@ -2197,9 +2197,9 @@ export default function BusinessAnalyticsPage() {
           ))}
         </div>
 
-        {/* ── 3. WIREFRAME GEOMETRIC SHAPES — 3D-perspective rotating ── */}
+        {/* ── 3. WIREFRAME GEOMETRIC SHAPES - 3D-perspective rotating ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Rotating diamond/rhombus — top right */}
+          {/* Rotating diamond/rhombus - top right */}
           <motion.div
             className="absolute"
             style={{ top: "8%", right: "12%", width: 60, height: 60 }}
@@ -2230,7 +2230,7 @@ export default function BusinessAnalyticsPage() {
             </svg>
           </motion.div>
 
-          {/* Rotating hexagon — bottom left */}
+          {/* Rotating hexagon - bottom left */}
           <motion.div
             className="absolute"
             style={{ bottom: "12%", left: "8%", width: 80, height: 80 }}
@@ -2264,7 +2264,7 @@ export default function BusinessAnalyticsPage() {
             </svg>
           </motion.div>
 
-          {/* Rotating triangle — middle right */}
+          {/* Rotating triangle - middle right */}
           <motion.div
             className="absolute"
             style={{ top: "45%", right: "5%", width: 50, height: 50 }}
@@ -2419,7 +2419,7 @@ export default function BusinessAnalyticsPage() {
         <TestimonialCarousel />
       </section>
 
-      {/* ═══════ CAREER GROWTH ROADMAP — Animated SVG path ═══════ */}
+      {/* ═══════ CAREER GROWTH ROADMAP - Animated SVG path ═══════ */}
       <section className="relative py-24 px-6 bg-white overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] rounded-full pointer-events-none" style={{ background: `radial-gradient(ellipse, ${ACCENT_BLUE}05, transparent 70%)` }} />
         <div className="max-w-6xl mx-auto relative z-10">
@@ -2468,7 +2468,7 @@ export default function BusinessAnalyticsPage() {
 
       <WaveDivider from="#ffffff" to="#f9fafb" />
 
-      {/* ═══════ FINAL CTA — Join 8000+ professionals ═══════ */}
+      {/* ═══════ FINAL CTA - Join 8000+ professionals ═══════ */}
       <FooterCTA />
     </div>
     </ThemeProvider>

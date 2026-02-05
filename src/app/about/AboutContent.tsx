@@ -93,7 +93,7 @@ const instructors = [
     name: "Shubham",
     experience: "5+ years",
     title: "Senior Data Scientist at RSPL Group",
-    bio: "Shubham spends his days at RSPL Group building machine learning models that help clients make smarter decisions. He's the kind of mentor who breaks down complex ML concepts into something you can actually apply — no unnecessary jargon, just real-world problem-solving.",
+    bio: "Shubham spends his days at RSPL Group building machine learning models that help clients make smarter decisions. He's the kind of mentor who breaks down complex ML concepts into something you can actually apply - no unnecessary jargon, just real-world problem-solving.",
     tags: ["Python", "Machine Learning", "SQL", "Advanced Analytics"],
     image: "/images/instructors/shubham.jpeg",
   },
@@ -198,7 +198,7 @@ export default function AboutPage() {
       <div ref={progressRef} className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 z-[60] origin-left" style={{ transform: "scaleX(0)" }} />
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 1 — HERO (Dark Navy, matches site hero pattern)
+          SECTION 1 - HERO (Dark Navy, matches site hero pattern)
           ══════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-navy-900">
         {/* Animated background elements */}
@@ -245,7 +245,7 @@ export default function AboutPage() {
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-32">
           {/* Left: Text */}
           <div>
-            {/* About Linkway Learning — compact badge */}
+            {/* About Linkway Learning - compact badge */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-orange-500/20 bg-orange-500/[0.06]">
                 <motion.svg
@@ -347,7 +347,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 2 — OUR STORY (Warm Beige #f2f1ee, matches WhyLinkway)
+          SECTION 2 - OUR STORY (Warm Beige #f2f1ee, matches WhyLinkway)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative py-28 md:py-36 px-6 overflow-hidden" style={{ background: "#f2f1ee" }}>
         {/* Decorative blobs */}
@@ -397,7 +397,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 3 — MISSION & VISION (White with orange accents)
+          SECTION 3 - MISSION & VISION (White with orange accents)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative py-28 md:py-36 px-6 overflow-hidden bg-white">
         <CrossFlicker position="top-left" color="orange" size="sm" />
@@ -461,7 +461,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 4 — STATS (Split: left label, right numbers)
+          SECTION 4 - STATS (Split: left label, right numbers)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative py-12 md:py-16 px-6 overflow-hidden bg-navy-900">
         <div className="absolute inset-0 hero-grid-overlay opacity-[0.015]" />
@@ -514,7 +514,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 5 — VALUES (Warm Beige #f4f2ed, matches CoursePreview)
+          SECTION 5 - VALUES (Warm Beige #f4f2ed, matches CoursePreview)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative py-28 md:py-36 px-6 overflow-hidden" style={{ background: "#f4f2ed" }}>
         <div className="absolute -top-20 right-[10%] w-[300px] h-[300px] rounded-full bg-orange-100/40 blur-[80px] pointer-events-none" />
@@ -567,7 +567,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 6 — TIMELINE (Dark Navy, vertical cascade)
+          SECTION 6 - TIMELINE (Dark Navy, vertical cascade)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative bg-navy-900 overflow-hidden py-16 md:py-20">
         {/* Animated background */}
@@ -640,7 +640,7 @@ export default function AboutPage() {
                     </SpringReveal>
                   </div>
 
-                  {/* Center dot — always visible */}
+                  {/* Center dot - always visible */}
                   <div className="absolute left-6 md:left-1/2 top-2 -translate-x-1/2 z-10">
                     <div className="about-timeline-dot group/dot relative">
                       <div className="w-4 h-4 rounded-full bg-navy-900 border-2 border-orange-500/50 group-hover/dot:border-orange-500 transition-colors duration-300" />
@@ -658,7 +658,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 7 — INSTRUCTORS (White, matches site card pattern)
+          SECTION 7 - INSTRUCTORS (White, matches site card pattern)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative py-28 md:py-36 px-6 overflow-hidden bg-white">
         <div className="absolute -top-20 left-[15%] w-[300px] h-[300px] rounded-full bg-orange-100/30 blur-[80px] pointer-events-none" />
@@ -725,7 +725,7 @@ export default function AboutPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECTION 8 — CTA (Split asymmetric layout with morphing blob)
+          SECTION 8 - CTA (Split asymmetric layout with morphing blob)
           ══════════════════════════════════════════════════════════ */}
       <section className="relative py-14 md:py-18 px-6 overflow-hidden" style={{ background: "#0c0f1a" }}>
         {/* Animated morphing gradient blob */}

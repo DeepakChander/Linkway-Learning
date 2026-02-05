@@ -3,7 +3,7 @@ import AgenticAIPage from "./AgenticAIPage";
 import { CourseJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Agentic AI & Prompt Engineering Course — LangChain, AI Agents",
+  title: "Agentic AI & Prompt Engineering Course - LangChain, AI Agents",
   description:
     "Master building autonomous AI agents. Learn prompt engineering, LangChain, and agentic workflows to build AI systems that think, plan, and execute. Enroll at Linkway Learning.",
   alternates: { canonical: "https://linkwaylearning.com/courses/agentic-ai" },

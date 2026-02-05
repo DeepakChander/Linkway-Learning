@@ -327,7 +327,7 @@ export default function CertificationDisplay() {
       <div className="relative z-10 py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* ════════════════════════════════════════════════
-              TOP: Split layout — Text left, Certificates right
+              TOP: Split layout - Text left, Certificates right
               ════════════════════════════════════════════════ */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center mb-16 sm:mb-20 md:mb-28 lg:mb-36">
             {/* ── LEFT: Copy ── */}

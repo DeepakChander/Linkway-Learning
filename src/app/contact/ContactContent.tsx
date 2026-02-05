@@ -313,7 +313,7 @@ export default function ContactPage() {
             className="mt-8 max-w-2xl mx-auto"
           >
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed">
-              Whether you have a question or you're ready to transform your career —
+              Whether you have a question or you're ready to transform your career -
               <span className="text-white font-medium"> we're here to help</span>.
               No pressure, just{" "}
               <span className="relative inline-block">

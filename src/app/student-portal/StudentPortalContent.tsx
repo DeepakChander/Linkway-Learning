@@ -82,7 +82,7 @@ const howItWorks = [
   {
     step: "03",
     title: "Start Learning",
-    description: "Access live classes, recordings, study materials, and assignments — all in one place.",
+    description: "Access live classes, recordings, study materials, and assignments - all in one place.",
     icon: MonitorPlay,
   },
   {
@@ -216,7 +216,7 @@ export default function StudentPortalContent() {
     <div className="min-h-screen">
 
       {/* ════════════════════════════════════════════════
-          HERO SECTION — Dark Navy
+          HERO SECTION - Dark Navy
           ════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-[#0D1B2A] pt-28 pb-14 md:pt-36 md:pb-20">
         {/* Background elements */}
@@ -273,7 +273,7 @@ export default function StudentPortalContent() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Access live classes, recorded sessions, assignments, certificates, and career support — accessible 24/7.
+            Access live classes, recorded sessions, assignments, certificates, and career support - accessible 24/7.
           </motion.p>
 
           <motion.div
@@ -305,7 +305,7 @@ export default function StudentPortalContent() {
             </a>
           </motion.div>
 
-          {/* Tools strip — inline below hero */}
+          {/* Tools strip - inline below hero */}
           <motion.div
             className="grid grid-cols-4 lg:grid-cols-8 gap-3 mt-12 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 15 }}
@@ -332,7 +332,7 @@ export default function StudentPortalContent() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          FEATURES GRID — Light Cream
+          FEATURES GRID - Light Cream
           ════════════════════════════════════════════════ */}
       <section className="py-14 md:py-20 bg-[#f2f1ee]">
         <div className="max-w-6xl mx-auto px-6">
@@ -384,7 +384,7 @@ export default function StudentPortalContent() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          HOW IT WORKS — Dark Navy
+          HOW IT WORKS - Dark Navy
           ════════════════════════════════════════════════ */}
       <section className="py-14 md:py-20 bg-[#0D1B2A] relative">
         <div className="absolute inset-0 pointer-events-none">
@@ -431,7 +431,7 @@ export default function StudentPortalContent() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          SUPPORT — Light Cream
+          SUPPORT - Light Cream
           ════════════════════════════════════════════════ */}
       <section className="py-10 md:py-14 bg-[#f2f1ee]">
         <div className="max-w-2xl mx-auto px-6">

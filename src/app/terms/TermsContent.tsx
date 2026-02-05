@@ -171,7 +171,7 @@ const sections: {
           To study with Linkway Learning, you need to create an account with
           your real information and keep it up to date. You must keep your login
           credentials secure because you&apos;re responsible for everything that
-          happens in your account. Follow Linkway Learning&apos;s rules — be
+          happens in your account. Follow Linkway Learning&apos;s rules - be
           respectful, don&apos;t do anything illegal or harmful, don&apos;t
           share your account, don&apos;t spam or bully people, and don&apos;t
           disrupt the experience for fellow students.
@@ -391,7 +391,7 @@ const sections: {
         </ul>
         <Note>
           Linkway Learning helps you find a job through resume support, mock
-          interviews, and hiring partner introductions — but we cannot guarantee
+          interviews, and hiring partner introductions - but we cannot guarantee
           you will get hired. You must complete the full program and actively
           participate in placement activities to be eligible.
         </Note>
@@ -405,10 +405,10 @@ const sections: {
     content: (
       <>
         <p className="mb-3">
-          All content on the Linkway Learning Service — including videos,
+          All content on the Linkway Learning Service - including videos,
           recordings, text, graphics, software, curriculum materials, quizzes,
           projects, and interactive features (collectively, the
-          &quot;Content&quot;) — and all trademarks, logos, and brand elements
+          &quot;Content&quot;) - and all trademarks, logos, and brand elements
           (the &quot;Marks&quot;) are owned by Linkway Learning Private Limited
           or its licensors and are protected under the Copyright Act, 1957, the
           Trade Marks Act, 1999, and other applicable intellectual property laws
@@ -439,7 +439,7 @@ const sections: {
         <Note>
           All videos, lessons, images, and logos belong to Linkway Learning and
           are protected by law. You can only use materials for your own learning
-          — you cannot copy, share, sell, or change them unless Linkway Learning
+          - you cannot copy, share, sell, or change them unless Linkway Learning
           gives you written permission.
         </Note>
       </>
@@ -470,8 +470,8 @@ const sections: {
         </h3>
         <p className="mb-3">
           Linkway Learning may use your name, photograph, job title, and
-          testimonial in its promotional materials — including the website,
-          social media, and marketing channels — to advertise and promote its
+          testimonial in its promotional materials - including the website,
+          social media, and marketing channels - to advertise and promote its
           services. If you wish to withdraw this consent, contact us at{" "}
           <a
             href="mailto:support@linkwaylearning.com"
@@ -1157,7 +1157,7 @@ export default function TermsPage() {
           <p className="text-sm text-gray-500 italic">
             The highlighted &quot;What this means&quot; boxes below are
             plain-language summaries to help you navigate the Terms. Please read
-            the full text — the summaries do not replace the complete agreement.
+            the full text - the summaries do not replace the complete agreement.
           </p>
         </div>
 

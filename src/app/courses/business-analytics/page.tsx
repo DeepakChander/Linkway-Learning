@@ -3,12 +3,12 @@ import BusinessAnalyticsPage from "./BusinessAnalyticsPage";
 import { CourseJsonLd, BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Business Analytics Course — BI Tools, Predictive Analytics, AI",
+  title: "Business Analytics Course - BI Tools, Predictive Analytics, AI",
   description:
     "Master BI tools, predictive analytics, and AI-powered decision-making. Designed for professionals, MBAs, and business leaders. 100% placement. Linkway Learning.",
   alternates: { canonical: "https://linkwaylearning.com/courses/business-analytics" },
   openGraph: {
-    title: "Business Analytics Course — BI, Predictive Analytics, AI",
+    title: "Business Analytics Course - BI, Predictive Analytics, AI",
     description: "For professionals & MBAs. Master BI tools and AI-powered analytics.",
     url: "https://linkwaylearning.com/courses/business-analytics",
   },
