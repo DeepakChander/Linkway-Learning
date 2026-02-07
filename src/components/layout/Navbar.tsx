@@ -23,7 +23,14 @@ const navLinks = [
   },
   { label: "About Us", href: "/about" },
   { label: "Success Stories", href: "/success-stories" },
-  { label: "Blog", href: "/blog" },
+  {
+    label: "Resources",
+    href: "/blog",
+    children: [
+      { label: "Blog", href: "/blog", desc: "Industry insights & career guides" },
+      { label: "Case Studies", href: "/case-studies", desc: "Real-world data science case studies" },
+    ],
+  },
 ];
 
 /* ── Magnetic Link - follows cursor subtly ── */
@@ -106,8 +113,8 @@ export default function Navbar() {
   const { openEnquiry } = useEnquiryModal();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [coursesOpen, setCoursesOpen] = useState(false);
-  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownTimeouts = useRef<Record<string, NodeJS.Timeout>>({});
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -128,16 +135,25 @@ export default function Navbar() {
 
   const isHome = pathname === "/";
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
-
-  const handleDropdownEnter = () => {
-    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
-    setCoursesOpen(true);
+  const isActive = (href: string, children?: { href: string }[]) => {
+    if (href === "/") return pathname === "/";
+    if (pathname.startsWith(href)) return true;
+    if (children) return children.some((child) => pathname.startsWith(child.href));
+    return false;
   };
 
-  const handleDropdownLeave = () => {
-    dropdownTimeout.current = setTimeout(() => setCoursesOpen(false), 180);
+  const handleDropdownEnter = (label: string) => {
+    if (dropdownTimeouts.current[label]) {
+      clearTimeout(dropdownTimeouts.current[label]);
+      delete dropdownTimeouts.current[label];
+    }
+    setOpenDropdown(label);
+  };
+
+  const handleDropdownLeave = (label: string) => {
+    dropdownTimeouts.current[label] = setTimeout(() => {
+      setOpenDropdown((current) => (current === label ? null : current));
+    }, 180);
   };
 
   /* Animated border gradient opacity based on scroll */
@@ -216,14 +232,14 @@ export default function Navbar() {
                   <li
                     key={link.label}
                     className="relative"
-                    onMouseEnter={handleDropdownEnter}
-                    onMouseLeave={handleDropdownLeave}
+                    onMouseEnter={() => handleDropdownEnter(link.label)}
+                    onMouseLeave={() => handleDropdownLeave(link.label)}
                   >
                     <MagneticLink
                       href={link.href}
                       className={cn(
                         "group relative flex items-center h-10 px-4 transition-colors duration-300 rounded-xl",
-                        isActive(link.href)
+                        isActive(link.href, link.children)
                           ? "text-orange-500"
                           : scrolled ? "text-gray-700" : isHome ? "text-gray-300" : "text-gray-700"
                       )}
@@ -237,12 +253,12 @@ export default function Navbar() {
                       <ChevronDown
                         className={cn(
                           "h-3.5 w-3.5 ml-1 transition-all duration-300",
-                          coursesOpen ? "rotate-180" : "",
+                          openDropdown === link.label ? "rotate-180" : "",
                           scrolled ? "text-gray-500" : isHome ? "text-gray-500" : "text-gray-500"
                         )}
                       />
                       {/* Active indicator dot */}
-                      {isActive(link.href) && (
+                      {isActive(link.href, link.children) && (
                         <motion.span
                           layoutId="nav-active"
                           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-orange-500"
@@ -253,7 +269,7 @@ export default function Navbar() {
 
                     {/* Premium Dropdown */}
                     <AnimatePresence>
-                      {coursesOpen && (
+                      {openDropdown === link.label && (
                         <motion.div
                           initial={{ opacity: 0, y: 12, scale: 0.96 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -453,13 +469,13 @@ export default function Navbar() {
                         onClick={() => setMobileOpen(false)}
                         className={cn(
                           "flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all duration-200",
-                          isActive(link.href)
+                          isActive(link.href, link.children)
                             ? "text-orange-500 bg-orange-500/8"
                             : "text-gray-300 hover:text-white hover:bg-white/[0.04]"
                         )}
                       >
                         {link.label}
-                        {isActive(link.href) && (
+                        {isActive(link.href, link.children) && (
                           <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                         )}
                       </Link>

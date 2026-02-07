@@ -1588,7 +1588,9 @@ export default function DataAnalyticsPage() {
         "File handling: reading CSVs, Excel files, and JSON data",
         "Git basics: version control for tracking your analysis work",
       ],
-      tools: ["Python", "Jupyter Notebook", "VS Code", "Pandas", "NumPy", "Git"],
+      tools: ["Python", "Excel", "Jupyter Notebook", "VS Code", "Pandas", "NumPy", "Git"],
+      // Terminal/code icon
+      iconPath: "M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
     },
     {
       title: "SQL & Database Essentials",
@@ -1604,6 +1606,8 @@ export default function DataAnalyticsPage() {
         "Working with cloud databases: BigQuery and PostgreSQL",
       ],
       tools: ["PostgreSQL", "Google BigQuery", "MySQL", "DBeaver"],
+      // Database icon
+      iconPath: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4",
     },
     {
       title: "Data Visualization & Business Intelligence",
@@ -1619,6 +1623,8 @@ export default function DataAnalyticsPage() {
         "Data storytelling: presenting insights that influence decisions",
       ],
       tools: ["Tableau", "Power BI", "Google Data Studio", "Excel Advanced"],
+      // Bar chart icon
+      iconPath: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
     },
     {
       title: "Statistics & Exploratory Data Analysis",
@@ -1634,6 +1640,8 @@ export default function DataAnalyticsPage() {
         "Identifying outliers, missing data, and data quality issues",
       ],
       tools: ["Python", "Pandas", "Matplotlib", "Seaborn", "SciPy"],
+      // Trending up / analytics icon
+      iconPath: "M3 3v18h18M7 16l4-4 4 4 6-6m0 0v4m0-4h-4",
     },
     {
       title: "Machine Learning for Analysts",
@@ -1649,6 +1657,8 @@ export default function DataAnalyticsPage() {
         "Feature engineering: creating predictive signals from raw data",
       ],
       tools: ["Scikit-learn", "XGBoost", "Python", "Jupyter", "Streamlit"],
+      // Brain / neural network icon
+      iconPath: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
     },
     {
       title: "GenAI & LLM Applications",
@@ -1664,6 +1674,8 @@ export default function DataAnalyticsPage() {
         "AI ethics and responsible use in business analytics",
       ],
       tools: ["ChatGPT", "Claude", "OpenAI API", "LangChain", "Streamlit"],
+      // Sparkles / AI icon
+      iconPath: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
     },
     {
       title: "Capstone Project",
@@ -1679,6 +1691,8 @@ export default function DataAnalyticsPage() {
         "Present findings to industry panel and receive feedback",
       ],
       tools: ["All Previous Tools", "GitHub Portfolio", "Notion", "Loom"],
+      // Rocket / launch icon
+      iconPath: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.63 8.25m6 6.12l-3 3m0-12.75a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0z",
     },
   ];
 
@@ -1896,14 +1910,6 @@ export default function DataAnalyticsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-24 lg:py-0">
             {/* Left: Text */}
             <div className="pt-8 lg:pt-0">
-              <motion.div className="flex items-center gap-2 mb-6 flex-wrap" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono tracking-wide border border-white/[0.1] bg-white/[0.04] text-gray-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  Now Enrolling
-                </span>
-                <span className="px-3 py-1.5 rounded-full text-xs font-mono tracking-wide border border-white/[0.1] bg-white/[0.04] text-gray-400">6 Months</span>
-              </motion.div>
-
               <motion.h1
                 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight"
                 initial={{ opacity: 0, y: 30 }}
@@ -2258,17 +2264,27 @@ export default function DataAnalyticsPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM - Clean Accordion Style ═══════ */}
-      <section className="relative py-16 md:py-24 px-4 sm:px-6 bg-[#f3f4f6]">
-        <div className="max-w-4xl mx-auto">
+      {/* ═══════ CURRICULUM - Dark Premium Accordion ═══════ */}
+      <section className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
+        {/* Background effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 w-[600px] h-[600px] rounded-full -translate-x-1/2 -translate-y-1/2" style={{ background: `radial-gradient(circle, ${BRAND_ORANGE}08, transparent 70%)` }} />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full translate-x-1/4 translate-y-1/4" style={{ background: `radial-gradient(circle, ${ACCENT_BLUE}06, transparent 70%)` }} />
+        </div>
+
+        <div className="relative max-w-4xl mx-auto">
           {/* Header */}
           <ScrollReveal>
-            <SectionLabel center>Curriculum</SectionLabel>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
+            <div className="flex justify-center mb-4">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase" style={{ backgroundColor: `${BRAND_ORANGE}15`, color: BRAND_ORANGE }}>
+                Curriculum
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight text-center">
               What You&apos;ll{" "}
-              <span className="text-orange-500">Master</span>
+              <span style={{ color: BRAND_ORANGE }}>Master</span>
             </h2>
-            <p className="mt-4 text-gray-600 text-base md:text-lg max-w-2xl mx-auto text-center">
+            <p className="mt-4 text-gray-400 text-base md:text-lg max-w-2xl mx-auto text-center">
               Industry-aligned modules designed by FAANG experts to make you job-ready.
             </p>
           </ScrollReveal>
@@ -2281,32 +2297,54 @@ export default function DataAnalyticsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
               >
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+                <div
+                  className="rounded-2xl border overflow-hidden transition-all duration-300"
+                  style={{
+                    backgroundColor: activeTab === i ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.02)",
+                    borderColor: activeTab === i ? `${BRAND_ORANGE}30` : "rgba(255,255,255,0.06)",
+                  }}
+                >
                   {/* Card Header */}
                   <div
-                    className="p-5 md:p-6 cursor-pointer select-none"
+                    className="p-5 md:p-6 cursor-pointer select-none group"
                     onClick={() => setActiveTab(activeTab === i ? -1 : i)}
                   >
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      {/* Module Icon */}
+                      <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300"
+                        style={{
+                          backgroundColor: activeTab === i ? `${BRAND_ORANGE}20` : "rgba(255,255,255,0.05)",
+                          border: `1px solid ${activeTab === i ? `${BRAND_ORANGE}30` : "rgba(255,255,255,0.06)"}`,
+                        }}
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke={activeTab === i ? BRAND_ORANGE : "rgba(255,255,255,0.4)"} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                          <path d={mod.iconPath} />
+                        </svg>
+                      </div>
+
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg md:text-xl font-bold text-navy-900">{mod.title}</h3>
-                        <div className="flex items-center gap-2 mt-2.5">
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                            {mod.weeks} weeks
-                          </span>
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-600 border border-emerald-100">
-                            {mod.projects} {mod.projects === 1 ? "project" : "projects"}
-                          </span>
+                        <span className="text-[10px] font-semibold uppercase tracking-widest mb-1 block" style={{ color: activeTab === i ? BRAND_ORANGE : "rgba(255,255,255,0.3)" }}>Module {i + 1}</span>
+                        <h3 className="text-base md:text-lg font-bold text-white group-hover:text-orange-400 transition-colors">{mod.title}</h3>
+                        <div className="flex items-center gap-2 mt-1.5">
+                          <span className="text-xs text-gray-500">{mod.weeks} weeks</span>
+                          <span className="w-1 h-1 rounded-full bg-gray-600" />
+                          <span className="text-xs" style={{ color: BRAND_ORANGE }}>{mod.projects} {mod.projects === 1 ? "project" : "projects"}</span>
                         </div>
                       </div>
+
                       <motion.div
-                        className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-gray-400 hover:bg-gray-50 transition-colors"
+                        className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-300"
+                        style={{
+                          backgroundColor: activeTab === i ? `${BRAND_ORANGE}15` : "rgba(255,255,255,0.04)",
+                          border: `1px solid ${activeTab === i ? `${BRAND_ORANGE}25` : "rgba(255,255,255,0.06)"}`,
+                        }}
                         animate={{ rotate: activeTab === i ? 45 : 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke={activeTab === i ? BRAND_ORANGE : "rgba(255,255,255,0.3)"} strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
                       </motion.div>
@@ -2323,15 +2361,15 @@ export default function DataAnalyticsPage() {
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 md:px-6 pb-6 border-t border-gray-100">
+                        <div className="px-5 md:px-6 pb-6 border-t border-white/[0.06]">
                           {/* Description */}
-                          <p className="pt-5 text-gray-600 text-[15px] leading-relaxed">
+                          <p className="pt-5 text-gray-400 text-[15px] leading-relaxed">
                             {mod.description}
                           </p>
 
                           {/* Learning Outcomes */}
                           <div className="mt-6">
-                            <h4 className="text-sm font-bold text-navy-900 mb-4">Learning Outcomes</h4>
+                            <h4 className="text-sm font-semibold text-white/80 mb-4">Learning Outcomes</h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5">
                               {mod.outcomes.map((outcome, j) => (
                                 <motion.div
@@ -2341,10 +2379,10 @@ export default function DataAnalyticsPage() {
                                   animate={{ opacity: 1, x: 0 }}
                                   transition={{ duration: 0.2, delay: j * 0.03 }}
                                 >
-                                  <svg className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                  <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke={BRAND_ORANGE} strokeWidth={2.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                   </svg>
-                                  <span className="text-sm text-gray-700">{outcome}</span>
+                                  <span className="text-sm text-gray-300">{outcome}</span>
                                 </motion.div>
                               ))}
                             </div>
@@ -2352,7 +2390,7 @@ export default function DataAnalyticsPage() {
 
                           {/* Tools & Technologies */}
                           <div className="mt-6">
-                            <h4 className="text-sm font-bold text-navy-900 mb-3">Tools & Technologies</h4>
+                            <h4 className="text-sm font-semibold text-white/80 mb-3">Tools & Technologies</h4>
                             <div className="flex flex-wrap gap-2">
                               {mod.tools.map((tool, j) => (
                                 <motion.div

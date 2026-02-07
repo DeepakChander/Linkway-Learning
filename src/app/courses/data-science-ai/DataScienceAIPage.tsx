@@ -188,6 +188,34 @@ function Divider({ className }: { className?: string }) {
   );
 }
 
+/* Program Offer Icons - for What Our Program Offers section */
+function ProgramOfferIcon({ type }: { type: string }) {
+  const iconClass = "w-5 h-5 text-orange-500";
+  const icons: Record<string, React.ReactNode> = {
+    mentorship: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>,
+    video: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z" /></svg>,
+    live: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>,
+    path: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>,
+    hackathon: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z" /></svg>,
+    assessment: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>,
+    career: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>,
+    expert: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" /></svg>,
+    workshop: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>,
+    placement: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" /></svg>,
+    network: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>,
+    interview: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" /></svg>,
+    material: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>,
+    support: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>,
+    certificate: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" /></svg>,
+    flexible: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+    project: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg>,
+    platform: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>,
+    progress: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>,
+    networking: <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>,
+  };
+  return icons[type] || icons.mentorship;
+}
+
 /* ═══════════════════════════════════════════════════════
    TESTIMONIAL CAROUSEL - Premium 3D tilt glassmorphism
    ═══════════════════════════════════════════════════════ */
@@ -325,148 +353,70 @@ function WaveDivider({ flip = false, from = "#f9fafb", to = "#ffffff" }: { flip?
   );
 }
 
-/* Journey Phase Card - interactive expandable card with code preview */
-function JourneyPhaseCard({ mod, index, isOpen, onToggle, codeLines }: {
-  mod: { phase: string; title: string; duration: string; color: string; topics: string[]; skills: string[] };
-  index: number;
-  isOpen: boolean;
-  onToggle: () => void;
-  codeLines: { text: string; color: string }[];
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-5%" });
-
+/* Project Card - for infinite scroll carousel */
+function ProjectCard({ project }: { project: { title: string; domain: string; tags: string[]; color: string; desc: string } }) {
   return (
-    <motion.div
-      ref={ref}
-      className="relative"
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-    >
-      <div
-        className={cn(
-          "relative rounded-2xl border overflow-hidden transition-all duration-500 cursor-pointer",
-          isOpen
-            ? "bg-white shadow-[0_12px_40px_rgba(0,0,0,0.08)] border-gray-200"
-            : "bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] border-gray-100 hover:border-gray-200 hover:shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
-        )}
-        onClick={onToggle}
-      >
-        <motion.div
-          className="h-1 w-full"
-          initial={{ scaleX: 0 }}
-          animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: index * 0.15 + 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          style={{ transformOrigin: "left", backgroundColor: mod.color }}
-        />
-
-        <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <motion.div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-lg font-mono text-white"
-                style={{ backgroundColor: mod.color }}
-                whileHover={{ scale: 1.08, rotate: -3 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              >
-                {mod.phase}
-              </motion.div>
-              <div className="absolute inset-0 rounded-2xl blur-lg opacity-30" style={{ backgroundColor: mod.color }} />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-navy-900">{mod.title}</h3>
-              <p className="text-sm text-gray-400 font-mono mt-0.5">{mod.duration}</p>
-            </div>
-          </div>
-
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center shrink-0"
-          >
-            <ChevronIcon className="w-4 h-4 text-gray-400" />
-          </motion.div>
+    <div className="shrink-0 w-[300px] md:w-[340px]">
+      <div className="h-full rounded-xl p-5 border border-[#e5e4e0] hover:border-[#d5d4d0] transition-all duration-300 group shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]" style={{ backgroundColor: "#F8F7F4" }}>
+        {/* Domain badge */}
+        <div className="flex items-center justify-between mb-3">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-semibold tracking-wide uppercase" style={{ backgroundColor: `${project.color}15`, color: project.color }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.color }} />
+            {project.domain}
+          </span>
         </div>
 
-        <div className="px-6 pb-4 flex flex-wrap gap-1.5">
-          {mod.skills.map((skill, j) => (
-            <motion.span
-              key={skill}
-              className="px-2.5 py-1 rounded-lg text-xs font-medium border"
-              style={{ color: mod.color, borderColor: `${mod.color}25`, backgroundColor: `${mod.color}08` }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.3, delay: index * 0.15 + 0.4 + j * 0.05 }}
-            >
-              {skill}
-            </motion.span>
+        {/* Title */}
+        <h4 className="text-[15px] font-bold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-2 leading-snug">
+          {project.title}
+        </h4>
+
+        {/* Description */}
+        <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed mb-4">
+          {project.desc}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map((tag) => (
+            <span key={tag} className="px-2 py-0.5 rounded text-[10px] font-mono font-medium text-gray-500 bg-white/60 border border-[#e5e4e0]">
+              {tag}
+            </span>
           ))}
         </div>
-
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="px-6 pb-6">
-                <div className="h-px bg-gray-100 mb-5" />
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                  <div className="space-y-3">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">What you&apos;ll learn</p>
-                    {mod.topics.map((topic, j) => (
-                      <motion.div
-                        key={j}
-                        className="flex items-start gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-100"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: j * 0.08 }}
-                      >
-                        <CheckCircleIcon className="w-4 h-4 mt-0.5 shrink-0" style={{ color: mod.color }} />
-                        <span className="text-sm text-gray-700 leading-relaxed">{topic}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <motion.div
-                    className="rounded-xl overflow-hidden border border-gray-200"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: 0.15 }}
-                  >
-                    <div className="flex items-center gap-1.5 px-3 py-2 bg-[#1a1e2e] border-b border-white/[0.06]">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-                      <span className="text-[10px] font-mono text-gray-500 ml-2">preview</span>
-                    </div>
-                    <div className="bg-[#0d1117] p-4 font-mono text-[12px] leading-[1.8]">
-                      {codeLines.map((line, j) => (
-                        <motion.div
-                          key={j}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.2, delay: 0.2 + j * 0.06 }}
-                          className="whitespace-pre"
-                          style={{ color: line.color }}
-                        >
-                          {line.text}
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
+  );
+}
+
+/* Project Carousel with infinite scroll */
+function ProjectCarousel({ projects }: { projects: { title: string; domain: string; tags: string[]; color: string; desc: string }[] }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    requestAnimationFrame(() => {
+      const oneSetWidth = track.scrollWidth / 2;
+      tweenRef.current = gsap.fromTo(track, { x: 0 }, { x: -oneSetWidth, duration: 90, ease: "none", repeat: -1 });
+    });
+    return () => { tweenRef.current?.kill(); };
+  }, []);
+
+  return (
+    <div className="mt-10 relative" onMouseEnter={() => tweenRef.current?.pause()} onMouseLeave={() => tweenRef.current?.resume()}>
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #0a0e18, transparent)' }} />
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #0a0e18, transparent)' }} />
+
+      <div className="overflow-hidden py-2">
+        <div ref={trackRef} className="flex gap-4 w-max" style={{ willChange: "transform" }}>
+          {[...projects, ...projects].map((project, i) => (
+            <ProjectCard key={`${project.title}-${i}`} project={project} />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -627,6 +577,22 @@ function LayersIcon({ className, style }: { className?: string; style?: React.CS
 }
 function ClockIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>;
+}
+function HeadsetIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6" /><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z" /></svg>;
+}
+function MicrosoftLogo({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <svg className={className} style={style} viewBox="0 0 24 24" fill="none">
+      <rect x="1" y="1" width="10" height="10" fill="#F25022" />
+      <rect x="13" y="1" width="10" height="10" fill="#7FBA00" />
+      <rect x="1" y="13" width="10" height="10" fill="#00A4EF" />
+      <rect x="13" y="13" width="10" height="10" fill="#FFB900" />
+    </svg>
+  );
+}
+function VideoIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  return <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 7l-7 5 7 5V7z" /><rect x="1" y="5" width="15" height="14" rx="2" ry="2" /></svg>;
 }
 
 /* ─── Interactive Dashboard Preview ─── */
@@ -808,449 +774,6 @@ function DashboardPreview() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════
-   MODULES - Bento-Grid Glassmorphism (Light Theme)
-   ═══════════════════════════════════════════════════════ */
-
-const MODULE_DATA = [
-  {
-    id: 1,
-    title: "Python Programming",
-    subtitle: "Master Python from zero to hero",
-    gradient: "from-emerald-400 to-teal-500",
-    bgGradient: "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)",
-    iconBg: "linear-gradient(135deg, #10b981, #059669)",
-    color: "#059669",
-    lightBg: "#ecfdf5",
-    topics: [
-      "Python fundamentals - variables, loops, functions, OOP",
-      "NumPy arrays & vectorized operations",
-      "Pandas DataFrames - cleaning, merging, grouping",
-      "File I/O, error handling & modules",
-      "List comprehensions & generators",
-      "Working with APIs & JSON data",
-    ],
-    icon: (<img src="/images/tools/python.png" alt="Python" className="w-7 h-7 object-contain drop-shadow-sm" />),
-  },
-  {
-    id: 2,
-    title: "Statistics & Mathematics",
-    subtitle: "Build the mathematical foundation for ML",
-    gradient: "from-blue-400 to-indigo-500",
-    bgGradient: "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
-    iconBg: "linear-gradient(135deg, #3b82f6, #4f46e5)",
-    color: "#3b82f6",
-    lightBg: "#eff6ff",
-    topics: [
-      "Descriptive statistics & data distributions",
-      "Probability theory & Bayes theorem",
-      "Hypothesis testing - t-test, chi-square, ANOVA",
-      "Linear algebra - matrices, eigenvalues, SVD",
-      "Calculus - gradients, partial derivatives",
-      "Statistical modeling & inference",
-    ],
-    icon: (<img src="/images/tools/python.png" alt="Statistics" className="w-7 h-7 object-contain drop-shadow-sm" />),
-  },
-  {
-    id: 3,
-    title: "Machine Learning",
-    subtitle: "Build predictive models that drive decisions",
-    gradient: "from-amber-400 to-orange-500",
-    bgGradient: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
-    iconBg: "linear-gradient(135deg, #f59e0b, #ea580c)",
-    color: "#d97706",
-    lightBg: "#fffbeb",
-    topics: [
-      "Supervised Learning - linear & logistic regression",
-      "Decision Trees, Random Forests & XGBoost",
-      "Unsupervised Learning - K-Means, DBSCAN, PCA",
-      "Model evaluation - cross-validation, ROC curves",
-      "Feature engineering & selection",
-      "Ensemble methods & model stacking",
-    ],
-    icon: (<img src="/images/tools/scikit-learn.png" alt="Machine Learning" className="w-7 h-7 object-contain drop-shadow-sm" />),
-  },
-  {
-    id: 4,
-    title: "Deep Learning",
-    subtitle: "Neural networks from scratch to production",
-    gradient: "from-violet-400 to-purple-600",
-    bgGradient: "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%)",
-    iconBg: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
-    color: "#7c3aed",
-    lightBg: "#f5f3ff",
-    topics: [
-      "Neural network fundamentals - perceptrons to DNNs",
-      "CNNs - image classification & object detection",
-      "RNNs & LSTMs - sequence modeling",
-      "Transfer learning with pre-trained models",
-      "Model optimization - batch norm, dropout, learning rate",
-      "PyTorch & TensorFlow implementation",
-    ],
-    icon: (<img src="/images/tools/tensorflow.png" alt="Deep Learning" className="w-7 h-7 object-contain drop-shadow-sm" />),
-  },
-  {
-    id: 5,
-    title: "NLP & Generative AI",
-    subtitle: "Build AI that understands language",
-    gradient: "from-pink-400 to-rose-500",
-    bgGradient: "linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)",
-    iconBg: "linear-gradient(135deg, #ec4899, #db2777)",
-    color: "#db2777",
-    lightBg: "#fdf2f8",
-    topics: [
-      "Text preprocessing - tokenization, stemming, TF-IDF",
-      "Word embeddings - Word2Vec, GloVe, FastText",
-      "Transformer architecture - attention mechanism",
-      "LLMs - GPT, BERT, fine-tuning strategies",
-      "Prompt engineering & RAG systems",
-      "LangChain for AI applications",
-    ],
-    icon: (<img src="/images/tools/python.png" alt="NLP" className="w-7 h-7 object-contain drop-shadow-sm" />),
-  },
-  {
-    id: 6,
-    title: "MLOps & Deployment",
-    subtitle: "Take models from notebook to production",
-    gradient: "from-cyan-400 to-sky-500",
-    bgGradient: "linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%)",
-    iconBg: "linear-gradient(135deg, #06b6d4, #0284c7)",
-    color: "#0891b2",
-    lightBg: "#ecfeff",
-    topics: [
-      "ML pipeline design & automation",
-      "Model versioning with MLflow & DVC",
-      "Docker containerization for ML",
-      "Cloud deployment - AWS SageMaker, GCP Vertex AI",
-      "CI/CD for ML pipelines",
-      "Monitoring, A/B testing & model drift",
-    ],
-    icon: (<img src="/images/tools/docker.png" alt="MLOps" className="w-7 h-7 object-contain drop-shadow-sm" />),
-  },
-];
-
-/* ── Module Card ── */
-function ModuleCard({ mod, index, onEnquiry }: { mod: typeof MODULE_DATA[0]; index: number; onEnquiry: () => void }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <motion.div
-      className="group relative"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-    >
-      <div
-        className="relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 border border-white/60 hover:shadow-xl hover:-translate-y-0.5"
-        style={{
-          background: "rgba(255,255,255,0.75)",
-          backdropFilter: "blur(12px)",
-          boxShadow: "0 4px 24px -8px rgba(0,0,0,0.1)",
-        }}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className="h-1" style={{ background: mod.iconBg }} />
-
-        <div className="p-5">
-          <div className="flex items-start gap-4">
-            <div
-              className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border border-white/80"
-              style={{ background: mod.lightBg, boxShadow: "0 2px 8px -2px rgba(0,0,0,0.1)" }}
-            >
-              {mod.icon}
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <span
-                  className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
-                  style={{ color: mod.color, backgroundColor: mod.lightBg }}
-                >
-                  Module {mod.id}
-                </span>
-                <span className="text-[10px] text-gray-400">{mod.topics.length} topics</span>
-              </div>
-
-              <h3 className="text-lg font-bold text-gray-900 leading-tight">{mod.title}</h3>
-              <p className="mt-0.5 text-sm text-gray-500">{mod.subtitle}</p>
-            </div>
-
-            <motion.div
-              className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.25 }}
-            >
-              <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </motion.div>
-          </div>
-
-          <div className="mt-4 flex items-center gap-3">
-            <div className="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
-              <motion.div
-                className="h-full rounded-full"
-                style={{ background: mod.iconBg }}
-                initial={{ width: "0%" }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
-              />
-            </div>
-            <span className="text-[11px] font-medium" style={{ color: mod.color }}>
-              {mod.topics.length} lessons
-            </span>
-          </div>
-
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <div className="space-y-2">
-                    {mod.topics.map((topic, tIdx) => {
-                      const parts = topic.split(" - ");
-                      return (
-                        <motion.div
-                          key={tIdx}
-                          className="flex items-start gap-3 p-2.5 rounded-lg transition-colors hover:bg-white/60"
-                          style={{ backgroundColor: `${mod.lightBg}80` }}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: tIdx * 0.03 }}
-                        >
-                          <div
-                            className="shrink-0 w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold mt-0.5"
-                            style={{ backgroundColor: mod.lightBg, color: mod.color }}
-                          >
-                            {tIdx + 1}
-                          </div>
-                          <div className="flex-1">
-                            <p className="text-[13px] font-medium text-gray-800">{parts[0]}</p>
-                            {parts[1] && <p className="text-[11px] text-gray-500 mt-0.5">{parts[1]}</p>}
-                          </div>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-
-                  <motion.button
-                    onClick={(e) => { e.stopPropagation(); onEnquiry(); }}
-                    className="mt-4 w-full py-2.5 rounded-xl text-sm font-semibold text-white cursor-pointer transition-transform"
-                    style={{ background: mod.iconBg }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Get Detailed Syllabus
-                  </motion.button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function ModulesSection({ openEnquiry }: { openEnquiry: () => void }) {
-  return (
-    <section className="relative py-28 px-6 overflow-hidden" style={{
-      background: `
-        linear-gradient(135deg, #fefce8 0%, #fef9ef 20%, #fdf2f8 40%, #f0f9ff 60%, #ecfeff 80%, #f0fdf4 100%)
-      `
-    }}>
-      {/* ── Morphing aurora blobs with conic gradients ── */}
-      <motion.div className="absolute w-[600px] h-[600px] pointer-events-none" style={{ top: "-15%", left: "-10%", background: "conic-gradient(from 0deg, rgba(251,191,36,0.12), rgba(236,72,153,0.08), rgba(139,92,246,0.1), rgba(251,191,36,0.12))", borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%", filter: "blur(80px)" }}
-        animate={{ borderRadius: ["40% 60% 55% 45% / 55% 40% 60% 45%", "55% 45% 40% 60% / 40% 55% 45% 60%", "45% 55% 60% 40% / 60% 45% 55% 40%", "40% 60% 55% 45% / 55% 40% 60% 45%"], rotate: [0, 120, 240, 360] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.div className="absolute w-[500px] h-[500px] pointer-events-none" style={{ top: "30%", right: "-5%", background: "conic-gradient(from 180deg, rgba(6,182,212,0.1), rgba(59,130,246,0.08), rgba(139,92,246,0.1), rgba(6,182,212,0.1))", borderRadius: "60% 40% 45% 55% / 45% 60% 40% 55%", filter: "blur(80px)" }}
-        animate={{ borderRadius: ["60% 40% 45% 55% / 45% 60% 40% 55%", "40% 60% 55% 45% / 60% 40% 55% 45%", "55% 45% 40% 60% / 40% 55% 45% 60%", "60% 40% 45% 55% / 45% 60% 40% 55%"], rotate: [0, -90, -180, -360] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.div className="absolute w-[450px] h-[450px] pointer-events-none" style={{ bottom: "-10%", left: "20%", background: "conic-gradient(from 90deg, rgba(245,130,32,0.08), rgba(16,185,129,0.1), rgba(59,130,246,0.06), rgba(245,130,32,0.08))", borderRadius: "45% 55% 60% 40% / 55% 45% 55% 45%", filter: "blur(70px)" }}
-        animate={{ borderRadius: ["45% 55% 60% 40% / 55% 45% 55% 45%", "55% 45% 45% 55% / 45% 55% 60% 40%", "40% 60% 55% 45% / 60% 40% 45% 55%", "45% 55% 60% 40% / 55% 45% 55% 45%"], rotate: [0, 60, 180, 360], scale: [1, 1.15, 0.95, 1] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }} />
-
-      {/* ── Floating constellation SVG ── */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="xMidYMid slice">
-        <defs>
-          <linearGradient id="mod-lg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f59e0b" stopOpacity="0.15" /><stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.08" /></linearGradient>
-          <linearGradient id="mod-lg2" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#06b6d4" stopOpacity="0.12" /><stop offset="100%" stopColor="#ec4899" stopOpacity="0.06" /></linearGradient>
-        </defs>
-        {[
-          { x1: "10%", y1: "15%", x2: "35%", y2: "25%", g: "url(#mod-lg1)", d: 0.5 },
-          { x1: "35%", y1: "25%", x2: "25%", y2: "55%", g: "url(#mod-lg1)", d: 0.8 },
-          { x1: "25%", y1: "55%", x2: "10%", y2: "75%", g: "url(#mod-lg2)", d: 1.1 },
-          { x1: "65%", y1: "10%", x2: "80%", y2: "35%", g: "url(#mod-lg2)", d: 0.6 },
-          { x1: "80%", y1: "35%", x2: "70%", y2: "60%", g: "url(#mod-lg1)", d: 0.9 },
-          { x1: "70%", y1: "60%", x2: "90%", y2: "80%", g: "url(#mod-lg2)", d: 1.2 },
-          { x1: "35%", y1: "25%", x2: "65%", y2: "10%", g: "url(#mod-lg2)", d: 1.0 },
-          { x1: "25%", y1: "55%", x2: "70%", y2: "60%", g: "url(#mod-lg1)", d: 1.3 },
-        ].map((l, i) => (
-          <motion.line key={`cl${i}`} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke={l.g} strokeWidth="1"
-            initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }}
-            viewport={{ once: true }} transition={{ duration: 2, delay: l.d }} />
-        ))}
-        {[
-          { cx: "10%", cy: "15%", c: "#f59e0b", r: 4, d: 0 },
-          { cx: "35%", cy: "25%", c: "#8b5cf6", r: 5, d: 1 },
-          { cx: "25%", cy: "55%", c: "#ec4899", r: 4, d: 2 },
-          { cx: "10%", cy: "75%", c: "#10b981", r: 3.5, d: 3 },
-          { cx: "65%", cy: "10%", c: "#06b6d4", r: 4, d: 0.5 },
-          { cx: "80%", cy: "35%", c: "#3b82f6", r: 5, d: 1.5 },
-          { cx: "70%", cy: "60%", c: "#d97706", r: 4, d: 2.5 },
-          { cx: "90%", cy: "80%", c: "#7c3aed", r: 3.5, d: 3.5 },
-        ].map((dot, i) => (
-          <motion.circle key={`nd${i}`} cx={dot.cx} cy={dot.cy} r={dot.r} fill={dot.c} opacity={0.2}
-            animate={{ r: [dot.r, dot.r + 2, dot.r], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 3, repeat: Infinity, delay: dot.d, ease: "easeInOut" }} />
-        ))}
-        {[0, 2.5, 5].map((d, i) => (
-          <motion.circle key={`tp${i}`} r="1.5" fill={["#f59e0b", "#8b5cf6", "#06b6d4"][i]} opacity={0.2}
-            animate={{ cx: ["10%", "35%", "25%", "70%", "90%", "65%", "10%"], cy: ["15%", "25%", "55%", "60%", "80%", "10%", "15%"] }}
-            transition={{ duration: 9 + i, repeat: Infinity, delay: d, ease: "linear" }} />
-        ))}
-      </svg>
-
-      {/* ── Floating geometric shapes ── */}
-      {[
-        { top: "8%", left: "5%", sz: 40, rot: 45, c: "rgba(245,130,32,0.06)", bc: "rgba(245,130,32,0.15)", dur: 15, br: "6px" },
-        { top: "20%", right: "8%", sz: 55, rot: 0, c: "rgba(139,92,246,0.05)", bc: "rgba(139,92,246,0.12)", dur: 20, br: "25% 10%" },
-        { top: "60%", left: "3%", sz: 35, rot: 30, c: "rgba(6,182,212,0.06)", bc: "rgba(6,182,212,0.15)", dur: 18, br: "0 50% 50%" },
-        { top: "75%", right: "6%", sz: 45, rot: 0, c: "rgba(236,72,153,0.05)", bc: "rgba(236,72,153,0.12)", dur: 16, br: "50%" },
-        { top: "45%", left: "50%", sz: 28, rot: 60, c: "rgba(16,185,129,0.05)", bc: "rgba(16,185,129,0.12)", dur: 22, br: "4px" },
-      ].map((s, i) => (
-        <motion.div key={`geo-${i}`} className="absolute pointer-events-none"
-          style={{ top: s.top, ...("left" in s ? { left: s.left } : {}), ...("right" in s ? { right: (s as unknown as Record<string, string>).right } : {}), width: s.sz, height: s.sz, border: `1.5px solid ${s.bc}`, backgroundColor: s.c, borderRadius: s.br, transform: `rotate(${s.rot}deg)` }}
-          animate={{ y: [0, -20, 10, -15, 0], rotate: [s.rot, s.rot + 90, s.rot + 180, s.rot + 270, s.rot + 360], scale: [1, 1.1, 0.95, 1.05, 1] }}
-          transition={{ duration: s.dur, repeat: Infinity, ease: "easeInOut" }} />
-      ))}
-
-      {/* ── Animated light streaks ── */}
-      <motion.div className="absolute top-[18%] left-0 w-full h-px pointer-events-none"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(245,130,32,0.08) 20%, rgba(139,92,246,0.06) 50%, rgba(6,182,212,0.08) 80%, transparent)" }}
-        animate={{ opacity: [0, 0.6, 0], x: ["-10%", "5%", "-10%"] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.div className="absolute top-[52%] left-0 w-full h-px pointer-events-none"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(6,182,212,0.06) 30%, rgba(236,72,153,0.08) 60%, transparent)" }}
-        animate={{ opacity: [0, 0.5, 0], x: ["5%", "-8%", "5%"] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
-      <motion.div className="absolute top-[82%] left-0 w-full h-px pointer-events-none"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(16,185,129,0.08) 40%, rgba(245,130,32,0.06) 70%, transparent)" }}
-        animate={{ opacity: [0, 0.4, 0], x: ["-5%", "8%", "-5%"] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 5 }} />
-
-      <div className="relative z-10 max-w-6xl mx-auto">
-        {/* ── Section Header ── */}
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200/80 bg-white/70 backdrop-blur-sm shadow-sm mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="flex items-center gap-1.5">
-                {MODULE_DATA.slice(0, 6).map((m, i) => (
-                  <motion.div
-                    key={i}
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: m.iconBg }}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + i * 0.06, type: "spring" }}
-                  />
-                ))}
-              </span>
-              <span className="text-xs font-semibold text-gray-600 tracking-wide">6 Modules · 36+ Topics · 32 Weeks</span>
-            </motion.div>
-
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              What You&apos;ll{" "}
-              <span className="relative inline-block">
-                <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, #e11d48, #7c3aed, #0891b2)` }}>
-                  Master
-                </span>
-                <motion.svg
-                  className="absolute -bottom-2 left-0 w-full h-3"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                  preserveAspectRatio="none"
-                >
-                  <motion.path
-                    d="M2 8 C30 3, 60 11, 100 6 S160 2, 198 7"
-                    stroke={BRAND_ORANGE}
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    fill="none"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-                  />
-                </motion.svg>
-              </span>
-            </h2>
-            <p className="mt-5 text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-              Each module builds on the last - from Python basics to production AI. Click any module to explore what&apos;s inside.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        {/* ── Bento Grid of Module Cards ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {MODULE_DATA.map((mod, idx) => (
-            <ModuleCard key={mod.id} mod={mod} index={idx} onEnquiry={openEnquiry} />
-          ))}
-        </div>
-
-        {/* ── Bottom Stats Cards ── */}
-        <motion.div
-          className="mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
-            {[
-              { value: "6", label: "Modules", color: BRAND_ORANGE, gradient: "from-orange-500 to-amber-400", icon: (<svg viewBox="0 0 24 24" fill="none" className="w-6 h-6"><rect x="3" y="3" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/><rect x="14" y="3" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/><rect x="3" y="14" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/><rect x="14" y="14" width="7" height="7" rx="2" stroke="currentColor" strokeWidth="2"/></svg>) },
-              { value: "36+", label: "Topics", color: "#7c3aed", gradient: "from-violet-500 to-purple-400", icon: (<svg viewBox="0 0 24 24" fill="none" className="w-6 h-6"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/><rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" strokeWidth="2"/><path d="M9 12h6M9 16h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>) },
-              { value: "32", label: "Weeks", color: "#0891b2", gradient: "from-cyan-500 to-teal-400", icon: (<svg viewBox="0 0 24 24" fill="none" className="w-6 h-6"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/><path d="M3 10h18" stroke="currentColor" strokeWidth="2"/><path d="M8 2v4M16 2v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>) },
-              { value: "25+", label: "Tools", color: "#059669", gradient: "from-emerald-500 to-green-400", icon: (<svg viewBox="0 0 24 24" fill="none" className="w-6 h-6"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>) },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                className="group relative"
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + i * 0.1, type: "spring", stiffness: 200 }}
-              >
-                <div className="relative overflow-hidden rounded-2xl p-5 md:p-6 bg-white/70 backdrop-blur-sm border border-white/80 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
-                  <div className={`absolute -top-8 -right-8 w-24 h-24 rounded-full bg-gradient-to-br ${stat.gradient} opacity-20 blur-2xl group-hover:opacity-30 transition-opacity`} />
-                  <div className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-3" style={{ backgroundColor: `${stat.color}15` }}>
-                    <div style={{ color: stat.color }}>{stat.icon}</div>
-                  </div>
-                  <motion.p className="relative text-3xl md:text-4xl font-bold" style={{ color: stat.color }} initial={{ scale: 0.5 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.6 + i * 0.1, type: "spring", stiffness: 200 }}>{stat.value}</motion.p>
-                  <p className="relative text-sm text-gray-600 font-medium mt-1 uppercase tracking-wide">{stat.label}</p>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: `linear-gradient(90deg, ${stat.color}, ${stat.color}80)` }} />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 /* ═══════════════════════════════════════════════════════
    MAIN PAGE
@@ -1264,7 +787,7 @@ export default function DataScienceAIPage() {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   const [openFaq, setOpenFaq] = useState(0);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(-1);
 
   /* ── Data ── */
   const personas = [
@@ -1275,85 +798,182 @@ export default function DataScienceAIPage() {
   ];
 
   const curriculum = [
-    { phase: "01", title: "Foundations", duration: "Weeks 1–10", color: BRAND_ORANGE, skills: ["Python", "NumPy", "Pandas", "Statistics", "Visualization"], topics: [
-      "Python fundamentals - variables, loops, functions, OOP",
-      "NumPy & Pandas - data manipulation at scale",
-      "Statistics & probability - distributions, hypothesis testing",
-      "Data visualization - Matplotlib, Seaborn, Plotly",
-    ], code: [
-      { text: "# Statistical analysis in Python", color: "#8b949e" },
-      { text: "import numpy as np", color: "#79c0ff" },
-      { text: "from scipy import stats", color: "#79c0ff" },
-      { text: "", color: "#e6edf3" },
-      { text: "data = np.random.normal(100, 15, 1000)", color: "#e6edf3" },
-      { text: "ci = stats.norm.interval(0.95, np.mean(data))", color: "#e6edf3" },
-      { text: "", color: "#e6edf3" },
-      { text: ">>> 95% CI: (99.1, 101.8)", color: "#7ee787" },
-    ]},
-    { phase: "02", title: "Machine Learning", duration: "Weeks 11–18", color: ACCENT_BLUE, skills: ["Scikit-learn", "XGBoost", "SHAP", "Feature Engineering"], topics: [
-      "Supervised learning - regression, classification, trees",
-      "Unsupervised learning - clustering, dimensionality reduction",
-      "Model evaluation - cross-validation, hyperparameter tuning",
-      "Feature engineering & explainability with SHAP",
-    ], code: [
-      { text: "# XGBoost with SHAP explainability", color: "#8b949e" },
-      { text: "import xgboost as xgb", color: "#79c0ff" },
-      { text: "import shap", color: "#79c0ff" },
-      { text: "", color: "#e6edf3" },
-      { text: "model = xgb.XGBClassifier(n_estimators=200)", color: "#e6edf3" },
-      { text: "model.fit(X_train, y_train)", color: "#e6edf3" },
-      { text: "explainer = shap.TreeExplainer(model)", color: "#e6edf3" },
-      { text: "", color: "#e6edf3" },
-      { text: ">>> Accuracy: 96.3% | AUC: 0.98", color: "#7ee787" },
-    ]},
-    { phase: "03", title: "Deep Learning & NLP", duration: "Weeks 19–28", color: ACCENT_CYAN, skills: ["TensorFlow", "PyTorch", "BERT", "GPT", "LangChain"], topics: [
-      "Neural networks - CNNs, RNNs, LSTMs, Transformers",
-      "NLP - tokenization, embeddings, BERT, GPT fine-tuning",
-      "Computer vision - image classification, object detection",
-      "Generative AI - prompt engineering, RAG, LangChain",
-    ], code: [
-      { text: "# BERT sentiment analysis", color: "#8b949e" },
-      { text: "from transformers import pipeline", color: "#79c0ff" },
-      { text: "", color: "#e6edf3" },
-      { text: 'classifier = pipeline("sentiment-analysis")', color: "#e6edf3" },
-      { text: 'result = classifier("This product is amazing!")', color: "#e6edf3" },
-      { text: "", color: "#e6edf3" },
-      { text: '>>> [{"label": "POSITIVE", "score": 0.9998}]', color: "#7ee787" },
-    ]},
+    {
+      title: "Python & Data Foundations",
+      weeks: 6,
+      projects: 5,
+      description: "Build a rock-solid programming foundation from scratch. Python is the undisputed language of data science and AI - every model, every pipeline, every analysis starts here. You'll go from zero to writing production-quality code, learning not just syntax but how to think like a data scientist.",
+      outcomes: [
+        "Python fundamentals: variables, data types, control flow, and OOP",
+        "Functions, decorators, generators, and error handling patterns",
+        "Data structures mastery: lists, dicts, sets, and when to use each",
+        "NumPy for vectorized computation and array operations",
+        "Pandas for real-world data wrangling, cleaning, and transformation",
+        "Data visualization with Matplotlib, Seaborn, and Plotly",
+      ],
+      tools: ["Python", "Jupyter", "NumPy", "Pandas", "Matplotlib", "Seaborn", "Git"],
+      iconPath: "M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
+    },
+    {
+      title: "Statistics & Mathematics for ML",
+      weeks: 5,
+      projects: 4,
+      description: "The math behind every AI breakthrough is simpler than you think - but you must know it. This module builds the statistical intuition and linear algebra skills that separate data scientists who understand their models from those who just copy-paste code. Every concept is taught through real datasets.",
+      outcomes: [
+        "Descriptive statistics: distributions, central tendency, and variance",
+        "Probability theory: Bayes theorem, conditional probability, and Markov chains",
+        "Hypothesis testing, A/B testing, and statistical significance",
+        "Linear algebra essentials: vectors, matrices, eigenvalues for ML",
+        "Calculus for optimization: gradients, partial derivatives, chain rule",
+        "Exploratory data analysis: systematic approach to any dataset",
+      ],
+      tools: ["Python", "SciPy", "Pandas", "Plotly", "Statsmodels"],
+      iconPath: "M3 3v18h18M7 16l4-4 4 4 6-6m0 0v4m0-4h-4",
+    },
+    {
+      title: "Machine Learning",
+      weeks: 8,
+      projects: 6,
+      description: "This is where data science gets powerful. You'll master every major ML algorithm - not just how to call sklearn.fit(), but why each algorithm works, when to use it, and how to debug it when it doesn't. Heavy emphasis on feature engineering, model evaluation, and the practical skills that win Kaggle competitions and real job interviews.",
+      outcomes: [
+        "Supervised learning: linear/logistic regression, SVMs, and naive Bayes",
+        "Tree-based models: decision trees, random forests, XGBoost, LightGBM",
+        "Unsupervised learning: K-means, DBSCAN, PCA, and t-SNE",
+        "Feature engineering: encoding, scaling, selection, and creation",
+        "Model evaluation: cross-validation, ROC-AUC, precision-recall tradeoffs",
+        "Hyperparameter tuning with Optuna and experiment tracking with MLflow",
+      ],
+      tools: ["Scikit-learn", "XGBoost", "Python", "MLflow", "Jupyter"],
+      iconPath: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
+    },
+    {
+      title: "Deep Learning",
+      weeks: 7,
+      projects: 5,
+      description: "Neural networks power everything from ChatGPT to self-driving cars. You'll build them from scratch using PyTorch, understand backpropagation at a deep level, then master CNNs for computer vision and sequence models. Transfer learning with pre-trained models lets you achieve state-of-the-art results even with limited data.",
+      outcomes: [
+        "Neural network fundamentals: perceptrons, activation functions, backprop",
+        "CNNs for image classification, object detection, and segmentation",
+        "RNNs, LSTMs, and GRUs for sequential and time-series data",
+        "Transfer learning: fine-tuning ResNet, EfficientNet, and Vision Transformers",
+        "Model optimization: batch normalization, dropout, learning rate scheduling",
+        "ONNX export, quantization, and edge deployment for production",
+      ],
+      tools: ["PyTorch", "TensorFlow", "Keras", "HuggingFace", "Google Colab"],
+      iconPath: "M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5",
+    },
+    {
+      title: "NLP & Generative AI",
+      weeks: 8,
+      projects: 6,
+      description: "The AI revolution of 2024-2026 is built on language models and generative AI. This module takes you from Transformer architecture fundamentals to building production RAG systems, fine-tuning open-source LLMs, and creating AI agents. You'll work with the exact same tools and techniques used at OpenAI, Google, and Meta.",
+      outcomes: [
+        "Transformer architecture: attention mechanisms, positional encoding",
+        "NLP pipeline: tokenization, embeddings, BERT, and text classification",
+        "LLM fine-tuning: LoRA, QLoRA, and PEFT on open-source models",
+        "RAG systems: vector databases, embeddings, retrieval, and reranking",
+        "AI agents: tool use, function calling, multi-step reasoning chains",
+        "Prompt engineering: systematic techniques for reliable AI outputs",
+      ],
+      tools: ["HuggingFace", "LangChain", "OpenAI API", "Pinecone", "Python", "FastAPI"],
+      iconPath: "M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z",
+    },
+    {
+      title: "MLOps & Cloud Deployment",
+      weeks: 6,
+      projects: 4,
+      description: "A model in a notebook is a toy. A model in production is a product. This module bridges that gap. Learn to containerize models with Docker, build APIs with FastAPI, set up CI/CD pipelines, deploy on AWS and GCP, and monitor model performance in production. These are the skills that companies pay senior data scientists for.",
+      outcomes: [
+        "Docker containerization and microservices architecture for ML",
+        "API development with FastAPI: serving models at scale",
+        "CI/CD pipelines: GitHub Actions, automated testing, and deployment",
+        "Cloud deployment: AWS SageMaker, GCP Vertex AI, and serverless options",
+        "Model monitoring: data drift detection, performance degradation alerts",
+        "ML pipeline orchestration with Airflow and experiment reproducibility",
+      ],
+      tools: ["Docker", "FastAPI", "AWS", "GCP", "GitHub", "Airflow"],
+      iconPath: "M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z",
+    },
+    {
+      title: "Capstone & Portfolio",
+      weeks: 8,
+      projects: 2,
+      description: "Two intensive capstone projects that simulate real industry work. You'll scope a problem, gather data, build and iterate on models, deploy to production, and present results to an industry panel. These become the crown jewels of your portfolio - the projects that get you hired. One project is guided, one is fully independent.",
+      outcomes: [
+        "Scope and plan an end-to-end data science project independently",
+        "Build production ML pipeline: data ingestion to deployed API",
+        "Integrate generative AI components into your solution",
+        "Create professional documentation, README, and demo video",
+        "Present findings to industry mentors and receive expert feedback",
+        "Publish portfolio on GitHub with clean code and reproducibility",
+      ],
+      tools: ["All Previous Tools", "GitHub", "Streamlit", "Notion"],
+      iconPath: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.63 8.25m6 6.12l-3 3m0-12.75a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0z",
+    },
+  ]
+
+  const tools = [
+    // Row 1 - Core Python & ML Stack (12)
+    "Python", "NumPy", "Pandas", "Scikit-learn", "XGBoost", "SciPy", "Matplotlib", "Seaborn", "Plotly", "Jupyter", "Google Colab", "Git",
+    // Row 2 - Deep Learning, NLP & GenAI (12)
+    "PyTorch", "TensorFlow", "Keras", "HuggingFace", "SpaCy", "FastAPI", "Docker", "AWS", "GCP", "Azure", "PostgreSQL", "MongoDB",
+    // Row 3 - MLOps, Data & Complementary (12)
+    "GitHub", "Spark", "Hadoop", "SQL", "Statsmodels", "Scrapy", "Flask", "Tableau", "Power BI", "Looker", "Google BigQuery", "R",
   ];
 
-  const tools = ["Python", "NumPy", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn", "TensorFlow", "PyTorch", "Keras", "XGBoost", "LightGBM", "NLTK", "SpaCy", "HuggingFace", "OpenCV", "Docker", "MLflow", "FastAPI", "Flask", "AWS", "GCP", "Jupyter", "Git", "SQL", "MongoDB", "Tableau", "Power BI", "Plotly", "Streamlit", "LangChain"];
-
-  const projects = [
-    { title: "Credit Scoring Model", desc: "Build an XGBoost-powered credit risk model with SHAP explainability and production-ready API.", tags: ["XGBoost", "SHAP", "FastAPI"], color: BRAND_ORANGE, complexity: 2, outcome: "96.3% accuracy", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="4" y="28" width="8" height="14" rx="2" fill="#F5822040" stroke="#F58220" strokeWidth="1.5"/><rect x="16" y="18" width="8" height="24" rx="2" fill="#F5822060" stroke="#F58220" strokeWidth="1.5"/><rect x="28" y="10" width="8" height="32" rx="2" fill="#F5822080" stroke="#F58220" strokeWidth="1.5"/><path d="M8 24L20 14L32 18L42 6" stroke="#F58220" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="42" cy="6" r="3" fill="#F58220"/></svg>) },
-    { title: "Fraud Detection System", desc: "Real-time anomaly detection using ensemble methods and automated alerting pipeline.", tags: ["Scikit-learn", "Kafka", "Docker"], color: ACCENT_BLUE, complexity: 3, outcome: "Real-time alerts", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><circle cx="24" cy="24" r="18" stroke="#3B82F620" strokeWidth="1"/><circle cx="18" cy="18" r="8" fill="#3B82F630" stroke="#3B82F6" strokeWidth="1.5"/><circle cx="32" cy="18" r="6" fill="#60A5FA30" stroke="#60A5FA" strokeWidth="1.5"/><circle cx="22" cy="32" r="7" fill="#93C5FD30" stroke="#93C5FD" strokeWidth="1.5"/><circle cx="34" cy="30" r="5" fill="#3B82F620" stroke="#3B82F6" strokeWidth="1.5"/></svg>) },
-    { title: "NLP Sentiment Pipeline", desc: "BERT-based sentiment analysis with HuggingFace Transformers and production Flask API.", tags: ["BERT", "HuggingFace", "Flask"], color: ACCENT_CYAN, complexity: 3, outcome: "Production API", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><path d="M6 38C6 38 14 34 20 22C26 10 34 8 42 12" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round"/><path d="M6 38C6 38 14 36 22 30C30 24 38 26 42 12" stroke="#06B6D440" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3"/><circle cx="20" cy="22" r="3" fill="#06B6D4" opacity="0.8"/><circle cx="34" cy="14" r="3" fill="#06B6D4" opacity="0.6"/><circle cx="14" cy="34" r="2.5" fill="#06B6D4" opacity="0.4"/><rect x="30" y="30" width="14" height="12" rx="2" fill="#06B6D415" stroke="#06B6D4" strokeWidth="1"/><text x="37" y="38" textAnchor="middle" fill="#06B6D4" fontSize="7" fontFamily="monospace" fontWeight="bold">API</text></svg>) },
-    { title: "End-to-End ML Deployment", desc: "Complete MLOps pipeline: Docker, FastAPI, CI/CD with GitHub Actions, MLflow monitoring.", tags: ["Docker", "FastAPI", "MLflow"], color: BRAND_ORANGE, complexity: 4, outcome: "12ms latency", icon: (<svg viewBox="0 0 48 48" fill="none" className="w-full h-full"><rect x="2" y="18" width="12" height="12" rx="3" fill="#F5822020" stroke="#F58220" strokeWidth="1.5"/><rect x="18" y="18" width="12" height="12" rx="3" fill="#F5822040" stroke="#F58220" strokeWidth="1.5"/><rect x="34" y="18" width="12" height="12" rx="3" fill="#F5822060" stroke="#F58220" strokeWidth="1.5"/><path d="M14 24H18" stroke="#F58220" strokeWidth="2" strokeLinecap="round"/><path d="M30 24H34" stroke="#F58220" strokeWidth="2" strokeLinecap="round"/><path d="M8 18V10H24V18" stroke="#F5822050" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 2"/><path d="M24 30V38H40V30" stroke="#F5822050" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 2"/></svg>) },
-  ];
-
-  const roles = [
-    { title: "Data Scientist", range: "8–15 LPA", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M21 12V7H5a2 2 0 010-4h14v4"/><path d="M3 5v14a2 2 0 002 2h16v-5"/><path d="M18 12a2 2 0 000 4h4v-4h-4z"/></svg>) },
-    { title: "ML Engineer", range: "10–18 LPA", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M2 20h20"/><path d="M5 20V10l4-4 4 4 4-8 4 4v14"/></svg>) },
-    { title: "AI Engineer", range: "10–20 LPA", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>) },
-    { title: "NLP Engineer", range: "9–16 LPA", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>) },
-    { title: "MLOps Engineer", range: "10–18 LPA", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="6" cy="18" r="1" fill="currentColor"/></svg>) },
-    { title: "Data Architect", range: "12–20 LPA", icon: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg>) },
+  const industryProjects = [
+    // Machine Learning & Predictive Analytics
+    { title: "Credit Risk Scoring Engine", domain: "Banking", tags: ["XGBoost", "SHAP", "FastAPI"], color: "#F97316", desc: "Ensemble ML model with explainable AI reducing loan defaults by 23%" },
+    { title: "Real-time Fraud Detection", domain: "FinTech", tags: ["PyTorch", "Kafka", "Docker"], color: "#EF4444", desc: "Deep learning pipeline detecting fraudulent transactions in under 50ms" },
+    { title: "Customer Churn Prediction", domain: "SaaS", tags: ["Scikit-learn", "XGBoost", "MLflow"], color: "#3B82F6", desc: "Proactive churn model saving $2.4M ARR with 94% precision" },
+    { title: "Demand Forecasting System", domain: "Supply Chain", tags: ["Prophet", "PyTorch", "Airflow"], color: "#10B981", desc: "Time-series deep learning model with 96% MAPE accuracy" },
+    // Deep Learning & Computer Vision
+    { title: "Medical Image Classifier", domain: "Healthcare", tags: ["PyTorch", "ViT", "FastAPI"], color: "#EC4899", desc: "Vision Transformer detecting anomalies in X-rays at 98.2% accuracy" },
+    { title: "Real-time Object Detection", domain: "Autonomous", tags: ["YOLOv8", "TensorFlow", "ONNX"], color: "#8B5CF6", desc: "Edge-deployed model processing 30 FPS on embedded hardware" },
+    { title: "Quality Control Vision", domain: "Manufacturing", tags: ["PyTorch", "OpenCV", "Docker"], color: "#F59E0B", desc: "Computer vision detecting defects at 99.4% accuracy on production line" },
+    { title: "Satellite Image Segmentation", domain: "GeoAI", tags: ["U-Net", "TensorFlow", "GCP"], color: "#06B6D4", desc: "Semantic segmentation for land-use classification from satellite data" },
+    // NLP & Generative AI
+    { title: "RAG-Powered Knowledge Base", domain: "GenAI", tags: ["LangChain", "Pinecone", "GPT-4"], color: "#A855F7", desc: "Enterprise RAG system answering questions from 100K+ documents" },
+    { title: "Sentiment Analysis Pipeline", domain: "Brand", tags: ["BERT", "HuggingFace", "Flask"], color: "#06B6D4", desc: "NLP pipeline processing 500K+ social mentions daily with 93% accuracy" },
+    { title: "AI Code Review Agent", domain: "DevTools", tags: ["LangChain", "FastAPI", "GitHub"], color: "#3B82F6", desc: "Multi-step AI agent reviewing PRs and suggesting improvements" },
+    { title: "Multilingual Chatbot", domain: "Customer Support", tags: ["LLaMA", "LoRA", "Docker"], color: "#F97316", desc: "Fine-tuned LLM handling support queries in 8 languages" },
+    // MLOps & Production Systems
+    { title: "End-to-End MLOps Pipeline", domain: "MLOps", tags: ["Docker", "FastAPI", "GitHub Actions"], color: "#8B5CF6", desc: "Complete CI/CD pipeline with model registry and 12ms inference" },
+    { title: "Model Monitoring Dashboard", domain: "MLOps", tags: ["MLflow", "Grafana", "AWS"], color: "#10B981", desc: "Real-time drift detection and performance monitoring for 15+ models" },
+    { title: "Feature Store Platform", domain: "Data Infra", tags: ["PySpark", "Redis", "Airflow"], color: "#EF4444", desc: "Centralized feature store serving 50M+ feature vectors daily" },
+    // Recommendation & Personalization
+    { title: "Recommendation Engine", domain: "E-commerce", tags: ["PyTorch", "Redis", "FastAPI"], color: "#F59E0B", desc: "Hybrid collaborative filtering boosting engagement by 34%" },
+    { title: "Content Personalization AI", domain: "Media", tags: ["TensorFlow", "BigQuery", "GCP"], color: "#EC4899", desc: "Deep learning personalization serving 10M+ users in real-time" },
+    // Time Series & Financial
+    { title: "Algorithmic Trading Bot", domain: "Finance", tags: ["PyTorch", "NumPy", "FastAPI"], color: "#3B82F6", desc: "LSTM-based trading signals with backtesting framework" },
+    { title: "Energy Consumption Forecasting", domain: "Energy", tags: ["Prophet", "Scikit-learn", "Plotly"], color: "#10B981", desc: "Multi-variate forecasting reducing energy costs by 18%" },
+    // Reinforcement Learning & Advanced AI
+    { title: "Game AI with Deep RL", domain: "AI Research", tags: ["PyTorch", "Gymnasium", "Ray"], color: "#A855F7", desc: "Deep Q-Network agent mastering Atari games from pixels" },
+    { title: "Autonomous Navigation Agent", domain: "Robotics", tags: ["PyTorch", "ROS", "Docker"], color: "#06B6D4", desc: "PPO-based agent navigating complex environments in simulation" },
+    // Data Engineering & Analytics
+    { title: "Real-time Analytics Pipeline", domain: "Data Infra", tags: ["PySpark", "Kafka", "BigQuery"], color: "#F97316", desc: "Stream processing pipeline handling 1M+ events per minute" },
+    { title: "Customer 360 Platform", domain: "Analytics", tags: ["Python", "SQL", "Tableau"], color: "#8B5CF6", desc: "Unified customer view integrating data from 12+ sources" },
+    { title: "Predictive Maintenance", domain: "IoT", tags: ["TensorFlow", "Azure", "Docker"], color: "#EF4444", desc: "Sensor-based ML reducing unplanned downtime by 45%" },
+    { title: "Drug Discovery Pipeline", domain: "BioTech", tags: ["PyTorch", "RDKit", "FastAPI"], color: "#EC4899", desc: "Graph neural network predicting molecular properties for drug screening" },
   ];
 
   const faqs = [
-    { question: "Can a complete beginner do this?", answer: "Yes. Module 1 starts with Python basics. No prior ML or programming experience needed. By month 3, you'll be building real ML models." },
-    { question: "How is this different from Data Analytics?", answer: "Data Analytics focuses on visualization and reporting. This goes way deeper - deep learning, NLP, generative AI, MLOps, cloud deployment. It's for people who want to build AI, not just look at dashboards." },
-    { question: "What's the capstone project like?", answer: "You build a full ML system end-to-end: define the problem, collect data, train models, deploy a production API, and set up monitoring. Past students have built fraud detectors, medical image classifiers, and chatbots." },
-    { question: "Do you cover generative AI?", answer: "Yes - GANs, LLMs, prompt engineering, fine-tuning with HuggingFace. You'll build actual generative AI applications, not just talk about them." },
-    { question: "What about placement support?", answer: "100% placement." },
+    { question: "Who is this program designed for?", answer: "Aspiring data scientists, developers who want AI skills, career changers, and AI enthusiasts. No prior ML experience needed - we start from Python basics." },
+    { question: "How is the program organized?", answer: "A blend of live mentor-led classes, recorded lessons, and hands-on projects across 7 modules over 12 months. Four structured phases take you from Python to production AI." },
+    { question: "What skills and tools will I learn?", answer: "Python, TensorFlow, PyTorch, Scikit-learn, NLP with Transformers, generative AI, LangChain, Docker, MLflow, and cloud deployment on AWS and GCP." },
+    { question: "What career roles can I pursue after completion?", answer: "Data Scientist, ML Engineer, AI Engineer, NLP Engineer, MLOps Engineer, and Data Architect at top tech companies, startups, and research labs." },
+    { question: "How long is the Data Science & AI program?", answer: "It is a comprehensive 12-month (48-week) program with 7 modules covering Python, ML, deep learning, NLP, generative AI, and production deployment." },
+    { question: "Who will be teaching the course?", answer: "Industry veterans from FAANG companies and AI research labs with 10+ years of hands-on data science and machine learning experience." },
+    { question: "Do I need a technical background to join?", answer: "Not at all. Module 1 starts with Python basics and builds up step by step. By month 3, you will be building real ML models from scratch." },
+    { question: "How does Linkway Learning help me get hired?", answer: "As a 100% placement program, we provide end-to-end career support including resume building, LinkedIn optimization, mock technical interviews, and direct introductions to 400+ hiring partners." },
   ];
 
   const highlights = [
     { icon: ShieldIcon, label: "100% Placement", sub: "Personalized Path to Employment", color: BRAND_ORANGE },
-    { icon: CurrencyIcon, label: "0% EMI Available", sub: "Starting ₹8,000/mo", color: ACCENT_BLUE },
-    { icon: SparklesIcon, label: "AI Certifications", sub: "AWS + Azure ML prep", color: ACCENT_CYAN },
-    { icon: ClockIcon, label: "Flexible Schedule", sub: "Weekday & weekend batches", color: BRAND_ORANGE },
-  ];
+    { icon: HeadsetIcon, label: "Unlimited 1:1 Doubt Clearing", sub: "Personal mentorship", color: ACCENT_BLUE },
+    { icon: MicrosoftLogo, label: "Microsoft Certification", sub: "Exam prep included", color: ACCENT_CYAN },
+    { icon: VideoIcon, label: "Live Interactive Classes", sub: "Learn from FAANG mentors", color: BRAND_ORANGE },
+  ]
 
   return (
     <ThemeProvider theme="light">
@@ -1447,13 +1067,6 @@ export default function DataScienceAIPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-24 lg:py-0">
             {/* Left: Text */}
             <div>
-              <motion.div className="flex items-center gap-2 mb-6 flex-wrap" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono tracking-wide border border-white/[0.1] bg-white/[0.04] text-gray-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  Now Enrolling
-                </span>
-                <span className="px-3 py-1.5 rounded-full text-xs font-mono tracking-wide border border-white/[0.1] bg-white/[0.04] text-gray-400">12 Months</span>
-              </motion.div>
 
               <motion.h1
                 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-bold leading-[1.05] tracking-tight"
@@ -1488,11 +1101,6 @@ export default function DataScienceAIPage() {
                 <Magnetic>
                   <motion.button onClick={openEnquiry} className="group relative px-7 py-3.5 rounded-xl font-semibold text-sm overflow-hidden cursor-pointer" style={{ backgroundColor: BRAND_ORANGE }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <span className="relative z-10 flex items-center gap-2 text-white">Start Learning <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></span>
-                  </motion.button>
-                </Magnetic>
-                <Magnetic>
-                  <motion.button onClick={openEnquiry} className="px-7 py-3.5 rounded-xl font-semibold text-sm border border-white/[0.12] text-white/80 hover:text-white hover:border-white/25 hover:bg-white/[0.04] transition-all duration-300 cursor-pointer" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                    Download Syllabus
                   </motion.button>
                 </Magnetic>
               </motion.div>
@@ -1533,6 +1141,115 @@ export default function DataScienceAIPage() {
               </div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ═══════ WHAT OUR PROGRAM OFFERS - Premium feature showcase ═══════ */}
+      <section className="relative py-20 md:py-28 overflow-hidden bg-[#fafbfc]">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0)`, backgroundSize: "32px 32px" }} />
+        {/* Soft gradient overlays */}
+        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-white to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-white to-transparent" />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16 md:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-600 text-xs font-semibold tracking-wider uppercase mb-6">
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                Program Highlights
+              </span>
+            </motion.div>
+            <motion.h2
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-5"
+              style={{ color: BRAND_NAVY }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+            >
+              What Our{" "}
+              <span className="relative">
+                <span className="relative z-10 bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-transparent">Program</span>
+                <motion.span
+                  className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-orange-500 to-amber-500"
+                  initial={{ scaleX: 0, originX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </span>
+              {" "}Offers?
+            </motion.h2>
+            <motion.p
+              className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Our Data Science & AI program equips you with industry-ready skills through advanced tools and expert support.
+            </motion.p>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+            {[
+              { icon: "mentorship", label: "1:1 Doubt Clearing", desc: "Unlimited personal sessions" },
+              { icon: "video", label: "250+ Hours Content", desc: "Self-paced learning" },
+              { icon: "live", label: "400+ Live Hours", desc: "Interactive classes" },
+              { icon: "path", label: "Personalized Paths", desc: "Tailored to your goals" },
+              { icon: "hackathon", label: "Live Hackathons", desc: "Real competition experience" },
+              { icon: "assessment", label: "Regular Assessments", desc: "Track your progress" },
+              { icon: "career", label: "Lifetime Career Support", desc: "We never stop helping" },
+              { icon: "expert", label: "Industry Mentors", desc: "Learn from the best" },
+              { icon: "workshop", label: "Webinars & Workshops", desc: "Extra learning sessions" },
+              { icon: "placement", label: "360° Placement Help", desc: "End-to-end assistance" },
+              { icon: "network", label: "Alumni Network", desc: "12,000+ strong community" },
+              { icon: "interview", label: "Interview Prep", desc: "Mock interviews included" },
+              { icon: "material", label: "Course Materials", desc: "Lifetime access" },
+              { icon: "support", label: "24/7 Support", desc: "Always here for you" },
+              { icon: "certificate", label: "Certifications", desc: "Industry-recognized" },
+              { icon: "flexible", label: "Flexible Schedule", desc: "Learn at your pace" },
+              { icon: "project", label: "Real Projects", desc: "Portfolio-ready work" },
+              { icon: "platform", label: "Learning Platform", desc: "Interactive & modern" },
+              { icon: "progress", label: "Progress Tracking", desc: "Visual dashboards" },
+              { icon: "networking", label: "Networking Events", desc: "Connect with peers" },
+            ].map((feature, i) => (
+              <motion.div
+                key={feature.label}
+                className="group relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: Math.min(i * 0.03, 0.3) }}
+              >
+                <div className="relative h-full p-4 sm:p-5 rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden transition-all duration-300 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/10 group-hover:-translate-y-1">
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  <div className="relative z-10 flex items-start gap-3">
+                    {/* Icon */}
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-orange-100 to-orange-50 border border-orange-200 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:border-orange-300 transition-all duration-300">
+                      <ProgramOfferIcon type={feature.icon} />
+                    </div>
+
+                    {/* Text */}
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-sm sm:text-base mb-0.5 transition-colors duration-300" style={{ color: BRAND_NAVY }}>{feature.label}</h3>
+                      <p className="text-gray-500 text-xs sm:text-sm leading-relaxed group-hover:text-gray-600 transition-colors duration-300">{feature.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1626,69 +1343,171 @@ export default function DataScienceAIPage() {
         </div>
       </section>
 
-      {/* ═══════ CURRICULUM - Timeline with JourneyPhaseCard ═══════ */}
-      <section className="relative py-16 px-6 bg-white overflow-hidden">
-        <div className="max-w-4xl mx-auto">
+      {/* ═══════ CURRICULUM - Dark Premium Accordion ═══════ */}
+      <section className="relative py-16 md:py-24 px-4 sm:px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
+        {/* Background effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 w-[600px] h-[600px] rounded-full -translate-x-1/2 -translate-y-1/2" style={{ background: `radial-gradient(circle, ${BRAND_ORANGE}08, transparent 70%)` }} />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full translate-x-1/4 translate-y-1/4" style={{ background: `radial-gradient(circle, ${ACCENT_BLUE}06, transparent 70%)` }} />
+        </div>
+
+        <div className="relative max-w-4xl mx-auto">
+          {/* Header */}
           <ScrollReveal>
-            <SectionLabel center>Curriculum</SectionLabel>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
-              Your Learning{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_CYAN})` }}>Journey</span>
+            <div className="flex justify-center mb-4">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase" style={{ backgroundColor: `${BRAND_ORANGE}15`, color: BRAND_ORANGE }}>
+                Curriculum
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight text-center">
+              What You&apos;ll{" "}
+              <span style={{ color: BRAND_ORANGE }}>Master</span>
             </h2>
-            <p className="mt-3 text-gray-500 text-base max-w-lg mx-auto text-center">
-              12 months of intensive training - from Python basics to production AI. Click each phase to explore.
+            <p className="mt-4 text-gray-400 text-base md:text-lg max-w-2xl mx-auto text-center">
+              Industry-aligned modules designed by senior data scientists to make you job-ready in 2026 and beyond.
             </p>
           </ScrollReveal>
 
-          <div className="relative mt-14">
-            <div className="absolute left-7 top-0 bottom-0 w-px bg-gray-200 hidden md:block">
-              <motion.div className="w-full bg-gradient-to-b from-orange-400 via-blue-400 to-cyan-400" initial={{ height: "0%" }} whileInView={{ height: "100%" }} viewport={{ once: true }} transition={{ duration: 1.5, delay: 0.3, ease }} />
-            </div>
-            <div className="space-y-6 md:pl-20 relative">
-              {curriculum.map((mod, i) => (
-                <div key={i} className="relative">
-                  <div className="hidden md:flex absolute -left-20 top-8 items-center">
-                    <motion.div className="w-[14px] h-[14px] rounded-full border-[3px] border-white shadow-md z-10" style={{ backgroundColor: mod.color }} initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.15 + 0.3, type: "spring", stiffness: 300 }} />
-                    <div className="w-[30px] h-px" style={{ backgroundColor: `${mod.color}40` }} />
+          {/* Accordion Cards */}
+          <div className="mt-10 md:mt-14 space-y-3">
+            {curriculum.map((mod, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+              >
+                <div
+                  className="rounded-2xl border overflow-hidden transition-all duration-300"
+                  style={{
+                    backgroundColor: activeTab === i ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.02)",
+                    borderColor: activeTab === i ? `${BRAND_ORANGE}30` : "rgba(255,255,255,0.06)",
+                  }}
+                >
+                  {/* Card Header */}
+                  <div
+                    className="p-5 md:p-6 cursor-pointer select-none group"
+                    onClick={() => setActiveTab(activeTab === i ? -1 : i)}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Module Icon */}
+                      <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300"
+                        style={{
+                          backgroundColor: activeTab === i ? `${BRAND_ORANGE}20` : "rgba(255,255,255,0.05)",
+                          border: `1px solid ${activeTab === i ? `${BRAND_ORANGE}30` : "rgba(255,255,255,0.06)"}`,
+                        }}
+                      >
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke={activeTab === i ? BRAND_ORANGE : "rgba(255,255,255,0.4)"} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                          <path d={mod.iconPath} />
+                        </svg>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <span className="text-[10px] font-semibold uppercase tracking-widest mb-1 block" style={{ color: activeTab === i ? BRAND_ORANGE : "rgba(255,255,255,0.3)" }}>Module {i + 1}</span>
+                        <h3 className="text-base md:text-lg font-bold text-white group-hover:text-orange-400 transition-colors">{mod.title}</h3>
+                        <div className="flex items-center gap-2 mt-1.5">
+                          <span className="text-xs text-gray-500">{mod.weeks} weeks</span>
+                          <span className="w-1 h-1 rounded-full bg-gray-600" />
+                          <span className="text-xs" style={{ color: BRAND_ORANGE }}>{mod.projects} {mod.projects === 1 ? "project" : "projects"}</span>
+                        </div>
+                      </div>
+
+                      <motion.div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-300"
+                        style={{
+                          backgroundColor: activeTab === i ? `${BRAND_ORANGE}15` : "rgba(255,255,255,0.04)",
+                          border: `1px solid ${activeTab === i ? `${BRAND_ORANGE}25` : "rgba(255,255,255,0.06)"}`,
+                        }}
+                        animate={{ rotate: activeTab === i ? 45 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke={activeTab === i ? BRAND_ORANGE : "rgba(255,255,255,0.3)"} strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      </motion.div>
+                    </div>
                   </div>
-                  <JourneyPhaseCard mod={mod} index={i} isOpen={activeTab === i} onToggle={() => setActiveTab(activeTab === i ? -1 : i)} codeLines={mod.code} />
+
+                  {/* Expandable Content */}
+                  <AnimatePresence>
+                    {activeTab === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 md:px-6 pb-6 border-t border-white/[0.06]">
+                          {/* Description */}
+                          <p className="pt-5 text-gray-400 text-[15px] leading-relaxed">
+                            {mod.description}
+                          </p>
+
+                          {/* Learning Outcomes */}
+                          <div className="mt-6">
+                            <h4 className="text-sm font-semibold text-white/80 mb-4">Learning Outcomes</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5">
+                              {mod.outcomes.map((outcome, j) => (
+                                <motion.div
+                                  key={j}
+                                  className="flex items-start gap-2.5"
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.2, delay: j * 0.03 }}
+                                >
+                                  <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke={BRAND_ORANGE} strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                  <span className="text-sm text-gray-300">{outcome}</span>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Tools & Technologies */}
+                          <div className="mt-6">
+                            <h4 className="text-sm font-semibold text-white/80 mb-3">Tools & Technologies</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {mod.tools.map((tool, j) => (
+                                <motion.div
+                                  key={j}
+                                  initial={{ opacity: 0, scale: 0.9 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.2, delay: 0.15 + j * 0.03 }}
+                                >
+                                  <ToolLogo name={tool} className="px-3 py-2 [&_img]:w-5 [&_img]:h-5 [&_span:last-child]:text-xs" />
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
 
-          <motion.div className="mt-10 flex items-center justify-center gap-3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm">
-              <div className="flex -space-x-1">
-                {curriculum.map((mod, i) => (<motion.div key={i} className="w-3 h-3 rounded-full border-2 border-white" style={{ backgroundColor: mod.color }} initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.8 + i * 0.1, type: "spring" }} />))}
-              </div>
-              <span className="text-xs font-semibold text-gray-600">3 phases</span>
-              <span className="text-xs text-gray-400">·</span>
-              <span className="text-xs font-mono text-gray-400">12 months</span>
-              <span className="text-xs text-gray-400">·</span>
-              <span className="text-xs font-semibold" style={{ color: BRAND_ORANGE }}>AI ready</span>
-            </div>
-          </motion.div>
         </div>
       </section>
 
-      {/* ═══════ MODULES ═══════ */}
-      <ModulesSection openEnquiry={openEnquiry} />
-
       {/* ═══════ TOOLS - Two-row marquee ═══════ */}
       <section className="relative py-20 px-6 bg-white overflow-hidden">
-        <Divider />
-        <div className="max-w-6xl mx-auto pt-12">
+        <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <SectionLabel center>Tech Stack</SectionLabel>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight text-center">
-              {tools.length} Tools You&apos;ll{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_BLUE}, ${BRAND_ORANGE})` }}>Master</span>
+              40+ Tools You&apos;ll{" "}
+              <span style={{ color: BRAND_ORANGE }}>Master</span>
             </h2>
           </ScrollReveal>
 
           <div className="mt-14 space-y-4">
-            {[tools.slice(0, 15), tools.slice(15, 30)].map((row, ri) => (
+            {[tools.slice(0, 12), tools.slice(12, 24), tools.slice(24)].map((row, ri) => (
               <div key={ri} className="relative overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)" }}>
                 <motion.div
                   className="flex gap-4 w-max"
@@ -1705,11 +1524,11 @@ export default function DataScienceAIPage() {
             ))}
           </div>
         </div>
-        <div className="mt-4"><Divider /></div>
       </section>
 
-      {/* ═══════ PROJECTS ═══════ */}
+      {/* ═══════ PROJECTS - Infinite scroll carousel ═══════ */}
       <section className="relative py-16 px-6 overflow-hidden" style={{ backgroundColor: DARK_BG }}>
+        {/* Aurora silk ribbons */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ribbonA" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1725,132 +1544,119 @@ export default function DataScienceAIPage() {
               <stop offset="60%" stopColor="#8b5cf6" stopOpacity="0.07" />
               <stop offset="100%" stopColor={ACCENT_BLUE} stopOpacity="0" />
             </linearGradient>
+            <linearGradient id="ribbonC" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor={ACCENT_CYAN} stopOpacity="0" />
+              <stop offset="40%" stopColor="#06b6d4" stopOpacity="0.08" />
+              <stop offset="70%" stopColor={BRAND_ORANGE} stopOpacity="0.06" />
+              <stop offset="100%" stopColor={BRAND_ORANGE} stopOpacity="0" />
+            </linearGradient>
             <filter id="ribbonGlow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
           </defs>
           <motion.path d="M-100,120 C150,40 350,200 600,80 S950,180 1200,60 1500,140" fill="none" stroke="url(#ribbonA)" strokeWidth="2" filter="url(#ribbonGlow)" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 2.5, ease: "easeInOut" }} />
           <motion.path d="M-50,320 C200,250 450,400 700,280 S1050,380 1300,300 1600,350" fill="none" stroke="url(#ribbonB)" strokeWidth="2" filter="url(#ribbonGlow)" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 3, delay: 0.4, ease: "easeInOut" }} />
+          <motion.path d="M-80,500 C180,440 400,550 680,460 S1000,530 1250,480 1600,520" fill="none" stroke="url(#ribbonC)" strokeWidth="1.5" filter="url(#ribbonGlow)" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 3.5, delay: 0.8, ease: "easeInOut" }} />
           <motion.circle r="4" fill={BRAND_ORANGE} opacity="0.6" filter="url(#ribbonGlow)" animate={{ cx: [-100, 150, 600, 1200, 1500], cy: [120, 40, 80, 60, 140] }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} />
           <motion.circle r="3" fill={ACCENT_BLUE} opacity="0.5" filter="url(#ribbonGlow)" animate={{ cx: [-50, 200, 700, 1300, 1600], cy: [320, 250, 280, 300, 350] }} transition={{ duration: 10, repeat: Infinity, ease: "linear", delay: 2 }} />
         </svg>
 
-        <div className="max-w-5xl mx-auto relative z-10">
+        {/* Rising code particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[
+            { char: "{ }", x: "8%", delay: 0, dur: 12, size: 11 },
+            { char: "=>", x: "15%", delay: 2, dur: 14, size: 10 },
+            { char: "0x", x: "22%", delay: 5, dur: 11, size: 9 },
+            { char: "//", x: "32%", delay: 1, dur: 13, size: 10 },
+            { char: "[]", x: "42%", delay: 4, dur: 15, size: 11 },
+            { char: "()", x: "52%", delay: 3, dur: 12, size: 9 },
+            { char: "&&", x: "68%", delay: 2, dur: 11, size: 10 },
+            { char: ">>", x: "76%", delay: 5, dur: 13, size: 9 },
+            { char: "f(x)", x: "48%", delay: 3, dur: 11, size: 10 },
+            { char: "lambda", x: "38%", delay: 8, dur: 13, size: 10 },
+            { char: "Sigma", x: "88%", delay: 2, dur: 12, size: 10 },
+          ].map((p, i) => (
+            <motion.span
+              key={`ember-${i}`}
+              className="absolute font-mono select-none"
+              style={{
+                left: p.x,
+                bottom: "-5%",
+                fontSize: p.size,
+                color: i % 3 === 0 ? `${BRAND_ORANGE}` : i % 3 === 1 ? `${ACCENT_BLUE}` : `${ACCENT_CYAN}`,
+              }}
+              animate={{
+                y: [0, -800],
+                opacity: [0, 0.25, 0.15, 0],
+                rotate: [0, i % 2 === 0 ? 45 : -30],
+                x: [0, i % 2 === 0 ? 30 : -20],
+              }}
+              transition={{
+                duration: p.dur,
+                repeat: Infinity,
+                delay: p.delay,
+                ease: "linear",
+              }}
+            >
+              {p.char}
+            </motion.span>
+          ))}
+        </div>
+
+        {/* Morphing gradient blobs */}
+        <motion.div
+          className="absolute w-[450px] h-[450px] pointer-events-none opacity-[0.07]"
+          style={{
+            top: "-10%", right: "-5%",
+            background: `radial-gradient(ellipse at 30% 50%, ${BRAND_ORANGE}, ${ACCENT_BLUE} 50%, transparent 70%)`,
+            borderRadius: "40% 60% 55% 45% / 55% 40% 60% 45%",
+            filter: "blur(60px)",
+          }}
+          animate={{
+            borderRadius: ["40% 60% 55% 45% / 55% 40% 60% 45%", "55% 45% 40% 60% / 45% 60% 40% 55%", "60% 40% 50% 50% / 50% 55% 45% 50%", "40% 60% 55% 45% / 55% 40% 60% 45%"],
+            x: [0, 30, -20, 0], y: [0, -20, 15, 0], scale: [1, 1.08, 0.95, 1],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] pointer-events-none opacity-[0.05]"
+          style={{
+            bottom: "-8%", left: "-5%",
+            background: `radial-gradient(ellipse at 60% 40%, ${ACCENT_CYAN}, #8b5cf6 50%, transparent 70%)`,
+            borderRadius: "55% 45% 40% 60% / 45% 60% 40% 55%",
+            filter: "blur(50px)",
+          }}
+          animate={{
+            borderRadius: ["55% 45% 40% 60% / 45% 60% 40% 55%", "40% 60% 55% 45% / 60% 40% 55% 45%", "50% 50% 45% 55% / 40% 55% 50% 50%", "55% 45% 40% 60% / 45% 60% 40% 55%"],
+            x: [0, -25, 35, 0], y: [0, 25, -15, 0], scale: [1, 0.95, 1.1, 1],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        />
+
+        <div className="max-w-6xl mx-auto relative z-10 px-6">
           <ScrollReveal>
-            <SectionLabel light>Hands-On</SectionLabel>
+            <SectionLabel light>Hands-On Experience</SectionLabel>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Projects You&apos;ll{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_CYAN}, ${BRAND_ORANGE})` }}>Ship</span>
+              <span className="text-white">25+ Domain-Specific </span>
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${ACCENT_CYAN}, ${BRAND_ORANGE})` }}>Projects</span>
             </h2>
-            <p className="mt-3 text-gray-500 text-base max-w-md">Production-grade AI projects that become your portfolio.</p>
+            <p className="mt-3 text-gray-400 text-base max-w-xl">
+              Build a portfolio that hiring managers actually care about. Real datasets, real business problems, real impact.
+            </p>
           </ScrollReveal>
+        </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-3">
-            {projects.map((project, i) => (
-              <motion.div key={i} className="group relative rounded-xl overflow-hidden cursor-default" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-5%" }} transition={{ duration: 0.5, delay: i * 0.08, ease }} whileHover={{ y: -3 }}>
-                <div className="absolute inset-0 rounded-xl border border-white/[0.06] group-hover:border-white/[0.14] transition-colors duration-500 pointer-events-none z-20" />
-                <div className="relative z-10 p-5" style={{ backgroundColor: "rgba(255,255,255,0.02)" }}>
-                  <div className="flex gap-4">
-                    <div className="shrink-0 w-12 h-12 rounded-lg flex items-center justify-center p-1.5" style={{ backgroundColor: `${project.color}08`, border: `1px solid ${project.color}15` }}>{project.icon}</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-[10px] font-bold font-mono" style={{ color: `${project.color}90` }}>{String(i + 1).padStart(2, "0")}</span>
-                        <div className="flex gap-0.5">{[0, 1, 2, 3].map((j) => (<div key={j} className="w-1 h-1 rounded-full" style={{ backgroundColor: j < project.complexity ? project.color : "rgba(255,255,255,0.08)" }} />))}</div>
-                        <span className="text-[9px] text-gray-600 uppercase tracking-wider">{["Beginner", "Intermediate", "Advanced", "Capstone"][project.complexity - 1]}</span>
-                      </div>
-                      <h4 className="text-sm font-bold text-white/90 group-hover:text-white transition-colors duration-300 mb-1 leading-snug">{project.title}</h4>
-                      <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors duration-300 leading-relaxed mb-2.5">{project.desc}</p>
-                      <div className="flex flex-wrap gap-1.5">{project.tags.map((tag) => (<span key={tag} className="px-1.5 py-0.5 rounded text-[10px] font-mono font-medium border" style={{ color: `${project.color}bb`, borderColor: `${project.color}18`, backgroundColor: `${project.color}06` }}>{tag}</span>))}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-3 pt-2.5 border-t border-white/[0.04]">
-                    <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 shrink-0" style={{ color: project.color }}><path d="M2 8.5L6 12.5L14 4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    <span className="text-[11px] text-gray-500 truncate">{project.outcome}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        {/* Infinite scroll project carousel */}
+        <div className="relative z-10">
+          <ProjectCarousel projects={industryProjects} />
+        </div>
 
-          <motion.div className="mt-10 relative max-w-4xl mx-auto" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        {/* Interactive Dashboard Preview */}
+        <div className="max-w-5xl mx-auto relative z-10 px-6">
+          <motion.div className="mt-12 relative" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <DashboardPreview />
           </motion.div>
         </div>
       </section>
 
-      {/* ═══════ CAREER OUTCOMES ═══════ */}
-      <section className="relative py-20 px-6 bg-white overflow-hidden">
-        <motion.div className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `${BRAND_ORANGE}0A` }} animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
-        <motion.div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full blur-[140px] pointer-events-none" style={{ backgroundColor: `${ACCENT_BLUE}08` }} animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <ScrollReveal>
-            <SectionLabel>Outcomes</SectionLabel>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 leading-tight">
-              Where You&apos;ll{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }}>End Up</span>
-            </h2>
-          </ScrollReveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-14">
-            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {roles.map((role, i) => (
-                <SlideIn key={i} direction="up" delay={i * 0.08}>
-                  <motion.div className="group relative rounded-2xl border border-gray-100 bg-white p-5 cursor-default overflow-hidden" whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.08)" }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                    <motion.div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ background: `linear-gradient(135deg, ${BRAND_ORANGE}15, ${ACCENT_BLUE}15)` }} />
-                    <div className="relative flex items-center gap-4">
-                      <motion.div className="flex items-center justify-center w-11 h-11 rounded-xl shrink-0" style={{ backgroundColor: `${i % 2 === 0 ? BRAND_ORANGE : ACCENT_BLUE}12` }} whileHover={{ rotate: 8, scale: 1.1 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}>
-                        <span style={{ color: i % 2 === 0 ? BRAND_ORANGE : ACCENT_BLUE }}>{role.icon}</span>
-                      </motion.div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-semibold text-gray-900">{role.title}</h4>
-                        <p className="text-xs text-gray-500 mt-0.5 font-mono tracking-wide">{role.range}</p>
-                      </div>
-                      <motion.div className="opacity-0 group-hover:opacity-100 transition-opacity" initial={false} whileHover={{ x: 3 }}>
-                        <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                </SlideIn>
-              ))}
-            </div>
-
-            <div className="lg:col-span-2 space-y-5 flex flex-col justify-center">
-              <SlideIn direction="right">
-                <motion.div className="relative rounded-2xl border border-gray-100 p-7 overflow-hidden" style={{ background: "linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)" }} whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                  <motion.div className="absolute inset-0 pointer-events-none" style={{ background: `linear-gradient(105deg, transparent 40%, ${BRAND_ORANGE}08 50%, transparent 60%)` }} animate={{ x: ["-100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }} />
-                  <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-3 relative">Expected Salary Range</p>
-                  <motion.p className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent relative" style={{ backgroundImage: `linear-gradient(135deg, ${BRAND_ORANGE}, ${ACCENT_BLUE})` }} initial={{ backgroundSize: "100%" }}>₹8–20 LPA</motion.p>
-                </motion.div>
-              </SlideIn>
-
-              <SlideIn direction="right" delay={0.1}>
-                <motion.div className="flex items-center gap-4 px-5 py-4 rounded-xl border border-gray-100 bg-gradient-to-r from-gray-50 to-white" whileHover={{ x: 4, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                  <motion.div className="flex items-center justify-center w-10 h-10 rounded-full shrink-0" style={{ backgroundColor: `${BRAND_ORANGE}15` }} animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-                    <ShieldIcon className="w-5 h-5" style={{ color: BRAND_ORANGE }} />
-                  </motion.div>
-                  <div>
-                    <p className="text-sm text-gray-900 font-semibold">100% Placement</p>
-                    <p className="text-xs text-gray-500">Personalized Path to Employment</p>
-                  </div>
-                </motion.div>
-              </SlideIn>
-
-              <SlideIn direction="right" delay={0.2}>
-                <motion.div className="flex items-center gap-4 px-5 py-4 rounded-xl border border-gray-100 bg-gradient-to-r from-gray-50 to-white" whileHover={{ x: 4, boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                  <motion.div className="flex items-center justify-center w-10 h-10 rounded-full shrink-0" style={{ backgroundColor: `${ACCENT_BLUE}15` }} animate={{ rotate: [0, 10, 0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", type: "tween" }}>
-                    <SparklesIcon className="w-5 h-5" style={{ color: ACCENT_BLUE }} />
-                  </motion.div>
-                  <div>
-                    <p className="text-sm text-gray-900 font-semibold">AWS & Azure ML Certifications</p>
-                    <p className="text-xs text-gray-500">Cloud AI certification prep included</p>
-                  </div>
-                </motion.div>
-              </SlideIn>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider from="#ffffff" to="#f9fafb" />
 
       {/* ═══════ TESTIMONIALS ═══════ */}
       <section className="relative py-24 px-6 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f9fafb 0%, #f1f5f9 50%, #f9fafb 100%)' }}>
