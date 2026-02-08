@@ -1014,8 +1014,8 @@ function VideoIcon({ className, style }: { className?: string; style?: React.CSS
 const MODULE_DATA = [
   {
     id: 1,
-    title: "Excel & Business Foundations",
-    subtitle: "Modern Excel for strategic decision-making",
+    title: "Excel, JIRA & Business Foundations",
+    subtitle: "Modern Excel & project management for strategic decision-making",
     gradient: "from-emerald-400 to-teal-500",
     bgGradient: "linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)",
     iconBg: "linear-gradient(135deg, #10b981, #059669)",
@@ -1026,8 +1026,8 @@ const MODULE_DATA = [
       "PivotTables, PivotCharts & interactive slicers",
       "Power Query for automated ETL & data transformation",
       "Financial modeling - budgets, forecasts, variance analysis",
-      "Dashboard design - sparklines, KPI tiles, conditional formatting",
-      "What-If analysis, Goal Seek & Scenario Manager",
+      "JIRA for project tracking, sprint planning & analytics dashboards",
+      "Confluence & MS Project for documentation & project planning",
     ],
     icon: (<img src="/images/tools/excel.png" alt="Excel" className="w-7 h-7 object-contain drop-shadow-sm" />),
   },
@@ -1566,19 +1566,19 @@ export default function BusinessAnalyticsPage() {
 
   const curriculum = [
     {
-      title: "Excel & Business Foundations",
+      title: "Excel, JIRA & Business Foundations",
       weeks: 3,
       projects: 4,
-      description: "Modern Excel is not the Excel from 2015. Master XLOOKUP, LAMBDA functions, dynamic arrays, and Power Query -- the tools that separate strategic analysts from spreadsheet users. Every exercise uses real business data: revenue models, budget templates, and executive dashboards.",
+      description: "Modern Excel is not the Excel from 2015. Master XLOOKUP, LAMBDA functions, dynamic arrays, and Power Query -- the tools that separate strategic analysts from spreadsheet users. You will also learn industry-standard project management tools like JIRA and Confluence that every business analyst uses daily. Every exercise uses real business data: revenue models, budget templates, and executive dashboards.",
       outcomes: [
         "XLOOKUP, LAMBDA, LET & dynamic array formulas for modern analysis",
         "PivotTables & PivotCharts for dynamic multi-dimensional reporting",
         "Power Query for automated data cleaning, merging & transformation",
         "Financial modeling: revenue forecasts, budgets & variance analysis",
-        "Dashboard design with sparklines, slicers, KPI tiles & conditional formatting",
-        "What-If analysis, Goal Seek, Scenario Manager & Monte Carlo basics",
+        "JIRA for agile project tracking, sprint planning & analytics reporting",
+        "Confluence & MS Project for documentation, planning & stakeholder management",
       ],
-      tools: ["Excel", "Power BI", "Google Sheets"],
+      tools: ["Excel", "Power BI", "Google Sheets", "JIRA", "Confluence", "MS Project"],
       iconPath: "M3 10h18M3 14h18M9 4v16M15 4v16M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6z",
     },
     {
@@ -1684,8 +1684,8 @@ export default function BusinessAnalyticsPage() {
     "Excel", "Power BI", "Tableau", "SQL", "Python", "Looker", "Google Analytics", "Google Data Studio", "Pandas", "NumPy", "Matplotlib", "Seaborn",
     // Row 2 - Databases, Cloud & Statistics (12)
     "PostgreSQL", "MySQL", "Google BigQuery", "AWS QuickSight", "Azure", "Scikit-learn", "SciPy", "Statsmodels", "R", "Google Colab", "MongoDB", "Plotly",
-    // Row 3 - Automation, DevOps & Productivity (12)
-    "Jupyter", "Git", "GitHub", "Excel Advanced", "GCP", "Scrapy", "Flask", "FastAPI", "Hadoop", "Docker", "Spark", "GitHub Portfolio",
+    // Row 3 - Project Management, DevOps & Productivity (12)
+    "JIRA", "Confluence", "MS Project", "Slack", "Jupyter", "Git", "GitHub", "Excel Advanced", "GCP", "Scrapy", "Docker", "GitHub Portfolio",
   ];
 
   // Industry-specific projects for infinite scroll carousel

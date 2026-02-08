@@ -966,6 +966,7 @@ export default function DataScienceAIPage() {
     { question: "Who will be teaching the course?", answer: "Industry veterans from FAANG companies and AI research labs with 10+ years of hands-on data science and machine learning experience." },
     { question: "Do I need a technical background to join?", answer: "Not at all. Module 1 starts with Python basics and builds up step by step. By month 3, you will be building real ML models from scratch." },
     { question: "How does Linkway Learning help me get hired?", answer: "As a 100% placement program, we provide end-to-end career support including resume building, LinkedIn optimization, mock technical interviews, and direct introductions to 400+ hiring partners." },
+    { question: "What are the prerequisites for enrolling in a Data Science and AI course at Linkway Learning?", answer: "No strict prerequisites are required. Basic math skills and a genuine curiosity for data and technology are all you need to get started - and even those are not mandatory. Our curriculum is built from the ground up, so we will equip you with every skill along the way." },
   ];
 
   const highlights = [

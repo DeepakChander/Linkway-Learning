@@ -1576,6 +1576,23 @@ export default function DataAnalyticsPage() {
 
   const curriculum = [
     {
+      title: "Excel for Data Analytics",
+      weeks: 3,
+      projects: 5,
+      description: "Start from absolute scratch with Excel - the world's most-used analytics tool. Whether you've never opened a spreadsheet or just know the basics, we'll take you from zero to building professional dashboards and automated reports. This is where your data analytics journey begins.",
+      outcomes: [
+        "Excel fundamentals: navigating, formatting, and organizing data efficiently",
+        "Formulas & functions: VLOOKUP, INDEX-MATCH, IF, SUMIFS, and array formulas",
+        "PivotTables & PivotCharts for dynamic data summarization",
+        "Data cleaning techniques: removing duplicates, text functions, and validation",
+        "Dashboard design: sparklines, slicers, conditional formatting, and KPI tiles",
+        "Power Query for automated data transformation and ETL workflows",
+      ],
+      tools: ["Microsoft Excel", "Power Query", "Google Sheets"],
+      // Spreadsheet / table icon
+      iconPath: "M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z",
+    },
+    {
       title: "Python Programming Fundamentals",
       weeks: 5,
       projects: 6,

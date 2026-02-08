@@ -60,6 +60,11 @@ const toolImageMap: Record<string, string> = {
   "Scrapy": "/images/tools/scrapy.svg",
   "Imbalanced-learn": "/images/tools/scikit-learn.png",
   "Statsmodels": "/images/tools/scipy.svg",
+  // Project Management & Collaboration
+  "JIRA": "/images/tools/jira.svg",
+  "Confluence": "/images/tools/confluence.svg",
+  "MS Project": "/images/tools/ms-project.svg",
+  "Slack": "/images/tools/slack.svg",
 };
 
 export default function ToolLogo({ name, className }: ToolLogoProps) {
