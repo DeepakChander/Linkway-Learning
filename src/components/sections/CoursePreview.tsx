@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, BarChart3, Brain, LineChart, Clock, Zap, CheckCircle2, Check } from "lucide-react";
+import { ArrowRight, ArrowLeft, BarChart3, Brain, LineChart, Zap, CheckCircle2, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const toolLogos: Record<string, string> = {
@@ -27,6 +27,7 @@ const courses = [
     slug: "data-analytics",
     name: "Data Analytics",
     duration: "6 Months",
+    hook: "Launch your analytics career in just 6 months",
     level: "Beginner to Advanced",
     category: "Data tools & visualization",
     badge: "Most Popular",
@@ -41,6 +42,7 @@ const courses = [
     slug: "business-analytics",
     name: "Business Analytics",
     duration: "6 Months",
+    hook: "From insights to business impact in 6 months",
     level: "Beginner to Advanced",
     category: "Business strategy & insights",
     badge: "High Demand",
@@ -55,6 +57,7 @@ const courses = [
     slug: "data-science-ai",
     name: "Data Science and AI",
     duration: "12 Months",
+    hook: "Zero to AI expert a 12-month transformation",
     level: "Zero to Expert",
     category: "AI & machine learning",
     badge: "Career Launcher",
@@ -69,6 +72,7 @@ const courses = [
     slug: "agentic-ai",
     name: "Agentic AI & Prompt Engineering",
     duration: "6 Months",
+    hook: "Master the next wave of AI in 6 months",
     level: "Intermediate to Advanced",
     category: "AI agents & automation",
     badge: "Future-Ready",
@@ -83,6 +87,7 @@ const courses = [
     slug: "investment-banking",
     name: "Investment Banking",
     duration: "9 Months",
+    hook: "Your fast-track to high-finance in 9 months",
     level: "Beginner to Advanced",
     category: "Finance & valuation",
     badge: "Wall Street Ready",
@@ -99,6 +104,71 @@ export default function CoursePreview() {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeCourse = courses[activeIndex];
   const ActiveIcon = activeCourse.icon;
+
+  // Auto-scroll for mobile only (below lg breakpoint)
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const isMobile = () => typeof window !== "undefined" && window.innerWidth < 1024;
+
+  const startAutoScroll = useCallback(() => {
+    if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    if (!isMobile()) return;
+    autoScrollRef.current = setInterval(() => {
+      if (!isMobile()) { if (autoScrollRef.current) clearInterval(autoScrollRef.current); return; }
+      setActiveIndex((prev) => (prev === courses.length - 1 ? 0 : prev + 1));
+    }, 4000);
+  }, []);
+
+  const pauseAutoScroll = useCallback(() => {
+    if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    if (!isMobile()) return;
+    pauseTimeoutRef.current = setTimeout(() => startAutoScroll(), 8000);
+  }, [startAutoScroll]);
+
+  useEffect(() => {
+    startAutoScroll();
+    const handleResize = () => {
+      if (!isMobile()) {
+        if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+        if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+      } else {
+        startAutoScroll();
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    };
+  }, [startAutoScroll]);
+
+  // Touch/swipe support
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    const threshold = 50;
+    if (Math.abs(diff) > threshold) {
+      pauseAutoScroll();
+      if (diff > 0) {
+        setActiveIndex((prev) => (prev === courses.length - 1 ? 0 : prev + 1));
+      } else {
+        setActiveIndex((prev) => (prev === 0 ? courses.length - 1 : prev - 1));
+      }
+    }
+  };
 
   return (
     <section className="bg-[#f4f2ed]">
@@ -244,15 +314,15 @@ export default function CoursePreview() {
                 {/* Content */}
                 <div className="relative z-10 px-10 py-8 flex flex-col h-full">
 
-                  {/* Duration */}
+                  {/* Hook line */}
                   <motion.div
                     className="flex items-center gap-1.5 text-gray-500 mb-5"
                     initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                   >
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm font-medium">{activeCourse.duration} part-time</span>
+                    <Zap className="w-4 h-4 text-orange-400" />
+                    <span className="text-sm font-medium">{activeCourse.hook}</span>
                   </motion.div>
 
                   {/* Course title */}
@@ -319,7 +389,7 @@ export default function CoursePreview() {
                     <span className="text-xs text-gray-400 font-medium">{activeCourse.level}</span>
                     <Link href={`/courses/${activeCourse.slug}`}>
                       <span className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-gray-900 text-gray-900 text-sm font-semibold hover:bg-gray-900 hover:text-white transition-colors duration-200 group/cta">
-                        Discover program
+                        Discover Program
                         <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/cta:translate-x-0.5" />
                       </span>
                     </Link>
@@ -334,14 +404,14 @@ export default function CoursePreview() {
             {/* Navigation arrows */}
             <div className="flex items-center justify-end gap-2 px-4 py-3 border-t border-gray-100 bg-[#f9f8f5]">
               <button
-                onClick={() => setActiveIndex((prev) => (prev === 0 ? courses.length - 1 : prev - 1))}
+                onClick={() => { pauseAutoScroll(); setActiveIndex((prev) => (prev === 0 ? courses.length - 1 : prev - 1)); }}
                 className="w-10 h-10 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
                 aria-label="Previous course"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
               <button
-                onClick={() => setActiveIndex((prev) => (prev === courses.length - 1 ? 0 : prev + 1))}
+                onClick={() => { pauseAutoScroll(); setActiveIndex((prev) => (prev === courses.length - 1 ? 0 : prev + 1)); }}
                 className="w-10 h-10 rounded-lg border border-gray-200 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
                 aria-label="Next course"
               >
@@ -360,13 +430,16 @@ export default function CoursePreview() {
                 style={{
                   background: "linear-gradient(180deg, #fff9f2 0%, #fff0e0 50%, #ffe4c8 100%)",
                 }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               >
                 <div className={cn("absolute inset-0 bg-gradient-to-br opacity-30", activeCourse.gradient)} />
                 <div className="relative z-10 px-5 py-6">
-                  {/* Duration */}
+                  {/* Hook line */}
                   <div className="flex items-center gap-1.5 text-gray-500 mb-4">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm font-medium">{activeCourse.duration} part-time</span>
+                    <Zap className="w-4 h-4 text-orange-400" />
+                    <span className="text-sm font-medium">{activeCourse.hook}</span>
                   </div>
 
                   {/* Course title */}
@@ -400,30 +473,16 @@ export default function CoursePreview() {
                   </div>
 
                   {/* CTA Button */}
-                  <Link href={`/courses/${activeCourse.slug}`} className="block">
-                    <span className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors">
-                      Discover program
-                      <ArrowRight className="w-4 h-4" />
+                  <Link href={`/courses/${activeCourse.slug}`} className="inline-block">
+                    <span className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors">
+                      Discover Program
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </span>
                   </Link>
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Pagination dots */}
-            <div className="flex items-center justify-center gap-1.5 py-4 bg-[#f9f8f5]">
-              {courses.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIndex(i)}
-                  className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-200 cursor-pointer",
-                    activeIndex === i ? "bg-orange-500 w-6" : "bg-gray-300 hover:bg-gray-400"
-                  )}
-                  aria-label={`Go to course ${i + 1}`}
-                />
-              ))}
-            </div>
           </div>
         </div>
         </div>
