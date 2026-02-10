@@ -1727,10 +1727,10 @@ export default function BusinessAnalyticsPage() {
   ];
 
   const faqs = [
-    { question: "Who is this program designed for?", answer: "Working professionals, MBA graduates, managers, and career changers who want to lead with data. No technical background needed - this is analytics for business people." },
-    { question: "How is the program organized?", answer: "A blend of live mentor-led classes, recorded lessons, and hands-on projects across 7 modules in 24 weeks. Evening and weekend batches available for working professionals." },
+    { question: "What is Business Analytics and its importance?", answer: "It's the practice of using data to drive business choices. Companies use it to sharpen operations, predict trends, and make evidence-based strategic moves." },
+    { question: "Is this course right for me?", answer: "Perfect for students, professionals, or owners wanting to master data-driven decisions. No technical expertise is required - just a basic analytical mindset." },
+    { question: "What if I fall behind the schedule?", answer: "We've got you covered with extra tutoring, flexible deadlines, and the chance to retake modules whenever needed." },
     { question: "What skills and tools will I learn?", answer: "Modern Excel, SQL, Python, Power BI, Tableau, Google BigQuery, predictive analytics, and AI-powered reporting. All taught through real business scenarios, not toy datasets." },
-    { question: "What career roles can I pursue after completion?", answer: "Business Analyst, BI Analyst, Strategy Analyst, Data Analyst, Management Consultant, and Analytics Manager. Our graduates work at top consulting firms, FMCG companies, and tech startups." },
     { question: "How long is the Business Analytics program?", answer: "It is a comprehensive 6-month (24-week) program with 7 modules that take you from Excel foundations to AI-powered analytics and a capstone project." },
     { question: "Who will be teaching the course?", answer: "Industry veterans from top consulting firms and Fortune 500 companies with 10+ years of hands-on business analytics experience." },
     { question: "Do I need a technical background to join?", answer: "Not at all. The program starts with Excel fundamentals and builds up step by step. SQL and Python are taught through a business lens - you will query sales data and automate reports, not write backend code." },

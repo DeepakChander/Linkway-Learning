@@ -958,13 +958,12 @@ export default function DataScienceAIPage() {
   ];
 
   const faqs = [
-    { question: "Who is this program designed for?", answer: "Aspiring data scientists, developers who want AI skills, career changers, and AI enthusiasts. No prior ML experience needed - we start from Python basics." },
-    { question: "How is the program organized?", answer: "A blend of live mentor-led classes, recorded lessons, and hands-on projects across 7 modules over 12 months. Four structured phases take you from Python to production AI." },
-    { question: "What skills and tools will I learn?", answer: "Python, TensorFlow, PyTorch, Scikit-learn, NLP with Transformers, generative AI, LangChain, Docker, MLflow, and cloud deployment on AWS and GCP." },
+    { question: "Who is this program designed for?", answer: "Aspiring data scientists, developers who want AI skills, career changers, and AI enthusiasts. No prior ML experience needed - we start from excel basics." },
+    { question: "How is the program organized?", answer: "A blend of live mentor-led classes, recorded lessons, and hands-on projects across 7 modules over 12 months. Four structured phases take you from Excel to production AI." },
+    { question: "Do I need a programming background to start a Data Science and AI course at Linkway Learning?", answer: "No prior programming experience is required. The course starts from basics and is beginner-friendly." },
+    { question: "Which programming languages are essential for Data Science and AI at Linkway Learning?", answer: "Python is the primary language taught, along with R for data analysis tasks." },
     { question: "What career roles can I pursue after completion?", answer: "Data Scientist, ML Engineer, AI Engineer, NLP Engineer, MLOps Engineer, and Data Architect at top tech companies, startups, and research labs." },
-    { question: "How long is the Data Science & AI program?", answer: "It is a comprehensive 12-month (48-week) program with 7 modules covering Python, ML, deep learning, NLP, generative AI, and production deployment." },
     { question: "Who will be teaching the course?", answer: "Industry veterans from FAANG companies and AI research labs with 10+ years of hands-on data science and machine learning experience." },
-    { question: "Do I need a technical background to join?", answer: "Not at all. Module 1 starts with Python basics and builds up step by step. By month 3, you will be building real ML models from scratch." },
     { question: "How does Linkway Learning help me get hired?", answer: "As a 100% placement program, we provide end-to-end career support including resume building, LinkedIn optimization, mock technical interviews, and direct introductions to 400+ hiring partners." },
     { question: "What are the prerequisites for enrolling in a Data Science and AI course at Linkway Learning?", answer: "No strict prerequisites are required. Basic math skills and a genuine curiosity for data and technology are all you need to get started - and even those are not mandatory. Our curriculum is built from the ground up, so we will equip you with every skill along the way." },
   ];
