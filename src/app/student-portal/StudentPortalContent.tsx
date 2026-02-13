@@ -283,7 +283,9 @@ export default function StudentPortalContent() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <a
-              href="#"
+              href="https://cratiocrm.com/login/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-white font-bold text-sm"
               style={{
                 background: "linear-gradient(135deg, #F58220, #E06A10)",
