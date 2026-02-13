@@ -16,6 +16,7 @@ import { AccordionItem } from "@/components/ui/Accordion";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
+import { usePurchaseModal } from "@/components/forms/PurchaseModal";
 import FooterCTA from "@/components/sections/FooterCTA";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -110,6 +111,7 @@ export default function CoursePageTemplate({
   careerOutcomes, faqs, animationVariant,
 }: CoursePageProps) {
   const { openEnquiry } = useEnquiryModal();
+  const { openPurchase } = usePurchaseModal();
   const heroRef = useRef<HTMLElement>(null);
   const v = animationVariant;
 
@@ -248,9 +250,9 @@ export default function CoursePageTemplate({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: transitionDuration, delay: 0.7, ease }}
           >
-            {/* Orano: Button with glow border focus */}
+            {/* Enroll Now - Opens Purchase Modal with Razorpay */}
             <MagneticWrap>
-              <Button variant="primary" size="lg" onClick={openEnquiry} className={cn(
+              <Button variant="primary" size="lg" onClick={() => openPurchase(name)} className={cn(
                 v === "orano" && "btn-border-glow orano-focus",
                 v === "activetheory" && "at-spring-enter",
                 "pulse-corners",
@@ -258,6 +260,7 @@ export default function CoursePageTemplate({
                 Enroll Now
               </Button>
             </MagneticWrap>
+            {/* Download Syllabus - Opens Enquiry Modal for lead capture */}
             <Button variant="outline" size="lg" onClick={openEnquiry} className={cn(
               v === "orano" && "orano-brightness",
               v === "activetheory" && "at-spring-enter",

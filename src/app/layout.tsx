@@ -8,6 +8,7 @@ import SmoothScroll from "@/components/animation/SmoothScroll";
 import PageTransition from "@/components/animation/PageTransition";
 import AgentationProvider from "@/components/dev/AgentationProvider";
 import EnquiryProvider from "@/components/providers/EnquiryProvider";
+import PurchaseProvider from "@/components/providers/PurchaseProvider";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd";
 
 const inter = Inter({
@@ -117,15 +118,17 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${poppins.variable} font-sans bg-navy-900 text-white antialiased`}>
         <EnquiryProvider>
-          <SmoothScroll>
-            <Navbar />
-            <PageTransition>
-              <main>{children}</main>
-            </PageTransition>
-            <Footer />
-            <WhatsAppButton />
-            <AgentationProvider />
-          </SmoothScroll>
+          <PurchaseProvider>
+            <SmoothScroll>
+              <Navbar />
+              <PageTransition>
+                <main>{children}</main>
+              </PageTransition>
+              <Footer />
+              <WhatsAppButton />
+              <AgentationProvider />
+            </SmoothScroll>
+          </PurchaseProvider>
         </EnquiryProvider>
       </body>
     </html>

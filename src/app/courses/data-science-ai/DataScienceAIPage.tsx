@@ -10,6 +10,7 @@ import Counter from "@/components/animation/Counter";
 import ScrollReveal from "@/components/animation/ScrollReveal";
 import ToolLogo from "@/components/ui/ToolLogo";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
+import { usePurchaseModal } from "@/components/forms/PurchaseModal";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme";
 import FooterCTA from "@/components/sections/FooterCTA";
@@ -781,6 +782,7 @@ function DashboardPreview() {
 
 export default function DataScienceAIPage() {
   const { openEnquiry } = useEnquiryModal();
+  const { openPurchase } = usePurchaseModal();
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
@@ -1099,7 +1101,7 @@ export default function DataScienceAIPage() {
 
               <motion.div className="mt-8 flex flex-wrap items-center gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.55 }}>
                 <Magnetic>
-                  <motion.button onClick={openEnquiry} className="group relative px-7 py-3.5 rounded-xl font-semibold text-sm overflow-hidden cursor-pointer" style={{ backgroundColor: BRAND_ORANGE }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                  <motion.button onClick={() => openPurchase("Data Science and AI")} className="group relative px-7 py-3.5 rounded-xl font-semibold text-sm overflow-hidden cursor-pointer" style={{ backgroundColor: BRAND_ORANGE }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <span className="relative z-10 flex items-center gap-2 text-white">Start Learning <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></span>
                   </motion.button>
                 </Magnetic>

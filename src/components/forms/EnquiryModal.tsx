@@ -115,17 +115,43 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     e.preventDefault();
     if (!validate()) return;
     setFormState("loading");
+
     try {
-      const res = await fetch("https://formspree.io/f/xpwdzgkl", {
+      // First, try submitting to Cratio CRM
+      const cratioSubmission = await fetch("/api/leads/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          background: formData.background,
+          course: formData.course,
+          source: "website_enquiry",
+        }),
+      });
+
+      // Fallback to Formspree if Cratio fails (for backup)
+      const formspreePromise = fetch("https://formspree.io/f/xpwdzgkl", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(formData),
       });
-      if (res.ok) {
+
+      // Wait for both (non-blocking)
+      await Promise.allSettled([cratioSubmission, formspreePromise]);
+
+      // Show success if at least one submission worked
+      if (cratioSubmission.ok) {
         setFormState("success");
       } else {
-        setFormState("idle");
-        setErrors({ email: "Submission failed. Please try again." });
+        const formspreeResult = await formspreePromise;
+        if (formspreeResult.ok) {
+          setFormState("success");
+        } else {
+          setFormState("idle");
+          setErrors({ email: "Submission failed. Please try again." });
+        }
       }
     } catch {
       setFormState("idle");

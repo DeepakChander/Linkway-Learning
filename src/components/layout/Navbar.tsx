@@ -7,6 +7,15 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { X, ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
+import { usePurchaseModal } from "@/components/forms/PurchaseModal";
+
+const coursePathToName: Record<string, string> = {
+  "/courses/data-analytics": "Data Analytics",
+  "/courses/business-analytics": "Business Analytics",
+  "/courses/data-science-ai": "Data Science and AI",
+  "/courses/agentic-ai": "Agentic AI & Prompt Engineering",
+  "/courses/investment-banking": "Investment Banking",
+};
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -111,6 +120,18 @@ const mobileItemVariants = {
 export default function Navbar() {
   const pathname = usePathname();
   const { openEnquiry } = useEnquiryModal();
+  const { openPurchase } = usePurchaseModal();
+  const normalizedPath = pathname.replace(/\/+$/, "");
+  const courseName = coursePathToName[normalizedPath];
+
+  const handleEnroll = useCallback(() => {
+    if (courseName) {
+      openPurchase(courseName);
+    } else {
+      openEnquiry();
+    }
+  }, [courseName, openPurchase, openEnquiry]);
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -351,9 +372,9 @@ export default function Navbar() {
               )}
             </ul>
 
-            {/* CTA Button */}
+            {/* CTA Button - Opens Payment Modal */}
             <button
-              onClick={openEnquiry}
+              onClick={handleEnroll}
               className={cn(
                 "group shrink-0 relative flex items-center justify-center font-bold gap-2 px-6 py-2.5 rounded-xl transition-all duration-500 text-[14px] overflow-hidden cursor-pointer",
                 isHome
@@ -383,7 +404,7 @@ export default function Navbar() {
 
             <div className="flex items-center gap-2">
               <button
-                onClick={openEnquiry}
+                onClick={handleEnroll}
                 className={cn(
                   "hidden xs:flex items-center justify-center font-bold px-4 py-2 rounded-xl transition-all duration-300 text-sm cursor-pointer",
                   isHome
@@ -522,7 +543,7 @@ export default function Navbar() {
                 <button
                   onClick={() => {
                     setMobileOpen(false);
-                    openEnquiry();
+                    handleEnroll();
                   }}
                   className="flex items-center justify-center gap-2 w-full font-bold px-5 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300 cursor-pointer"
                 >
