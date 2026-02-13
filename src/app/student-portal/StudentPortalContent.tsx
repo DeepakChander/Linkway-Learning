@@ -283,7 +283,7 @@ export default function StudentPortalContent() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <a
-              href="https://cratiocrm.com/login/"
+              href="https://lms.linkwaylearning.com"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-white font-bold text-sm"
