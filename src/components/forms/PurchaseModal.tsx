@@ -127,8 +127,8 @@ function PurchaseModal({
     setErrorMessage("");
 
     try {
-      // Submit lead to Formspree (works on static hosting)
-      fetch("https://formspree.io/f/xpwdzgkl", {
+      // Submit lead to Cratio CRM via PHP proxy (works on static hosting)
+      fetch("/api/submit-lead.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
