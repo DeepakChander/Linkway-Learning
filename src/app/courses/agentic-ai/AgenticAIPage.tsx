@@ -14,6 +14,7 @@ import { usePurchaseModal } from "@/components/forms/PurchaseModal";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme";
 import FooterCTA from "@/components/sections/FooterCTA";
+import CertificationDisplay from "@/components/sections/CertificationDisplay";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1443,6 +1444,18 @@ export default function AgenticAIPage() {
           </div>
         </div>
       </section>
+
+      {/* ═══════ CERTIFICATION DISPLAY ═══════ */}
+      <CertificationDisplay
+        cert1Image="/images/certificates/Microsoft.jpeg"
+        cert1Alt="Microsoft Certificate"
+        cert1Label="Microsoft Certified"
+        cert1Sub="Azure AI (AI-900)"
+        cert2Image="/images/certificates/Simple-Demo.jpeg"
+        cert2Alt="Linkway Learning Certificate of Completion"
+        cert2Label="Linkway Learning"
+        cert2Sub="Completion Certificate"
+      />
 
       <WaveDivider from="#ffffff" to="#f9fafb" />
 
