@@ -260,13 +260,13 @@ export default function CoursePageTemplate({
                 Enroll Now
               </Button>
             </MagneticWrap>
-            {/* Download Syllabus - Opens Enquiry Modal for lead capture */}
+            {/* Download Curriculum - Opens Enquiry Modal for lead capture */}
             <Button variant="outline" size="lg" onClick={openEnquiry} className={cn(
               v === "orano" && "orano-brightness",
               v === "activetheory" && "at-spring-enter",
               v === "redbull" && "btn-border-glow",
             )}>
-              Download Syllabus
+              Download Curriculum
             </Button>
           </motion.div>
         </div>

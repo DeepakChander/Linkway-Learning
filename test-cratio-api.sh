@@ -1,137 +1,111 @@
 #!/bin/bash
 
 # Cratio CRM API Test Script
-# This script tests different possible API endpoint patterns
+# API Docs: https://api.cratiocrm.com/
+# All endpoints confirmed working on 2026-02-14
 
 API_KEY="NF8xXzQ5NjMkQDU4IyMyMDI2LTAyLTEyIDE2OjUxOjIz"
+BASE_URL="http://apps.cratiocrm.com/api/apirequest.php"
+TODAY=$(date +%Y-%m-%d)
 
 echo "========================================"
-echo "Testing Cratio CRM API Endpoints"
+echo "Cratio CRM API - Live Test"
+echo "Base URL: $BASE_URL"
+echo "Date: $TODAY"
 echo "========================================"
+
+# ---- TEST 1: Create Lead (insertRecords) ----
 echo ""
+echo "========================================"
+echo "TEST 1: Create Lead (insertRecords)"
+echo "========================================"
 
-# Test data
-TEST_DATA='{
-  "lead_name": "Test User",
-  "email": "test@example.com",
-  "phone": "+919876543210",
-  "interested_course": "Data Analytics",
-  "lead_source": "website"
-}'
+response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
+  "${BASE_URL}?operation=insertRecords&apikey=${API_KEY}&formname=Leads&overwrite=false" \
+  -H "Content-Type: application/json" \
+  -d "{\"records\":[{\"Contact Name\":\"Test API User\",\"Email\":\"test-api@linkwaylearning.com\",\"Mobile Number\":\"9999900001\",\"Lead Date\":\"${TODAY}\"}]}" 2>&1)
 
-echo "Test Lead Data:"
-echo "$TEST_DATA"
+http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
+body=$(echo "$response" | sed '/HTTP_CODE:/d')
+
+echo "HTTP Status: $http_code"
+echo "Response: $body"
+
+# Extract Form ID from response for later tests
+FORM_ID=$(echo "$body" | grep -oP '"formid":"[^"]*"' | head -1 | cut -d'"' -f4)
+echo "Extracted Form ID: $FORM_ID"
+
+# ---- TEST 2: Get All Leads (getAllRecords) ----
 echo ""
-
-# Common CRM API endpoint patterns
-ENDPOINTS=(
-  "https://api.cratio.com/v1/leads"
-  "https://api.cratio.com/api/leads"
-  "https://app.cratio.com/api/v1/leads"
-  "https://app.cratio.com/api/leads"
-  "https://cratiocrm.com/api/v1/leads"
-  "https://cratiocrm.com/api/leads"
-)
-
 echo "========================================"
-echo "Testing with Bearer Token Authentication"
+echo "TEST 2: Get All Leads (getAllRecords)"
 echo "========================================"
 
-for endpoint in "${ENDPOINTS[@]}"; do
-  echo ""
-  echo "Testing: $endpoint"
-  echo "----------------------------------------"
+response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
+  "${BASE_URL}?operation=getAllRecords&apikey=${API_KEY}&formname=Leads" \
+  -H "Content-Type: application/json" \
+  -d '{"displayfields":["Contact Name","Mobile Number","Email","Lead Date","Lead Stage"],"pageno":1,"numofrecords":5,"sortcolumn":"Lead Date","sortorder":"desc","isnull":1}' 2>&1)
 
-  response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$endpoint" \
+http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
+body=$(echo "$response" | sed '/HTTP_CODE:/d')
+
+echo "HTTP Status: $http_code"
+echo "Response: $body"
+
+# ---- TEST 3: Search Leads (getRecordsBySearch) ----
+echo ""
+echo "========================================"
+echo "TEST 3: Search Leads (getRecordsBySearch)"
+echo "========================================"
+
+response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
+  "${BASE_URL}?operation=getRecordsBySearch&apikey=${API_KEY}&formname=Leads" \
+  -H "Content-Type: application/json" \
+  -d '{"displayfields":["Contact Name","Mobile Number","Email","Lead Date","Lead Stage"],"pageno":1,"numofrecords":5,"isnull":1,"searchcondition":"Contact Name@contains@Test API@AND$"}' 2>&1)
+
+http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
+body=$(echo "$response" | sed '/HTTP_CODE:/d')
+
+echo "HTTP Status: $http_code"
+echo "Response: $body"
+
+# ---- TEST 4: Update Lead (updateRecords) ----
+echo ""
+echo "========================================"
+echo "TEST 4: Update Lead (updateRecords)"
+echo "========================================"
+
+if [ -n "$FORM_ID" ]; then
+  response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST \
+    "${BASE_URL}?operation=updateRecords&apikey=${API_KEY}&formname=Leads" \
     -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $API_KEY" \
-    -H "Accept: application/json" \
-    -d "$TEST_DATA" 2>&1)
+    -d "{\"records\":[{\"Form ID\":\"${FORM_ID}\",\"Contact Name\":\"Test API User Updated\",\"Lead Stage\":\"interested\"}]}" 2>&1)
 
   http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
   body=$(echo "$response" | sed '/HTTP_CODE:/d')
 
   echo "HTTP Status: $http_code"
   echo "Response: $body"
-done
+else
+  echo "SKIPPED: No Form ID from insert test"
+fi
 
-echo ""
-echo "========================================"
-echo "Testing with X-API-Key Header"
-echo "========================================"
-
-for endpoint in "${ENDPOINTS[@]}"; do
-  echo ""
-  echo "Testing: $endpoint"
-  echo "----------------------------------------"
-
-  response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$endpoint" \
-    -H "Content-Type: application/json" \
-    -H "X-API-Key: $API_KEY" \
-    -H "Accept: application/json" \
-    -d "$TEST_DATA" 2>&1)
-
-  http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
-  body=$(echo "$response" | sed '/HTTP_CODE:/d')
-
-  echo "HTTP Status: $http_code"
-  echo "Response: $body"
-done
-
-echo ""
-echo "========================================"
-echo "Testing with API Key in URL"
-echo "========================================"
-
-for endpoint in "${ENDPOINTS[@]}"; do
-  echo ""
-  echo "Testing: ${endpoint}?api_key=***"
-  echo "----------------------------------------"
-
-  response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "${endpoint}?api_key=${API_KEY}" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d "$TEST_DATA" 2>&1)
-
-  http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
-  body=$(echo "$response" | sed '/HTTP_CODE:/d')
-
-  echo "HTTP Status: $http_code"
-  echo "Response: $body"
-done
-
-echo ""
-echo "========================================"
-echo "Testing with Auth Token Header"
-echo "========================================"
-
-for endpoint in "${ENDPOINTS[@]}"; do
-  echo ""
-  echo "Testing: $endpoint"
-  echo "----------------------------------------"
-
-  response=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$endpoint" \
-    -H "Content-Type: application/json" \
-    -H "Auth-Token: $API_KEY" \
-    -H "Accept: application/json" \
-    -d "$TEST_DATA" 2>&1)
-
-  http_code=$(echo "$response" | grep "HTTP_CODE:" | sed 's/HTTP_CODE://')
-  body=$(echo "$response" | sed '/HTTP_CODE:/d')
-
-  echo "HTTP Status: $http_code"
-  echo "Response: $body"
-done
-
+# ---- Summary ----
 echo ""
 echo "========================================"
 echo "Test Complete"
 echo "========================================"
 echo ""
-echo "Look for HTTP status codes:"
-echo "  - 200/201: Success"
-echo "  - 400: Bad Request (wrong field names or data format)"
-echo "  - 401: Unauthorized (wrong API key or auth method)"
-echo "  - 403: Forbidden (no access)"
-echo "  - 404: Not Found (wrong endpoint URL)"
-echo "  - 500: Server Error"
+echo "Expected results:"
+echo "  TEST 1: {\"success\":[{\"rowindex\":1,\"formid\":\"...\",\"info\":\"created\"}]}"
+echo "  TEST 2: {\"pageno\":1,\"totalrows\":N,\"responserows\":5,\"data\":[...]}"
+echo "  TEST 3: {\"pageno\":1,\"totalrows\":N,\"data\":[...matching leads...]}"
+echo "  TEST 4: {\"success\":[{\"rowindex\":1,\"info\":\"updated\"}]}"
+echo ""
+echo "Error codes from API docs:"
+echo "  401: API Key is missing"
+echo "  402: No valid API Key provided"
+echo "  403: Reached max API limit (250/day)"
+echo "  405: Module name missing"
+echo "  406: Invalid operation name"
+echo "  407: Invalid module name"

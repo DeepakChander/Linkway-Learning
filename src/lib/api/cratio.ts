@@ -1,18 +1,22 @@
 /**
  * Cratio CRM API Integration
  *
- * SETUP INSTRUCTIONS:
- * 1. Contact Cratio CRM support (support@cratio.com) to get:
- *    - API endpoint URL
- *    - API Key / Authentication token
- *    - Required field mappings
+ * API Docs: https://api.cratiocrm.com/
+ * Base URL: http://apps.cratiocrm.com/api/apirequest.php
+ * Auth: apikey as query parameter
+ * Limit: 250 API calls/day
  *
- * 2. Add these to your .env.local file:
- *    NEXT_PUBLIC_CRATIO_API_URL=https://api.cratio.com/v1/leads
- *    CRATIO_API_KEY=your_api_key_here
- *
- * 3. Update the field mappings in this file based on Cratio's requirements
+ * SETUP:
+ * Add to .env.local:
+ *   CRATIO_API_URL=http://apps.cratiocrm.com/api/apirequest.php
+ *   CRATIO_API_KEY=your_api_key_here
  */
+
+const CRATIO_BASE_URL =
+  process.env.CRATIO_API_URL ||
+  "http://apps.cratiocrm.com/api/apirequest.php";
+
+// --- Types ---
 
 export interface CratioLeadData {
   fullName: string;
@@ -20,7 +24,7 @@ export interface CratioLeadData {
   phone: string;
   background?: string;
   course?: string;
-  source?: string; // e.g., "website", "landing_page"
+  source?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -33,149 +37,235 @@ export interface CratioAPIResponse {
   error?: string;
 }
 
-/**
- * Submit lead to Cratio CRM
- *
- * This function handles the API call to Cratio CRM's lead capture endpoint.
- * Common API patterns for CRM systems:
- *
- * METHOD 1: REST API with JSON (Most Common)
- * POST https://api.cratio.com/v1/leads
- * Headers: { "Authorization": "Bearer YOUR_API_KEY", "Content-Type": "application/json" }
- * Body: { "name": "...", "email": "...", "phone": "...", ... }
- *
- * METHOD 2: Form Data
- * POST https://api.cratio.com/v1/leads
- * Headers: { "Authorization": "Bearer YOUR_API_KEY", "Content-Type": "application/x-www-form-urlencoded" }
- * Body: name=...&email=...&phone=...
- *
- * METHOD 3: API Key in URL
- * POST https://api.cratio.com/v1/leads?api_key=YOUR_API_KEY
- */
+interface CratioInsertSuccess {
+  rowindex: number;
+  formid: string;
+  info: string;
+  "Lead Owner"?: string;
+}
+
+interface CratioError {
+  rowindex: number;
+  formid: string | string[];
+  info: string;
+}
+
+interface CratioSearchResponse {
+  pageno: number;
+  totalrows: number;
+  responserows: number;
+  data: Record<string, string>[];
+}
+
+// --- Helpers ---
+
+function buildUrl(operation: string, extraParams?: Record<string, string>): string {
+  const apiKey = process.env.CRATIO_API_KEY;
+  if (!apiKey) throw new Error("CRATIO_API_KEY not configured");
+
+  const params = new URLSearchParams({
+    operation,
+    apikey: apiKey,
+    formname: "Leads",
+    ...extraParams,
+  });
+
+  return `${CRATIO_BASE_URL}?${params.toString()}`;
+}
+
+function todayDate(): string {
+  return new Date().toISOString().split("T")[0];
+}
+
+// --- Create Lead ---
+
 export async function submitLeadToCratio(
   leadData: CratioLeadData
 ): Promise<CratioAPIResponse> {
   try {
-    // Get API configuration from environment variables
-    const apiUrl = process.env.NEXT_PUBLIC_CRATIO_API_URL;
     const apiKey = process.env.CRATIO_API_KEY;
 
-    // If API is not configured, fall back to Formspree (current implementation)
-    if (!apiUrl || !apiKey) {
+    if (!apiKey) {
       console.warn(
-        "Cratio CRM API not configured. Please add NEXT_PUBLIC_CRATIO_API_URL and CRATIO_API_KEY to your .env.local file."
+        "Cratio CRM API not configured. Add CRATIO_API_KEY to .env.local"
       );
-      return {
-        success: false,
-        error: "CRM API not configured",
-      };
+      return { success: false, error: "CRM API not configured" };
     }
 
-    // Map form data to Cratio CRM field names
-    // UPDATE THESE FIELD NAMES based on your Cratio CRM configuration
-    const cratioPayload = {
-      // Standard fields (adjust field names as needed)
-      lead_name: leadData.fullName,
-      email: leadData.email,
-      phone: leadData.phone,
+    const url = buildUrl("insertRecords", { overwrite: "false" });
 
-      // Optional fields
-      ...(leadData.background && { background: leadData.background }),
-      ...(leadData.course && { interested_course: leadData.course }),
-      ...(leadData.source && { lead_source: leadData.source }),
-
-      // UTM tracking parameters
-      ...(leadData.utm_source && { utm_source: leadData.utm_source }),
-      ...(leadData.utm_medium && { utm_medium: leadData.utm_medium }),
-      ...(leadData.utm_campaign && { utm_campaign: leadData.utm_campaign }),
-
-      // Additional metadata
-      submitted_at: new Date().toISOString(),
-      website: "linkwaylearning.com",
+    const record: Record<string, string> = {
+      "Contact Name": leadData.fullName,
+      "Mobile Number": leadData.phone,
+      "Email": leadData.email,
+      "Lead Date": todayDate(),
     };
 
-    // Method 1: JSON API (Most common)
-    const response = await fetch(apiUrl, {
+    if (leadData.course) record["Company Name"] = leadData.course;
+
+    const body = JSON.stringify({ records: [record] });
+
+    const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`, // or "X-API-Key": apiKey
-        Accept: "application/json",
-      },
-      body: JSON.stringify(cratioPayload),
+      headers: { "Content-Type": "application/json" },
+      body,
     });
-
-    // Alternative Method 2: Form Data (Uncomment if needed)
-    /*
-    const formData = new URLSearchParams();
-    Object.entries(cratioPayload).forEach(([key, value]) => {
-      formData.append(key, String(value));
-    });
-
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": `Bearer ${apiKey}`,
-      },
-      body: formData,
-    });
-    */
-
-    // Alternative Method 3: API Key in URL (Uncomment if needed)
-    /*
-    const response = await fetch(`${apiUrl}?api_key=${apiKey}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cratioPayload),
-    });
-    */
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error("Cratio API Error:", errorData);
-      return {
-        success: false,
-        error: errorData.message || `API Error: ${response.status}`,
-      };
-    }
 
     const data = await response.json();
 
-    return {
-      success: true,
-      message: data.message || "Lead submitted successfully",
-      leadId: data.id || data.lead_id || data.leadId,
-    };
+    // Success response: {"success":[{"rowindex":1,"formid":"12039","info":"created"}]}
+    if (data.success && Array.isArray(data.success)) {
+      const first = data.success[0] as CratioInsertSuccess;
+      return {
+        success: true,
+        message: first.info || "Lead created",
+        leadId: first.formid,
+      };
+    }
+
+    // Error response: {"error":[{"rowindex":1,"formid":[],"info":"Mobile ... already linked"}]}
+    if (data.error) {
+      const errors = Array.isArray(data.error) ? data.error : [data.error];
+      const firstError = errors[0] as CratioError;
+      const errorMsg =
+        typeof firstError === "string" ? firstError : firstError.info;
+      console.error("Cratio API Error:", errorMsg);
+      return { success: false, error: errorMsg };
+    }
+
+    return { success: false, error: "Unexpected API response" };
   } catch (error) {
     console.error("Error submitting lead to Cratio:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Unknown error occurred",
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }
 
-/**
- * CURL Example for Testing:
- *
- * Once you have your API credentials, test with:
- *
- * curl -X POST https://api.cratio.com/v1/leads \
- *   -H "Content-Type: application/json" \
- *   -H "Authorization: Bearer YOUR_API_KEY" \
- *   -d '{
- *     "lead_name": "Test User",
- *     "email": "test@example.com",
- *     "phone": "+919876543210",
- *     "interested_course": "Data Analytics",
- *     "lead_source": "website"
- *   }'
- *
- * Check the response to understand:
- * 1. The exact field names Cratio expects
- * 2. The response format
- * 3. Error handling patterns
- */
+// --- Update Lead ---
+
+export async function updateLeadInCratio(
+  formId: string,
+  fields: Record<string, string>
+): Promise<CratioAPIResponse> {
+  try {
+    const url = buildUrl("updateRecords");
+
+    const record = { "Form ID": formId, ...fields };
+    const body = JSON.stringify({ records: [record] });
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+    });
+
+    const data = await response.json();
+
+    if (data.success && Array.isArray(data.success)) {
+      return { success: true, message: data.success[0]?.info || "updated" };
+    }
+
+    if (data.error) {
+      const errors = Array.isArray(data.error) ? data.error : [data.error];
+      return { success: false, error: errors[0]?.info || "Update failed" };
+    }
+
+    return { success: false, error: "Unexpected API response" };
+  } catch (error) {
+    console.error("Error updating lead in Cratio:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+// --- Get All Leads ---
+
+export async function getAllLeadsFromCratio(options?: {
+  displayfields?: string[];
+  pageno?: number;
+  numofrecords?: number;
+  sortcolumn?: string;
+  sortorder?: "asc" | "desc";
+}): Promise<CratioSearchResponse | { error: string }> {
+  try {
+    const url = buildUrl("getAllRecords");
+
+    const body = JSON.stringify({
+      displayfields: options?.displayfields || [
+        "Contact Name",
+        "Mobile Number",
+        "Email",
+        "Lead Date",
+        "Lead Stage",
+      ],
+      pageno: options?.pageno || 1,
+      numofrecords: options?.numofrecords || 50,
+      sortcolumn: options?.sortcolumn || "Lead Date",
+      sortorder: options?.sortorder || "desc",
+      isnull: 1,
+    });
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching leads from Cratio:", error);
+    return {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+// --- Search Leads ---
+
+export async function searchLeadsInCratio(
+  searchcondition: string,
+  options?: {
+    displayfields?: string[];
+    pageno?: number;
+    numofrecords?: number;
+    sortcolumn?: string;
+    sortorder?: "asc" | "desc";
+  }
+): Promise<CratioSearchResponse | { error: string }> {
+  try {
+    const url = buildUrl("getRecordsBySearch");
+
+    const body = JSON.stringify({
+      displayfields: options?.displayfields || [
+        "Contact Name",
+        "Mobile Number",
+        "Email",
+        "Lead Date",
+        "Lead Stage",
+      ],
+      pageno: options?.pageno || 1,
+      numofrecords: options?.numofrecords || 50,
+      sortcolumn: options?.sortcolumn || "Lead Date",
+      sortorder: options?.sortorder || "desc",
+      isnull: 1,
+      searchcondition,
+    });
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error searching leads in Cratio:", error);
+    return {
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}

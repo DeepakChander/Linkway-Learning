@@ -117,8 +117,8 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     setFormState("loading");
 
     try {
-      // First, try submitting to Cratio CRM
-      const cratioSubmission = await fetch("/api/leads/submit", {
+      // Submit to Cratio CRM via PHP proxy (works on static hosting)
+      const cratioSubmission = await fetch("/api/submit-lead.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
