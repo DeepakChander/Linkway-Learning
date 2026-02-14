@@ -37,9 +37,9 @@ export default function ContactPage() {
     setSubmitting(true);
     setError("");
     try {
-      const res = await fetch("https://formspree.io/f/xpwdzgkl", {
+      const res = await fetch("/api/leads/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (res.ok) {

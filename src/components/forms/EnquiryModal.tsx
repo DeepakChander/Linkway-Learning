@@ -117,8 +117,7 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     setFormState("loading");
 
     try {
-      // Submit to Cratio CRM via PHP proxy (works on static hosting)
-      const cratioSubmission = await fetch("/api/submit-lead.php", {
+      const response = await fetch("/api/leads/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -131,27 +130,11 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
         }),
       });
 
-      // Fallback to Formspree if Cratio fails (for backup)
-      const formspreePromise = fetch("https://formspree.io/f/xpwdzgkl", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      // Wait for both (non-blocking)
-      await Promise.allSettled([cratioSubmission, formspreePromise]);
-
-      // Show success if at least one submission worked
-      if (cratioSubmission.ok) {
+      if (response.ok) {
         setFormState("success");
       } else {
-        const formspreeResult = await formspreePromise;
-        if (formspreeResult.ok) {
-          setFormState("success");
-        } else {
-          setFormState("idle");
-          setErrors({ email: "Submission failed. Please try again." });
-        }
+        setFormState("idle");
+        setErrors({ email: "Submission failed. Please try again." });
       }
     } catch {
       setFormState("idle");

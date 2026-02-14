@@ -206,9 +206,9 @@ function InlineLeadForm() {
     if (!validate()) return;
     setFormState("loading");
     try {
-      const res = await fetch("https://formspree.io/f/xpwdzgkl", {
+      const res = await fetch("/api/leads/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       if (res.ok) {

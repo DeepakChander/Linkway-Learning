@@ -14,6 +14,7 @@ import { usePurchaseModal } from "@/components/forms/PurchaseModal";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/lib/theme";
 import FooterCTA from "@/components/sections/FooterCTA";
+import CertificationDisplay from "@/components/sections/CertificationDisplay";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1730,6 +1731,18 @@ export default function DataScienceAIPage() {
           </div>
         </div>
       </section>
+
+      {/* ═══════ CERTIFICATION DISPLAY ═══════ */}
+      <CertificationDisplay
+        cert1Image="/images/certificates/Microsoft.jpeg"
+        cert1Alt="Microsoft Certificate"
+        cert1Label="Microsoft Certified"
+        cert1Sub="Azure AI (AI-900)"
+        cert2Image="/images/certificates/Data-Science.jpeg"
+        cert2Alt="Data Science & AI Certificate of Completion"
+        cert2Label="Linkway Learning"
+        cert2Sub="Data Science & AI Certificate"
+      />
 
       <WaveDivider from="#ffffff" to="#f9fafb" />
 

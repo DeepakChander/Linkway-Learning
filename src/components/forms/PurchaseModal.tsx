@@ -127,8 +127,8 @@ function PurchaseModal({
     setErrorMessage("");
 
     try {
-      // Submit lead to CRM via PHP proxy
-      await fetch("/api/submit-lead.php", {
+      // Submit lead to CRM
+      await fetch("/api/leads/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

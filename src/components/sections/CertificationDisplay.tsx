@@ -201,7 +201,29 @@ function FeatureSteps() {
 /* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
-export default function CertificationDisplay() {
+interface CertificationDisplayProps {
+  /** Back/left certificate (default: Microsoft) */
+  cert1Image?: string;
+  cert1Alt?: string;
+  cert1Label?: string;
+  cert1Sub?: string;
+  /** Front/right certificate (default: Simple-Demo) */
+  cert2Image?: string;
+  cert2Alt?: string;
+  cert2Label?: string;
+  cert2Sub?: string;
+}
+
+export default function CertificationDisplay({
+  cert1Image = "/images/certificates/Microsoft.jpeg",
+  cert1Alt = "Microsoft Certificate",
+  cert1Label = "Microsoft Certified",
+  cert1Sub = "Azure AI (AI-900)",
+  cert2Image = "/images/certificates/Simple-Demo.jpeg",
+  cert2Alt = "Linkway Learning Certificate of Completion",
+  cert2Label = "Linkway Learning",
+  cert2Sub = "Completion Certificate",
+}: CertificationDisplayProps = {}) {
   const { openEnquiry } = useEnquiryModal();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -569,7 +591,7 @@ export default function CertificationDisplay() {
                 }}
               />
 
-              {/* ── Linkway Certificate (back, tilted left) ── */}
+              {/* ── Certificate 1 (back, tilted left) ── */}
               <motion.div
                 className="absolute w-[200px] sm:w-[240px] md:w-[340px] lg:w-[380px]"
                 style={{
@@ -601,8 +623,8 @@ export default function CertificationDisplay() {
                 >
                   <div className="relative aspect-[4/3] bg-white">
                     <Image
-                      src="/images/certificates/linkway-certificate.png"
-                      alt="Linkway Learning Certificate of Completion"
+                      src={cert1Image}
+                      alt={cert1Alt}
                       fill
                       className="object-contain p-2"
                       sizes="400px"
@@ -611,31 +633,26 @@ export default function CertificationDisplay() {
                   {/* Label strip */}
                   <div
                     className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 flex items-center gap-1.5 sm:gap-2.5"
-                    style={{ background: "#F58220" }}
+                    style={{ background: "#2563eb" }}
                   >
-                    <svg
-                      className="w-3 h-3 sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="12" cy="8" r="6" />
-                      <path d="M9 14l-2 8 5-3 5 3-2-8" />
+                    {/* Microsoft logo squares */}
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 16 16" fill="white">
+                      <rect x="0" y="0" width="7" height="7" />
+                      <rect x="9" y="0" width="7" height="7" />
+                      <rect x="0" y="9" width="7" height="7" />
+                      <rect x="9" y="9" width="7" height="7" />
                     </svg>
                     <span className="text-white text-[10px] sm:text-xs md:text-sm font-bold">
-                      Linkway Learning
+                      {cert1Label}
                     </span>
                     <span className="text-white/60 text-[8px] sm:text-[10px] md:text-xs ml-auto hidden sm:inline">
-                      Completion Certificate
+                      {cert1Sub}
                     </span>
                   </div>
                 </motion.div>
               </motion.div>
 
-              {/* ── Microsoft Certificate (front, tilted right) ── */}
+              {/* ── Certificate 2 (front, tilted right) ── */}
               <motion.div
                 className="absolute w-[200px] sm:w-[240px] md:w-[340px] lg:w-[380px]"
                 style={{
@@ -667,8 +684,8 @@ export default function CertificationDisplay() {
                 >
                   <div className="relative aspect-[4/3] bg-white">
                     <Image
-                      src="/images/certificates/azure-certificate.png"
-                      alt="Microsoft Azure AI Fundamentals Certificate"
+                      src={cert2Image}
+                      alt={cert2Alt}
                       fill
                       className="object-contain p-2"
                       sizes="400px"
@@ -677,20 +694,25 @@ export default function CertificationDisplay() {
                   {/* Label strip */}
                   <div
                     className="px-2 sm:px-3 md:px-4 py-2 sm:py-3 flex items-center gap-1.5 sm:gap-2.5"
-                    style={{ background: "#2563eb" }}
+                    style={{ background: "#F58220" }}
                   >
-                    {/* Microsoft logo squares */}
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" viewBox="0 0 16 16" fill="white">
-                      <rect x="0" y="0" width="7" height="7" />
-                      <rect x="9" y="0" width="7" height="7" />
-                      <rect x="0" y="9" width="7" height="7" />
-                      <rect x="9" y="9" width="7" height="7" />
+                    <svg
+                      className="w-3 h-3 sm:w-4 sm:h-4 md:w-[18px] md:h-[18px]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="8" r="6" />
+                      <path d="M9 14l-2 8 5-3 5 3-2-8" />
                     </svg>
                     <span className="text-white text-[10px] sm:text-xs md:text-sm font-bold">
-                      Microsoft Certified
+                      {cert2Label}
                     </span>
                     <span className="text-white/60 text-[8px] sm:text-[10px] md:text-xs ml-auto hidden sm:inline">
-                      Azure AI (AI-900)
+                      {cert2Sub}
                     </span>
                   </div>
                 </motion.div>
