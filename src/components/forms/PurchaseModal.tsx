@@ -127,8 +127,8 @@ function PurchaseModal({
     setErrorMessage("");
 
     try {
-      // Submit lead to CRM
-      await fetch("/api/leads/submit", {
+      // Submit lead to Formspree (works on static hosting)
+      fetch("https://formspree.io/f/xpwdzgkl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -136,9 +136,10 @@ function PurchaseModal({
           email: formData.email,
           phone: formData.phone,
           course: courseName,
+          amount: formData.amount,
           source: "course_purchase",
         }),
-      });
+      }).catch(() => {}); // Fire-and-forget, don't block payment
 
       setFormState("processing");
 

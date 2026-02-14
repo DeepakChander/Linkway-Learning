@@ -17,7 +17,7 @@ interface RazorpayOptions {
   currency: string;
   name: string;
   description: string;
-  order_id: string;
+  order_id?: string;
   prefill: {
     name: string;
     email: string;
@@ -70,31 +70,8 @@ export function loadRazorpayScript(): Promise<boolean> {
 }
 
 /**
- * Create a Razorpay order via our backend API
- */
-async function createOrder(data: CheckoutData): Promise<{ orderId: string; amount: number; currency: string }> {
-  const response = await fetch("/api/razorpay/create-order", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      amount: data.amount,
-      courseName: data.courseName,
-      studentName: data.studentName,
-      email: data.email,
-      phone: data.phone,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error || "Failed to create order");
-  }
-
-  return response.json();
-}
-
-/**
- * Open Razorpay Checkout with the given data
+ * Open Razorpay Checkout directly (no server-side order creation needed).
+ * Works on static hosting (Hostinger) without API routes.
  */
 export async function openRazorpayCheckout(
   data: CheckoutData,
@@ -108,23 +85,19 @@ export async function openRazorpayCheckout(
     return;
   }
 
-  // Create order
-  const order = await createOrder(data);
-
   const keyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
   if (!keyId) {
     onFailure("Payment gateway not configured.");
     return;
   }
 
-  // Open checkout
+  // Open checkout directly without server-side order creation
   const options: RazorpayOptions = {
     key: keyId,
-    amount: order.amount,
-    currency: order.currency,
+    amount: data.amount * 100, // Convert INR to paise
+    currency: "INR",
     name: "Linkway Learning",
     description: `Enrollment - ${data.courseName}`,
-    order_id: order.orderId,
     prefill: {
       name: data.studentName,
       email: data.email,

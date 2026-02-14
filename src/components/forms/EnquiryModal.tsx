@@ -117,7 +117,7 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     setFormState("loading");
 
     try {
-      const response = await fetch("/api/leads/submit", {
+      const response = await fetch("https://formspree.io/f/xpwdzgkl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
