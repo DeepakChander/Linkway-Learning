@@ -27,7 +27,7 @@ export function PurchaseModalProvider({ children }: { children: React.ReactNode 
   const [selectedCourse, setSelectedCourse] = useState<string>();
 
   const openPurchase = useCallback((courseName?: string) => {
-    setSelectedCourse(courseName || "Data Analytics");
+    setSelectedCourse(courseName);
     setIsOpen(true);
   }, []);
 
@@ -67,12 +67,13 @@ interface FieldErrors {
 function PurchaseModal({
   isOpen,
   onClose,
-  courseName = "Data Analytics",
+  courseName,
 }: {
   isOpen: boolean;
   onClose: () => void;
   courseName?: string;
 }) {
+  const showCourseSelector = !courseName;
   const [formState, setFormState] = useState<"idle" | "loading" | "processing" | "success" | "error">("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [errorMessage, setErrorMessage] = useState("");
@@ -81,9 +82,11 @@ function PurchaseModal({
     email: "",
     phone: "",
     amount: "",
+    course: "Data Analytics",
   });
   const modalRef = useRef<HTMLDivElement>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
+  const effectiveCourseName = courseName || formData.course;
 
   // Focus first input on open
   useEffect(() => {
@@ -135,7 +138,7 @@ function PurchaseModal({
           fullName: formData.fullName,
           email: formData.email,
           phone: formData.phone,
-          course: courseName,
+          course: effectiveCourseName,
           amount: formData.amount,
           source: "course_purchase",
         }),
@@ -146,7 +149,7 @@ function PurchaseModal({
       // Open Razorpay Checkout
       await openRazorpayCheckout(
         {
-          courseName,
+          courseName: effectiveCourseName,
           studentName: formData.fullName,
           email: formData.email,
           phone: formData.phone,
@@ -179,7 +182,7 @@ function PurchaseModal({
 
   const resetAndClose = () => {
     setFormState("idle");
-    setFormData({ fullName: "", email: "", phone: "", amount: "" });
+    setFormData({ fullName: "", email: "", phone: "", amount: "", course: "Data Analytics" });
     setErrors({});
     setErrorMessage("");
     onClose();
@@ -250,7 +253,7 @@ function PurchaseModal({
                     </motion.div>
                     <h3 className="text-xl font-bold text-navy-900 mb-2">Payment Successful!</h3>
                     <p className="text-gray-500 text-sm">
-                      Thank you for enrolling in {courseName}. Our team will reach out to you shortly.
+                      Thank you for enrolling in {effectiveCourseName}. Our team will reach out to you shortly.
                     </p>
                   </motion.div>
                 ) : formState === "processing" ? (
@@ -311,7 +314,10 @@ function PurchaseModal({
                         <CreditCard className="w-4 h-4" />
                         <span className="text-xs font-bold tracking-wide uppercase">Enroll Now</span>
                       </div>
-                      <h3 className="text-xl font-bold text-navy-900">{courseName}</h3>
+                      <h3 className="text-xl font-bold text-navy-900">{courseName || "Choose Your Course"}</h3>
+                      {!courseName && (
+                        <p className="text-sm text-gray-500 mt-1">Select a course and proceed to payment.</p>
+                      )}
                     </div>
 
                     {/* Trust indicators */}
@@ -329,6 +335,27 @@ function PurchaseModal({
                         <span className="text-[10px] text-gray-600 font-medium">Instant Access</span>
                       </div>
                     </div>
+
+                    {/* Course Selector (shown on home page) */}
+                    {showCourseSelector && (
+                      <div className="space-y-1">
+                        <label htmlFor="pu-course" className="text-xs font-medium text-gray-600">
+                          Select Course <span className="text-red-400">*</span>
+                        </label>
+                        <select
+                          id="pu-course"
+                          value={formData.course}
+                          onChange={(e) => handleChange("course", e.target.value)}
+                          className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-navy-900 text-sm focus:outline-none focus:border-orange-500 transition-colors appearance-none cursor-pointer"
+                        >
+                          <option value="Data Analytics" className="bg-white">Data Analytics</option>
+                          <option value="Business Analytics" className="bg-white">Business Analytics</option>
+                          <option value="Data Science and AI" className="bg-white">Data Science and AI</option>
+                          <option value="Agentic AI & Prompt Engineering" className="bg-white">Agentic AI & Prompt Engineering</option>
+                          <option value="Investment Banking" className="bg-white">Investment Banking</option>
+                        </select>
+                      </div>
+                    )}
 
                     {/* Form Fields */}
                     <div className="space-y-3">

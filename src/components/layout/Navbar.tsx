@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { X, ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEnquiryModal } from "@/components/forms/EnquiryModal";
 import { usePurchaseModal } from "@/components/forms/PurchaseModal";
 
 const coursePathToName: Record<string, string> = {
@@ -119,18 +118,13 @@ const mobileItemVariants = {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { openEnquiry } = useEnquiryModal();
   const { openPurchase } = usePurchaseModal();
   const normalizedPath = pathname.replace(/\/+$/, "");
   const courseName = coursePathToName[normalizedPath];
 
   const handleEnroll = useCallback(() => {
-    if (courseName) {
-      openPurchase(courseName);
-    } else {
-      openEnquiry();
-    }
-  }, [courseName, openPurchase, openEnquiry]);
+    openPurchase(courseName);
+  }, [courseName, openPurchase]);
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
