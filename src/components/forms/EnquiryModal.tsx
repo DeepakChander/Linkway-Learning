@@ -117,7 +117,10 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     setFormState("loading");
 
     try {
-      const response = await fetch("/api/submit-lead.php", {
+      const endpoint = process.env.NODE_ENV === "development"
+        ? "/api/leads/submit"
+        : "/api/submit-lead.php";
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { submitLeadToCratio } from "@/lib/api/cratio";
+
+const CRATIO_WEBHOOK_URL =
+  "https://apps.cratiocrm.com/Customize/Webhooks/webhook.php?id=248590";
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,36 +15,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Extract UTM parameters from headers or body
-    const referer = request.headers.get("referer") || "";
-    const url = new URL(referer || request.url);
-    const utmSource = url.searchParams.get("utm_source") || body.utm_source;
-    const utmMedium = url.searchParams.get("utm_medium") || body.utm_medium;
-    const utmCampaign = url.searchParams.get("utm_campaign") || body.utm_campaign;
+    // Build CRM payload
+    const record: Record<string, string> = {
+      "Contact Name": body.fullName,
+      "Mobile Number": body.phone,
+      Email: body.email,
+      "Lead Date": new Date().toISOString().split("T")[0],
+    };
 
-    // Submit to Cratio CRM
-    const result = await submitLeadToCratio({
-      fullName: body.fullName,
-      email: body.email,
-      phone: body.phone,
-      background: body.background,
-      course: body.course,
-      source: body.source || "website",
-      utm_source: utmSource || undefined,
-      utm_medium: utmMedium || undefined,
-      utm_campaign: utmCampaign || undefined,
+    if (body.course) {
+      record["Company Name"] = body.course;
+    }
+
+    // Submit to Cratio Webhook
+    const response = await fetch(CRATIO_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(record),
     });
 
-    if (!result.success) {
-      console.error("Cratio CRM submission failed:", result.error);
-      // Still return success to user, but log the error
-      // Formspree will handle the backup in the frontend
+    if (!response.ok) {
+      console.error("Cratio webhook failed:", response.status);
     }
 
     return NextResponse.json({
       success: true,
       message: "Lead submitted successfully",
-      leadId: result.leadId,
     });
   } catch (error) {
     console.error("Error in lead submission API:", error);
