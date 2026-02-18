@@ -28,8 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // ── Config ──
-$CRATIO_API_KEY = 'NF8xXzQ5NjMkQDU4IyMyMDI2LTAyLTEyIDE2OjUxOjIz';
-$CRATIO_API_URL = 'https://apps.cratiocrm.com/api/apirequest.php';
+$CRATIO_WEBHOOK_URL = 'https://apps.cratiocrm.com/Customize/Webhooks/webhook.php?id=248590';
 
 // ── Read request body ──
 $input = json_decode(file_get_contents('php://input'), true);
@@ -52,17 +51,10 @@ if (!empty($input['course'])) {
     $record['Company Name'] = $input['course'];
 }
 
-$payload = json_encode(['records' => [$record]]);
+$payload = json_encode($record);
 
-// ── Call Cratio API ──
-$url = $CRATIO_API_URL . '?' . http_build_query([
-    'operation' => 'insertRecords',
-    'apikey'    => $CRATIO_API_KEY,
-    'formname'  => 'Leads',
-    'overwrite' => 'false',
-]);
-
-$ch = curl_init($url);
+// ── Call Cratio Webhook ──
+$ch = curl_init($CRATIO_WEBHOOK_URL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
@@ -74,32 +66,14 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $error = curl_error($ch);
 curl_close($ch);
 
-if ($error) {
+if ($error || $httpCode >= 400) {
     http_response_code(500);
     echo json_encode(['error' => 'Failed to connect to CRM', 'success' => false]);
     exit;
 }
 
-// ── Parse Cratio response ──
-$data = json_decode($response, true);
-
-if (isset($data['success']) && is_array($data['success'])) {
-    echo json_encode([
-        'success' => true,
-        'message' => 'Lead submitted successfully',
-        'leadId'  => $data['success'][0]['formid'] ?? null,
-    ]);
-} else {
-    $errorMsg = 'Unknown error';
-    if (isset($data['error'])) {
-        if (is_array($data['error']) && isset($data['error'][0]['info'])) {
-            $errorMsg = $data['error'][0]['info'];
-        } elseif (is_string($data['error'])) {
-            $errorMsg = $data['error'];
-        }
-    }
-    echo json_encode([
-        'success' => true,
-        'message' => 'Lead submitted (with note: ' . $errorMsg . ')',
-    ]);
-}
+// ── Webhook returns "Payload Received" on success ──
+echo json_encode([
+    'success' => true,
+    'message' => 'Lead submitted successfully',
+]);
