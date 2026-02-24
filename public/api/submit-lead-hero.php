@@ -1,0 +1,76 @@
+<?php
+/**
+ * Cratio CRM Lead Submission Proxy (Hero Form)
+ *
+ * Uses a separate webhook for the homepage hero lead form.
+ * Deploy this file alongside the static build on Hostinger.
+ */
+
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+// Handle preflight
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+// Only allow POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed']);
+    exit;
+}
+
+// ── Config ──
+$CRATIO_WEBHOOK_URL = 'https://apps.cratiocrm.com/Customize/Webhooks/webhook.php?id=779820';
+
+// ── Read request body ──
+$input = json_decode(file_get_contents('php://input'), true);
+
+if (!$input || !isset($input['fullName']) || !isset($input['email']) || !isset($input['phone'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing required fields: fullName, email, phone']);
+    exit;
+}
+
+// ── Build Cratio payload ──
+$record = [
+    'Contact Name'  => $input['fullName'],
+    'Mobile Number' => $input['phone'],
+    'Email'         => $input['email'],
+    'Lead Date'     => date('Y-m-d'),
+];
+
+if (!empty($input['course'])) {
+    $record['Company Name'] = $input['course'];
+}
+
+$payload = json_encode($record);
+
+// ── Call Cratio Webhook ──
+$ch = curl_init($CRATIO_WEBHOOK_URL);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$error = curl_error($ch);
+curl_close($ch);
+
+if ($error || $httpCode >= 400) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Failed to connect to CRM', 'success' => false]);
+    exit;
+}
+
+// ── Webhook returns "Payload Received" on success ──
+echo json_encode([
+    'success' => true,
+    'message' => 'Lead submitted successfully',
+]);

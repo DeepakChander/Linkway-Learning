@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const CRATIO_WEBHOOK_URL =
-  "https://apps.cratiocrm.com/Customize/Webhooks/webhook.php?id=248590";
+const WEBHOOKS: Record<string, string> = {
+  default: "https://apps.cratiocrm.com/Customize/Webhooks/webhook.php?id=248590",
+  hero: "https://apps.cratiocrm.com/Customize/Webhooks/webhook.php?id=779820",
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,7 +30,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Submit to Cratio Webhook
-    const response = await fetch(CRATIO_WEBHOOK_URL, {
+    const webhookUrl = WEBHOOKS[body.webhookType] || WEBHOOKS.default;
+    const response = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(record),

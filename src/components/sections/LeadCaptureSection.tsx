@@ -206,10 +206,13 @@ function InlineLeadForm() {
     if (!validate()) return;
     setFormState("loading");
     try {
-      const res = await fetch("/api/leads/submit", {
+      const endpoint = process.env.NODE_ENV === "development"
+        ? "/api/leads/submit"
+        : "/api/submit-lead-hero.php";
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, webhookType: "hero" }),
       });
       if (res.ok) {
         setFormState("success");
