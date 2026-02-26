@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useCallback, useEffect, useRef } f
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CreditCard, CheckCircle2, Loader2, AlertCircle, Shield, Clock, IndianRupee } from "lucide-react";
 import { openRazorpayCheckout } from "@/lib/api/razorpay";
+import { trackPurchaseModalOpen, trackPaymentInitiate, trackPaymentSuccess, trackPaymentFailure } from "@/lib/analytics";
 
 /* ─── Context ─── */
 interface PurchaseModalContextType {
@@ -29,6 +30,7 @@ export function PurchaseModalProvider({ children }: { children: React.ReactNode 
   const openPurchase = useCallback((courseName?: string) => {
     setSelectedCourse(courseName);
     setIsOpen(true);
+    trackPurchaseModalOpen(courseName || "Not Selected");
   }, []);
 
   const closePurchase = useCallback(() => {
@@ -130,8 +132,11 @@ function PurchaseModal({
     setErrorMessage("");
 
     try {
-      // Submit lead to Cratio CRM via PHP proxy (works on static hosting)
-      fetch("/api/submit-lead.php", {
+      // Submit lead to Cratio CRM (fire-and-forget, don't block payment)
+      const leadEndpoint = process.env.NODE_ENV === "development"
+        ? "/api/leads/submit"
+        : "/api/submit-lead.php";
+      fetch(leadEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -141,10 +146,12 @@ function PurchaseModal({
           course: effectiveCourseName,
           amount: formData.amount,
           source: "course_purchase",
+          webhookType: "default",
         }),
-      }).catch(() => {}); // Fire-and-forget, don't block payment
+      }).catch(() => {});
 
       setFormState("processing");
+      trackPaymentInitiate(effectiveCourseName, parseFloat(formData.amount));
 
       // Open Razorpay Checkout
       await openRazorpayCheckout(
@@ -158,12 +165,14 @@ function PurchaseModal({
         () => {
           // Payment success
           setFormState("success");
+          trackPaymentSuccess(effectiveCourseName, parseFloat(formData.amount));
           setTimeout(() => resetAndClose(), 3000);
         },
         (error) => {
           // Payment failed or cancelled
           setErrorMessage(error);
           setFormState("error");
+          trackPaymentFailure(effectiveCourseName, error);
         }
       );
     } catch (error) {

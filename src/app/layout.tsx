@@ -10,6 +10,7 @@ import AgentationProvider from "@/components/dev/AgentationProvider";
 import EnquiryProvider from "@/components/providers/EnquiryProvider";
 import PurchaseProvider from "@/components/providers/PurchaseProvider";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/seo/JsonLd";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -116,6 +117,7 @@ export default function RootLayout({
         <OrganizationJsonLd />
         <WebsiteJsonLd />
       </head>
+      <GoogleAnalytics />
       <body className={`${inter.variable} ${poppins.variable} font-sans bg-navy-900 text-white antialiased`}>
         <EnquiryProvider>
           <PurchaseProvider>

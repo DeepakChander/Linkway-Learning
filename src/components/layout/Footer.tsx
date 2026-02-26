@@ -6,6 +6,7 @@ import CanvasWave from "@/components/animation/CanvasWave";
 
 import { cn } from "@/lib/utils";
 import { Facebook, Linkedin, Instagram, MapPin, Phone, Mail } from "lucide-react";
+import { trackFooterLinkClick, trackSocialClick, trackPhoneClick, trackEmailClick } from "@/lib/analytics";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -34,7 +35,11 @@ const legalLinks = [
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link href={href} className="text-gray-300 hover:text-orange-400 transition-colors duration-300">
+    <Link
+      href={href}
+      className="text-gray-300 hover:text-orange-400 transition-colors duration-300"
+      onClick={() => trackFooterLinkClick(label)}
+    >
       {label}
     </Link>
   );
@@ -87,11 +92,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <Phone className="w-4 h-4 text-orange-500 shrink-0" />
-                <a href="tel:+919315647113" className="text-gray-300 text-xs sm:text-sm hover:text-orange-400 transition-colors">+91-93156-47113</a>
+                <a href="tel:+919315647113" className="text-gray-300 text-xs sm:text-sm hover:text-orange-400 transition-colors" onClick={() => trackPhoneClick()}>+91-93156-47113</a>
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <Mail className="w-4 h-4 text-orange-500 shrink-0" />
-                <a href="mailto:support@linkwaylearning.com" className="text-gray-300 text-xs sm:text-sm hover:text-orange-400 transition-colors break-all">support@linkwaylearning.com</a>
+                <a href="mailto:support@linkwaylearning.com" className="text-gray-300 text-xs sm:text-sm hover:text-orange-400 transition-colors break-all" onClick={() => trackEmailClick()}>support@linkwaylearning.com</a>
               </div>
             </div>
           </div>
@@ -146,6 +151,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black transition-all duration-300"
                 aria-label={`Follow us on ${social.name}`}
+                onClick={() => trackSocialClick(social.name)}
               >
                 <social.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </a>

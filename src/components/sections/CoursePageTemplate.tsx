@@ -18,6 +18,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
 import { usePurchaseModal } from "@/components/forms/PurchaseModal";
 import FooterCTA from "@/components/sections/FooterCTA";
+import { trackEnrollClick, trackBookCounsellingClick, trackCourseView } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -252,7 +253,7 @@ export default function CoursePageTemplate({
           >
             {/* Enroll Now - Opens Purchase Modal with Razorpay */}
             <MagneticWrap>
-              <Button variant="primary" size="lg" onClick={() => openPurchase(name)} className={cn(
+              <Button variant="primary" size="lg" onClick={() => { trackEnrollClick("Course Hero", name); openPurchase(name); }} className={cn(
                 v === "orano" && "btn-border-glow orano-focus",
                 v === "activetheory" && "at-spring-enter",
                 "pulse-corners",
@@ -261,7 +262,7 @@ export default function CoursePageTemplate({
               </Button>
             </MagneticWrap>
             {/* Download Curriculum - Opens Enquiry Modal for lead capture */}
-            <Button variant="outline" size="lg" onClick={openEnquiry} className={cn(
+            <Button variant="outline" size="lg" onClick={() => { trackBookCounsellingClick(`Course Page - ${name}`); openEnquiry(); }} className={cn(
               v === "orano" && "orano-brightness",
               v === "activetheory" && "at-spring-enter",
               v === "redbull" && "btn-border-glow",

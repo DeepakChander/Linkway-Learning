@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Star, StarHalf, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import ScrollReveal from "@/components/animation/ScrollReveal";
+import { trackContactFormSubmit, trackContactFormSuccess } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -208,14 +209,19 @@ function InlineLeadForm() {
     e.preventDefault();
     if (!validate()) return;
     setFormState("loading");
+    trackContactFormSubmit(formData.course || "Footer CTA");
     try {
-      const res = await fetch("/api/leads/submit", {
+      const endpoint = process.env.NODE_ENV === "development"
+        ? "/api/leads/submit"
+        : "/api/submit-lead.php";
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, webhookType: "default" }),
       });
       if (res.ok) {
         setFormState("success");
+        trackContactFormSuccess(formData.course || "Footer CTA");
       } else {
         setFormState("idle");
         setErrors({ email: "Submission failed. Please try again." });

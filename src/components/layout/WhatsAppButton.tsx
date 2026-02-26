@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export default function WhatsAppButton() {
   const [visible, setVisible] = useState(false);
@@ -42,6 +43,7 @@ export default function WhatsAppButton() {
         rel="noopener noreferrer"
         className="relative group"
         aria-label="Chat on WhatsApp"
+        onClick={() => trackWhatsAppClick("Floating Button")}
       >
         {/* Outer glow ring */}
         <div className="absolute -inset-1 rounded-full bg-[#25D366]/20 group-hover:bg-[#25D366]/30 transition-all duration-300 group-hover:scale-110" />

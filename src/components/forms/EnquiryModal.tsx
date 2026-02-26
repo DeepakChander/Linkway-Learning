@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Loader2, AlertCircle, Sparkles } from "lucide-react";
+import { trackEnquiryModalOpen, trackEnquiryFormSubmit, trackEnquiryFormSuccess } from "@/lib/analytics";
 
 /* ─── Context ─── */
 interface EnquiryModalContextType {
@@ -23,7 +24,10 @@ export const useEnquiryModal = () => useContext(EnquiryModalContext);
 export function EnquiryModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openEnquiry = useCallback(() => setIsOpen(true), []);
+  const openEnquiry = useCallback(() => {
+    setIsOpen(true);
+    trackEnquiryModalOpen();
+  }, []);
   const closeEnquiry = useCallback(() => setIsOpen(false), []);
 
   // Lock body scroll when open
@@ -115,6 +119,7 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     e.preventDefault();
     if (!validate()) return;
     setFormState("loading");
+    trackEnquiryFormSubmit(formData.course);
 
     try {
       const endpoint = process.env.NODE_ENV === "development"
@@ -130,11 +135,13 @@ function EnquiryModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           background: formData.background,
           course: formData.course,
           source: "website_enquiry",
+          webhookType: "default",
         }),
       });
 
       if (response.ok) {
         setFormState("success");
+        trackEnquiryFormSuccess(formData.course);
       } else {
         setFormState("idle");
         setErrors({ email: "Submission failed. Please try again." });

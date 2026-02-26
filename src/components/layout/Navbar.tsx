@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { X, ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { usePurchaseModal } from "@/components/forms/PurchaseModal";
+import { trackEnrollClick, trackNavClick } from "@/lib/analytics";
 
 const coursePathToName: Record<string, string> = {
   "/courses/data-analytics": "Data Analytics",
@@ -77,12 +78,17 @@ function MagneticLink({
     y.set(0);
   }, [x, y]);
 
+  const handleClick = () => {
+    trackNavClick(typeof children === "string" ? children : href);
+    onClick?.();
+  };
+
   return (
     <motion.div style={{ x: springX, y: springY }} className="inline-flex">
       <Link
         ref={ref}
         href={href}
-        onClick={onClick}
+        onClick={handleClick}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={className}
@@ -123,6 +129,7 @@ export default function Navbar() {
   const courseName = coursePathToName[normalizedPath];
 
   const handleEnroll = useCallback(() => {
+    trackEnrollClick("Navbar", courseName);
     openPurchase(courseName);
   }, [courseName, openPurchase]);
 

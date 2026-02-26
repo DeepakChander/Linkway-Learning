@@ -16,6 +16,7 @@ import ScrollOdometer from "@/components/animation/ScrollOdometer";
 import BorderGlow from "@/components/animation/BorderGlow";
 import Button from "@/components/ui/Button";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
+import { trackExplorCoursesClick, trackBookCounsellingClick } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -797,14 +798,14 @@ export default function HeroSection() {
               transition={{ duration: 0.7, delay: 0.7 }}
             >
               <BorderGlow glowColor="orange" glowIntensity="medium">
-                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-2.5 xs:py-3 sm:py-4">
+                <Button variant="primary" size="lg" href="/courses" className="group w-full sm:w-auto justify-center text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-2.5 xs:py-3 sm:py-4" onClick={() => trackExplorCoursesClick("Hero Section")}>
                   Explore Courses
                   <svg className="w-3 h-3 xs:w-4 xs:h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Button>
               </BorderGlow>
-              <Button variant="outline" size="lg" onClick={openEnquiry} className="w-full sm:w-auto justify-center text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-2.5 xs:py-3 sm:py-4">
+              <Button variant="outline" size="lg" onClick={() => { trackBookCounsellingClick("Hero Section"); openEnquiry(); }} className="w-full sm:w-auto justify-center text-xs xs:text-sm sm:text-base px-3 xs:px-4 sm:px-6 py-2.5 xs:py-3 sm:py-4">
                 Book Free Counselling
               </Button>
             </motion.div>

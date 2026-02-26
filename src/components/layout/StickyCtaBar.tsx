@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 import { X } from "lucide-react";
+import { trackStickyBarClick } from "@/lib/analytics";
 
 export default function StickyCtaBar() {
   const [visible, setVisible] = useState(false);
@@ -52,12 +53,14 @@ export default function StickyCtaBar() {
           <Link
             href="/courses"
             className="hidden md:inline-flex shrink-0 border border-white/10 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-all hover:bg-white/5"
+            onClick={() => trackStickyBarClick("View Courses")}
           >
             View Courses
           </Link>
           <Link
             href="/contact"
             className="shrink-0 bg-orange-600 hover:bg-orange-500 text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all shadow-lg hover:shadow-orange-500/25"
+            onClick={() => trackStickyBarClick("Apply Now")}
           >
             Apply Now
           </Link>
