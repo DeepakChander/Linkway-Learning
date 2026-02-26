@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useEnquiryModal } from "@/components/forms/EnquiryModal";
+import { trackCtaClick } from "@/lib/analytics";
 import {
   motion,
   useScroll,
@@ -955,7 +956,7 @@ export default function CertificationDisplay({
                 </div>
 
                 <motion.button
-                  onClick={openEnquiry}
+                  onClick={() => { trackCtaClick("Get Certified", "Certification Section"); openEnquiry(); }}
                   className="px-8 py-3.5 rounded-full text-white font-bold text-sm whitespace-nowrap cursor-pointer"
                   style={{
                     background: "linear-gradient(135deg, #F58220, #E06A10)",

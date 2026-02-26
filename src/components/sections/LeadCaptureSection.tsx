@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ArrowRight, Star, StarHalf, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import ScrollReveal from "@/components/animation/ScrollReveal";
+import { trackContactFormSubmit, trackContactFormSuccess } from "@/lib/analytics";
 
 /* ─── Testimonial Data ─── */
 const testimonials = [
@@ -205,6 +206,7 @@ function InlineLeadForm() {
     e.preventDefault();
     if (!validate()) return;
     setFormState("loading");
+    trackContactFormSubmit(formData.course || "Lead Capture Hero");
     try {
       const endpoint = process.env.NODE_ENV === "development"
         ? "/api/leads/submit"
@@ -216,6 +218,7 @@ function InlineLeadForm() {
       });
       if (res.ok) {
         setFormState("success");
+        trackContactFormSuccess(formData.course || "Lead Capture Hero");
       } else {
         setFormState("idle");
         setErrors({ email: "Submission failed. Please try again." });
